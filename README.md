@@ -1,6 +1,8 @@
 # 🚀 REDDIT AI PROBLEM SOLVER BOT
 
-**Autonomous AI bot solving Reddit problems using JMichael Labs AGI System**
+**Autonomous AI bot solving Reddit problems using JMichael Labs AGI System**  
+**Repository:** `github.com/Jmichael-Labs/reddit-ai-problem-solver` (Private)  
+**Deployment:** Render.com Free Tier + GitHub Actions
 
 ---
 
