@@ -150,6 +150,55 @@ def ping():
         "timestamp": datetime.now().isoformat()
     })
 
+@app.route('/debug')
+def debug_scan():
+    """Debug endpoint to investigate why bot finds 0 opportunities"""
+    try:
+        if not initialize_bot():
+            return jsonify({"error": "Bot initialization failed"}), 500
+        
+        # Test just one subreddit in detail
+        subreddit_name = "ChatGPT"
+        debug_info = {
+            "subreddit": subreddit_name,
+            "posts_found": 0,
+            "posts_details": [],
+            "memory_size": len(bot_instance.processed_posts),
+            "daily_responses": bot_instance.daily_responses,
+            "scan_limit": 10  # Just scan 10 for debugging
+        }
+        
+        try:
+            subreddit = bot_instance.reddit.subreddit(subreddit_name)
+            
+            for i, post in enumerate(subreddit.new(limit=10)):
+                debug_info["posts_found"] += 1
+                
+                # Test AI detection
+                ai_detected = bot_instance.detect_ai_problem(post)
+                would_respond = bot_instance.should_respond_to_post(post)
+                
+                post_detail = {
+                    "index": i + 1,
+                    "id": post.id,
+                    "title": post.title[:80] + "..." if len(post.title) > 80 else post.title,
+                    "created_hours_ago": round((datetime.now() - datetime.fromtimestamp(post.created_utc)).total_seconds() / 3600, 1),
+                    "num_comments": post.num_comments,
+                    "ai_detected": ai_detected,
+                    "would_respond": would_respond,
+                    "already_processed": post.id in bot_instance.processed_posts
+                }
+                
+                debug_info["posts_details"].append(post_detail)
+                
+        except Exception as e:
+            debug_info["subreddit_error"] = str(e)
+        
+        return jsonify(debug_info)
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     # Get port from environment (Render provides this)
     port = int(os.environ.get('PORT', 5000))
