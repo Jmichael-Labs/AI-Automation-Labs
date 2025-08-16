@@ -10,6 +10,7 @@ import os
 import json
 import random
 from datetime import datetime, timedelta
+from real_time_news_aggregator import AINewsAggregator
 
 class AINewsPoster:
     def __init__(self):
@@ -35,9 +36,13 @@ class AINewsPoster:
         self.max_daily_posts = 1  # Conservative start
         self.posts_today = 0
         
+        # Initialize real-time news aggregator
+        self.news_aggregator = AINewsAggregator(self.reddit)
+        
         print(f"🤖 JMichael Labs AI News Poster initialized")
         print(f"🎯 Target: r/{self.target_subreddit}")
         print(f"📧 Contact: {self.email_contact}")
+        print(f"📡 Real-time news aggregation enabled")
     
     def test_connection(self):
         """Test Reddit connection with new credentials"""
@@ -58,10 +63,22 @@ class AINewsPoster:
             return False
     
     def generate_daily_ai_news(self):
-        """Generate daily AI news post"""
-        today = datetime.now().strftime("%Y-%m-%d")
+        """Generate daily AI news post using real-time data"""
+        print("Generating real-time AI news...")
         
-        title = f"🚀 Daily AI Roundup - {datetime.now().strftime('%B %d, %Y')}"
+        # Try to get real-time news first
+        try:
+            title, content = self.news_aggregator.generate_real_time_post()
+            if title and content:
+                print("✅ Real-time news generated successfully")
+                return title, content
+        except Exception as e:
+            print(f"⚠️ Real-time news failed: {e}")
+        
+        # Fallback to template content
+        print("Using fallback template content")
+        today = datetime.now().strftime("%Y-%m-%d")
+        title = f"AI Intelligence Brief - {datetime.now().strftime('%B %d, %Y')}"
         
         content = f"""## Today's AI Developments & Insights
 
@@ -105,64 +122,89 @@ What's the biggest manual task in your workflow that you wish you could automate
         return title, content
     
     def generate_tool_tuesday(self):
-        """Generate Tool Tuesday post"""
+        """Generate Tool Tuesday post - BILINGUAL"""
         tools = [
             {
                 "name": "Vercept",
                 "use_case": "E-commerce Automation",
+                "use_case_es": "Automatización de E-commerce", 
                 "description": "Tell it what to do, it does it automatically. Perfect for Etsy sellers.",
+                "description_es": "Dile qué hacer y lo hace automáticamente. Perfecto para vendedores de Etsy.",
                 "url": "vercept.com"
             },
             {
                 "name": "Claude Code",
-                "use_case": "Development Automation", 
+                "use_case": "Development Automation",
+                "use_case_es": "Automatización de Desarrollo",
                 "description": "AI-powered coding assistant that understands complex project contexts.",
+                "description_es": "Asistente de programación con IA que entiende contextos complejos de proyectos.",
                 "url": "claude.ai/code"
             },
             {
                 "name": "Zapier AI",
                 "use_case": "Workflow Automation",
+                "use_case_es": "Automatización de Flujos de Trabajo",
                 "description": "Connect apps with natural language. No coding required.",
+                "description_es": "Conecta aplicaciones con lenguaje natural. No requiere programación.",
                 "url": "zapier.com"
             }
         ]
         
         tool = random.choice(tools)
         
-        title = f"🔧 Tool Tuesday: {tool['name']} for {tool['use_case']}"
+        title = f"Tool Tuesday: {tool['name']} para {tool['use_case_es']} | for {tool['use_case']}"
         
-        content = f"""## Tool Spotlight: **{tool['name']}**
+        content = f"""## Tool Spotlight | Herramienta Destacada: **{tool['name']}**
 
-### 🎯 **What it does:**
-{tool['description']}
+### What it does | Qué hace:
 
-### ⚡ **Why I recommend it:**
-- **Zero learning curve:** Natural language interface
-- **Immediate results:** Start seeing value within hours
-- **Cost effective:** Saves more than it costs
-- **Scales with you:** Works for solo entrepreneurs to teams
+**EN:** {tool['description']}
 
-### 🏆 **Real-world use case:**
-I've personally used this for automating product uploads to Etsy. What used to take 2 hours now happens automatically while I sleep.
+**ES:** {tool['description_es']}
 
-### 📊 **Results:**
-- **80% time savings** on repetitive tasks
-- **Zero errors** vs manual process
-- **24/7 operation** without my involvement
+### Why I recommend it | Por qué lo recomiendo:
 
-### 🔗 **Try it yourself:**
+**EN:**
+- Zero learning curve: Natural language interface
+- Immediate results: Start seeing value within hours
+- Cost effective: Saves more than it costs
+- Scales with you: Works for solo entrepreneurs to teams
+
+**ES:**
+- Curva de aprendizaje cero: Interfaz de lenguaje natural
+- Resultados inmediatos: Comienza a ver valor en horas
+- Rentable: Ahorra más de lo que cuesta
+- Escala contigo: Funciona para emprendedores solos hasta equipos
+
+### Real-world use case | Caso de uso real:
+
+**EN:** I've personally used this for automating product uploads to Etsy. What used to take 2 hours now happens automatically while I sleep.
+
+**ES:** Personalmente he usado esto para automatizar subidas de productos a Etsy. Lo que solía tomar 2 horas ahora sucede automáticamente mientras duermo.
+
+### Results | Resultados:
+
+- **80% time savings | 80% ahorro de tiempo** on repetitive tasks | en tareas repetitivas
+- **Zero errors | Cero errores** vs manual process | vs proceso manual
+- **24/7 operation | Operación 24/7** without my involvement | sin mi intervención
+
+### Try it yourself | Pruébalo tú mismo:
 Check out {tool['name']} at {tool['url']}
 
-### 💬 **Your turn:**
-What tools are you using for automation? Share your favorites below! 👇
+### Your turn | Tu turno:
+
+**EN:** What tools are you using for automation? Share your favorites below!
+
+**ES:** ¿Qué herramientas estás usando para automatización? ¡Comparte tus favoritas abajo!
 
 ---
 
-**Need help choosing the right AI stack for your business?**  
-📧 Email: {self.email_contact}  
-📱 Instagram: {self.instagram_consulting}
+**Need help choosing the right AI stack for your business? | ¿Necesitas ayuda eligiendo el stack de IA correcto para tu negocio?**
 
-*The right tool can change everything* 🚀"""
+Email: {self.email_contact}
+Instagram: {self.instagram_consulting}
+
+*The right tool can change everything | La herramienta correcta puede cambiarlo todo*"""
 
         return title, content
     
