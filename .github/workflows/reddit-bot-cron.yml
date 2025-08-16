@@ -1,0 +1,31 @@
+name: Reddit AI Bot Cron
+on:
+  schedule:
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping-reddit-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Reddit AI Bot
+        run: |
+          echo "🚀 Pinging Reddit AI Bot on Render..."
+          
+          # Replace with your actual Render service URL when deployed
+          BOT_URL="https://reddit-ai-problem-solver.onrender.com"
+          
+          # Ping health check
+          curl -f "$BOT_URL/" || echo "Health check failed"
+          
+          # Trigger bot run
+          echo "⚡ Triggering bot scan..."
+          response=$(curl -s -f "$BOT_URL/run" || echo "Bot run failed")
+          echo "$response"
+          
+          # Log results
+          echo "✅ Bot ping completed at $(date)"
+          
+          # Optional: Send results to webhook/notification service
+          # curl -X POST your-webhook-url -d "Bot status: $response"
