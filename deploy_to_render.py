@@ -24,7 +24,7 @@ class RenderDeployer:
         service_config = {
             "type": "web_service",
             "name": "reddit-ai-problem-solver",
-            "repo": "https://github.com/yourusername/reddit-ai-bot.git",  # Update this
+            "repo": "https://github.com/Jmichael-Labs/reddit-ai-problem-solver.git",
             "branch": "main",
             "buildCommand": "pip install -r requirements.txt",
             "startCommand": "python app.py",

@@ -13,7 +13,7 @@ jobs:
         run: |
           echo "🚀 Pinging Reddit AI Bot on Render..."
           
-          # Replace with your actual Render service URL when deployed
+          # Render service URL - will be active after deployment
           BOT_URL="https://reddit-ai-problem-solver.onrender.com"
           
           # Ping health check
