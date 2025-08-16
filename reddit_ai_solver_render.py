@@ -29,8 +29,9 @@ class RedditAIProblemSolver:
         self.email_contact = os.environ.get('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')
         self.instagram_consulting = os.environ.get('INSTAGRAM_CONSULTING', 'https://www.instagram.com/jmichaeloficial/')
         
-        # Bot configuration
-        self.processed_posts = set()
+        # Bot configuration with persistent memory
+        self.memory_file = '/tmp/bot_memory.json'
+        self.processed_posts = self.load_memory()
         self.daily_responses = 0
         self.max_daily_responses = 10  # Conservative for free tier
         
@@ -50,6 +51,38 @@ class RedditAIProblemSolver:
         print(f"🤖 Reddit AI Solver initialized for Render.com")
         print(f"📧 Contact: {self.email_contact}")
         print(f"📱 Instagram: {self.instagram_consulting}")
+        print(f"🧠 Loaded {len(self.processed_posts)} processed posts from memory")
+    
+    def load_memory(self):
+        """Load processed posts from persistent storage"""
+        try:
+            if os.path.exists(self.memory_file):
+                with open(self.memory_file, 'r') as f:
+                    data = json.load(f)
+                    # Only keep posts from last 24 hours to prevent memory bloat
+                    current_time = datetime.now().timestamp()
+                    recent_posts = {}
+                    for post_id, timestamp in data.items():
+                        if current_time - timestamp < 86400:  # 24 hours
+                            recent_posts[post_id] = timestamp
+                    return set(recent_posts.keys())
+            return set()
+        except Exception as e:
+            print(f"⚠️ Error loading memory: {e}")
+            return set()
+    
+    def save_memory(self):
+        """Save processed posts to persistent storage"""
+        try:
+            # Save with timestamps for cleanup
+            current_time = datetime.now().timestamp()
+            memory_data = {post_id: current_time for post_id in self.processed_posts}
+            
+            with open(self.memory_file, 'w') as f:
+                json.dump(memory_data, f)
+            print(f"💾 Saved {len(self.processed_posts)} processed posts to memory")
+        except Exception as e:
+            print(f"⚠️ Error saving memory: {e}")
     
     def detect_ai_problem(self, post):
         """Detect if post is asking for AI help"""
@@ -235,10 +268,12 @@ I've analyzed your AI challenge using advanced systems. Here's the solution:
         """Determine if we should respond to this post"""
         # Skip if already processed
         if post.id in self.processed_posts:
+            print(f"⏭️ Skipping already processed post: {post.id}")
             return False
         
         # Skip if we've hit daily limit
         if self.daily_responses >= self.max_daily_responses:
+            print(f"📊 Daily limit reached: {self.daily_responses}/{self.max_daily_responses}")
             return False
         
         # Skip very old posts (older than 12 hours for faster response)
@@ -249,6 +284,18 @@ I've analyzed your AI challenge using advanced systems. Here's the solution:
         # Skip if post already has many comments (probably solved)
         if post.num_comments > 10:
             return False
+        
+        # Check if we already commented on this post (double safety)
+        try:
+            post.comments.replace_more(limit=0)
+            for comment in post.comments:
+                if hasattr(comment, 'author') and comment.author and comment.author.name == self.reddit.user.me().name:
+                    print(f"⚠️ Already commented on this post: {post.id}")
+                    self.processed_posts.add(post.id)  # Add to memory to prevent future attempts
+                    self.save_memory()
+                    return False
+        except Exception as e:
+            print(f"⚠️ Error checking existing comments: {e}")
         
         # Must be asking for AI help
         if not self.detect_ai_problem(post):
@@ -267,9 +314,10 @@ I've analyzed your AI challenge using advanced systems. Here's the solution:
             # Post reply
             post.reply(response)
             
-            # Track
+            # Track and save to persistent memory
             self.processed_posts.add(post.id)
             self.daily_responses += 1
+            self.save_memory()  # Save immediately to prevent duplicates
             
             print(f"✅ Responded to: {post.title[:50]}...")
             print(f"📊 Daily responses: {self.daily_responses}/{self.max_daily_responses}")
