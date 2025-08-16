@@ -17,11 +17,11 @@ class AINewsPoster:
         
         # New working credentials
         self.reddit = praw.Reddit(
-            client_id=os.environ.get('REDDIT_CLIENT_ID', 's1vUrdncjjFnjUo4DiCGzQ'),
-            client_secret=os.environ.get('REDDIT_CLIENT_SECRET', 'nM_sjL0VyW4Ezuhj_8KbUfwcLKShUg'),
+            client_id=os.environ.get('REDDIT_CLIENT_ID', 'WWPlll5usdslxz9bQqEvZg'),
+            client_secret=os.environ.get('REDDIT_CLIENT_SECRET', 'c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ'),
             user_agent=os.environ.get('REDDIT_USER_AGENT', 'JMichaelLabsBot:v1.0 (by /u/theinnovationla)'),
             username=os.environ.get('REDDIT_USERNAME', 'theinnovationla'),
-            password=os.environ.get('REDDIT_PASSWORD', 'EBV9Sy5E2BWwfeY')
+            password=os.environ.get('REDDIT_PASSWORD', 'Suxtan20@')
         )
         
         # Target subreddit
