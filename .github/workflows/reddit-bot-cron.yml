@@ -1,8 +1,8 @@
 name: Reddit AI Bot Cron
 on:
   schedule:
-    # Run every 30 minutes
-    - cron: '*/30 * * * *'
+    # Run every 5 minutes for testing
+    - cron: '*/5 * * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -19,9 +19,9 @@ jobs:
           # Ping health check
           curl -f "$BOT_URL/" || echo "Health check failed"
           
-          # Trigger bot run
+          # Trigger bot run with POST
           echo "⚡ Triggering bot scan..."
-          response=$(curl -s -f "$BOT_URL/run" || echo "Bot run failed")
+          response=$(curl -X POST -s -f "$BOT_URL/run" --max-time 300 || echo "Bot run failed")
           echo "$response"
           
           # Log results
