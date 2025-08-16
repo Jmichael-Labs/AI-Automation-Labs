@@ -85,30 +85,41 @@ class RedditAIProblemSolver:
             print(f"⚠️ Error saving memory: {e}")
     
     def detect_ai_problem(self, post):
-        """Detect if post is asking for AI help"""
+        """Detect if post is related to AI (much more permissive)"""
         title = post.title.lower()
         text = post.selftext.lower() if post.selftext else ""
         combined = f"{title} {text}"
         
-        # AI help keywords
+        # Expanded AI keywords - más amplio
         ai_keywords = [
-            "chatgpt", "openai", "artificial intelligence", "machine learning",
-            "ai help", "ai problem", "how to use ai", "ai tools", "prompt",
-            "neural network", "deep learning", "automation", "ai strategy",
-            "gpt", "claude", "gemini", "ai for business", "ai implementation"
+            "chatgpt", "openai", "artificial intelligence", "machine learning", "ai",
+            "prompt", "neural network", "deep learning", "automation", "bot",
+            "gpt", "claude", "gemini", "llm", "model", "algorithm", "data science",
+            "python ai", "tensorflow", "pytorch", "hugging face", "langchain",
+            "rag", "vector", "embedding", "fine-tuning", "training", "api",
+            "nlp", "computer vision", "generative", "transformer", "copilot"
         ]
         
-        # Problem/question indicators
-        help_keywords = [
-            "help", "how do i", "how to", "problem", "issue", "stuck",
-            "confused", "need advice", "question", "guidance", "tutorial",
-            "explain", "best way", "recommend", "suggestions"
+        # Mucho más flexible - no requiere help keywords específicos
+        engagement_indicators = [
+            "help", "how", "what", "why", "when", "where", "which", "best",
+            "recommend", "advice", "opinion", "thoughts", "experience", "tips",
+            "guide", "tutorial", "learn", "understand", "explain", "compare",
+            "vs", "better", "good", "bad", "works", "doesn't work", "issue",
+            "problem", "solution", "idea", "project", "building", "creating",
+            "?", "anyone", "suggestions", "feedback", "review"
         ]
         
         has_ai_keyword = any(keyword in combined for keyword in ai_keywords)
-        has_help_keyword = any(keyword in combined for keyword in help_keywords)
+        has_engagement = any(keyword in combined for keyword in engagement_indicators)
         
-        return has_ai_keyword and has_help_keyword
+        # Mucho más permisivo: solo necesita AI keyword OR estar en subreddit AI
+        is_ai_subreddit = post.subreddit.display_name.lower() in [
+            'artificial', 'machinelearning', 'chatgpt', 'openai', 
+            'artificialintelligence', 'deeplearning', 'mlquestions'
+        ]
+        
+        return has_ai_keyword or (is_ai_subreddit and has_engagement)
     
     def generate_ai_solution(self, post):
         """Generate AI solution (simplified for Render deployment)"""
@@ -119,147 +130,168 @@ class RedditAIProblemSolver:
         return self.format_response(post)
     
     def format_response(self, post):
-        """Format professional response with contact info"""
+        """Format conversational, helpful response with contact info"""
         
         title_lower = post.title.lower()
         
-        if "chatgpt" in title_lower or "prompt" in title_lower:
+        # More nuanced response selection
+        if any(word in title_lower for word in ["chatgpt", "prompt", "gpt", "claude"]):
             response_type = "prompt_optimization"
-        elif "business" in title_lower or "strategy" in title_lower:
+        elif any(word in title_lower for word in ["business", "strategy", "company", "startup"]):
             response_type = "business_strategy"
-        elif "tool" in title_lower or "software" in title_lower:
+        elif any(word in title_lower for word in ["tool", "software", "app", "platform", "recommend"]):
             response_type = "tool_recommendation"
+        elif any(word in title_lower for word in ["learn", "tutorial", "beginner", "start"]):
+            response_type = "learning_guide"
         else:
             response_type = "general_ai_help"
         
         responses = {
-            "prompt_optimization": f"""🚀 **AI Prompt Optimization Solution:**
+            "prompt_optimization": f"""Hey! I've been working with ChatGPT and other AI tools extensively - here's what actually works:
 
-**Strategic Approach:**
-Your prompt needs better structure and specificity. Here's the optimized framework:
+**The key is being super specific.** Instead of "write me content", try:
+- "Write a 300-word LinkedIn post about [topic] for [audience] with [tone]"
+- Always include context, desired outcome, and format
+- Add "Think step by step" at the end - it really helps
 
-**Better Prompt Structure:**
+**Pro tips that changed my game:**
+1. Give it a role: "You are an expert [field] consultant..."
+2. Provide examples of what you want
+3. Use constraints: word count, style, audience level
+4. Iterate - first response is rarely perfect
+
+**Template that works:**
 ```
-Role: Act as [specific expert role]
-Context: [situation/background]
-Task: [clear objective]
-Output: [format specification]
-Success: [measurable criteria]
+Role: You are [expert type]
+Context: [situation/background]  
+Task: [specific action]
+Format: [how you want output]
+Audience: [who will read this]
 ```
 
-**Pro Tips:**
-- Be specific about the output format you want
-- Include examples when possible  
-- Use constraint prompts to guide AI behavior
-- Test with different temperature settings
+The difference in quality is honestly night and day when you structure it right.
 
-**Advanced Techniques:**
-- Chain prompts for complex tasks
-- Use role prompting for expertise
-- Include negative examples (what NOT to do)
+Need help with specific prompts? Feel free to reach out: {self.email_contact} or {self.instagram_consulting}
 
-**Need custom prompt engineering for your specific use case?**
-📧 Email: {self.email_contact}
-📱 Instagram: {self.instagram_consulting}
+*Hope this helps!*""",
 
-*Powered by JMichael Labs - AI Systems Engineering*""",
+            "learning_guide": f"""Great question! I remember being in the same spot when I started with AI.
 
-            "business_strategy": f"""🎯 **AI Business Implementation Strategy:**
+**Here's honestly the fastest path I wish someone told me:**
 
-**Current Assessment:**
-Your AI integration needs a systematic approach. Here's the roadmap:
+**Week 1-2: Get your hands dirty**
+- Pick ONE tool (ChatGPT is fine to start)
+- Use it for actual work problems, not tutorials
+- You'll learn faster by solving real stuff
 
-**Phase 1 - Foundation (Week 1-2):**
-- Audit current processes for AI opportunities
-- Identify 3 high-impact, low-risk AI implementations
-- Calculate ROI potential for each
+**Week 3-4: Understand the fundamentals**
+- Learn prompt engineering (this is 80% of success)
+- Understand tokens, context windows, temperature
+- Try different AI models to see strengths/weaknesses
 
-**Phase 2 - Quick Wins (Week 3-4):**
-- Implement automation in customer service
-- Deploy AI content generation tools
-- Setup performance tracking systems
+**Month 2: Go deeper**
+- Learn APIs if you want automation
+- Try specialized tools for your field
+- Start building actual workflows
 
-**Phase 3 - Advanced Integration (Month 2):**
-- Custom AI workflows for your industry
-- Integration with existing software stack
-- Team training and change management
+**Biggest mistakes I made (so you don't have to):**
+- Trying to learn everything at once
+- Following too many tutorials instead of practicing
+- Not focusing on ONE use case first
 
-**ROI Expectations:**
-- 40-60% time savings in first month
-- 200-300% efficiency gains in targeted areas
-- Break-even typically within 90 days
+**Actually useful resources:**
+- OpenAI Playground (free, great for learning)
+- Anthropic's Claude (often better than ChatGPT)
+- Build simple projects with real problems you have
 
-**Ready for custom AI business transformation?**
-📧 Contact: {self.email_contact}  
-📱 Instagram: {self.instagram_consulting}
+The key is consistent practice with real problems, not consuming more content.
 
-*JMichael Labs - Turning businesses into AI-powered enterprises*""",
+What specific area are you looking to apply AI to? Happy to give more targeted advice: {self.email_contact}
 
-            "tool_recommendation": f"""🛠️ **AI Tools & Implementation Guide:**
+*Good luck!*""",
 
-**Top AI Tools for Your Use Case:**
+            "business_strategy": f"""I've helped several businesses integrate AI successfully. Here's what actually works:
 
-**Content Creation:**
-- ChatGPT Pro ($20/month) - Advanced reasoning
-- Claude (Free/Pro) - Better for analysis
-- Jasper ($49/month) - Marketing copy
+**Start simple, scale smart:**
+- Pick ONE process that eats tons of time (customer support, content creation, data entry)
+- Test AI on that specific thing for 2 weeks
+- Measure actual time/cost savings before expanding
 
-**Business Automation:**
-- Zapier AI ($19/month) - Workflow automation
-- Monday.com AI ($8/month) - Project management
-- Notion AI ($8/month) - Knowledge management
+**Tools that deliver real ROI:**
+- ChatGPT for content and communication (saves 3-5 hours/week)
+- Zapier for workflow automation (connect your apps)
+- Notion AI for documentation and knowledge management
 
-**Advanced Analytics:**
-- DataRobot (Enterprise) - Predictive analytics
-- H2O.ai (Free tier) - Machine learning platform
-- Tableau AI ($15/month) - Data visualization
+**Common mistakes I see:**
+- Trying to AI-ify everything at once (recipe for chaos)
+- Choosing fancy tools without clear use cases
+- Not training the team properly (they'll resist if confused)
 
-**Implementation Priority:**
-1. Start with one tool, master it completely
-2. Automate your most time-consuming task first
-3. Measure results before adding more tools
-4. Train your team on best practices
+**My recommended sequence:**
+1. Week 1: Pick one repetitive task, test AI solution
+2. Week 2: Measure results, get team feedback
+3. Week 3: Optimize the solution based on learnings
+4. Month 2: Add one more AI workflow
 
-**Need help choosing the right AI stack?**
-📧 Email: {self.email_contact}
-📱 Instagram: {self.instagram_consulting}
+**The key:** Focus on problems that cost you real time/money, not just cool tech.
 
-*JMichael Labs - AI implementation specialists*""",
+What specific business process are you looking to improve? Happy to give more targeted advice: {self.email_contact} or {self.instagram_consulting}""",
 
-            "general_ai_help": f"""🧠 **AI Solution & Implementation Guide:**
+            "tool_recommendation": f"""Based on what you're asking about, here are the tools I actually use and recommend:
 
-**Problem Analysis:**
-I've analyzed your AI challenge using advanced systems. Here's the solution:
+**For content/writing:**
+- ChatGPT Plus ($20/month) - Best overall, great for ideation
+- Claude (Anthropic) - Better for analysis and longer content  
+- Grammarly AI - Editing and tone adjustment
 
-**Immediate Action Steps:**
-1. **Define Clear Objectives** - What specific outcome do you want?
-2. **Choose Right Tools** - Match tools to your technical skill level
-3. **Start Small** - Pilot with one process before scaling
-4. **Measure Results** - Track metrics from day one
+**For business automation:**
+- Zapier ($20/month) - Connect different apps automatically
+- Make.com (cheaper Zapier alternative)
+- Notion AI - Great for team knowledge management
 
-**Best Practices:**
-- Focus on problems worth solving (high impact, frequent occurrence)
-- Invest time in prompt engineering - it's 80% of AI success
-- Always have human oversight for critical decisions
-- Build feedback loops to improve AI performance
+**For data/analysis:**
+- ChatGPT with Code Interpreter - Surprisingly good at data analysis
+- Tableau with AI features - If you need real dashboards
+- Excel with Copilot - If you're already in Microsoft ecosystem
 
-**Common Pitfalls to Avoid:**
-- Trying to automate everything at once
-- Using AI for tasks humans do better
-- Ignoring data quality issues
-- Not training your team properly
+**Free options to start with:**
+- ChatGPT free tier
+- Claude free tier  
+- Google Bard
+- Bing Chat
 
-**Technical Implementation:**
-- Start with API-based solutions (easier integration)
-- Use pre-trained models before building custom ones
-- Implement proper error handling and fallbacks
-- Plan for scalability from the beginning
+**My advice:** Start with the free versions, find what you actually use daily, THEN upgrade. Don't buy everything at once.
 
-**Ready for personalized AI guidance?**
-📧 Email: {self.email_contact}
-📱 Instagram: {self.instagram_consulting}
+What's your specific use case? I can give you a more targeted recommendation: {self.email_contact}""",
 
-*JMichael Labs - Your AI transformation partner*"""
+            "general_ai_help": f"""I've been working with AI systems for a while - here's my take on your situation:
+
+**The practical approach that works:**
+
+1. **Start with your biggest pain point** - What task do you wish you could delegate?
+2. **Test before you invest** - Most AI tools have free trials, use them
+3. **Focus on one workflow** - Master one AI application before adding more
+
+**What I wish someone told me when I started:**
+- AI is a tool, not magic - it needs good inputs to give good outputs
+- The learning curve is mostly about prompt engineering, not the tech
+- 80% of AI success comes from asking the right questions
+
+**Common patterns that work:**
+- Use AI for first drafts, humans for final edits
+- Automate repetitive tasks, keep humans for creative decisions  
+- Think "AI-assisted" not "AI-replacement"
+
+**Red flags to avoid:**
+- Tools that promise to "replace your entire team"
+- Solutions that seem too good to be true (they usually are)
+- Not having a clear success metric
+
+The best AI implementations solve real problems you already have, they don't create new workflows just because it's cool tech.
+
+What specific challenge are you trying to solve? Feel free to reach out: {self.email_contact}
+
+*Hope this helps!*"""
         }
         
         return responses.get(response_type, responses["general_ai_help"])
@@ -276,13 +308,13 @@ I've analyzed your AI challenge using advanced systems. Here's the solution:
             print(f"📊 Daily limit reached: {self.daily_responses}/{self.max_daily_responses}")
             return False
         
-        # Skip very old posts (older than 12 hours for faster response)
+        # Skip very old posts (extended to 48 hours for more opportunities)
         post_time = datetime.fromtimestamp(post.created_utc)
-        if datetime.now() - post_time > timedelta(hours=12):
+        if datetime.now() - post_time > timedelta(hours=48):
             return False
         
-        # Skip if post already has many comments (probably solved)
-        if post.num_comments > 10:
+        # Skip if post already has TOO many comments (increased limit)
+        if post.num_comments > 50:
             return False
         
         # Check if we already commented on this post (double safety)
@@ -339,8 +371,8 @@ I've analyzed your AI challenge using advanced systems. Here's the solution:
                 subreddit = self.reddit.subreddit(subreddit_name)
                 print(f"📍 Scanning r/{subreddit_name}...")
                 
-                # Check new posts (limit for free tier)
-                for post in subreddit.new(limit=5):
+                # Check more posts for better opportunities
+                for post in subreddit.new(limit=15):
                     if self.should_respond_to_post(post):
                         if self.respond_to_post(post):
                             responses_this_cycle += 1
