@@ -17,12 +17,12 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Import our bot (will be in same directory)
+# Import our NEW AI News Poster bot
 try:
-    from reddit_ai_solver_render import RedditAIProblemSolver
+    from ai_news_poster import AINewsPoster
 except ImportError:
-    logger.error("Could not import Reddit bot - check dependencies")
-    RedditAIProblemSolver = None
+    logger.error("Could not import AI News Poster - check dependencies")
+    AINewsPoster = None
 
 # Global bot instance
 bot_instance = None
@@ -30,15 +30,15 @@ last_run_time = None
 run_count = 0
 
 def initialize_bot():
-    """Initialize bot with environment variables"""
+    """Initialize AI News Poster bot"""
     global bot_instance
     
-    if RedditAIProblemSolver and not bot_instance:
+    if AINewsPoster and not bot_instance:
         try:
-            bot_instance = RedditAIProblemSolver()
-            logger.info("✅ Reddit AI Bot initialized successfully")
+            bot_instance = AINewsPoster()
+            logger.info("✅ AI News Poster initialized successfully")
         except Exception as e:
-            logger.error(f"❌ Failed to initialize bot: {e}")
+            logger.error(f"❌ Failed to initialize AI News Poster: {e}")
             bot_instance = None
     
     return bot_instance is not None
@@ -47,10 +47,11 @@ def initialize_bot():
 def health_check():
     """Health check endpoint"""
     return jsonify({
-        "status": "Reddit AI Problem Solver Bot",
-        "version": "1.0",
+        "status": "JMichael Labs AI News Poster",
+        "version": "2.0",
         "last_run": last_run_time.isoformat() if last_run_time else None,
         "total_runs": run_count,
+        "target_subreddit": "r/jmichaelLabs",
         "bot_initialized": bot_instance is not None
     })
 
@@ -69,11 +70,10 @@ def run_bot():
                 "timestamp": start_time.isoformat()
             }), 500
         
-        logger.info("🚀 Starting Reddit AI bot scan...")
+        logger.info("🚀 Starting AI News Posting...")
         
-        # Run bot scan (limit responses for free tier)
-        bot_instance.max_daily_responses = 10  # Conservative for free tier
-        responses_count = bot_instance.scan_subreddits()
+        # Run daily posting
+        posts_count = bot_instance.run_daily_posting()
         
         # Update tracking
         last_run_time = datetime.now()
@@ -85,13 +85,14 @@ def run_bot():
             "status": "success",
             "timestamp": last_run_time.isoformat(),
             "execution_time_seconds": execution_time,
-            "responses_generated": responses_count,
+            "posts_generated": posts_count,
             "total_runs": run_count,
-            "daily_responses": bot_instance.daily_responses if bot_instance else 0,
-            "max_daily": bot_instance.max_daily_responses if bot_instance else 0
+            "daily_posts": bot_instance.posts_today if bot_instance else 0,
+            "max_daily": bot_instance.max_daily_posts if bot_instance else 0,
+            "target_subreddit": "r/jmichaelLabs"
         }
         
-        logger.info(f"✅ Bot run completed: {responses_count} responses in {execution_time:.1f}s")
+        logger.info(f"✅ AI News Posting completed: {posts_count} posts in {execution_time:.1f}s")
         return jsonify(result)
         
     except Exception as e:

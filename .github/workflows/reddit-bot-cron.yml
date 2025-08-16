@@ -1,17 +1,17 @@
-name: Reddit AI Bot Cron
+name: JMichael Labs AI News Poster
 on:
   schedule:
-    # Run every 5 minutes for testing
-    - cron: '*/5 * * * *'
+    # Run once daily at 10 AM EST (15:00 UTC)
+    - cron: '0 15 * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
-  ping-reddit-bot:
+  trigger-ai-news-post:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Reddit AI Bot
+      - name: Trigger AI News Posting
         run: |
-          echo "🚀 Pinging Reddit AI Bot on Render..."
+          echo "🚀 Triggering daily AI news post..."
           
           # Render service URL - will be active after deployment
           BOT_URL="https://reddit-ai-problem-solver.onrender.com"
@@ -19,13 +19,13 @@ jobs:
           # Ping health check
           curl -f "$BOT_URL/" || echo "Health check failed"
           
-          # Trigger bot run with POST
-          echo "⚡ Triggering bot scan..."
-          response=$(curl -X POST -s -f "$BOT_URL/run" --max-time 300 || echo "Bot run failed")
+          # Trigger daily AI news post
+          echo "⚡ Triggering daily AI news post..."
+          response=$(curl -X POST -s -f "$BOT_URL/run" --max-time 300 || echo "Post failed")
           echo "$response"
           
           # Log results
-          echo "✅ Bot ping completed at $(date)"
+          echo "✅ AI News posting completed at $(date)"
           
           # Optional: Send results to webhook/notification service
           # curl -X POST your-webhook-url -d "Bot status: $response"
