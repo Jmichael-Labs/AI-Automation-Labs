@@ -296,11 +296,11 @@ What specific challenge are you trying to solve? Feel free to reach out: {self.e
         
         return responses.get(response_type, responses["general_ai_help"])
     
-    def should_respond_to_post(self, post):
+    def should_respond_to_post(self, post, stats=None):
         """Determine if we should respond to this post"""
         # Skip if already processed
         if post.id in self.processed_posts:
-            print(f"⏭️ Skipping already processed post: {post.id}")
+            if stats: stats['processed'] += 1
             return False
         
         # Skip if we've hit daily limit
@@ -308,13 +308,13 @@ What specific challenge are you trying to solve? Feel free to reach out: {self.e
             print(f"📊 Daily limit reached: {self.daily_responses}/{self.max_daily_responses}")
             return False
         
-        # Skip very old posts (extended to 48 hours for more opportunities)
+        # Skip very old posts (extended to 7 days for maximum opportunities)
         post_time = datetime.fromtimestamp(post.created_utc)
-        if datetime.now() - post_time > timedelta(hours=48):
+        if datetime.now() - post_time > timedelta(days=7):
             return False
         
-        # Skip if post already has TOO many comments (increased limit)
-        if post.num_comments > 50:
+        # Skip if post already has TOO many comments (very permissive)
+        if post.num_comments > 200:
             return False
         
         # Check if we already commented on this post (double safety)
@@ -365,14 +365,23 @@ What specific challenge are you trying to solve? Feel free to reach out: {self.e
         print(f"🔍 Scanning subreddits: {self.TARGET_SUBREDDITS}")
         
         responses_this_cycle = 0
+        total_posts_scanned = 0
+        posts_by_reason = {
+            'processed': 0,
+            'too_old': 0, 
+            'too_many_comments': 0,
+            'already_commented': 0,
+            'no_ai_detected': 0,
+            'passed_filters': 0
+        }
         
         for subreddit_name in self.TARGET_SUBREDDITS:
             try:
                 subreddit = self.reddit.subreddit(subreddit_name)
                 print(f"📍 Scanning r/{subreddit_name}...")
                 
-                # Check more posts for better opportunities
-                for post in subreddit.new(limit=15):
+                # Check MANY more posts for maximum opportunities  
+                for post in subreddit.new(limit=50):
                     if self.should_respond_to_post(post):
                         if self.respond_to_post(post):
                             responses_this_cycle += 1
