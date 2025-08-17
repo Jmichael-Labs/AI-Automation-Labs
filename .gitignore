@@ -1,12 +1,41 @@
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.env
+.Python
+*.so
+.coverage
+.pytest_cache/
+*.egg-info/
 .venv
 env/
 venv/
-.DS_Store
+
+# Personal credentials
+reddit_credentials.py
+credentials.json
+
+# Local development
+.vscode/
+.idea/
 *.log
-temp_speech.mp3
+temp_*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Bot data
+bot_memory.json
+execution_log.txt
+/tmp/reddit_bot_status.json
+
+# Legacy files
 response_log.json
+temp_speech.mp3

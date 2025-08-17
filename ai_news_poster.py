@@ -17,24 +17,24 @@ class AINewsPoster:
     def __init__(self):
         """Initialize AI News Poster with new credentials"""
         
-        # theinnovationla credentials with new bot app
+        # Reddit API credentials from environment variables
         self.reddit = praw.Reddit(
-            client_id=os.environ.get('REDDIT_CLIENT_ID', '2db6KZffvByzTGZCEntIqw'),
-            client_secret=os.environ.get('REDDIT_CLIENT_SECRET', '5f1GO6oTWWJUf153NnhlfL1khE4osQ'),
-            user_agent=os.environ.get('REDDIT_USER_AGENT', 'AIAutomationLabsBot-v2:v1.0 (by /u/theinnovationla)'),
-            username=os.environ.get('REDDIT_USERNAME', 'theinnovationla'),
-            password=os.environ.get('REDDIT_PASSWORD', 'Suxtan20@')
+            client_id=os.environ.get('REDDIT_CLIENT_ID'),
+            client_secret=os.environ.get('REDDIT_CLIENT_SECRET'),
+            user_agent=os.environ.get('REDDIT_USER_AGENT'),
+            username=os.environ.get('REDDIT_USERNAME'),
+            password=os.environ.get('REDDIT_PASSWORD')
         )
         
-        # Target subreddit
-        self.target_subreddit = "AIAutomationLabs"
+        # Target subreddit (configurable)
+        self.target_subreddit = os.environ.get('TARGET_SUBREDDIT', 'AIAutomationLabs')
         
-        # Contact info
-        self.email_contact = os.environ.get('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')
-        self.instagram_consulting = os.environ.get('INSTAGRAM_CONSULTING', 'https://www.instagram.com/jmichaeloficial/')
+        # Contact info (configurable)
+        self.email_contact = os.environ.get('EMAIL_CONTACT', 'your.email@example.com')
+        self.instagram_consulting = os.environ.get('INSTAGRAM_CONSULTING', 'https://instagram.com/youraccount')
         
-        # Posting schedule
-        self.max_daily_posts = 1  # Conservative start
+        # Posting schedule (configurable)
+        self.max_daily_posts = int(os.environ.get('MAX_DAILY_POSTS', '3'))
         self.posts_today = 0
         self.last_post_date = None
         

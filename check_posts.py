@@ -4,18 +4,21 @@ Check posts in r/AIAutomationLabs
 """
 import praw
 
+import os
+
 reddit = praw.Reddit(
-    client_id='2db6KZffvByzTGZCEntIqw',
-    client_secret='5f1GO6oTWWJUf153NnhlfL1khE4osQ',
-    user_agent='AIAutomationLabsBot-v2:v1.0 (by /u/theinnovationla)',
-    username='theinnovationla',
-    password='Suxtan20@'
+    client_id=os.environ.get('REDDIT_CLIENT_ID'),
+    client_secret=os.environ.get('REDDIT_CLIENT_SECRET'),
+    user_agent=os.environ.get('REDDIT_USER_AGENT'),
+    username=os.environ.get('REDDIT_USERNAME'),
+    password=os.environ.get('REDDIT_PASSWORD')
 )
 
 def check_subreddit_posts():
-    """Check what posts exist in r/AIAutomationLabs"""
+    """Check what posts exist in target subreddit"""
+    target_subreddit = os.environ.get('TARGET_SUBREDDIT', 'AIAutomationLabs')
     try:
-        subreddit = reddit.subreddit('AIAutomationLabs')
+        subreddit = reddit.subreddit(target_subreddit)
         print(f"📍 Checking r/{subreddit.display_name}")
         print(f"👥 Subscribers: {subreddit.subscribers}")
         print(f"📝 Description: {subreddit.public_description}")
@@ -33,7 +36,7 @@ def check_subreddit_posts():
             print(f"   Created: {post.created_utc}")
         
         if post_count == 0:
-            print("❌ NO POSTS FOUND in r/AIAutomationLabs")
+            print(f"❌ NO POSTS FOUND in r/{target_subreddit}")
         else:
             print(f"\n✅ Found {post_count} posts total")
             
