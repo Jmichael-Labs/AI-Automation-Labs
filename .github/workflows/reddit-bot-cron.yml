@@ -1,8 +1,8 @@
 name: JMichael Labs AI News Poster
 on:
   schedule:
-    # Run once daily at 10 AM EST (15:00 UTC)
-    - cron: '0 15 * * *'
+    # Run once daily at 10 AM EDT (14:00 UTC) - Newark, NJ timezone
+    - cron: '0 14 * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
