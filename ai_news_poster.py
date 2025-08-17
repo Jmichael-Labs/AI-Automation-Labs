@@ -35,6 +35,7 @@ class AINewsPoster:
         # Posting schedule
         self.max_daily_posts = 1  # Conservative start
         self.posts_today = 0
+        self.last_post_date = None
         
         # Initialize real-time news aggregator
         self.news_aggregator = AINewsAggregator(self.reddit)
@@ -63,148 +64,163 @@ class AINewsPoster:
             return False
     
     def generate_daily_ai_news(self):
-        """Generate daily AI news post using real-time data"""
-        print("Generating real-time AI news...")
+        """Generate daily passive income focused AI post"""
+        print("Generating AI passive income content...")
         
-        # Try to get real-time news first
-        try:
-            title, content = self.news_aggregator.generate_real_time_post()
-            if title and content:
-                print("✅ Real-time news generated successfully")
-                return title, content
-        except Exception as e:
-            print(f"⚠️ Real-time news failed: {e}")
+        passive_income_ideas = [
+            {
+                "title": "Build a $2K/Month AI Content Farm (Zero Programming)",
+                "tool": "Claude + Zapier + WordPress",
+                "investment": "$47/month",
+                "timeframe": "2-4 weeks setup",
+                "method": "AI writes articles → Auto-publish → Ad revenue + affiliates",
+                "steps": "1. Pick profitable niche 2. Setup WordPress + ads 3. Connect Claude API 4. Create content pipeline"
+            },
+            {
+                "title": "AI Product Review Empire ($1.5K/Month Passive)",
+                "tool": "ChatGPT + Shopify + Amazon Affiliate",
+                "investment": "$29/month",
+                "timeframe": "3-5 weeks",
+                "method": "AI generates product reviews → Auto-post → Affiliate commissions",
+                "steps": "1. Choose product category 2. Setup review site 3. AI content generation 4. Affiliate link automation"
+            },
+            {
+                "title": "Automated YouTube Shorts Channel ($3K/Month)",
+                "tool": "Pictory + DALL-E + TikTok API",
+                "investment": "$67/month",
+                "timeframe": "1-3 weeks",
+                "method": "AI creates videos → Auto-upload → Ad revenue + sponsorships",
+                "steps": "1. Research viral niches 2. Setup automation tools 3. Content pipeline 4. Monetization setup"
+            },
+            {
+                "title": "AI Newsletter Empire ($4K/Month Subscription)",
+                "tool": "GPT-4 + ConvertKit + Substack",
+                "investment": "$39/month",
+                "timeframe": "4-6 weeks",
+                "method": "AI curates + writes newsletter → Auto-send → Paid subscriptions",
+                "steps": "1. Choose expertise niche 2. Setup email platform 3. AI content curation 4. Subscription funnel"
+            },
+            {
+                "title": "Etsy Digital Products on Autopilot ($2.5K/Month)",
+                "tool": "Midjourney + Printful + Etsy API",
+                "investment": "$55/month",
+                "timeframe": "2-3 weeks",
+                "method": "AI designs products → Auto-list → Print-on-demand fulfillment",
+                "steps": "1. Research trending designs 2. AI art generation 3. Listing automation 4. Order fulfillment setup"
+            }
+        ]
         
-        # Fallback to template content
-        print("Using fallback template content")
-        today = datetime.now().strftime("%Y-%m-%d")
-        title = f"AI Intelligence Brief - {datetime.now().strftime('%B %d, %Y')}"
+        idea = random.choice(passive_income_ideas)
+        today = datetime.now().strftime('%B %d, %Y')
         
-        content = f"""## Today's AI Developments & Insights
+        title = f"💰 {idea['title']} - {today}"
+        
+        content = f"""## How to Build {idea['title'].split('(')[0].strip()}
 
-### 🔥 **Trending in AI Today:**
+**🎯 The Opportunity:**
+{idea['method']}
 
-**1. Autonomous Systems Revolution**
-- New breakthroughs in AI automation are changing how we work
-- Tools like Vercept are enabling no-code automation at scale
-- The shift from manual to autonomous workflows is accelerating
+**💸 Investment Required:** {idea['investment']}
+**⏰ Setup Time:** {idea['timeframe']}
+**🛠️ Tools Needed:** {idea['tool']}
 
-**2. Latest AI Tool Discoveries**
-- Advanced prompt engineering techniques showing 300% efficiency gains
-- Integration platforms simplifying complex AI implementations  
-- Cost-effective alternatives to expensive enterprise solutions
+**📋 Action Steps:**
+{idea['steps']}
 
-**3. Real-World Implementation Stories**
-- Small businesses seeing immediate ROI from AI adoption
-- Creative professionals augmenting workflows with AI assistants
-- E-commerce automation reducing manual work by 80%
+**🚀 Why This Works in 2025:**
+- AI tools have matured (quality + reliability)
+- Automation platforms are user-friendly
+- Market demand for AI-generated content is huge
+- Most people still don't know how to implement this
 
-### 💡 **JMichael Labs Insight:**
-*"The real advantage isn't in having the most advanced AI, but in knowing how to implement the right tools for your specific use case. Focus on problems that cost you time or money - that's where AI delivers immediate value."*
+**⚡ Pro Tip:**
+Start with one income stream, perfect it, then scale to multiple. The key is consistency and letting AI handle the heavy lifting while you focus on optimization.
 
-### 🛠️ **Tool Spotlight:**
-**This Week:** Vercept.com for e-commerce automation
-- No-code solution for Etsy, Shopify, Amazon
-- Natural language commands for complex workflows
-- Perfect for entrepreneurs who want results without programming
-
-### 💬 **Discussion Question:**
-What's the biggest manual task in your workflow that you wish you could automate? Drop your thoughts below! 👇
+**💡 Real Talk:**
+This isn't "get rich quick" - it's "get rich smart." AI does the work, you reap the rewards, but you still need to set it up correctly.
 
 ---
 
-**Want personalized AI implementation guidance?**  
-📧 Email: {self.email_contact}  
+**Need help setting up your AI passive income stream?**
+I've built multiple systems like this and can show you the exact implementation.
+
+📧 Email: {self.email_contact}
 📱 Instagram: {self.instagram_consulting}
 
-*Building the future, one automation at a time* ⚡"""
+*AI + Automation = Your Time Freedom* 🤖"""
 
         return title, content
     
     def generate_tool_tuesday(self):
-        """Generate Tool Tuesday post - BILINGUAL"""
+        """Generate Tool Tuesday post - Passive Income Tools"""
         tools = [
             {
                 "name": "Vercept",
                 "use_case": "E-commerce Automation",
-                "use_case_es": "Automatización de E-commerce", 
-                "description": "Tell it what to do, it does it automatically. Perfect for Etsy sellers.",
-                "description_es": "Dile qué hacer y lo hace automáticamente. Perfecto para vendedores de Etsy.",
-                "url": "vercept.com"
+                "roi": "$2,000/month",
+                "cost": "$47/month",
+                "description": "Natural language e-commerce automation. Tell it what to do, it does it automatically.",
+                "setup": "Connect to Etsy/Shopify → Give commands in plain English → Watch it work"
             },
             {
-                "name": "Claude Code",
-                "use_case": "Development Automation",
-                "use_case_es": "Automatización de Desarrollo",
-                "description": "AI-powered coding assistant that understands complex project contexts.",
-                "description_es": "Asistente de programación con IA que entiende contextos complejos de proyectos.",
-                "url": "claude.ai/code"
+                "name": "Make.com + ChatGPT",
+                "use_case": "Content Pipeline Automation",
+                "roi": "$1,500/month",
+                "cost": "$29/month",
+                "description": "AI content creation + automatic publishing across multiple platforms.",
+                "setup": "Design workflow → Connect AI tools → Set publishing schedule"
             },
             {
-                "name": "Zapier AI",
-                "use_case": "Workflow Automation",
-                "use_case_es": "Automatización de Flujos de Trabajo",
-                "description": "Connect apps with natural language. No coding required.",
-                "description_es": "Conecta aplicaciones con lenguaje natural. No requiere programación.",
-                "url": "zapier.com"
+                "name": "Zapier + Claude",
+                "use_case": "Newsletter Automation",
+                "roi": "$3,000/month",
+                "cost": "$39/month",
+                "description": "AI curates content and writes newsletters automatically.",
+                "setup": "Connect data sources → AI content creation → Email automation"
             }
         ]
         
         tool = random.choice(tools)
         
-        title = f"Tool Tuesday: {tool['name']} para {tool['use_case_es']} | for {tool['use_case']}"
+        title = f"🛠️ Tool Tuesday: {tool['name']} for {tool['use_case']}"
         
-        content = f"""## Tool Spotlight | Herramienta Destacada: **{tool['name']}**
+        content = f"""## Tool Spotlight: **{tool['name']}**
 
-### What it does | Qué hace:
+**What it does:**
+{tool['description']}
 
-**EN:** {tool['description']}
+**Passive Income Potential:** {tool['roi']}
+**Monthly Cost:** {tool['cost']}
 
-**ES:** {tool['description_es']}
+**How to set it up:**
+{tool['setup']}
 
-### Why I recommend it | Por qué lo recomiendo:
+**Why this tool wins in 2025:**
+- No coding required
+- Works while you sleep
+- Scales automatically
+- AI handles the complexity
 
-**EN:**
-- Zero learning curve: Natural language interface
-- Immediate results: Start seeing value within hours
-- Cost effective: Saves more than it costs
-- Scales with you: Works for solo entrepreneurs to teams
+**Real implementation example:**
+I set this up for a client who went from 5 hours/week manual work to completely automated income generation. They're now pulling in consistent monthly revenue with minimal oversight.
 
-**ES:**
-- Curva de aprendizaje cero: Interfaz de lenguaje natural
-- Resultados inmediatos: Comienza a ver valor en horas
-- Rentable: Ahorra más de lo que cuesta
-- Escala contigo: Funciona para emprendedores solos hasta equipos
+**Your next steps:**
+1. Sign up for free trial
+2. Follow the setup process
+3. Start with one simple automation
+4. Scale once you see results
 
-### Real-world use case | Caso de uso real:
-
-**EN:** I've personally used this for automating product uploads to Etsy. What used to take 2 hours now happens automatically while I sleep.
-
-**ES:** Personalmente he usado esto para automatizar subidas de productos a Etsy. Lo que solía tomar 2 horas ahora sucede automáticamente mientras duermo.
-
-### Results | Resultados:
-
-- **80% time savings | 80% ahorro de tiempo** on repetitive tasks | en tareas repetitivas
-- **Zero errors | Cero errores** vs manual process | vs proceso manual
-- **24/7 operation | Operación 24/7** without my involvement | sin mi intervención
-
-### Try it yourself | Pruébalo tú mismo:
-Check out {tool['name']} at {tool['url']}
-
-### Your turn | Tu turno:
-
-**EN:** What tools are you using for automation? Share your favorites below!
-
-**ES:** ¿Qué herramientas estás usando para automatización? ¡Comparte tus favoritas abajo!
+**Pro tip:** Don't try to automate everything at once. Pick one income stream, perfect it, then expand.
 
 ---
 
-**Need help choosing the right AI stack for your business? | ¿Necesitas ayuda eligiendo el stack de IA correcto para tu negocio?**
+**Want me to walk you through the exact setup?**
+I've implemented these systems multiple times and can show you the shortcuts.
 
-Email: {self.email_contact}
-Instagram: {self.instagram_consulting}
+📧 Email: {self.email_contact}
+📱 Instagram: {self.instagram_consulting}
 
-*The right tool can change everything | La herramienta correcta puede cambiarlo todo*"""
+*The right tool can generate passive income* 💰"""
 
         return title, content
     
@@ -348,7 +364,14 @@ Your experience might be exactly what someone else needs to hear. Every automati
             return False
     
     def run_daily_posting(self):
-        """Run daily posting routine"""
+        """Run daily posting routine with duplicate prevention"""
+        today = datetime.now().strftime('%Y-%m-%d')
+        
+        # Check if already posted today
+        if self.last_post_date == today:
+            print(f"📊 Already posted today ({today})")
+            return 0
+            
         if self.posts_today >= self.max_daily_posts:
             print(f"📊 Daily limit reached: {self.posts_today}/{self.max_daily_posts}")
             return 0
@@ -356,7 +379,7 @@ Your experience might be exactly what someone else needs to hear. Every automati
         # Determine what type of post to make based on day of week
         weekday = datetime.now().weekday()  # 0=Monday, 6=Sunday
         
-        if weekday == 0:  # Monday - Daily AI News
+        if weekday == 0:  # Monday - Passive Income Ideas
             title, content = self.generate_daily_ai_news()
         elif weekday == 1:  # Tuesday - Tool Spotlight  
             title, content = self.generate_tool_tuesday()
@@ -364,11 +387,14 @@ Your experience might be exactly what someone else needs to hear. Every automati
             title, content = self.generate_case_study()
         elif weekday == 4:  # Friday - Discussion
             title, content = self.generate_discussion_post()
-        else:  # Other days - AI News
+        else:  # Other days - Passive Income Ideas
             title, content = self.generate_daily_ai_news()
         
         success = self.post_to_subreddit(title, content)
-        return 1 if success else 0
+        if success:
+            self.last_post_date = today
+            return 1
+        return 0
 
 if __name__ == "__main__":
     poster = AINewsPoster()
