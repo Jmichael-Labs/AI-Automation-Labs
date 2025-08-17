@@ -51,7 +51,7 @@ def health_check():
         "version": "2.0",
         "last_run": last_run_time.isoformat() if last_run_time else None,
         "total_runs": run_count,
-        "target_subreddit": "r/jmichaelLabs",
+        "target_subreddit": "r/AILabs",
         "bot_initialized": bot_instance is not None
     })
 
@@ -89,7 +89,7 @@ def run_bot():
             "total_runs": run_count,
             "daily_posts": bot_instance.posts_today if bot_instance else 0,
             "max_daily": bot_instance.max_daily_posts if bot_instance else 0,
-            "target_subreddit": "r/jmichaelLabs"
+            "target_subreddit": "r/AILabs"
         }
         
         logger.info(f"✅ AI News Posting completed: {posts_count} posts in {execution_time:.1f}s")

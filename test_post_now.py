@@ -10,13 +10,13 @@ from datetime import datetime
 reddit = praw.Reddit(
     client_id='WWPlll5usdslxz9bQqEvZg',
     client_secret='c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ',
-    user_agent='JMichaelLabsBot:v1.0 (by /u/theinnovationla)',
+    user_agent='AILabsBot:v1.0 (by /u/theinnovationla)',
     username='theinnovationla',
     password='Suxtan20@'
 )
 
 def post_immediately():
-    """Post to r/jmichaelLabs right now"""
+    """Post to r/AILabs right now"""
     try:
         # Test connection first
         user = reddit.user.me()
@@ -78,13 +78,13 @@ What's the most time-consuming task in your workflow? Drop a comment - I might f
 Welcome to the community! 🌟"""
 
         # Post to subreddit
-        subreddit = reddit.subreddit('jmichaelLabs')
+        subreddit = reddit.subreddit('AILabs')
         submission = subreddit.submit(title=title, selftext=content)
         
         print(f"🎉 SUCCESSFULLY POSTED!")
         print(f"📱 Title: {title}")
         print(f"🔗 URL: {submission.url}")
-        print(f"📍 Posted to: r/jmichaelLabs")
+        print(f"📍 Posted to: r/AILabs")
         
         return True
         

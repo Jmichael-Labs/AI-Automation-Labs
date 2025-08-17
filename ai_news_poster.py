@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 JMichael Labs AI News Poster Bot
-Posts AI content to r/jmichaelLabs subreddit
+Posts AI content to r/AILabs subreddit
 """
 
 import praw
@@ -11,6 +11,7 @@ import json
 import random
 from datetime import datetime, timedelta
 from real_time_news_aggregator import AINewsAggregator
+import re
 
 class AINewsPoster:
     def __init__(self):
@@ -20,13 +21,13 @@ class AINewsPoster:
         self.reddit = praw.Reddit(
             client_id=os.environ.get('REDDIT_CLIENT_ID', 'WWPlll5usdslxz9bQqEvZg'),
             client_secret=os.environ.get('REDDIT_CLIENT_SECRET', 'c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ'),
-            user_agent=os.environ.get('REDDIT_USER_AGENT', 'JMichaelLabsBot:v1.0 (by /u/theinnovationla)'),
+            user_agent=os.environ.get('REDDIT_USER_AGENT', 'AILabsBot:v1.0 (by /u/theinnovationla)'),
             username=os.environ.get('REDDIT_USERNAME', 'theinnovationla'),
             password=os.environ.get('REDDIT_PASSWORD', 'Suxtan20@')
         )
         
         # Target subreddit
-        self.target_subreddit = "jmichaelLabs"
+        self.target_subreddit = "AILabs"
         
         # Contact info
         self.email_contact = os.environ.get('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')
@@ -40,10 +41,14 @@ class AINewsPoster:
         # Initialize real-time news aggregator
         self.news_aggregator = AINewsAggregator(self.reddit)
         
+        # Load 1,000 business prompts
+        self.business_prompts = self.load_business_prompts()
+        
         print(f"🤖 JMichael Labs AI News Poster initialized")
         print(f"🎯 Target: r/{self.target_subreddit}")
         print(f"📧 Contact: {self.email_contact}")
         print(f"📡 Real-time news aggregation enabled")
+        print(f"💡 Loaded {len(self.business_prompts)} business prompts")
     
     def test_connection(self):
         """Test Reddit connection with new credentials"""
@@ -345,8 +350,255 @@ Your experience might be exactly what someone else needs to hear. Every automati
 
         return discussion['title'], full_content
     
+    def load_business_prompts(self):
+        """Load and parse 1,000 business prompts from desktop file"""
+        prompts_file = "/Users/suxtan/Desktop/COMPLETE_1000_CHATGPT_BUSINESS_PROMPTS.md"
+        prompts = []
+        
+        try:
+            with open(prompts_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Extract prompts using regex patterns
+            # Look for numbered prompts with code blocks
+            prompt_pattern = r'\*\*\d+\. ([^*]+)\*\*\s*```([^`]+)```'
+            matches = re.findall(prompt_pattern, content, re.DOTALL)
+            
+            for title, prompt_content in matches:
+                prompts.append({
+                    'title': title.strip(),
+                    'content': prompt_content.strip(),
+                    'category': self.categorize_prompt(title)
+                })
+            
+            print(f"✅ Loaded {len(prompts)} business prompts successfully")
+            return prompts
+            
+        except Exception as e:
+            print(f"⚠️ Error loading business prompts: {e}")
+            return self.get_fallback_prompts()
+    
+    def categorize_prompt(self, title):
+        """Categorize prompt for better selection"""
+        title_lower = title.lower()
+        
+        if any(word in title_lower for word in ['social media', 'content', 'marketing', 'advertising']):
+            return 'marketing'
+        elif any(word in title_lower for word in ['automation', 'ai', 'tool', 'software']):
+            return 'automation'
+        elif any(word in title_lower for word in ['business', 'strategy', 'entrepreneur']):
+            return 'business'
+        elif any(word in title_lower for word in ['finance', 'investment', 'money']):
+            return 'finance'
+        else:
+            return 'general'
+    
+    def get_fallback_prompts(self):
+        """Fallback prompts if file loading fails"""
+        return [
+            {
+                'title': 'AI Content Empire Builder',
+                'content': 'Create a systematic approach to building passive income through AI-generated content across multiple platforms.',
+                'category': 'automation'
+            },
+            {
+                'title': 'Automation Business Generator',
+                'content': 'Design an automated business model that leverages AI tools to generate consistent revenue streams.',
+                'category': 'business'
+            },
+            {
+                'title': 'AI Marketing System',
+                'content': 'Build an intelligent marketing automation system that adapts to market trends and customer behavior.',
+                'category': 'marketing'
+            }
+        ]
+    
+    def generate_prompt_based_content(self):
+        """Generate content based on business prompts + current AI news"""
+        # Get recent AI news for context
+        news_items = self.news_aggregator.scrape_latest_ai_news(hours_back=48, max_posts=10)
+        trending_tools = self.extract_trending_ai_tools(news_items)
+        
+        # Select relevant prompt
+        prompt = self.select_smart_prompt(trending_tools)
+        
+        # Get current date
+        today = datetime.now().strftime('%B %d, %Y')
+        
+        # Generate AI-enhanced passive income idea
+        title, content = self.transform_prompt_to_passive_income(prompt, trending_tools, today)
+        
+        return title, content
+    
+    def extract_trending_ai_tools(self, news_items):
+        """Extract trending AI tools from recent news"""
+        trending_tools = []
+        
+        for item in news_items:
+            text = f"{item['title']} {item['content']}".lower()
+            
+            # Common AI tools and platforms
+            tool_keywords = {
+                'chatgpt': 'ChatGPT',
+                'claude': 'Claude',
+                'midjourney': 'Midjourney',
+                'dall-e': 'DALL-E',
+                'stable diffusion': 'Stable Diffusion',
+                'runway': 'Runway',
+                'luma': 'Luma AI',
+                'suno': 'Suno',
+                'eleven labs': 'ElevenLabs',
+                'perplexity': 'Perplexity',
+                'anthropic': 'Claude/Anthropic',
+                'openai': 'OpenAI',
+                'google gemini': 'Google Gemini',
+                'zapier': 'Zapier',
+                'make.com': 'Make.com',
+                'notion': 'Notion AI'
+            }
+            
+            for keyword, tool_name in tool_keywords.items():
+                if keyword in text and tool_name not in trending_tools:
+                    trending_tools.append(tool_name)
+        
+        # Add some always-relevant tools if list is empty
+        if not trending_tools:
+            trending_tools = ['ChatGPT', 'Claude', 'Zapier', 'Make.com']
+        
+        return trending_tools[:3]  # Top 3 trending
+    
+    def select_smart_prompt(self, trending_tools):
+        """Select relevant prompt based on trending tools"""
+        if not self.business_prompts:
+            return self.get_fallback_prompts()[0]
+        
+        # Try to find prompts related to automation/AI if trending tools are present
+        if trending_tools:
+            automation_prompts = [p for p in self.business_prompts if p['category'] == 'automation']
+            if automation_prompts:
+                return random.choice(automation_prompts)
+        
+        # Otherwise, prefer marketing or business prompts
+        preferred_categories = ['marketing', 'business', 'automation']
+        
+        for category in preferred_categories:
+            category_prompts = [p for p in self.business_prompts if p['category'] == category]
+            if category_prompts:
+                return random.choice(category_prompts)
+        
+        # Fallback to any prompt
+        return random.choice(self.business_prompts)
+    
+    def transform_prompt_to_passive_income(self, prompt, trending_tools, today):
+        """Transform business prompt into passive income opportunity with trending tools"""
+        
+        # Extract key concepts from prompt
+        prompt_concepts = self.extract_key_concepts(prompt['content'])
+        
+        # Generate title
+        tool_list = ' + '.join(trending_tools[:2]) if trending_tools else 'AI Tools'
+        title = f"💰 {prompt['title']} with {tool_list} - {today}"
+        
+        # Calculate potential earnings (realistic ranges)
+        monthly_income = random.choice(['$1,200', '$2,500', '$4,800', '$3,200', '$1,800', '$6,000', '$2,800'])
+        setup_time = random.choice(['2-3 weeks', '1-2 weeks', '3-4 weeks', '1 week', '2 weeks'])
+        investment = random.choice(['$39/month', '$67/month', '$29/month', '$89/month', '$47/month', '$0 (free tier)'])
+        
+        # Generate content
+        content = f"""## How to Build {prompt['title']} Using Current AI Technology
+
+**🎯 The Strategy:**
+Leverage the latest AI breakthroughs to create {prompt_concepts['main_goal']}. The recent developments in {trending_tools[0] if trending_tools else 'AI automation'} have made this approach incredibly accessible.
+
+**💸 Realistic Income Potential:** {monthly_income}/month
+**⏰ Setup Timeline:** {setup_time}
+**🛠️ Investment Required:** {investment}
+**📱 Key Tools:** {', '.join(trending_tools) if trending_tools else 'ChatGPT, Claude, Zapier'}
+
+**📋 Implementation Strategy:**
+{self.generate_implementation_steps(prompt, trending_tools)}
+
+**🚀 Why This Works Right Now:**
+- {trending_tools[0] if trending_tools else 'AI tools'} just released new features perfect for this
+- Market demand is high but competition is still low
+- Automation technology has reached the "sweet spot" of reliability
+- Most people don't know how to connect these tools effectively
+
+**⚡ Pro Implementation Tip:**
+Start with the simplest version first. Get one income stream working, then systematically add complexity. The goal is predictable revenue, not perfection.
+
+**💡 Real Talk:**
+This isn't magic - it requires strategic thinking and consistent execution. But when you leverage AI correctly, you can build systems that generate income while you focus on scaling.
+
+**🔥 Current Market Context:**
+Based on what's happening in AI this week, {self.generate_market_context(trending_tools)}
+
+---
+
+**Ready to implement this exact system?**
+I've built similar automation systems and can walk you through the specific setup.
+
+📧 Email: {self.email_contact}
+📱 Instagram: {self.instagram_consulting}
+
+*AI automation isn't the future - it's happening now* 🤖"""
+        
+        return title, content
+    
+    def extract_key_concepts(self, prompt_content):
+        """Extract key concepts from prompt for content generation"""
+        # Simple concept extraction
+        content_lower = prompt_content.lower()
+        
+        if 'social media' in content_lower:
+            main_goal = 'automated social media revenue streams'
+        elif 'content' in content_lower:
+            main_goal = 'passive content income systems'
+        elif 'marketing' in content_lower:
+            main_goal = 'automated marketing funnels'
+        elif 'business' in content_lower:
+            main_goal = 'hands-off business operations'
+        else:
+            main_goal = 'systematic passive income generation'
+        
+        return {'main_goal': main_goal}
+    
+    def generate_implementation_steps(self, prompt, trending_tools):
+        """Generate implementation steps based on prompt and trending tools"""
+        tool = trending_tools[0] if trending_tools else 'AI tools'
+        
+        steps = [
+            f"1. Research profitable opportunities in your chosen niche",
+            f"2. Set up {tool} for automated content/process generation", 
+            f"3. Create templates and workflows for consistency",
+            f"4. Implement automation pipeline with monitoring",
+            f"5. Scale successful processes and optimize underperforming ones"
+        ]
+        
+        return '\n'.join(steps)
+    
+    def generate_market_context(self, trending_tools):
+        """Generate current market context based on trending tools"""
+        if not trending_tools:
+            return "the AI automation space is evolving rapidly with new opportunities emerging weekly."
+        
+        tool = trending_tools[0]
+        contexts = {
+            'ChatGPT': "OpenAI's latest updates have made content automation incredibly sophisticated",
+            'Claude': "Anthropic's improvements in reasoning make complex automation workflows possible",
+            'Midjourney': "visual content creation has become nearly indistinguishable from human work",
+            'Zapier': "workflow automation has reached enterprise-level reliability at consumer prices",
+            'Make.com': "visual automation builders are enabling non-technical automation at scale"
+        }
+        
+        return contexts.get(tool, f"{tool}'s recent developments are creating new automation possibilities")
+    
+    def should_use_prompt_based_content(self):
+        """Decide whether to use prompt-based content (80% of the time)"""
+        return random.random() < 0.8  # 80% chance
+    
     def post_to_subreddit(self, title, content, post_type="text"):
-        """Post content to r/jmichaelLabs"""
+        """Post content to r/AILabs"""
         try:
             subreddit = self.reddit.subreddit(self.target_subreddit)
             
@@ -379,7 +631,11 @@ Your experience might be exactly what someone else needs to hear. Every automati
         # Determine what type of post to make based on day of week
         weekday = datetime.now().weekday()  # 0=Monday, 6=Sunday
         
-        if weekday == 0:  # Monday - Passive Income Ideas
+        # 80% chance to use 1,000 prompts + trending AI tools
+        if self.should_use_prompt_based_content():
+            print("🚀 Using 1,000 prompts + trending AI tools for content generation")
+            title, content = self.generate_prompt_based_content()
+        elif weekday == 0:  # Monday - Passive Income Ideas
             title, content = self.generate_daily_ai_news()
         elif weekday == 1:  # Tuesday - Tool Spotlight  
             title, content = self.generate_tool_tuesday()
@@ -403,6 +659,6 @@ if __name__ == "__main__":
     if poster.test_connection():
         print("🚀 Running daily posting...")
         posts_made = poster.run_daily_posting()
-        print(f"✅ Posted {posts_made} content to r/jmichaelLabs")
+        print(f"✅ Posted {posts_made} content to r/AILabs")
     else:
         print("❌ Connection failed")
