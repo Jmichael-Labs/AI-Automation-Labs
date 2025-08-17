@@ -650,7 +650,7 @@ I've built similar automation systems and can walk you through the specific setu
         
         success = self.post_to_subreddit(title, content)
         if success:
-            self.last_post_date = today
+            self.last_post_date = datetime.now().strftime('%Y-%m-%d')
             return 1
         return 0
 
