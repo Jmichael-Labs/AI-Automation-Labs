@@ -16,13 +16,17 @@ class SmartAutoLauncher:
         self.render_url = "https://reddit-ai-problem-solver.onrender.com"
         self.status_file = "/tmp/reddit_bot_status.json"
         self.check_interval = 30 * 60  # Check every 30 minutes
-        self.min_daily_interval = 18 * 60 * 60  # Minimum 18 hours between posts
-        self.max_daily_interval = 30 * 60 * 60  # Maximum 30 hours between posts
+        self.posts_per_day = 3  # Target 3 posts daily
+        self.min_post_interval = 6 * 60 * 60  # Minimum 6 hours between posts
+        self.max_post_interval = 12 * 60 * 60  # Maximum 12 hours between posts
+        self.optimal_hours = [9, 15, 20]  # 9AM, 3PM, 8PM EST
         
         print("🤖 Smart Auto Launcher initialized")
         print(f"📡 Target: {self.render_url}")
         print(f"⏱️  Check interval: {self.check_interval//60} minutes")
-        print(f"📅 Post interval: {self.min_daily_interval//3600}-{self.max_daily_interval//3600} hours")
+        print(f"📅 Posts per day: {self.posts_per_day}")
+        print(f"⏰ Optimal hours: {self.optimal_hours}")
+        print(f"📊 Post interval: {self.min_post_interval//3600}-{self.max_post_interval//3600} hours")
     
     def load_status(self):
         """Load last execution status"""
@@ -37,6 +41,8 @@ class SmartAutoLauncher:
             'last_post_time': None,
             'last_check_time': None,
             'total_posts': 0,
+            'daily_posts': 0,
+            'last_post_date': None,
             'consecutive_failures': 0
         }
     
@@ -49,48 +55,65 @@ class SmartAutoLauncher:
             print(f"⚠️ Error saving status: {e}")
     
     def should_post_today(self, status):
-        """Intelligent logic to decide if we should post"""
+        """Intelligent logic for 3 posts daily"""
         now = datetime.now()
-        
-        # If never posted, post immediately
-        if not status['last_post_time']:
-            return True, "First time posting"
-        
-        # Parse last post time
-        try:
-            last_post = datetime.fromisoformat(status['last_post_time'])
-        except:
-            return True, "Invalid last post time - posting now"
-        
-        # Calculate time since last post
-        time_since_last = (now - last_post).total_seconds()
-        
-        # If less than minimum interval, don't post
-        if time_since_last < self.min_daily_interval:
-            hours_remaining = (self.min_daily_interval - time_since_last) / 3600
-            return False, f"Too soon - wait {hours_remaining:.1f} more hours"
-        
-        # If more than maximum interval, definitely post
-        if time_since_last > self.max_daily_interval:
-            return True, f"Overdue - {time_since_last/3600:.1f} hours since last post"
-        
-        # Between min and max - use intelligent probability
-        # As time passes, probability increases
-        time_factor = (time_since_last - self.min_daily_interval) / (self.max_daily_interval - self.min_daily_interval)
-        probability = 0.1 + (time_factor * 0.8)  # 10% to 90% probability
-        
-        # Add randomness based on current hour (prefer posting during active hours)
+        current_date = now.strftime('%Y-%m-%d')
         current_hour = now.hour
-        if 8 <= current_hour <= 22:  # 8 AM to 10 PM - active hours
-            probability *= 1.5
-        elif 23 <= current_hour or current_hour <= 6:  # Night hours
-            probability *= 0.3
         
-        # Cap probability at 95%
-        probability = min(probability, 0.95)
+        # Reset daily counter if new day
+        if status.get('last_post_date') != current_date:
+            status['daily_posts'] = 0
+            status['last_post_date'] = current_date
         
-        should_post = random.random() < probability
-        return should_post, f"Probability: {probability:.1%} - {'Posting' if should_post else 'Waiting'}"
+        # Check if already hit daily limit
+        if status['daily_posts'] >= self.posts_per_day:
+            return False, f"Daily limit reached ({status['daily_posts']}/{self.posts_per_day})"
+        
+        # If never posted today, check optimal timing
+        if status['daily_posts'] == 0:
+            if current_hour >= 9:  # After 9 AM
+                return True, "First post of the day"
+            else:
+                return False, "Too early - waiting for 9 AM"
+        
+        # Check minimum interval between posts
+        if status['last_post_time']:
+            try:
+                last_post = datetime.fromisoformat(status['last_post_time'])
+                time_since_last = (now - last_post).total_seconds()
+                
+                if time_since_last < self.min_post_interval:
+                    hours_remaining = (self.min_post_interval - time_since_last) / 3600
+                    return False, f"Too soon - wait {hours_remaining:.1f} more hours"
+            except:
+                pass
+        
+        # Intelligent timing based on posts completed today
+        if status['daily_posts'] == 1:
+            # Second post - prefer afternoon (2-4 PM)
+            if 14 <= current_hour <= 16:
+                return True, "Optimal time for second post (afternoon)"
+            elif current_hour >= 12:
+                # After noon, use probability
+                probability = 0.3 + (current_hour - 12) * 0.1  # Increases after noon
+                should_post = random.random() < probability
+                return should_post, f"Afternoon probability: {probability:.1%}"
+            else:
+                return False, "Too early for second post"
+        
+        elif status['daily_posts'] == 2:
+            # Third post - prefer evening (7-9 PM)
+            if 19 <= current_hour <= 21:
+                return True, "Optimal time for third post (evening)"
+            elif current_hour >= 17:
+                # After 5 PM, use probability
+                probability = 0.2 + (current_hour - 17) * 0.15  # Increases after 5 PM
+                should_post = random.random() < probability
+                return should_post, f"Evening probability: {probability:.1%}"
+            else:
+                return False, "Too early for third post"
+        
+        return False, "Unknown state"
     
     def check_render_health(self):
         """Check if Render service is healthy"""
@@ -155,7 +178,9 @@ class SmartAutoLauncher:
                 print(f"🎉 Bot run successful: {result_msg}")
                 status['last_post_time'] = now.isoformat()
                 status['total_posts'] += 1
+                status['daily_posts'] += 1
                 status['consecutive_failures'] = 0
+                print(f"📊 Daily progress: {status['daily_posts']}/{self.posts_per_day} posts")
             else:
                 print(f"❌ Bot run failed: {result_msg}")
                 status['consecutive_failures'] += 1
@@ -167,7 +192,7 @@ class SmartAutoLauncher:
         self.save_status(status)
         
         # Show summary
-        print(f"📊 Summary: {status['total_posts']} total posts, {status['consecutive_failures']} consecutive failures")
+        print(f"📊 Summary: {status['total_posts']} total posts, {status.get('daily_posts', 0)}/{self.posts_per_day} today, {status['consecutive_failures']} consecutive failures")
     
     def run_continuous(self):
         """Run continuous monitoring"""
