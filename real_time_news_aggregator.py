@@ -259,7 +259,7 @@ if __name__ == "__main__":
     reddit = praw.Reddit(
         client_id='WWPlll5usdslxz9bQqEvZg',
         client_secret='c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ',
-        user_agent='AILabsBot:v1.0 (by /u/theinnovationla)',
+        user_agent='AIAutomationLabsBot:v1.0 (by /u/theinnovationla)',
         username='theinnovationla',
         password='Suxtan20@'
     )

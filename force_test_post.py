@@ -27,7 +27,7 @@ print(f"📝 TITLE: {title}")
 print(f"📊 Content length: {len(content)} characters")
 print("=" * 60)
 
-print("\n🚨 About to post to r/AILabs:")
+print("\n🚨 About to post to r/AIAutomationLabs:")
 print(f"Title: {title[:50]}...")
 
 print("\n🚀 Posting to Reddit...")
@@ -35,6 +35,6 @@ success = bot.post_to_subreddit(title, content)
 
 if success:
     print("✅ POST SUCCESSFUL!")
-    print("🔗 Check: https://reddit.com/r/AILabs/new")
+    print("🔗 Check: https://reddit.com/r/AIAutomationLabs/new")
 else:
     print("❌ POST FAILED!")

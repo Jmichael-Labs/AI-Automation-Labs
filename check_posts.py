@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-Check posts in r/AILabs
+Check posts in r/AIAutomationLabs
 """
 import praw
 
 reddit = praw.Reddit(
     client_id='WWPlll5usdslxz9bQqEvZg',
     client_secret='c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ',
-    user_agent='AILabsBot:v1.0 (by /u/theinnovationla)',
+    user_agent='AIAutomationLabsBot:v1.0 (by /u/theinnovationla)',
     username='theinnovationla',
     password='Suxtan20@'
 )
 
 def check_subreddit_posts():
-    """Check what posts exist in r/AILabs"""
+    """Check what posts exist in r/AIAutomationLabs"""
     try:
-        subreddit = reddit.subreddit('AILabs')
+        subreddit = reddit.subreddit('AIAutomationLabs')
         print(f"📍 Checking r/{subreddit.display_name}")
         print(f"👥 Subscribers: {subreddit.subscribers}")
         print(f"📝 Description: {subreddit.public_description}")
@@ -33,7 +33,7 @@ def check_subreddit_posts():
             print(f"   Created: {post.created_utc}")
         
         if post_count == 0:
-            print("❌ NO POSTS FOUND in r/AILabs")
+            print("❌ NO POSTS FOUND in r/AIAutomationLabs")
         else:
             print(f"\n✅ Found {post_count} posts total")
             

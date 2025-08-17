@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 JMichael Labs AI News Poster Bot
-Posts AI content to r/AILabs subreddit
+Posts AI content to r/AIAutomationLabs subreddit
 """
 
 import praw
@@ -21,13 +21,13 @@ class AINewsPoster:
         self.reddit = praw.Reddit(
             client_id=os.environ.get('REDDIT_CLIENT_ID', 'WWPlll5usdslxz9bQqEvZg'),
             client_secret=os.environ.get('REDDIT_CLIENT_SECRET', 'c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ'),
-            user_agent=os.environ.get('REDDIT_USER_AGENT', 'AILabsBot:v1.0 (by /u/theinnovationla)'),
+            user_agent=os.environ.get('REDDIT_USER_AGENT', 'AIAutomationLabsBot:v1.0 (by /u/theinnovationla)'),
             username=os.environ.get('REDDIT_USERNAME', 'theinnovationla'),
             password=os.environ.get('REDDIT_PASSWORD', 'Suxtan20@')
         )
         
         # Target subreddit
-        self.target_subreddit = "AILabs"
+        self.target_subreddit = "AIAutomationLabs"
         
         # Contact info
         self.email_contact = os.environ.get('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')
@@ -598,7 +598,7 @@ I've built similar automation systems and can walk you through the specific setu
         return random.random() < 0.8  # 80% chance
     
     def post_to_subreddit(self, title, content, post_type="text"):
-        """Post content to r/AILabs"""
+        """Post content to r/AIAutomationLabs"""
         try:
             subreddit = self.reddit.subreddit(self.target_subreddit)
             
@@ -659,6 +659,6 @@ if __name__ == "__main__":
     if poster.test_connection():
         print("🚀 Running daily posting...")
         posts_made = poster.run_daily_posting()
-        print(f"✅ Posted {posts_made} content to r/AILabs")
+        print(f"✅ Posted {posts_made} content to r/AIAutomationLabs")
     else:
         print("❌ Connection failed")

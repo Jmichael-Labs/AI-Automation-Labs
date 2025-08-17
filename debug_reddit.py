@@ -23,7 +23,7 @@ def test_reddit_auth():
         reddit = praw.Reddit(
             client_id=client_id,
             client_secret=client_secret,
-            user_agent='AILabsBot:v2.0 (by /u/theinnovationla)',
+            user_agent='AIAutomationLabsBot:v2.0 (by /u/theinnovationla)',
             username=username,
             password=password
         )
@@ -38,7 +38,7 @@ def test_reddit_auth():
         
         # Test subreddit access
         print("🔍 Testing subreddit access...")
-        subreddit = reddit.subreddit('AILabs')
+        subreddit = reddit.subreddit('AIAutomationLabs')
         print(f"✅ Subreddit access OK: r/{subreddit.display_name}")
         print(f"👥 Subscribers: {subreddit.subscribers}")
         
