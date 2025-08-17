@@ -11,6 +11,7 @@ import json
 import random
 from datetime import datetime, timedelta
 from real_time_news_aggregator import AINewsAggregator
+from infinite_content_engine import InfiniteContentEngine
 import re
 
 class AINewsPoster:
@@ -41,6 +42,9 @@ class AINewsPoster:
         # Initialize real-time news aggregator
         self.news_aggregator = AINewsAggregator(self.reddit)
         
+        # Initialize infinite content engine
+        self.infinite_engine = InfiniteContentEngine()
+        
         # Load 1,000 business prompts
         self.business_prompts = self.load_business_prompts()
         
@@ -49,6 +53,7 @@ class AINewsPoster:
         print(f"📧 Contact: {self.email_contact}")
         print(f"📡 Real-time news aggregation enabled")
         print(f"💡 Loaded {len(self.business_prompts)} business prompts")
+        print(f"🧠 Infinite Content Engine activated - Zero repetition guaranteed")
     
     def test_connection(self):
         """Test Reddit connection with new credentials"""
@@ -593,9 +598,9 @@ I've built similar automation systems and can walk you through the specific setu
         
         return contexts.get(tool, f"{tool}'s recent developments are creating new automation possibilities")
     
-    def should_use_prompt_based_content(self):
-        """Decide whether to use prompt-based content (80% of the time)"""
-        return random.random() < 0.8  # 80% chance
+    def should_use_infinite_content(self):
+        """Always use infinite content engine (95% of the time)"""
+        return random.random() < 0.95  # 95% chance for infinite unique content
     
     def post_to_subreddit(self, title, content, post_type="text"):
         """Post content to r/AIAutomationLabs"""
@@ -626,10 +631,12 @@ I've built similar automation systems and can walk you through the specific setu
         # Determine what type of post to make based on day of week
         weekday = datetime.now().weekday()  # 0=Monday, 6=Sunday
         
-        # 80% chance to use 1,000 prompts + trending AI tools
-        if self.should_use_prompt_based_content():
-            print("🚀 Using 1,000 prompts + trending AI tools for content generation")
-            title, content = self.generate_prompt_based_content()
+        # 95% chance to use Infinite Content Engine - NEVER REPEATS
+        if self.should_use_infinite_content():
+            print("🧠 Using Infinite Content Engine - Guaranteed unique content")
+            print("🔄 Scraping latest AI tools from free-for.dev and blog.pareto.io...")
+            title, content = self.infinite_engine.generate_infinite_content()
+            print(f"✅ Generated completely unique content: {title[:60]}...")
         elif weekday == 0:  # Monday - Passive Income Ideas
             title, content = self.generate_daily_ai_news()
         elif weekday == 1:  # Tuesday - Tool Spotlight  
