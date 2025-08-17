@@ -7,6 +7,7 @@ Scrapes AI subreddits for latest news and creates unified posts
 import praw
 import requests
 import json
+import os
 from datetime import datetime, timedelta
 import re
 
@@ -242,11 +243,11 @@ if __name__ == "__main__":
     import praw
     
     reddit = praw.Reddit(
-        client_id='sVYH1t6xaF8j5MkfcTVxww',
-        client_secret='7kbuoA9Ct_X_LN5DyFJwcL3gKHVu3A',
-        user_agent='AIAutomationLabsBot:v1.0 (by /u/AIAutomationLabs)',
-        username='AIAutomationLabs',
-        password='Suxtan20@'
+        client_id=os.environ.get('REDDIT_CLIENT_ID'),
+        client_secret=os.environ.get('REDDIT_CLIENT_SECRET'),
+        user_agent=os.environ.get('REDDIT_USER_AGENT', 'AIAutomationLabsBot:v1.0 (by /u/AIAutomationLabs)'),
+        username=os.environ.get('REDDIT_USERNAME'),
+        password=os.environ.get('REDDIT_PASSWORD')
     )
     
     aggregator = AINewsAggregator(reddit)
