@@ -147,13 +147,12 @@ Content: Write the full article"""
         return None
     
     def template_based_synthesis(self, news_items):
-        """Fallback template-based news synthesis - BILINGUAL"""
+        """Fallback template-based news synthesis - ENGLISH ONLY"""
         if not news_items:
             return None, None
             
         today = datetime.now().strftime("%B %d, %Y")
-        today_es = datetime.now().strftime("%d de %B, %Y")
-        title = f"AI Intelligence Brief - Informe de IA | {today}"
+        title = f"AI Intelligence Brief | {today}"
         
         # Group news by theme
         breakthrough_news = [item for item in news_items if any(word in item['title'].lower() 
@@ -163,69 +162,55 @@ Content: Write the full article"""
         research_news = [item for item in news_items if any(word in item['title'].lower() 
                         for word in ['research', 'study', 'paper', 'model'])]
         
-        content = f"""# AI Intelligence Brief - Informe de IA | {today}
+        content = f"""# AI Intelligence Brief | {today}
 
-**English:** The artificial intelligence landscape continues evolving at breakneck speed. Here's what caught my attention in the past 24 hours, and why it matters for anyone building their future around intelligent systems.
+The artificial intelligence landscape continues evolving at breakneck speed. Here's what caught my attention in the past 24 hours, and why it matters for anyone building their future around intelligent systems.
 
-**Español:** El panorama de la inteligencia artificial sigue evolucionando a una velocidad vertiginosa. Aquí está lo que captó mi atención en las últimas 24 horas, y por qué es importante para cualquiera que esté construyendo su futuro con sistemas inteligentes.
-
-## Technology Developments | Desarrollos Tecnológicos
+## Technology Developments
 
 """
         
         if breakthrough_news:
             content += f"""**{breakthrough_news[0]['title']}**
 
-**EN:** The implications here extend beyond the immediate technical achievement. {breakthrough_news[0]['content'][:100] if breakthrough_news[0]['content'] else 'This development signals a broader shift in how AI systems are being designed and deployed.'}
-
-**ES:** Las implicaciones van más allá del logro técnico inmediato. {breakthrough_news[0]['content'][:100] if breakthrough_news[0]['content'] else 'Este desarrollo señala un cambio más amplio en cómo los sistemas de IA están siendo diseñados e implementados.'}
+The implications here extend beyond the immediate technical achievement. {breakthrough_news[0]['content'][:150] if breakthrough_news[0]['content'] else 'This development signals a broader shift in how AI systems are being designed and deployed, with potential ripple effects across multiple industries.'}
 
 """
         
         if business_news:
-            content += f"""## Market Movements | Movimientos del Mercado
+            content += f"""## Market Movements
 
 **{business_news[0]['title']}**
 
-**EN:** Follow the money, and you'll see where the industry is heading. {business_news[0]['content'][:100] if business_news[0]['content'] else 'Investment patterns like this often predict which technologies will dominate the next cycle.'}
-
-**ES:** Sigue el dinero y verás hacia dónde se dirige la industria. {business_news[0]['content'][:100] if business_news[0]['content'] else 'Patrones de inversión como este a menudo predicen qué tecnologías dominarán el próximo ciclo.'}
+Follow the money, and you'll see where the industry is heading. {business_news[0]['content'][:150] if business_news[0]['content'] else 'Investment patterns like this often predict which technologies will dominate the next cycle, making this worth watching closely.'}
 
 """
         
         if research_news:
-            content += f"""## Research Frontiers | Fronteras de Investigación
+            content += f"""## Research Frontiers
 
 **{research_news[0]['title']}**
 
-**EN:** Academic breakthroughs typically take 18-24 months to reach practical applications. {research_news[0]['content'][:100] if research_news[0]['content'] else 'Smart money starts positioning now for what researchers are publishing today.'}
-
-**ES:** Los avances académicos típicamente toman 18-24 meses en llegar a aplicaciones prácticas. {research_news[0]['content'][:100] if research_news[0]['content'] else 'El dinero inteligente comienza a posicionarse ahora para lo que los investigadores están publicando hoy.'}
+Academic breakthroughs typically take 18-24 months to reach practical applications. {research_news[0]['content'][:150] if research_news[0]['content'] else 'Smart money starts positioning now for what researchers are publishing today, as these insights often become tomorrow\'s competitive advantages.'}
 
 """
         
-        content += f"""## Why This Matters | Por Qué Esto Importa
+        content += f"""## Why This Matters
 
-**EN:** The convergence of these developments isn't coincidental. We're seeing the early stages of AI systems that can truly augment human decision-making at scale. The companies and professionals who recognize this pattern first will have a significant advantage.
+The convergence of these developments isn't coincidental. We're seeing the early stages of AI systems that can truly augment human decision-making at scale. The companies and professionals who recognize this pattern first will have a significant advantage.
 
-**ES:** La convergencia de estos desarrollos no es coincidencial. Estamos viendo las primeras etapas de sistemas de IA que realmente pueden aumentar la toma de decisiones humanas a escala. Las empresas y profesionales que reconozcan este patrón primero tendrán una ventaja significativa.
+The question isn't whether AI will transform your industry - it's whether you'll be leading that transformation or responding to it.
 
-**EN:** The question isn't whether AI will transform your industry - it's whether you'll be leading that transformation or responding to it.
-
-**ES:** La pregunta no es si la IA transformará tu industria - es si estarás liderando esa transformación o respondiendo a ella.
-
-**EN:** What patterns are you seeing in your field that suggest AI integration is accelerating?
-
-**ES:** ¿Qué patrones estás viendo en tu campo que sugieren que la integración de IA se está acelerando?
+What patterns are you seeing in your field that suggest AI integration is accelerating?
 
 ---
 
-**Want to discuss how these developments might impact your specific situation? | ¿Quieres discutir cómo estos desarrollos podrían impactar tu situación específica?**
+**Want to discuss how these developments might impact your specific situation?**
 
 Email: jmichaeloficial@gmail.com
 Instagram: https://www.instagram.com/jmichaeloficial/
 
-*Building competitive advantage through intelligent automation | Construyendo ventaja competitiva a través de automatización inteligente*"""
+*Building competitive advantage through intelligent automation*"""
         
         return title, content
     

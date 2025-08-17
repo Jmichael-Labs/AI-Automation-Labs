@@ -212,6 +212,86 @@ class SmartAutoLauncher:
         except Exception as e:
             print(f"\n❌ Unexpected error: {e}")
     
+    def get_missed_posts_today(self, status):
+        """Check what posts we've missed today based on optimal hours"""
+        now = datetime.now()
+        current_date = now.strftime('%Y-%m-%d')
+        current_hour = now.hour
+        
+        # Reset daily counter if new day
+        if status.get('last_post_date') != current_date:
+            status['daily_posts'] = 0
+            status['last_post_date'] = current_date
+            status['posts_completed_hours'] = []
+        
+        if 'posts_completed_hours' not in status:
+            status['posts_completed_hours'] = []
+        
+        missed_opportunities = []
+        tolerance_hours = 2  # Can post up to 2 hours late
+        
+        for target_hour in self.optimal_hours:
+            # Check if we missed this posting window
+            if current_hour >= (target_hour + tolerance_hours):
+                # We're past the tolerance window
+                if target_hour not in status['posts_completed_hours']:
+                    missed_opportunities.append(target_hour)
+            elif current_hour >= target_hour:
+                # We're in the posting window
+                if target_hour not in status['posts_completed_hours']:
+                    missed_opportunities.append(target_hour)
+        
+        return missed_opportunities
+    
+    def run_startup_catchup(self):
+        """Run catch-up when computer starts up"""
+        print("🖥️ COMPUTER STARTUP - CATCH-UP MODE")
+        print("=" * 50)
+        
+        status = self.load_status()
+        missed_posts = self.get_missed_posts_today(status)
+        
+        print(f"📊 Posts completed today: {status.get('posts_completed_hours', [])}")
+        print(f"🎯 Missed opportunities: {missed_posts}")
+        print(f"⏰ Current time: {datetime.now().strftime('%H:%M')}")
+        
+        if missed_posts:
+            print(f"🚀 Executing {len(missed_posts)} missed posts...")
+            
+            successful_posts = 0
+            for i, target_hour in enumerate(missed_posts):
+                print(f"\n📍 Catching up post {i+1}/{len(missed_posts)} (missed {target_hour}:00)")
+                
+                success, result_msg = self.trigger_bot_run()
+                
+                if success:
+                    print(f"✅ Success: {result_msg}")
+                    status['posts_completed_hours'].append(target_hour)
+                    status['daily_posts'] += 1
+                    status['total_posts'] += 1
+                    status['last_post_time'] = datetime.now().isoformat()
+                    successful_posts += 1
+                    
+                    # Space out multiple posts (2 minutes)
+                    if i < len(missed_posts) - 1:
+                        print("⏱️ Waiting 2 minutes before next post...")
+                        time.sleep(120)
+                else:
+                    print(f"❌ Failed: {result_msg}")
+                    break
+            
+            print(f"\n🎉 Catch-up completed: {successful_posts}/{len(missed_posts)} posts successful")
+        else:
+            print("✅ No missed posts - all caught up!")
+        
+        # Save status
+        self.save_status(status)
+        
+        # Show final summary
+        current_posts = len(status.get('posts_completed_hours', []))
+        print(f"\n📊 Daily summary: {current_posts}/3 posts completed today")
+        print(f"🏆 Total posts: {status.get('total_posts', 0)}")
+    
     def run_once(self):
         """Run single check (for testing)"""
         print("🧪 Running single smart check...")
@@ -223,7 +303,18 @@ if __name__ == "__main__":
     
     launcher = SmartAutoLauncher()
     
-    if len(sys.argv) > 1 and sys.argv[1] == "--once":
-        launcher.run_once()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--once":
+            launcher.run_once()
+        elif sys.argv[1] == "--startup":
+            launcher.run_startup_catchup()
+        elif sys.argv[1] == "--catchup":
+            launcher.run_startup_catchup()
+        else:
+            print("Usage: python3 smart_auto_launcher.py [--once|--startup|--catchup]")
+            print("  --once: Single check")
+            print("  --startup: Catch-up mode for computer startup")
+            print("  --catchup: Manual catch-up mode")
+            print("  (no args): Continuous monitoring")
     else:
         launcher.run_continuous()

@@ -616,17 +616,12 @@ I've built similar automation systems and can walk you through the specific setu
             return False
     
     def run_daily_posting(self):
-        """Run daily posting routine with duplicate prevention"""
-        today = datetime.now().strftime('%Y-%m-%d')
+        """Run daily posting routine - AUTONOMOUS VERSION"""
+        print(f"🤖 AUTONOMOUS REDDIT BOT ACTIVATED")
+        print(f"⏰ Execution time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} UTC")
         
-        # Check if already posted today
-        if self.last_post_date == today:
-            print(f"📊 Already posted today ({today})")
-            return 0
-            
-        if self.posts_today >= self.max_daily_posts:
-            print(f"📊 Daily limit reached: {self.posts_today}/{self.max_daily_posts}")
-            return 0
+        # Always generate content for autonomous system (no daily limits)
+        print("🚀 Generating fresh content for autonomous posting...")
         
         # Determine what type of post to make based on day of week
         weekday = datetime.now().weekday()  # 0=Monday, 6=Sunday
