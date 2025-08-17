@@ -9,10 +9,10 @@ def test_reddit_auth():
     
     print("🔍 Testing Reddit connection...")
     
-    # Your new credentials
-    client_id = 'WWPlll5usdslxz9bQqEvZg'
-    client_secret = 'c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ'
-    username = 'theinnovationla'
+    # AIAutomationLabs official credentials
+    client_id = 'sVYH1t6xaF8j5MkfcTVxww'
+    client_secret = '7kbuoA9Ct_X_LN5DyFJwcL3gKHVu3A'
+    username = 'AIAutomationLabs'
     password = 'Suxtan20@'
     
     print(f"📱 Client ID: {client_id}")
@@ -23,7 +23,7 @@ def test_reddit_auth():
         reddit = praw.Reddit(
             client_id=client_id,
             client_secret=client_secret,
-            user_agent='AIAutomationLabsBot:v2.0 (by /u/theinnovationla)',
+            user_agent='AIAutomationLabsBot:v2.0 (by /u/AIAutomationLabs)',
             username=username,
             password=password
         )

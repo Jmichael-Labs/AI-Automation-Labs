@@ -5,9 +5,9 @@ Check posts in r/AIAutomationLabs
 import praw
 
 reddit = praw.Reddit(
-    client_id='WWPlll5usdslxz9bQqEvZg',
-    client_secret='c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ',
-    user_agent='AIAutomationLabsBot:v1.0 (by /u/theinnovationla)',
+    client_id='2db6KZffvByzTGZCEntIqw',
+    client_secret='5f1GO6oTWWJUf153NnhlfL1khE4osQ',
+    user_agent='AIAutomationLabsBot-v2:v1.0 (by /u/theinnovationla)',
     username='theinnovationla',
     password='Suxtan20@'
 )

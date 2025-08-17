@@ -17,11 +17,11 @@ class AINewsPoster:
     def __init__(self):
         """Initialize AI News Poster with new credentials"""
         
-        # New working credentials
+        # theinnovationla credentials with new bot app
         self.reddit = praw.Reddit(
-            client_id=os.environ.get('REDDIT_CLIENT_ID', 'WWPlll5usdslxz9bQqEvZg'),
-            client_secret=os.environ.get('REDDIT_CLIENT_SECRET', 'c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ'),
-            user_agent=os.environ.get('REDDIT_USER_AGENT', 'AIAutomationLabsBot:v1.0 (by /u/theinnovationla)'),
+            client_id=os.environ.get('REDDIT_CLIENT_ID', '2db6KZffvByzTGZCEntIqw'),
+            client_secret=os.environ.get('REDDIT_CLIENT_SECRET', '5f1GO6oTWWJUf153NnhlfL1khE4osQ'),
+            user_agent=os.environ.get('REDDIT_USER_AGENT', 'AIAutomationLabsBot-v2:v1.0 (by /u/theinnovationla)'),
             username=os.environ.get('REDDIT_USERNAME', 'theinnovationla'),
             password=os.environ.get('REDDIT_PASSWORD', 'Suxtan20@')
         )

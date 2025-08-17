@@ -257,10 +257,10 @@ if __name__ == "__main__":
     import praw
     
     reddit = praw.Reddit(
-        client_id='WWPlll5usdslxz9bQqEvZg',
-        client_secret='c7gBvHnTuQO1v3eiHLt8IotVuSVhyQ',
-        user_agent='AIAutomationLabsBot:v1.0 (by /u/theinnovationla)',
-        username='theinnovationla',
+        client_id='sVYH1t6xaF8j5MkfcTVxww',
+        client_secret='7kbuoA9Ct_X_LN5DyFJwcL3gKHVu3A',
+        user_agent='AIAutomationLabsBot:v1.0 (by /u/AIAutomationLabs)',
+        username='AIAutomationLabs',
         password='Suxtan20@'
     )
     
