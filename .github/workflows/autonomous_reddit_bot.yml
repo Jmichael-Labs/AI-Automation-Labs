@@ -38,8 +38,13 @@ jobs:
         INSTAGRAM_CONSULTING: ${{ secrets.INSTAGRAM_CONSULTING }}
       run: |
         echo "🚀 Starting autonomous Reddit AI bot..."
-        python ai_news_poster.py
-        echo "✅ Bot execution completed"
+        echo "📊 Environment check:"
+        echo "- REDDIT_CLIENT_ID: ${REDDIT_CLIENT_ID:0:10}..."
+        echo "- REDDIT_USERNAME: $REDDIT_USERNAME"
+        echo "- TARGET_SUBREDDIT: AIAutomationLabs"
+        echo "🔄 Running bot with full error output..."
+        python ai_news_poster.py 2>&1 || { echo "❌ Bot execution failed with exit code $?"; exit 1; }
+        echo "✅ Bot execution completed successfully"
         
     - name: Log execution
       run: |

@@ -655,12 +655,31 @@ I've built similar automation systems and can walk you through the specific setu
         return 0
 
 if __name__ == "__main__":
-    poster = AINewsPoster()
-    
-    print("🧪 Testing connection...")
-    if poster.test_connection():
-        print("🚀 Running daily posting...")
-        posts_made = poster.run_daily_posting()
-        print(f"✅ Posted {posts_made} content to r/AIAutomationLabs")
-    else:
-        print("❌ Connection failed")
+    try:
+        print("🎯 REDDIT BOT STARTING...")
+        print(f"📅 Execution time: {datetime.now()}")
+        
+        poster = AINewsPoster()
+        
+        print("🧪 Testing connection...")
+        if poster.test_connection():
+            print("✅ Connection successful!")
+            print("🚀 Running daily posting...")
+            posts_made = poster.run_daily_posting()
+            print(f"🎉 RESULT: Posted {posts_made} content to r/{poster.target_subreddit}")
+            
+            if posts_made > 0:
+                print("✅ SUCCESS: Post was created successfully!")
+            else:
+                print("⚠️  WARNING: No posts were made (may be due to timing restrictions)")
+        else:
+            print("❌ CRITICAL ERROR: Connection to Reddit failed")
+            print("🔍 Check your Reddit credentials in GitHub Secrets")
+            exit(1)
+            
+    except Exception as e:
+        print(f"💥 FATAL ERROR: {str(e)}")
+        import traceback
+        print("📍 Full traceback:")
+        traceback.print_exc()
+        exit(1)
