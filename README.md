@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-**AI Automation Labs Reddit Bot** is a fully autonomous system that generates and posts AI automation content to Reddit communities. Built for educational purposes and community building, this bot demonstrates how to create intelligent, content-aware automation systems.
+**AI Automation Labs Reddit Bot** is a fully autonomous system that generates and posts AI automation content to Reddit communities. Respects Reddit's posting policies with maximum 3 posts per day. Built for educational purposes and community building, this bot demonstrates how to create intelligent, content-aware automation systems.
 
 ### ✨ Key Features
 
@@ -67,7 +67,7 @@ Go to your repository **Settings → Secrets and Variables → Actions** and add
 #### Target Subreddit
 Edit `ai_news_poster.py` line 30:
 ```python
-self.target_subreddit = "YourSubredditName"  # Change this to your target subreddit
+self.target_subreddit = "YourSubredditName"  # Change this to your target subreddit (max 3 posts/day)
 ```
 
 #### Business Prompts

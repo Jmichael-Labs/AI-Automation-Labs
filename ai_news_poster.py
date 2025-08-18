@@ -28,7 +28,7 @@ class AINewsPoster:
         )
         
         # Target subreddit (configurable)
-        self.target_subreddit = os.environ.get('TARGET_SUBREDDIT', 'AIAutomationLabs')
+        self.target_subreddit = os.environ.get('TARGET_SUBREDDIT', 'AIAutomationLabsBot')
         
         # Contact info (configurable)
         self.email_contact = os.environ.get('EMAIL_CONTACT', 'your.email@example.com')
