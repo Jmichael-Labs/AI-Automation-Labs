@@ -192,7 +192,7 @@ Follow the money, and you'll see where the industry is heading. {business_news[0
 
 **{research_news[0]['title']}**
 
-Academic breakthroughs typically take 18-24 months to reach practical applications. {research_news[0]['content'][:150] if research_news[0]['content'] else 'Smart money starts positioning now for what researchers are publishing today, as these insights often become tomorrow\'s competitive advantages.'}
+Academic breakthroughs typically take 18-24 months to reach practical applications. {research_news[0]['content'][:150] if research_news[0]['content'] else 'Smart money starts positioning now for what researchers are publishing today, as these insights often become tomorrow' + chr(39) + 's competitive advantages.'}
 
 """
         
