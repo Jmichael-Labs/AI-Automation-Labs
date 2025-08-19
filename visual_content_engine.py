@@ -524,28 +524,44 @@ Purpose: Educational content for AI tool tutorials
         tool_hash = hashlib.md5(f"{tool_data['name']}{today}".encode()).hexdigest()
         seed_number = int(tool_hash[:4], 16) % len(video_segments)
         
-        daily_quota_limit = 10  # Free tier limit
-        segments_to_generate = quota_strategies["single_highlight"]  # Conservative: 1 video
+        # Check quota based on available credits
+        has_paid_credits = True  # Set to True when using $300 Google Cloud credits
         
-        # Select optimal segment based on captology priority
-        high_priority_segments = [0, 1, 9, 10, 11]  # Hook, Authority, Urgency, Bio Link, Closing
-        selected_index = high_priority_segments[seed_number % len(high_priority_segments)]
+        if has_paid_credits:
+            # With $300 credits: Can afford full 12-segment videos
+            daily_quota_limit = 500  # Much higher with paid credits
+            segments_to_generate = quota_strategies["weekly_series"]  # Generate all 12!
+            print("💰 PAID CREDITS DETECTED - Generating full 12-segment video!")
+            print(f"🚀 VEO 3 FAST MODE: $0.40 per 8-second video")
+            print(f"💳 Budget: $300 credits = 750 individual videos")
+            print(f"🎬 Complete videos: 62 full newsroom series (12 segments each)")
+            print(f"💡 Cost per complete video: $4.80 (12 × $0.40)")
+            selected_segments = video_segments  # All 12 segments!
+        else:
+            daily_quota_limit = 10  # Free tier limit
+            segments_to_generate = quota_strategies["single_highlight"]  # Conservative: 1 video
+            # Select optimal segment based on captology priority
+            high_priority_segments = [0, 1, 9, 10, 11]  # Hook, Authority, Urgency, Bio Link, Closing
+            selected_index = high_priority_segments[seed_number % len(high_priority_segments)]
+            print(f"🎲 Today's segment: #{selected_index + 1} - {video_segments[selected_index]['title']}")
+            selected_segments = [video_segments[selected_index]]
         
-        print(f"🎯 SMART QUOTA STRATEGY: Generating {segments_to_generate} strategic segment")
-        print(f"📊 Daily limit: {daily_quota_limit} videos (Free tier)")
-        print(f"🎲 Today's segment: #{selected_index + 1} - {video_segments[selected_index]['title']}")
-        print(f"🧠 High-impact rotation ensures variety + quota efficiency")
+        print(f"🎯 QUOTA STRATEGY: Generating {segments_to_generate} segment(s)")
+        print(f"📊 Available quota: {daily_quota_limit} videos")
+        print(f"🧠 Strategy: {'Full 12-segment video' if has_paid_credits else 'Single high-impact segment'}")
         
         generated_segments = []
-        
-        # Generate only the selected strategic segment
-        selected_segments = [video_segments[selected_index]]
         
         for i, segment in enumerate(selected_segments, 1):
             print(f"🎨 Generating strategic segment {i}/{segments_to_generate}: {segment['title']}")
             
             segment_prompt = f"""
 Create an 8-second futuristic AI newsroom segment: "{segment['title']}"
+
+VEO 3 FAST OPTIMIZATION:
+- High-quality but cost-efficient generation
+- Streamlined processing for $0.40 per video
+- Professional newsroom standards maintained
 
 VISUAL STYLE: {segment['visual']}
 NEWSROOM AESTHETIC: {newsroom_style['base_aesthetic']}
@@ -559,7 +575,7 @@ MOOD: {newsroom_style['mood']}
 TECHNICAL REQUIREMENTS:
 - Duration: Exactly 8 seconds
 - Style: Futuristic holographic newsroom
-- Resolution: 1080p, 16:9 aspect ratio
+- Resolution: 720p, 16:9 aspect ratio (Veo 3 Fast)
 - Professional English narration
 - Ambient electronic news theme background
 - Smooth cinematic camera movements
@@ -642,13 +658,18 @@ End with smooth transition setup for next segment.
                         })
                         
                         # Save quota usage info for future optimization
+                        cost_per_segment = 0.40 if has_paid_credits else "Free tier"
+                        total_cost = len(generated_segments) * 0.40 if has_paid_credits else "Free tier"
+                        
                         quota_info = {
                             "date": today,
-                            "segments_generated": 1,
-                            "quota_used": f"1/{daily_quota_limit}",
-                            "strategy": "single_highlight",
+                            "segments_generated": len(generated_segments),
+                            "quota_used": f"{len(generated_segments)}/{daily_quota_limit}",
+                            "strategy": "weekly_series" if has_paid_credits else "single_highlight",
                             "segment_type": segment['title'],
-                            "tool_featured": tool_data['name']
+                            "tool_featured": tool_data['name'],
+                            "cost_per_segment": f"${cost_per_segment}",
+                            "total_cost": f"${total_cost}" if has_paid_credits else "Free tier"
                         }
                         print(f"💾 Quota tracking: {quota_info}")
                         print(f"🎯 Strategic generation complete - 1 high-impact video created")
@@ -661,14 +682,21 @@ End with smooth transition setup for next segment.
                 print(f"⚠️ Segment {i} generation error: {e}")
                 continue
         
-        print(f"📊 INTELLIGENT GENERATION SUMMARY:")
-        print(f"✅ Strategic segments: {len(generated_segments)}/1 (quota-optimized)")
+        print(f"📊 VEO 3 FAST GENERATION SUMMARY:")
+        segments_generated = len(generated_segments)
+        if has_paid_credits:
+            total_cost = segments_generated * 0.40
+            print(f"✅ Complete video: {segments_generated}/12 segments generated")
+            print(f"💰 Total cost: ${total_cost:.2f} (Veo 3 Fast: $0.40/segment)")
+            print(f"💳 Remaining budget: ${300 - total_cost:.2f} out of $300")
+            print(f"🎬 Videos remaining: {int((300 - total_cost) / 4.80)} complete 12-segment videos")
+        else:
+            print(f"✅ Strategic segments: {segments_generated}/1 (free tier)")
         print(f"🎬 Style: Futuristic AI newsroom")
         print(f"🗣️ Language: Professional English") 
         print(f"🎯 Purpose: Maximum bio link conversion")
-        print(f"💡 Strategy: Daily rotation of high-impact segments")
-        print(f"📈 Quota efficiency: 100% (1 video = maximum ROI)")
-        print(f"🔄 Tomorrow: Different segment for variety")
+        print(f"💡 Strategy: {'Full 12-segment video' if has_paid_credits else 'Daily rotation'}")
+        print(f"📈 ROI: {'Complete newsroom experience' if has_paid_credits else 'High-impact single segment'}")
         
         # Return first segment for testing (future: return concatenated video)
         if generated_segments:
