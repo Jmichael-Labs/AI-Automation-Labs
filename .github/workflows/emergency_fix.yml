@@ -8,7 +8,7 @@ on:
 jobs:
   emergency-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     
     steps:
     - name: 🚨 Emergency Fresh Checkout
@@ -35,12 +35,18 @@ jobs:
       with:
         python-version: '3.11'
         
-    - name: 📦 Install Dependencies (Force Fresh)
+    - name: 📦 Install Dependencies (Fast)
       run: |
-        echo "📦 Installing with --no-cache-dir..."
-        python -m pip install --upgrade pip --no-cache-dir
-        pip install --no-cache-dir -r requirements.txt
-        echo "✅ Fresh install complete"
+        echo "📦 Fast install with minimal dependencies..."
+        python -m pip install --upgrade pip
+        # Core dependencies only
+        pip install Flask==3.0.0 requests==2.32.4 python-telegram-bot==22.3
+        pip install praw==7.8.1 beautifulsoup4==4.12.2
+        # Google AI for video generation
+        pip install google-genai==1.29.0 google-generativeai==0.8.5
+        # Image processing
+        pip install Pillow==11.3.0
+        echo "✅ Fast install complete (essential packages only)"
         
     - name: ☁️ Configure Google Cloud
       env:
