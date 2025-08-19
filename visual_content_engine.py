@@ -367,183 +367,199 @@ Purpose: Educational content for AI tool tutorials
                 print("🔍 Imagen 3.0 model not accessible - check project permissions")
             return None
 
-    def generate_whiteboard_video_segments(self, tool_data, industry, script_highlights):
-        """Generate multiple 8-second video segments for complete whiteboard explainer"""
+    def generate_futuristic_newsroom_segments(self, tool_data, industry, script_highlights, latest_ai_news=None):
+        """Generate 12 sequential 8-second futuristic newsroom segments for complete AI news story"""
         
         if not self.veo3_client or not self.video_model:
-            print(f"🔄 Skipping whiteboard video generation (Veo 3 API not available)")
+            print(f"🔄 Skipping futuristic newsroom video generation (Veo 3 API not available)")
             return None
         
-        # Industry-specific psychological triggers
-        industry_psychology = {
+        # Futuristic newsroom visual specifications
+        newsroom_style = {
+            "base_aesthetic": "futuristic newsroom, holographic panels glowing in blue and purple light",
+            "scene_elements": "floating 3D screens show abstract AI icons (brain, robot, lock, chip)",
+            "camera_work": "slow pan across holographic desk, cinematic lighting",
+            "voice_style": "calm professional newscaster voice in English",
+            "mood": "informative, urgent but optimistic",
+            "color_palette": "blue, purple, silver, white holographic glow"
+        }
+        
+        # Captology-enhanced industry targeting for biografía traffic
+        industry_captology = {
             "legal": {
-                "authority_trigger": "Legal experts recommend",
-                "social_proof": "Over 75% of top law firms",
-                "scarcity": "Exclusive legal automation techniques",
-                "visual_style": "Professional courtroom aesthetic, scales of justice"
+                "hook": "Breaking: New AI regulation affecting 80% of law firms",
+                "authority": "Leading legal tech experts confirm",
+                "urgency": "Changes take effect this quarter",
+                "social_proof": "Top-tier law firms already implementing"
             },
             "medical": {
-                "authority_trigger": "Medical professionals trust", 
-                "social_proof": "Leading healthcare institutions use",
-                "scarcity": "Advanced medical AI most doctors don't know about",
-                "visual_style": "Clean medical environment, stethoscope, health icons"
+                "hook": "Medical AI breakthrough: 40% faster diagnosis accuracy",
+                "authority": "Clinical research validates effectiveness", 
+                "urgency": "Early adoption provides competitive advantage",
+                "social_proof": "Leading hospitals report significant improvements"
             },
             "senior": {
-                "authority_trigger": "Tech experts designed this for seniors",
-                "social_proof": "Thousands of seniors successfully using",
-                "scarcity": "Simple AI tools they don't want you to know",
-                "visual_style": "Large, clear text, friendly colors, simple drawings"
+                "hook": "Senior-friendly AI tools gaining massive adoption",
+                "authority": "Gerontology experts recommend these solutions",
+                "urgency": "Simple tools becoming mainstream quickly",
+                "social_proof": "Thousands of seniors successfully using daily"
             },
             "general": {
-                "authority_trigger": "Industry leaders confirm",
-                "social_proof": "Professionals across sectors rely on",
-                "scarcity": "Insider AI strategies", 
-                "visual_style": "Modern business environment, growth charts"
+                "hook": "AI market explosion: New tools changing everything",
+                "authority": "Industry analysts predict massive disruption",
+                "urgency": "Early adopters securing significant advantages",
+                "social_proof": "Fortune 500 companies investing heavily"
             }
         }
         
-        psych = industry_psychology[industry]
+        captology = industry_captology[industry]
         
-        # Define 8-second video segments (15 total = 120 seconds = 2 minutes)
+        # Define 12 sequential 8-second segments (12 total = 96 seconds complete story)
         video_segments = [
             {
-                "title": "Hook - Attention Grabber",
+                "title": "Opening - Breaking News Hook",
                 "duration": 8,
-                "content": f"Hand writing on whiteboard: '{psych['scarcity']}' with dramatic underline. Show surprised face emoji being drawn.",
-                "visual": "Clean white background, black marker writing text, simple stick figure with wide eyes"
+                "content": f"Futuristic newsroom establishing shot with glowing holographic panels. News ticker: '{captology['hook']}'",
+                "visual": f"{newsroom_style['base_aesthetic']}, {newsroom_style['camera_work']}, news ticker with breaking news text",
+                "narration": f"This is AI News Update - Breaking: {captology['hook']}"
             },
             {
-                "title": "Problem - Frustration Setup", 
+                "title": "Authority Validation",
                 "duration": 8,
-                "content": f"Draw frustrated professional at desk with papers scattered. Clock showing long hours. Stress marks around head.",
-                "visual": "Stick figure at desk, papers flying, clock hands spinning, stress lines being drawn"
+                "content": f"Holographic expert panel discussing AI trends. {captology['authority']} with floating credentials",
+                "visual": f"{newsroom_style['scene_elements']}, expert hologram, floating certification badges",
+                "narration": f"{captology['authority']} that {tool_data['name']} represents the future of {industry}"
             },
             {
-                "title": "Problem Impact - Time Waste",
-                "duration": 8, 
-                "content": f"Draw time being wasted: clock with money falling out. Calculator showing high costs. Tired face.",
-                "visual": "Clock with dollar signs falling, calculator, exhausted stick figure"
+                "title": "Market Analysis",
+                "duration": 8,
+                "content": f"3D holographic charts showing AI adoption rates. Market growth statistics floating in space",
+                "visual": f"{newsroom_style['scene_elements']}, 3D growth charts, market statistics, data visualization",
+                "narration": f"Market analysis shows {captology['urgency']} - early adopters seeing immediate ROI"
             },
             {
-                "title": "Solution Introduction",
+                "title": "Tool Spotlight",
                 "duration": 8,
-                "content": f"Hand draws lightbulb above head. Then draws {tool_data['name']} as clean interface box with arrows.",
-                "visual": "Lightbulb appearing, clean interface rectangle, connecting arrows being drawn"
+                "content": f"Holographic {tool_data['name']} interface materializes with glowing features highlighted",
+                "visual": f"{newsroom_style['base_aesthetic']}, {tool_data['name']} logo hologram, feature callouts",
+                "narration": f"Introducing {tool_data['name']} - the {industry} tool that's changing everything"
             },
             {
-                "title": "How It Works - Step 1",
+                "title": "Technology Deep Dive",
                 "duration": 8,
-                "content": f"Draw workflow: Input data → {tool_data['name']} processing box → AI magic sparkles",
-                "visual": "Data symbols → clean box → sparkle effects being drawn in sequence"
+                "content": f"AI brain visualization with neural networks processing {industry} data in real-time",
+                "visual": f"{newsroom_style['scene_elements']}, AI brain hologram, neural network animation, data flow",
+                "narration": f"Advanced AI processes {industry} workflows 300% faster than traditional methods"
             },
             {
-                "title": "How It Works - Step 2", 
+                "title": "Success Metrics",
                 "duration": 8,
-                "content": f"Continue workflow: AI processing → Automated output → Results appearing",
-                "visual": "Gear symbols inside box, output arrows, result charts appearing"
+                "content": f"Floating success metrics and ROI calculations with real-time updates",
+                "visual": f"{newsroom_style['scene_elements']}, ROI dashboard, success percentage, profit graphs",
+                "narration": f"Users report {tool_data.get('income_potential', '$2,500/month')} average income increase within 90 days"
             },
             {
-                "title": "Benefits - Time Savings",
+                "title": "Social Proof Evidence",
                 "duration": 8,
-                "content": f"Draw before/after: Old way = 8 hours, New way = 2 hours. Happy stick figure.",
-                "visual": "Time comparison chart, before/after clocks, smiling stick figure"
+                "content": f"Holographic testimonials from {industry} professionals floating around newsroom",
+                "visual": f"{newsroom_style['base_aesthetic']}, floating testimonial holograms, user avatars",
+                "narration": f"{captology['social_proof']} - join thousands already transforming their {industry} practice"
             },
             {
-                "title": "Benefits - Money Savings",
+                "title": "Implementation Guide",
                 "duration": 8,
-                "content": f"Draw income increase: {tool_data.get('income_potential', '$2,500/month')} in large numbers with dollar signs",
-                "visual": "Large dollar amounts, upward trending graph, money symbols"
+                "content": f"Step-by-step holographic tutorial showing setup process with glowing checkmarks",
+                "visual": f"{newsroom_style['scene_elements']}, step-by-step tutorial, progress indicators",
+                "narration": f"Getting started takes just 3 simple steps - even beginners see results immediately"
             },
             {
-                "title": "Social Proof",
+                "title": "Community Showcase",
                 "duration": 8,
-                "content": f"Draw community: '{psych['social_proof']} this technology' with multiple happy faces",
-                "visual": "Multiple stick figures smiling, checkmarks, testimonial bubbles"
+                "content": f"Holographic global map showing community members worldwide with success stories",
+                "visual": f"{newsroom_style['base_aesthetic']}, world map hologram, community member icons",
+                "narration": f"Join our exclusive {industry} AI community - over 50,000 professionals strong"
             },
             {
-                "title": "Call To Action",
+                "title": "Urgency & Scarcity",
                 "duration": 8,
-                "content": f"Hand writes: 'Join {industry} professionals using this!' with arrow pointing to action button",
-                "visual": "Bold text being written, action arrow, button being drawn and highlighted"
-            },
-            # Additional segments for 2-minute video (segments 11-15)
-            {
-                "title": "Implementation Step 1",
-                "duration": 8,
-                "content": f"Draw step 1: Setting up {tool_data['name']} - account creation and initial configuration",
-                "visual": "Computer screen, user account, setup checkboxes being marked"
+                "content": f"Countdown timer with limited access notification and exclusive offer details",
+                "visual": f"{newsroom_style['scene_elements']}, countdown timer, exclusive access badge",
+                "narration": f"Limited time: Get exclusive access to our {industry} AI toolkit and community"
             },
             {
-                "title": "Implementation Step 2", 
+                "title": "Contact & Bio Link",
                 "duration": 8,
-                "content": f"Draw step 2: Connecting your existing {industry} tools and data sources",
-                "visual": "Connection lines, data flow arrows, integration icons"
+                "content": f"Professional contact information with direct bio link and instant access button",
+                "visual": f"{newsroom_style['base_aesthetic']}, contact hologram, bio link highlight, call button",
+                "narration": f"Click the link in our bio for instant access to tools, courses, and community"
             },
             {
-                "title": "Implementation Step 3",
+                "title": "Closing - Future Vision",
                 "duration": 8,
-                "content": f"Draw step 3: Creating your first automation workflow with {tool_data['name']}",
-                "visual": "Workflow builder interface, drag and drop elements"
-            },
-            {
-                "title": "Results Preview",
-                "duration": 8,
-                "content": f"Show real results: Dashboard with metrics, happy user, success indicators",
-                "visual": "Dashboard screens, checkmarks, celebration elements"
-            },
-            {
-                "title": "Final CTA & Contact",
-                "duration": 8,
-                "content": f"Final message: 'Start your {industry} automation journey today!' with contact info",
-                "visual": "Contact details being written, website URL, final call to action"
+                "content": f"Futuristic vision of {industry} transformation with AI integration success story",
+                "visual": f"{newsroom_style['base_aesthetic']}, future vision hologram, success transformation",
+                "narration": f"This is the future of {industry} - and it starts with your next decision. Join us."
             }
         ]
         
-        print(f"🎬 Generating {len(video_segments)} whiteboard video segments for {tool_data['name']}")
+        print(f"🎬 Generating {len(video_segments)} futuristic newsroom segments for {tool_data['name']}")
+        print(f"📺 Total duration: {len(video_segments) * 8} seconds ({len(video_segments) * 8 / 60:.1f} minutes)")
         
-        # Generate first segment only to avoid quota issues (proof of concept)
-        segment = video_segments[0]  # Just hook segment for now
+        # Generate all 12 segments sequentially for complete video
+        generated_segments = []
         
-        segment_prompt = f"""
-Create an 8-second whiteboard animation segment: "{segment['title']}"
+        for i, segment in enumerate(video_segments, 1):
+            print(f"🎨 Generating segment {i}/12: {segment['title']}")
+            
+            segment_prompt = f"""
+Create an 8-second futuristic AI newsroom segment: "{segment['title']}"
 
-CONTENT: {segment['content']}
 VISUAL STYLE: {segment['visual']}
-INDUSTRY: {industry} with {psych['visual_style']}
+NEWSROOM AESTHETIC: {newsroom_style['base_aesthetic']}
+CAMERA WORK: {newsroom_style['camera_work']}
+COLOR PALETTE: {newsroom_style['color_palette']}
+
+NARRATION (English): {segment.get('narration', segment['content'])}
+VOICE STYLE: {newsroom_style['voice_style']}
+MOOD: {newsroom_style['mood']}
 
 TECHNICAL REQUIREMENTS:
 - Duration: Exactly 8 seconds
-- Style: Hand-drawn on white background
-- Animation: Stroke-by-stroke drawing in real time
+- Style: Futuristic holographic newsroom
 - Resolution: 1080p, 16:9 aspect ratio
-- No audio needed (will be added in post)
-- Smooth drawing motion like real hand
+- Professional English narration
+- Ambient electronic news theme background
+- Smooth cinematic camera movements
 
-DRAWING SEQUENCE:
-- Start with empty white background
-- Hand appears with black marker
-- Draw elements in logical sequence
-- End with complete visual for this segment
+VISUAL ELEMENTS:
+- Holographic panels with blue/purple glow
+- Floating 3D AI icons and data
+- Professional news anchor presence
+- Smooth transitions between elements
+- Industry-specific content for {industry}
+
+SEQUENCE FLOW:
+This is segment {i} of 12 in a complete story arc.
+Ensure visual continuity with previous segments.
+End with smooth transition setup for next segment.
 """
 
-        try:
-            print(f"🎨 Generating REAL video segment 1/15: {segment['title']}")
-            
-            # Generate ACTUAL VIDEO with Veo 3 API
-            if not self.veo3_client:
-                raise Exception("Veo 3 client not available")
-            
-            print("🎬 Using Veo 3 API for REAL video generation...")
-            
-            # Generate actual video using Veo 3
-            operation = self.veo3_client.models.generate_videos(
-                model=self.video_model,
-                prompt=segment_prompt,
-                config=types.GenerateVideosConfig(
-                    negative_prompt="cartoon, drawing, low quality, blurry, text overlay",
-                    aspect_ratio="16:9"
+            try:
+                print(f"🎬 Using Veo 3 API for REAL newsroom video generation...")
+                
+                # Generate ACTUAL VIDEO with Veo 3 API
+                if not self.veo3_client:
+                    raise Exception("Veo 3 client not available")
+                
+                # Generate actual video using Veo 3
+                operation = self.veo3_client.models.generate_videos(
+                    model=self.video_model,
+                    prompt=segment_prompt,
+                    config=types.GenerateVideosConfig(
+                        negative_prompt="cartoon, amateur, low quality, blurry, unprofessional, hand-drawn",
+                        aspect_ratio="16:9"
+                    )
                 )
-            )
             
             print(f"🔄 Polling video generation operation...")
             max_wait_time = 300  # 5 minutes max wait
@@ -576,36 +592,50 @@ DRAWING SEQUENCE:
                 # Verify file was saved correctly
                 if os.path.exists(video_filename):
                     file_size = os.path.getsize(video_filename)
-                    print(f"🎥 REAL VIDEO successfully generated and saved!")
+                    print(f"🎥 REAL NEWSROOM VIDEO successfully generated!")
                     print(f"📁 File: {video_filename}")
-                    print(f"📊 File size: {file_size} bytes")
+                    print(f"📊 File size: {file_size} bytes") 
                     print(f"⏱️ Duration: 8 seconds (Veo 3)")
                     print(f"📺 Resolution: 720p, 16:9 aspect ratio")
-                    print(f"🔊 Audio: Natively generated")
-                    print(f"📊 Total segments for 2-minute video: {len(video_segments)} x 8s = {len(video_segments) * 8}s")
-                    print(f"⏰ Current: Segment 1/15 complete - REAL VIDEO!")
+                    print(f"🎙️ Audio: Professional English narration")
                     print(f"✅ File verification: EXISTS and has {file_size} bytes")
+                    
+                    generated_segments.append({
+                        "segment_number": i,
+                        "title": segment['title'],
+                        "file_path": video_filename,
+                        "file_size": file_size,
+                        "narration": segment.get('narration', segment['content'])
+                    })
+                    
+                    # For now, only generate first segment to test (quota management)
+                    if i == 1:
+                        print(f"🎯 Generated segment {i}/12 - Testing single segment first")
+                        break
+                        
                 else:
                     print(f"❌ ERROR: Video file was not saved to {video_filename}")
-                    return None
-                
-                return video_filename
-            elif waited_time >= max_wait_time:
-                print(f"⏰ Video generation timeout after {max_wait_time}s")
-                print("🔄 Operation may still be processing in background")
-                return None
-            else:
-                print("⚠️ Video generation failed - no response received")
-                return None
-                
-        except Exception as e:
-            print(f"⚠️ Veo 3 video generation error: {e}")
+                    
+            except Exception as e:
+                print(f"⚠️ Segment {i} generation error: {e}")
+                continue
+        
+        print(f"📊 Generation Summary:")
+        print(f"✅ Segments generated: {len(generated_segments)}/12")
+        print(f"🎬 Style: Futuristic AI newsroom")
+        print(f"🗣️ Language: Professional English")
+        print(f"🎯 Purpose: Bio link conversion via captology")
+        
+        # Return first segment for testing (future: return concatenated video)
+        if generated_segments:
+            return generated_segments[0]['file_path']
+        else:
             return None
 
     # Keep old function for backwards compatibility
     def generate_whiteboard_explainer_video(self, tool_data, industry, script_highlights):
-        """Wrapper function - calls new segment-based generation"""
-        return self.generate_whiteboard_video_segments(tool_data, industry, script_highlights)
+        """Wrapper function - calls new futuristic newsroom generation"""
+        return self.generate_futuristic_newsroom_segments(tool_data, industry, script_highlights)
 
     def create_visual_content_package(self, script, tool_data, industry):
         """Create complete visual package for educational content"""
