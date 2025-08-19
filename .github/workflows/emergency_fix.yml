@@ -1,0 +1,104 @@
+# FORCE REFRESH: 2025-08-19-emergency-fix-465b6af
+name: 🚨 EMERGENCY FIX - Force Latest Code
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  emergency-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+    - name: 🚨 Emergency Fresh Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: 465b6af  # SPECIFIC COMMIT WITH FIX
+        fetch-depth: 0
+        clean: true
+        
+    - name: ✅ Verify Correct Commit
+      run: |
+        echo "🎯 Expected: 465b6af"
+        echo "📊 Actual: $(git rev-parse --short HEAD)"
+        if [ "$(git rev-parse --short HEAD)" != "465b6af" ]; then
+          echo "❌ ERROR: Wrong commit!"
+          exit 1
+        fi
+        echo "✅ CORRECT COMMIT VERIFIED!"
+        
+    - name: 🧨 Nuclear Cache Clear
+      run: |
+        echo "💣 Clearing ALL cache locations..."
+        rm -rf ~/.cache ~/.npm ~/.yarn ~/.cargo ~/.pip
+        echo "🗑️ Cache annihilated"
+        
+    - name: 🐍 Setup Python (No Cache)
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install Dependencies (Force Fresh)
+      run: |
+        echo "📦 Installing with --no-cache-dir..."
+        python -m pip install --upgrade pip --no-cache-dir
+        pip install --no-cache-dir -r requirements.txt
+        echo "✅ Fresh install complete"
+        
+    - name: ☁️ Configure Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+      run: |
+        echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/gcp-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json
+        echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json" >> $GITHUB_ENV
+        
+    - name: 🎯 EMERGENCY AI EDUCATION SYSTEM
+      env:
+        # === TELEGRAM TOKENS ===
+        TELEGRAM_LEGAL_TOKEN: ${{ secrets.TELEGRAM_LEGAL_TOKEN }}
+        TELEGRAM_MEDICAL_TOKEN: ${{ secrets.TELEGRAM_MEDICAL_TOKEN }}
+        TELEGRAM_SENIOR_TOKEN: ${{ secrets.TELEGRAM_SENIOR_TOKEN }}
+        TELEGRAM_GENERAL_TOKEN: ${{ secrets.TELEGRAM_GENERAL_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        
+        # === GUMROAD ===
+        GUMROAD_API_KEY: ${{ secrets.GUMROAD_API_KEY }}
+        GUMROAD_LEGAL_ID: ${{ secrets.GUMROAD_LEGAL_ID }}
+        GUMROAD_MEDICAL_ID: ${{ secrets.GUMROAD_MEDICAL_ID }}
+        GUMROAD_SENIOR_ID: ${{ secrets.GUMROAD_SENIOR_ID }}
+        GUMROAD_GENERAL_ID: ${{ secrets.GUMROAD_GENERAL_ID }}
+        
+        # === KO-FI ===
+        KOFI_LEGAL_API: ${{ secrets.KOFI_LEGAL_API }}
+        KOFI_MEDICAL_API: ${{ secrets.KOFI_MEDICAL_API }}
+        KOFI_SENIOR_API: ${{ secrets.KOFI_SENIOR_API }}
+        KOFI_GENERAL_API: ${{ secrets.KOFI_GENERAL_API }}
+        
+        # === GOOGLE CLOUD ===
+        GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp-key.json
+        GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+        
+        # === CONTACT ===
+        EMAIL_CONTACT: ${{ secrets.EMAIL_CONTACT }}
+        INSTAGRAM_CONSULTING: ${{ secrets.INSTAGRAM_CONSULTING }}
+        
+      run: |
+        echo "🚨 EMERGENCY EXECUTION WITH CORRECT COMMIT"
+        echo "📅 Time: $(date)"
+        echo "📊 Commit: $(git rev-parse --short HEAD)"
+        echo "🔍 Files in directory:"
+        ls -la multi_platform_engine.py
+        
+        echo "🔍 Checking channel configuration:"
+        grep -A 5 -B 5 "@AIEducationHub_bot" multi_platform_engine.py || echo "❌ Channel not found in code!"
+        
+        echo "🚀 EXECUTING WITH FIXED CHANNELS..."
+        python multi_platform_engine.py
+        
+    - name: 🧹 Emergency Cleanup
+      if: always()
+      run: |
+        rm -f /tmp/gcp-key.json
+        echo "🧹 Emergency cleanup done"
