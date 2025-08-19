@@ -10,7 +10,15 @@ import time
 import requests
 import random
 from datetime import datetime
-from google.cloud import language_v1
+
+# Optional Google Cloud imports - graceful fallback if not available
+try:
+    from google.cloud import language_v1
+    GOOGLE_CLOUD_AVAILABLE = True
+except ImportError:
+    print("⚠️ Google Cloud Language not available - using simple classification")
+    GOOGLE_CLOUD_AVAILABLE = False
+
 from infinite_content_engine import InfiniteContentEngine
 from visual_content_engine import VisualContentEngine
 
@@ -49,7 +57,14 @@ class MultiPlatformEngine:
         }
         
         # Initialize Google Cloud Natural Language for content classification
-        self.language_client = language_v1.LanguageServiceClient()
+        if GOOGLE_CLOUD_AVAILABLE:
+            try:
+                self.language_client = language_v1.LanguageServiceClient()
+            except Exception as e:
+                print(f"⚠️ Google Cloud client initialization failed: {e}")
+                self.language_client = None
+        else:
+            self.language_client = None
         
         # Initialize content engines
         self.content_engine = InfiniteContentEngine()
@@ -67,56 +82,72 @@ class MultiPlatformEngine:
 
     def classify_content_industry(self, content):
         """
-        Classify content into industry using Google Cloud Natural Language API
+        Classify content into industry using Google Cloud Natural Language API or fallback
         """
-        try:
-            # Analyze content with Google NL API
-            document = language_v1.Document(content=content, type_=language_v1.Document.Type.PLAIN_TEXT)
-            
-            # Get entities and keywords
-            entities_response = self.language_client.analyze_entities(
-                request={"document": document, "encoding_type": language_v1.EncodingType.UTF8}
-            )
-            
-            # Extract keywords from entities
-            detected_keywords = []
-            for entity in entities_response.entities:
-                detected_keywords.append(entity.name.lower())
-            
-            # Add content text keywords
-            content_lower = content.lower()
-            
-            # Score each industry based on keyword matches
-            industry_scores = {}
-            for industry, data in self.industries.items():
-                score = 0
-                for keyword in data["keywords"]:
-                    # Check in detected entities
-                    if any(keyword in dk for dk in detected_keywords):
-                        score += 2
-                    # Check in content text
-                    if keyword in content_lower:
-                        score += 1
+        if self.language_client and GOOGLE_CLOUD_AVAILABLE:
+            try:
+                # Analyze content with Google NL API
+                document = language_v1.Document(content=content, type_=language_v1.Document.Type.PLAIN_TEXT)
                 
-                industry_scores[industry] = score
-            
-            # Return industry with highest score
+                # Get entities and keywords
+                entities_response = self.language_client.analyze_entities(
+                    request={"document": document, "encoding_type": language_v1.EncodingType.UTF8}
+                )
+                
+                # Extract keywords from entities
+                detected_keywords = []
+                for entity in entities_response.entities:
+                    detected_keywords.append(entity.name.lower())
+                
+                # Add content text keywords
+                content_lower = content.lower()
+                
+                # Score each industry based on keyword matches
+                industry_scores = {}
+                for industry, data in self.industries.items():
+                    score = 0
+                    for keyword in data["keywords"]:
+                        # Check in detected entities
+                        if any(keyword in dk for dk in detected_keywords):
+                            score += 2
+                        # Check in content text
+                        if keyword in content_lower:
+                            score += 1
+                    
+                    industry_scores[industry] = score
+                
+                # Return industry with highest score
+                best_industry = max(industry_scores, key=industry_scores.get)
+                confidence = industry_scores[best_industry]
+                
+                print(f"🎯 Content classified as: {best_industry} (confidence: {confidence})")
+                return best_industry, confidence
+                
+            except Exception as e:
+                print(f"⚠️ Google Cloud classification error: {e}")
+        
+        # Simple keyword fallback when Google Cloud API not available or fails
+        print("🔄 Using simple keyword classification")
+        content_lower = content.lower()
+        
+        # Score each industry based on keyword matches
+        industry_scores = {}
+        for industry, data in self.industries.items():
+            score = 0
+            for keyword in data["keywords"]:
+                if keyword in content_lower:
+                    score += 1
+            industry_scores[industry] = score
+        
+        # Return industry with highest score
+        if max(industry_scores.values()) > 0:
             best_industry = max(industry_scores, key=industry_scores.get)
             confidence = industry_scores[best_industry]
-            
-            print(f"🎯 Content classified as: {best_industry} (confidence: {confidence})")
+            print(f"🎯 Simple classification: {best_industry} (confidence: {confidence})")
             return best_industry, confidence
-            
-        except Exception as e:
-            print(f"⚠️ Classification error: {e}")
-            # Simple keyword fallback when Google Cloud API fails
-            content_lower = content.lower()
-            for industry, data in self.industries.items():
-                for keyword in data["keywords"]:
-                    if keyword in content_lower:
-                        print(f"🎯 Fallback classification: {industry}")
-                        return industry, 1
-            return "general", 1  # Default fallback with confidence
+        else:
+            print(f"🎯 Default classification: general")
+            return "general", 1  # Default fallback
 
     def adapt_content_for_industry(self, base_content, industry, platform):
         """
