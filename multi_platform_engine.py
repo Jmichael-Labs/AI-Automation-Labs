@@ -621,8 +621,8 @@ Platform: Single Telegram Channel + Vertex AI Visual Engine"""
         """
         print(f"\n🌅 Starting advanced publishing cycle: {datetime.now()}")
         
-        # Force visual content for better engagement (90% visual, 10% text)
-        use_visual = random.random() < 0.9
+        # Force visual content for testing Veo 3 videos (100% visual content)
+        use_visual = random.random() < 1.0  # 100% visual to test Veo 3 video generation
         
         if use_visual:
             print("🎨 Running visual content generation...")
