@@ -11,57 +11,58 @@ import requests
 from datetime import datetime
 from google.cloud import language_v1
 from infinite_content_engine import InfiniteContentEngine
+from visual_content_engine import VisualContentEngine
 
 class MultiPlatformEngine:
     def __init__(self):
         """Initialize multi-platform content distribution engine"""
         
-        # Industry classification
+        # SINGLE MAIN CHANNEL - All content goes to AIEducationHub_bot for partner demonstration
+        self.main_channel = {
+            "channel": "@AIEducationHub_bot", 
+            "token": os.getenv('TELEGRAM_GENERAL_TOKEN')
+        }
+        
+        # Industry classification for content adaptation (all goes to main channel)
         self.industries = {
             "legal": {
                 "keywords": ["law", "legal", "attorney", "lawyer", "court", "litigation", "contract", "compliance"],
-                "platforms": {
-                    "telegram": {"channel": "@LegalAIAcademy", "token": os.getenv('TELEGRAM_LEGAL_TOKEN')},
-                    "kofi": {"profile": "legalaiacademy", "api_key": os.getenv('KOFI_LEGAL_API')}
-                }
+                "label": "🏛️ LEGAL AI",
+                "description": "Legal sector automation and AI tools"
             },
             "medical": {
                 "keywords": ["medical", "healthcare", "doctor", "physician", "patient", "diagnosis", "treatment", "clinical"],
-                "platforms": {
-                    "telegram": {"channel": "@HealthAIInsights", "token": os.getenv('TELEGRAM_MEDICAL_TOKEN')},
-                    "kofi": {"profile": "healthaiinsights", "api_key": os.getenv('KOFI_MEDICAL_API')},
-                }
+                "label": "🏥 MEDICAL AI", 
+                "description": "Healthcare and medical AI innovations"
             },
             "senior": {
                 "keywords": ["senior", "elderly", "aging", "caregiver", "retirement", "accessibility", "simple", "easy"],
-                "platforms": {
-                    "telegram": {"channel": "@SeniorTechGuide", "token": os.getenv('TELEGRAM_SENIOR_TOKEN')},
-                    "kofi": {"profile": "seniortechguide", "api_key": os.getenv('KOFI_SENIOR_API')},
-                }
+                "label": "👴 SENIOR TECH",
+                "description": "Senior-friendly AI and technology"
             },
             "general": {
                 "keywords": ["ai", "artificial intelligence", "automation", "technology", "innovation", "business"],
-                "platforms": {
-                    "telegram": {"channel": "@AIEducationHub_bot", "token": os.getenv('TELEGRAM_GENERAL_TOKEN')},
-                    "kofi": {"profile": "aieducationhub", "api_key": os.getenv('KOFI_GENERAL_API')},
-                }
+                "label": "🧠 GENERAL AI",
+                "description": "General AI education and automation"
             }
         }
         
         # Initialize Google Cloud Natural Language for content classification
         self.language_client = language_v1.LanguageServiceClient()
         
-        # Initialize base content engine
+        # Initialize content engines
         self.content_engine = InfiniteContentEngine()
+        self.visual_engine = VisualContentEngine()
         
         # Initialize notification system
         self.notification_chat_id = os.getenv('TELEGRAM_CHAT_ID')
-        self.notification_token = self.industries["general"]["platforms"]["telegram"]["token"]
+        self.notification_token = self.main_channel["token"]
         
-        print("🚀 Multi-Platform AI Education Engine initialized")
-        print(f"📊 Industries: {len(self.industries)}")
-        print(f"🔧 Platforms per industry: 2")
-        print(f"📡 Total channels: {len(self.industries) * 2}  # Telegram + Ko-fi")
+        print("🚀 AI Education Demo Channel Engine initialized")
+        print(f"📊 Content types: {len(self.industries)} industry categories")
+        print(f"🔧 Platform: Single Telegram Channel + Visual Content (Vertex AI)")
+        print(f"📡 Main channel: {self.main_channel['channel']}")
+        print(f"🎨 Visual capabilities: Images + Narrative Scripts + Partner Demo")
 
     def classify_content_industry(self, content):
         """
@@ -107,7 +108,14 @@ class MultiPlatformEngine:
             
         except Exception as e:
             print(f"⚠️ Classification error: {e}")
-            return "general", 0  # Default fallback
+            # Simple keyword fallback when Google Cloud API fails
+            content_lower = content.lower()
+            for industry, data in self.industries.items():
+                for keyword in data["keywords"]:
+                    if keyword in content_lower:
+                        print(f"🎯 Fallback classification: {industry}")
+                        return industry, 1
+            return "general", 1  # Default fallback with confidence
 
     def adapt_content_for_industry(self, base_content, industry, platform):
         """
@@ -116,70 +124,30 @@ class MultiPlatformEngine:
         adaptations = {
             "legal": {
                 "telegram": {
-                    "prefix": "⚖️ Legal AI Insight",
+                    "prefix": "⚖️ Legal AI Visual Learning",
                     "tone": "Professional, precise, compliance-focused",
-                    "cta": "Learn more: ko-fi.com/legalaiacademy"
-                },
-                "kofi": {
-                    "prefix": "🏛️ Legal Practice Enhancement",
-                    "tone": "ROI-focused, practice management",
-                    "cta": "Join Legal AI Academy membership for advanced prompts"
-                },
-                "gumroad": {
-                    "prefix": "💼 Legal AI Toolkit",
-                    "tone": "Product-focused, immediate value",
-                    "cta": "Get Legal AI Prompts Library ($97)"
+                    "cta": "Join our Legal AI community for visual tutorials and case studies"
                 }
             },
             "medical": {
                 "telegram": {
-                    "prefix": "🏥 Medical AI Breakthrough",
+                    "prefix": "🏥 Medical AI Visual Education",
                     "tone": "Evidence-based, clinical relevance",
-                    "cta": "Learn more: ko-fi.com/healthaiinsights"
-                },
-                "kofi": {
-                    "prefix": "⚕️ Healthcare Innovation",
-                    "tone": "Patient outcomes, efficiency gains",
-                    "cta": "Support Medical AI research with membership"
-                },
-                "gumroad": {
-                    "prefix": "📋 Medical AI Assistant",
-                    "tone": "Practical tools, time-saving",
-                    "cta": "Get Medical AI Documentation Kit ($197)"
+                    "cta": "Join our Medical AI community for video tutorials and clinical case studies"
                 }
             },
             "senior": {
                 "telegram": {
-                    "prefix": "👴 Senior-Friendly AI",
+                    "prefix": "👴 Senior-Friendly AI Visual Guide",
                     "tone": "Simple, patient, encouraging",
-                    "cta": "Learn more: ko-fi.com/seniortechguide"
-                },
-                "kofi": {
-                    "prefix": "❤️ Tech Support for Seniors",
-                    "tone": "Supportive, step-by-step guidance",
-                    "cta": "Get personalized senior tech support"
-                },
-                "gumroad": {
-                    "prefix": "🎯 Easy AI for Seniors",
-                    "tone": "Simplified, illustrated guides",
-                    "cta": "Get Senior AI Starter Kit ($47)"
+                    "cta": "Join our Senior Tech community for easy-to-follow video tutorials"
                 }
             },
             "general": {
                 "telegram": {
-                    "prefix": "🧠 AI Education Daily",
+                    "prefix": "🧠 AI Education Visual Hub",
                     "tone": "Educational, comprehensive",
-                    "cta": "Learn more: ko-fi.com/aieducationhub"
-                },
-                "kofi": {
-                    "prefix": "🚀 AI Learning Hub",
-                    "tone": "Progressive learning, skill building",
-                    "cta": "Join AI Education community"
-                },
-                "gumroad": {
-                    "prefix": "🎓 AI Mastery Collection",
-                    "tone": "Comprehensive learning resources",
-                    "cta": "Get AI Education Starter Pack ($29)"
+                    "cta": "Join our AI Education community for videos, images, and interactive tutorials"
                 }
             }
         }
@@ -202,73 +170,42 @@ class MultiPlatformEngine:
         
         return adapted_content.strip()
 
-    def publish_to_telegram(self, industry, content):
-        """Publish content to industry-specific Telegram channel"""
+    def publish_to_main_channel(self, industry, content):
+        """Publish content to main demo channel with industry labeling"""
         try:
-            token = self.industries[industry]["platforms"]["telegram"]["token"]
-            channel = self.industries[industry]["platforms"]["telegram"]["channel"]
+            token = self.main_channel["token"]
+            channel = self.main_channel["channel"]
+            
+            # Add industry label to content
+            industry_info = self.industries[industry]
+            labeled_content = f"{industry_info['label']} | {industry_info['description']}\n\n{content}"
             
             if not token:
-                print(f"⚠️ No Telegram token for {industry}")
+                print(f"⚠️ No Telegram token for main channel")
                 return False
             
             url = f"https://api.telegram.org/bot{token}/sendMessage"
             payload = {
                 "chat_id": channel,
-                "text": content,
+                "text": labeled_content,
                 "parse_mode": "Markdown"
             }
             
-            print(f"🔍 DEBUG: Sending to {channel} with token ending in {token[-8:] if token else 'MISSING'}")
+            print(f"🔍 DEBUG: Sending {industry} content to main channel {channel}")
             response = requests.post(url, json=payload)
             if response.status_code == 200:
-                print(f"✅ Published to Telegram {industry}: {channel}")
+                print(f"✅ Published {industry} content to main channel: {channel}")
                 return True
             else:
-                print(f"❌ Telegram {industry} failed: {response.status_code} - {response.text[:100]}")
+                print(f"❌ Main channel {industry} failed: {response.status_code} - {response.text[:100]}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Telegram {industry} error: {e}")
+            print(f"❌ Main channel {industry} error: {e}")
             return False
 
-    def publish_to_kofi(self, industry, content):
-        """Publish content to industry-specific Ko-fi profile via webhook"""
-        try:
-            webhook_url = self.industries[industry]["platforms"]["kofi"]["api_key"]
-            profile = self.industries[industry]["platforms"]["kofi"]["profile"]
-            
-            if not webhook_url:
-                print(f"⚠️ Ko-fi webhook URL missing for {industry}")
-                return False
-            
-            # Ko-fi uses webhook integration for posting updates
-            payload = {
-                "type": "shop_update",
-                "data": {
-                    "message": content[:500],  # Ko-fi limit ~500 chars
-                    "timestamp": datetime.now().isoformat(),
-                    "shop_items": f"Visit ko-fi.com/{profile} for AI education resources"
-                }
-            }
-            
-            headers = {
-                "Content-Type": "application/json",
-                "User-Agent": "MultiPlatform-AI-Education/1.0"
-            }
-            
-            response = requests.post(webhook_url, json=payload, headers=headers, timeout=30)
-            
-            if response.status_code in [200, 201, 202]:
-                print(f"✅ Ko-fi {industry} update posted: ko-fi.com/{profile}")
-                return True
-            else:
-                print(f"❌ Ko-fi {industry} failed: {response.status_code} - {response.text[:100]}")
-                return False
-            
-        except Exception as e:
-            print(f"❌ Ko-fi {industry} error: {e}")
-            return False
+    # Ko-fi API doesn't support posting content - only payment webhooks
+    # Removed non-functional Ko-fi integration
 
 
     # DISABLED: Gumroad API doesn't support product updates
@@ -388,79 +325,227 @@ class MultiPlatformEngine:
 
     def publish_multi_platform(self, base_content):
         """
-        Main function: Classify content and publish to all relevant platforms
+        Main function: Classify content and publish to main demo channel
         """
-        print(f"\n🚀 Starting multi-platform publishing...")
+        print(f"\n🚀 Starting main channel publishing...")
         print(f"📝 Base content: {base_content[:100]}...")
         
         # Classify content to determine primary industry
         primary_industry, confidence = self.classify_content_industry(base_content)
         
-        # Publish to all platforms for the primary industry
-        results = {}
-        for platform in ["telegram", "kofi"]:
-            adapted_content = self.adapt_content_for_industry(base_content, primary_industry, platform)
-            
-            if platform == "telegram":
-                success = self.publish_to_telegram(primary_industry, adapted_content)
-            elif platform == "kofi":
-                success = self.publish_to_kofi(primary_industry, adapted_content)
-            
-            results[f"{primary_industry}_{platform}"] = success
-            
-            # Small delay between platforms
-            time.sleep(2)
+        # Adapt content for the classified industry
+        adapted_content = self.adapt_content_for_industry(base_content, primary_industry, "telegram")
         
-        # Also publish to general industry if confidence is low
-        if confidence < 3:
-            print(f"🔄 Low confidence ({confidence}), also publishing to general...")
-            for platform in ["telegram"]:  # Just Telegram for general fallback
-                adapted_content = self.adapt_content_for_industry(base_content, "general", platform)
-                success = self.publish_to_telegram("general", adapted_content)
-                results[f"general_{platform}"] = success
+        # Publish to main channel with industry labeling
+        success = self.publish_to_main_channel(primary_industry, adapted_content)
+        results = {f"{primary_industry}_main_channel": success}
         
+        print(f"📡 Published {primary_industry} content to main demo channel")
         return results
 
-    def run_daily_publishing_cycle(self):
+    def run_visual_content_cycle(self):
         """
-        Run complete daily publishing cycle across all industries
+        Run advanced visual content generation cycle
         """
-        print(f"\n🌅 Starting daily publishing cycle: {datetime.now()}")
+        print(f"\n🎬 Starting visual content generation: {datetime.now()}")
         
-        # Generate base content using existing Infinite Content Engine
-        base_content = self.content_engine.generate_infinite_content()
+        # Get fresh tool from content engine
+        self.content_engine.update_ai_tools_database()
+        available_tools = self.content_engine.get_fresh_tools()
         
-        if base_content:
-            title, content = base_content
+        if not available_tools:
+            print("❌ No tools available for content generation")
+            return 0
             
-            # Use the content for multi-platform distribution
-            results = self.publish_multi_platform(content)
-            
-            # Summary
-            successful_publications = sum(1 for success in results.values() if success)
-            total_attempts = len(results)
-            success_rate = (successful_publications/total_attempts)*100 if total_attempts > 0 else 0
-            
-            print(f"\n📊 Publishing Summary:")
-            print(f"✅ Successful: {successful_publications}/{total_attempts}")
-            print(f"📈 Success rate: {success_rate:.1f}%")
-            
-            # Send notification
-            notification_msg = f"""📊 **Publishing Cycle Complete**
-            
+        # Select random tool and convert to visual content format
+        selected_tool = random.choice(available_tools)
+        tool_data = {
+            "name": selected_tool.name,
+            "description": selected_tool.description,
+            "category": selected_tool.category,
+            "use_case": selected_tool.use_case,
+            "income_potential": selected_tool.income_potential,
+            "related_tools": ["Zapier", "Make.com", "Airtable"]  # Mock related tools
+        }
+        
+        print(f"🎯 Selected tool for visual content: {tool_data['name']}")
+        
+        # Generate visual content for each industry
+        results = {}
+        for industry in self.industries.keys():
+            try:
+                print(f"\n🎨 Generating visual content for {industry} industry...")
+                
+                # Generate complete educational package
+                visual_package = self.visual_engine.generate_complete_educational_content(
+                    tool_data, industry
+                )
+                
+                if visual_package:
+                    # Adapt for Telegram with visual elements
+                    telegram_content = self.create_telegram_visual_post(visual_package, industry)
+                    
+                    # Publish to main demo channel
+                    success = self.publish_to_main_channel(industry, telegram_content)
+                    results[f"{industry}_visual"] = success
+                    
+                    if success:
+                        print(f"✅ Visual content published to main demo channel")
+                    else:
+                        print(f"❌ Failed to publish to main demo channel")
+                        
+                    # Small delay between industries
+                    time.sleep(3)
+                else:
+                    print(f"❌ Failed to generate visual package for {industry}")
+                    results[f"{industry}_visual"] = False
+                    
+            except Exception as e:
+                print(f"❌ Error generating visual content for {industry}: {e}")
+                results[f"{industry}_visual"] = False
+        
+        # Summary
+        successful_publications = sum(1 for success in results.values() if success)
+        total_attempts = len(results)
+        success_rate = (successful_publications/total_attempts)*100 if total_attempts > 0 else 0
+        
+        print(f"\n📊 Visual Content Summary:")
+        print(f"✅ Successful: {successful_publications}/{total_attempts}")
+        print(f"📈 Success rate: {success_rate:.1f}%")
+        print(f"🎨 Tool featured: {tool_data['name']}")
+        
+        # Send notification
+        notification_msg = f"""🎬 **Visual Content Generation Complete**
+        
+🎯 Featured Tool: {tool_data['name']}
 ✅ Successful: {successful_publications}/{total_attempts} publications
 📈 Success rate: {success_rate:.1f}%
 🕐 Time: {datetime.now().strftime('%H:%M %Z')}
-📡 Channels: {len(self.industries) * 3} total
+📡 Main Demo Channel: {self.main_channel['channel']}
+🎨 Content: Advanced narrative + images
+👥 Partner Demo: Content visible for evaluation
 
-Platforms: Telegram + Ko-fi + Gumroad"""
-            
-            self.send_notification(notification_msg)
-            
-            return successful_publications
+Platform: Single Telegram Channel + Vertex AI Visual Engine"""
+        
+        self.send_notification(notification_msg)
+        
+        return successful_publications
+    
+    def create_telegram_visual_post(self, visual_package, industry):
+        """Create Telegram post with visual content references"""
+        
+        adaptation = self.industries[industry]
+        telegram_config = adaptation["telegram"]
+        
+        # Create visual-enhanced content
+        content = f"""{telegram_config['prefix']}
+
+🎬 **{visual_package['title']}**
+
+📖 **Narrative Theme:** {visual_package['theme'].replace('_', ' ').title()}
+⏱️ **Duration:** {visual_package['estimated_duration']}
+
+**🔥 Key Highlights:**
+{self.extract_script_highlights(visual_package['script'])}
+
+**🎯 Visual Learning Included:**
+📸 Professional thumbnails and diagrams
+📊 Workflow visualizations  
+📈 Success metrics and ROI data
+🎨 Step-by-step implementation guides
+
+**📚 Educational Value:**
+• Advanced {industry} automation strategies
+• Real-world case studies and examples
+• Future-ready skill development
+• Community-driven learning
+
+---
+
+{telegram_config['cta']}
+
+📧 Contact: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}
+📱 Community: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}
+
+#{industry.upper()}AI #VisualLearning #Education #Automation
+
+*{visual_package['metadata']['created'][:10]} - Advanced Visual Content*"""
+
+        return content
+    
+    def extract_script_highlights(self, script):
+        """Extract key highlights from the generated script"""
+        # Simple extraction of key points (in production, could use NLP)
+        lines = script.split('\n')
+        highlights = []
+        
+        for line in lines:
+            if any(keyword in line.lower() for keyword in ['key', 'important', 'result', 'benefit', 'save']):
+                clean_line = line.strip('•-* ').strip()
+                if len(clean_line) > 20 and len(clean_line) < 100:
+                    highlights.append(f"• {clean_line}")
+                    if len(highlights) >= 3:
+                        break
+        
+        if not highlights:
+            highlights = [
+                "• Professional-grade automation implementation",
+                "• Real case studies with measurable results", 
+                "• Step-by-step visual learning approach"
+            ]
+        
+        return '\n'.join(highlights[:3])
+
+    def run_daily_publishing_cycle(self):
+        """
+        Run complete daily publishing cycle with visual content
+        """
+        print(f"\n🌅 Starting advanced publishing cycle: {datetime.now()}")
+        
+        # 70% chance for visual content, 30% for text content
+        import random
+        use_visual = random.random() < 0.7
+        
+        if use_visual:
+            print("🎨 Running visual content generation...")
+            return self.run_visual_content_cycle()
         else:
-            print("❌ Failed to generate base content")
-            return 0
+            print("📝 Running text content generation...")
+            # Generate base content using existing Infinite Content Engine
+            base_content = self.content_engine.generate_infinite_content()
+            
+            if base_content:
+                title, content = base_content
+                
+                # Use the content for multi-platform distribution
+                results = self.publish_multi_platform(content)
+                
+                # Summary
+                successful_publications = sum(1 for success in results.values() if success)
+                total_attempts = len(results)
+                success_rate = (successful_publications/total_attempts)*100 if total_attempts > 0 else 0
+                
+                print(f"\n📊 Text Publishing Summary:")
+                print(f"✅ Successful: {successful_publications}/{total_attempts}")
+                print(f"📈 Success rate: {success_rate:.1f}%")
+                
+                # Send notification
+                notification_msg = f"""📊 **Text Content Publishing Complete**
+                
+✅ Successful: {successful_publications}/{total_attempts} publications
+📈 Success rate: {success_rate:.1f}%
+🕐 Time: {datetime.now().strftime('%H:%M %Z')}
+📡 Main Demo Channel: {self.main_channel['channel']}
+👥 Partner Demo: Content visible for evaluation
+
+Platform: Single Telegram Channel (text content)"""
+                
+                self.send_notification(notification_msg)
+                
+                return successful_publications
+            else:
+                print("❌ Failed to generate base content")
+                return 0
 
 if __name__ == "__main__":
     try:

@@ -1,5 +1,5 @@
 # AI Education System - Production Ready
-name: AI Education System - 12 Channel Automation
+name: AI Education System - 4 Telegram Channel Automation
 
 on:
   workflow_dispatch:
@@ -66,11 +66,7 @@ jobs:
         GUMROAD_SENIOR_ID: ${{ secrets.GUMROAD_SENIOR_ID }}
         GUMROAD_GENERAL_ID: ${{ secrets.GUMROAD_GENERAL_ID }}
         
-        # === KO-FI ===
-        KOFI_LEGAL_API: ${{ secrets.KOFI_LEGAL_API }}
-        KOFI_MEDICAL_API: ${{ secrets.KOFI_MEDICAL_API }}
-        KOFI_SENIOR_API: ${{ secrets.KOFI_SENIOR_API }}
-        KOFI_GENERAL_API: ${{ secrets.KOFI_GENERAL_API }}
+        # === KO-FI === (REMOVED - API doesn't support posting content)
         
         # === GOOGLE CLOUD ===
         GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp-key.json

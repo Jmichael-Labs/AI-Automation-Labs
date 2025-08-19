@@ -449,10 +449,10 @@ class InfiniteContentEngine:
         # Add unique elements
         content += f"\n\n**🔥 Current Opportunity:**\n{self.generate_current_opportunity(tool)}"
         content += f"\n\n---\n\n**Ready to implement {tool.name}?**"
-        content += f"\nI can walk you through the exact setup process."
-        content += f"\n\n📧 Email: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
-        content += f"\n📱 Instagram: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
-        content += f"\n\n*Building automated income streams, one tool at a time* 🤖"
+        content += f"\nJoin our AI Education community for step-by-step tutorials."
+        content += f"\n\n📧 Contact: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
+        content += f"\n📱 Community: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
+        content += f"\n\n*Building the future of AI education with visual content* 🎨🤖"
         
         # Verify uniqueness
         if self.is_content_unique(content):
@@ -505,10 +505,10 @@ class InfiniteContentEngine:
         content = '\n\n'.join(content_parts)
         content += f"\n\n**🎯 Implementation Timeline:**\n{self.generate_timeline(tool1, tool2)}"
         content += f"\n\n---\n\n**Need help setting up this combo?**"
-        content += f"\nI've implemented {tool1.name} + {tool2.name} systems before."
-        content += f"\n\n📧 Email: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
-        content += f"\n📱 Instagram: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
-        content += f"\n\n*Two tools, infinite possibilities* 🚀"
+        content += f"\nOur AI Education community provides complete {tool1.name} + {tool2.name} tutorials."
+        content += f"\n\n📧 Contact: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
+        content += f"\n📱 Community: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
+        content += f"\n\n*Two tools, infinite visual learning possibilities* 🎨🚀"
         
         if self.is_content_unique(content):
             self.save_memory()
@@ -556,10 +556,10 @@ class InfiniteContentEngine:
         content = '\n\n'.join(content_parts)
         content += f"\n\n**📊 Market Data:**\n{self.generate_market_data(tool)}"
         content += f"\n\n---\n\n**Want to capitalize on this opportunity?**"
-        content += f"\nI can show you the exact implementation strategy."
-        content += f"\n\n📧 Email: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
-        content += f"\n📱 Instagram: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
-        content += f"\n\n*Spotting opportunities before they become obvious* 👁️"
+        content += f"\nOur AI Education community provides visual tutorials and complete implementation strategies."
+        content += f"\n\n📧 Contact: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
+        content += f"\n📱 Community: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
+        content += f"\n\n*Spotting opportunities with visual learning before they become obvious* 🎨👁️"
         
         if self.is_content_unique(content):
             self.save_memory()
