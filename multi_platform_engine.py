@@ -8,6 +8,7 @@ import os
 import json
 import time
 import requests
+import random
 from datetime import datetime
 from google.cloud import language_v1
 from infinite_content_engine import InfiniteContentEngine
@@ -503,7 +504,6 @@ Platform: Single Telegram Channel + Vertex AI Visual Engine"""
         print(f"\n🌅 Starting advanced publishing cycle: {datetime.now()}")
         
         # 70% chance for visual content, 30% for text content
-        import random
         use_visual = random.random() < 0.7
         
         if use_visual:
