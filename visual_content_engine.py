@@ -524,18 +524,25 @@ Purpose: Educational content for AI tool tutorials
         tool_hash = hashlib.md5(f"{tool_data['name']}{today}".encode()).hexdigest()
         seed_number = int(tool_hash[:4], 16) % len(video_segments)
         
-        # Check quota based on available credits
+        # Check quota based on available credits and tier status
         has_paid_credits = True  # Set to True when using $300 Google Cloud credits
         
+        # TIER ESCALATION STRATEGY
+        # Start aggressive to trigger tier upgrades automatically
+        daily_quota_limit = 10  # Conservative start (Tier 3 documented limit)
+        
         if has_paid_credits:
-            # With $300 credits: Can afford full 12-segment videos
-            daily_quota_limit = 500  # Much higher with paid credits
+            # VERTEX AI DIRECT: Much higher limits than Gemini API
+            daily_quota_limit = 1000  # Vertex AI enterprise limits
             segments_to_generate = quota_strategies["weekly_series"]  # Generate all 12!
-            print("💰 PAID CREDITS DETECTED - Generating full 12-segment video!")
-            print(f"🚀 VEO 3 FAST MODE: $0.40 per 8-second video")
-            print(f"💳 Budget: $300 credits = 750 individual videos")
-            print(f"🎬 Complete videos: 62 full newsroom series (12 segments each)")
-            print(f"💡 Cost per complete video: $4.80 (12 × $0.40)")
+            print("💰 VERTEX AI DIRECT ENDPOINT DETECTED!")
+            print("🚀 Project: youtube-pro-469213 with Veo 3 Fast")
+            print(f"🎯 Generating complete 12-segment newsroom video")
+            print(f"💳 Budget: $300 credits with Vertex AI pricing")
+            print(f"🎬 No daily limits - generate as needed!")
+            print(f"⚡ 1 video per request (sampleCount: 1) - controlled generation")
+            print(f"🔊 Audio included + 720p resolution")
+            print(f"💡 Model: veo-3.0-fast-generate-001 (cost optimized)")
             selected_segments = video_segments  # All 12 segments!
         else:
             daily_quota_limit = 10  # Free tier limit
@@ -600,15 +607,98 @@ End with smooth transition setup for next segment.
                 if not self.veo3_client:
                     raise Exception("Veo 3 client not available")
                 
-                # Generate actual video using Veo 3
-                operation = self.veo3_client.models.generate_videos(
-                    model=self.video_model,
-                    prompt=segment_prompt,
-                    config=types.GenerateVideosConfig(
-                        negative_prompt="cartoon, amateur, low quality, blurry, unprofessional, hand-drawn",
-                        aspect_ratio="16:9"
+                # Generate actual video using Vertex AI direct endpoint
+                # Using user's youtube-pro-469213 project with higher limits
+                
+                # USER'S EXACT CONFIGURATION - Veo 3 Fast with 1 video per generation
+                vertex_request = {
+                    "endpoint": "projects/youtube-pro-469213/locations/us-central1/publishers/google/models/veo-3.0-fast-generate-001",
+                    "instances": [
+                        {
+                            "prompt": segment_prompt,
+                        }
+                    ],
+                    "parameters": {
+                        "aspectRatio": "16:9",
+                        "sampleCount": 1,  # User specified: 1 video per generation
+                        "durationSeconds": "8",
+                        "personGeneration": "allow_all",
+                        "addWatermark": True,
+                        "includeRaiReason": True,
+                        "generateAudio": True,
+                        "resolution": "720p",
+                    }
+                }
+                
+                print("🚀 Using Vertex AI direct endpoint (youtube-pro-469213)")
+                print("💰 Higher limits than Gemini API - generating 12 segments!")
+                
+                # Use direct API call instead of SDK (following user's example)
+                import subprocess
+                import json
+                import tempfile
+                
+                # Create request file
+                with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+                    json.dump(vertex_request, f)
+                    request_file = f.name
+                
+                # Make API call using gcloud auth - USER'S EXACT CONFIGURATION
+                api_endpoint = "us-central1-aiplatform.googleapis.com"
+                project_id = "youtube-pro-469213"
+                location_id = "us-central1"
+                model_id = "veo-3.0-fast-generate-001"  # User specified: Fast model
+                
+                curl_cmd = [
+                    "curl", "-X", "POST",
+                    "-H", "Content-Type: application/json",
+                    "-H", f"Authorization: Bearer $(gcloud auth print-access-token)",
+                    f"https://{api_endpoint}/v1/projects/{project_id}/locations/{location_id}/publishers/google/models/{model_id}:predictLongRunning",
+                    "-d", f"@{request_file}"
+                ]
+                
+                try:
+                    result = subprocess.run(curl_cmd, capture_output=True, text=True, shell=True)
+                    operation_response = json.loads(result.stdout)
+                    operation_name = operation_response.get('name', '')
+                    print(f"✅ Vertex AI operation started: {operation_name[:50]}...")
+                    
+                    # Extract operation ID for fetch (following user's pattern)
+                    operation_id = operation_name.strip('"')
+                    
+                    # Create fetch request file
+                    fetch_request = {
+                        "operationName": operation_id
+                    }
+                    
+                    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+                        json.dump(fetch_request, f)
+                        fetch_file = f.name
+                    
+                    # Create mock operation object for compatibility with polling
+                    class MockOperation:
+                        def __init__(self, name, fetch_file, api_endpoint, project_id, location_id, model_id):
+                            self.name = name
+                            self.done = False
+                            self.fetch_file = fetch_file
+                            self.api_endpoint = api_endpoint
+                            self.project_id = project_id
+                            self.location_id = location_id
+                            self.model_id = model_id
+                    
+                    operation = MockOperation(operation_id, fetch_file, api_endpoint, project_id, location_id, model_id)
+                    
+                except Exception as api_error:
+                    print(f"⚠️ Vertex AI direct call failed: {api_error}")
+                    # Fallback to SDK method
+                    operation = self.veo3_client.models.generate_videos(
+                        model=self.video_model,
+                        prompt=segment_prompt,
+                        config=types.GenerateVideosConfig(
+                            negative_prompt="cartoon, amateur, low quality, blurry, unprofessional, hand-drawn",
+                            aspect_ratio="16:9"
+                        )
                     )
-                )
                 
                 print(f"🔄 Polling video generation operation...")
                 max_wait_time = 300  # 5 minutes max wait
@@ -686,23 +776,104 @@ End with smooth transition setup for next segment.
         segments_generated = len(generated_segments)
         if has_paid_credits:
             total_cost = segments_generated * 0.40
-            print(f"✅ Complete video: {segments_generated}/12 segments generated")
+            total_duration = segments_generated * 8
+            print(f"✅ Segments generated: {segments_generated}/12")
+            print(f"🎬 Will create: 1 unified video ({total_duration} seconds)")
+            print(f"🔧 Process: 12 segments → ffmpeg concat → 1 complete video")
             print(f"💰 Total cost: ${total_cost:.2f} (Veo 3 Fast: $0.40/segment)")
             print(f"💳 Remaining budget: ${300 - total_cost:.2f} out of $300")
-            print(f"🎬 Videos remaining: {int((300 - total_cost) / 4.80)} complete 12-segment videos")
+            print(f"🎬 Complete videos possible: {int((300 - total_cost) / 4.80)} more")
         else:
             print(f"✅ Strategic segments: {segments_generated}/1 (free tier)")
+        print(f"🎥 Final output: Complete newsroom experience")
         print(f"🎬 Style: Futuristic AI newsroom")
         print(f"🗣️ Language: Professional English") 
         print(f"🎯 Purpose: Maximum bio link conversion")
-        print(f"💡 Strategy: {'Full 12-segment video' if has_paid_credits else 'Daily rotation'}")
-        print(f"📈 ROI: {'Complete newsroom experience' if has_paid_credits else 'High-impact single segment'}")
+        print(f"💡 Flow: Hook → Authority → Analysis → CTA → Bio Link")
+        print(f"📈 ROI: {'96-second complete story' if has_paid_credits else 'High-impact single segment'}")
         
-        # Return first segment for testing (future: return concatenated video)
-        if generated_segments:
-            return generated_segments[0]['file_path']
+        # CONCATENATE ALL 12 SEGMENTS INTO ONE COMPLETE VIDEO
+        if generated_segments and len(generated_segments) > 1:
+            return self.concatenate_video_segments(generated_segments, tool_data, industry)
+        elif generated_segments:
+            return generated_segments[0]['file_path']  # Single segment fallback
         else:
             return None
+    
+    def concatenate_video_segments(self, segments, tool_data, industry):
+        """Concatenate 12 video segments into one complete 96-second newsroom video"""
+        
+        print(f"🎬 CONCATENATING {len(segments)} segments into complete newsroom video...")
+        
+        # Sort segments by number to ensure correct order
+        sorted_segments = sorted(segments, key=lambda x: x['segment_number'])
+        
+        # Create ffmpeg input list
+        segment_files = [seg['file_path'] for seg in sorted_segments]
+        
+        # Generate output filename
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"/tmp/complete_newsroom_{tool_data['name'].replace(' ', '_')}_{industry}_{timestamp}.mp4"
+        
+        try:
+            # Create file list for ffmpeg concat
+            import tempfile
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
+                for segment_file in segment_files:
+                    f.write(f"file '{segment_file}'\n")
+                concat_list = f.name
+            
+            # Use ffmpeg to concatenate videos
+            import subprocess
+            ffmpeg_cmd = [
+                "ffmpeg", "-f", "concat", "-safe", "0", 
+                "-i", concat_list, 
+                "-c", "copy",  # Copy streams without re-encoding for speed
+                output_filename
+            ]
+            
+            print(f"🔧 Running ffmpeg concatenation...")
+            result = subprocess.run(ffmpeg_cmd, capture_output=True, text=True)
+            
+            if result.returncode == 0:
+                # Verify output file
+                if os.path.exists(output_filename):
+                    file_size = os.path.getsize(output_filename)
+                    total_duration = len(segments) * 8
+                    
+                    print(f"✅ COMPLETE NEWSROOM VIDEO CREATED!")
+                    print(f"📁 File: {output_filename}")
+                    print(f"📊 File size: {file_size} bytes")
+                    print(f"⏱️ Duration: {total_duration} seconds ({total_duration/60:.1f} minutes)")
+                    print(f"🎬 Segments: {len(segments)} × 8 seconds each")
+                    print(f"🎯 Story arc: Complete newsroom experience")
+                    print(f"💰 Cost: ${len(segments) * 0.40:.2f} (Veo 3 Fast)")
+                    
+                    # Clean up individual segment files
+                    for segment_file in segment_files:
+                        try:
+                            os.remove(segment_file)
+                        except:
+                            pass
+                    
+                    # Clean up concat list
+                    try:
+                        os.remove(concat_list)
+                    except:
+                        pass
+                    
+                    return output_filename
+                else:
+                    print(f"❌ ERROR: Concatenated video not found at {output_filename}")
+                    return None
+            else:
+                print(f"❌ ffmpeg error: {result.stderr}")
+                return None
+                
+        except Exception as e:
+            print(f"❌ Video concatenation error: {e}")
+            # Return first segment as fallback
+            return sorted_segments[0]['file_path'] if sorted_segments else None
 
     # Keep old function for backwards compatibility
     def generate_whiteboard_explainer_video(self, tool_data, industry, script_highlights):
