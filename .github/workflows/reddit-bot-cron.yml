@@ -1,8 +1,9 @@
-name: JMichael Labs AI News Poster
+name: JMichael Labs AI News Poster [DISABLED]
 on:
-  schedule:
-    # Run once daily at 10 AM EDT (14:00 UTC) - Newark, NJ timezone
-    - cron: '0 14 * * *'
+  # DISABLED - Render removed, now using Multi-Platform System
+  # schedule:
+  #   # Run once daily at 10 AM EDT (14:00 UTC) - Newark, NJ timezone
+  #   - cron: '0 14 * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:

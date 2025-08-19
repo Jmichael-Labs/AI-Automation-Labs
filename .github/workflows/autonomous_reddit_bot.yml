@@ -1,12 +1,13 @@
-name: Autonomous Reddit AI Bot
+name: Autonomous Reddit AI Bot [DISABLED]
 on:
-  schedule:
-    # 9 AM EST (14:00 UTC)
-    - cron: '0 14 * * *'
-    # 3 PM EST (20:00 UTC) 
-    - cron: '0 20 * * *'
-    # 8 PM EST (01:00 UTC next day)
-    - cron: '0 1 * * *'
+  # DISABLED - Now using Multi-Platform System
+  # schedule:
+  #   # 9 AM EST (14:00 UTC)
+  #   - cron: '0 14 * * *'
+  #   # 3 PM EST (20:00 UTC) 
+  #   - cron: '0 20 * * *'
+  #   # 8 PM EST (01:00 UTC next day)
+  #   - cron: '0 1 * * *'
   workflow_dispatch: # Manual trigger for testing
 
 jobs:
@@ -41,7 +42,7 @@ jobs:
         echo "📊 Environment check:"
         echo "- REDDIT_CLIENT_ID: ${REDDIT_CLIENT_ID:0:10}..."
         echo "- REDDIT_USERNAME: $REDDIT_USERNAME"
-        echo "- TARGET_SUBREDDIT: AIAutomationLabs"
+        echo "- TARGET_SUBREDDIT: AIAutomationLabsBot"
         echo "🔄 Running bot with full error output..."
         python ai_news_poster.py 2>&1 || { echo "❌ Bot execution failed with exit code $?"; exit 1; }
         echo "✅ Bot execution completed successfully"
