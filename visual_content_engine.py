@@ -50,8 +50,9 @@ class VisualContentEngine:
                 self.image_model = None
             
             try:
-                # Veo 3 - Google's most advanced video generation
-                self.video_model = VideoModel("veo-3.0-generate-preview")  
+                # Import Veo 3 video generation model
+                from vertexai.preview.vision_models import VideoGenerationModel
+                self.video_model = VideoGenerationModel.from_pretrained("veo-3.0-generate-preview")
                 print("✅ Veo 3 video generation model loaded")
             except Exception as video_error:
                 print(f"⚠️ Veo 3 model not available: {video_error}")
@@ -343,7 +344,7 @@ Purpose: Educational content for AI tool tutorials
         
         psych = industry_psychology[industry]
         
-        # Define 8-second video segments (10 total = 80 seconds)
+        # Define 8-second video segments (15 total = 120 seconds = 2 minutes)
         video_segments = [
             {
                 "title": "Hook - Attention Grabber",
@@ -404,6 +405,37 @@ Purpose: Educational content for AI tool tutorials
                 "duration": 8,
                 "content": f"Hand writes: 'Join {industry} professionals using this!' with arrow pointing to action button",
                 "visual": "Bold text being written, action arrow, button being drawn and highlighted"
+            },
+            # Additional segments for 2-minute video (segments 11-15)
+            {
+                "title": "Implementation Step 1",
+                "duration": 8,
+                "content": f"Draw step 1: Setting up {tool_data['name']} - account creation and initial configuration",
+                "visual": "Computer screen, user account, setup checkboxes being marked"
+            },
+            {
+                "title": "Implementation Step 2", 
+                "duration": 8,
+                "content": f"Draw step 2: Connecting your existing {industry} tools and data sources",
+                "visual": "Connection lines, data flow arrows, integration icons"
+            },
+            {
+                "title": "Implementation Step 3",
+                "duration": 8,
+                "content": f"Draw step 3: Creating your first automation workflow with {tool_data['name']}",
+                "visual": "Workflow builder interface, drag and drop elements"
+            },
+            {
+                "title": "Results Preview",
+                "duration": 8,
+                "content": f"Show real results: Dashboard with metrics, happy user, success indicators",
+                "visual": "Dashboard screens, checkmarks, celebration elements"
+            },
+            {
+                "title": "Final CTA & Contact",
+                "duration": 8,
+                "content": f"Final message: 'Start your {industry} automation journey today!' with contact info",
+                "visual": "Contact details being written, website URL, final call to action"
             }
         ]
         
@@ -435,37 +467,32 @@ DRAWING SEQUENCE:
 """
 
         try:
-            print(f"🎨 Generating segment 1/10: {segment['title']}")
+            print(f"🎨 Generating REAL video segment 1/15: {segment['title']}")
             
-            # Generate with Veo 3 (corrected approach)
-            response = self.video_model.generate_content(
-                contents=[segment_prompt],
-                generation_config={
-                    "max_output_tokens": 512,
-                    "temperature": 0.6,
-                    "top_p": 0.9
-                }
+            # Generate ACTUAL VIDEO with Veo 3 (not text)
+            video_response = self.video_model.generate_video(
+                prompt=segment_prompt,
+                duration_seconds=8,  # Veo 3 maximum
+                aspect_ratio="16:9",
+                resolution="720p"
             )
             
-            if response and response.candidates:
+            if video_response and video_response.video_bytes:
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 
-                # Save segment script
-                script_filename = f"/tmp/whiteboard_segment_1_{industry}_{timestamp}.txt"
-                with open(script_filename, 'w') as f:
-                    f.write(f"Veo 3 Whiteboard Segment 1 for {tool_data['name']}:\n\n{response.text}")
-                
-                # Mock video filename (would be actual video in production)
+                # Save ACTUAL VIDEO file
                 video_filename = f"/tmp/whiteboard_segment_1_{industry}_{timestamp}.mp4"
+                with open(video_filename, 'wb') as video_file:
+                    video_file.write(video_response.video_bytes)
                 
-                print(f"✅ Segment 1 generated: {segment['title']}")
-                print(f"📝 Script saved: {script_filename}")
-                print(f"🎬 Video would be: {video_filename}")
-                print(f"📊 Total segments planned: {len(video_segments)} x 8 seconds = {len(video_segments) * 8} seconds")
+                print(f"✅ REAL VIDEO generated: {segment['title']}")
+                print(f"🎬 Video saved: {video_filename}")
+                print(f"📊 Total segments for 2-minute video: {len(video_segments)} x 8s = {len(video_segments) * 8}s")
+                print(f"⏰ Current: Segment 1/15 complete")
                 
                 return video_filename
             else:
-                print("⚠️ No whiteboard segment generated")
+                print("⚠️ No video bytes received from Veo 3")
                 return None
                 
         except Exception as e:
@@ -536,8 +563,8 @@ SIZE: Comprehensive enough to be the ONLY visual needed - contains all informati
             print("✅ Single comprehensive whiteboard image generated!")
         
         # RESTORE VIDEO GENERATION - Both whiteboard image AND video
-        # Generate whiteboard explainer video with Veo 3 (25% chance to avoid quota issues)
-        if random.random() < 0.25:  # Reduced to 25% to manage quota
+        # Generate whiteboard explainer video with Veo 3 (75% chance for testing)
+        if random.random() < 0.75:  # Increased to 75% to test video generation
             print("🎬 Generating whiteboard explainer video...")
             whiteboard_video_path = self.generate_whiteboard_explainer_video(tool_data, industry, script)
             if whiteboard_video_path:
