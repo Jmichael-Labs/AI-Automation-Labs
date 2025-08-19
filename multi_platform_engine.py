@@ -296,6 +296,16 @@ class MultiPlatformEngine:
             user_response = requests.get(user_test_url, params={"access_token": api_key}, timeout=10)
             print(f"🔍 User API test: {user_response.status_code} - {user_response.text[:100]}")
             
+            # List all products to see available IDs
+            products_list_url = "https://api.gumroad.com/v2/products"
+            products_response = requests.get(products_list_url, params={"access_token": api_key}, timeout=10)
+            print(f"🔍 Products list: {products_response.status_code} - {products_response.text[:200]}")
+            
+            # Test if specific product exists with GET
+            get_product_url = f"https://api.gumroad.com/v2/products/{product_id}"
+            get_response = requests.get(get_product_url, params={"access_token": api_key}, timeout=10)
+            print(f"🔍 Get product test: {get_response.status_code} - {get_response.text[:100]}")
+            
             # Format content for product description update
             formatted_description = f"""
 🚀 LATEST UPDATE - {datetime.now().strftime('%B %d, %Y')}
