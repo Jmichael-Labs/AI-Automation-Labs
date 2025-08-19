@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Multi-Platform AI Education Engine
-Distributes specialized AI education content across 3 platforms × 4 industries (12 channels)
+Distributes specialized AI education content across 2 platforms × 4 industries (8 channels)
 """
 
 import os
@@ -22,8 +22,7 @@ class MultiPlatformEngine:
                 "keywords": ["law", "legal", "attorney", "lawyer", "court", "litigation", "contract", "compliance"],
                 "platforms": {
                     "telegram": {"channel": "@LegalAIAcademy", "token": os.getenv('TELEGRAM_LEGAL_TOKEN')},
-                    "kofi": {"profile": "legalaiacademy", "api_key": os.getenv('KOFI_LEGAL_API')},
-                    "gumroad": {"product_id": os.getenv('GUMROAD_LEGAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
+                    "kofi": {"profile": "legalaiacademy", "api_key": os.getenv('KOFI_LEGAL_API')}
                 }
             },
             "medical": {
@@ -31,7 +30,6 @@ class MultiPlatformEngine:
                 "platforms": {
                     "telegram": {"channel": "@HealthAIInsights", "token": os.getenv('TELEGRAM_MEDICAL_TOKEN')},
                     "kofi": {"profile": "healthaiinsights", "api_key": os.getenv('KOFI_MEDICAL_API')},
-                    "gumroad": {"product_id": os.getenv('GUMROAD_MEDICAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
             },
             "senior": {
@@ -39,7 +37,6 @@ class MultiPlatformEngine:
                 "platforms": {
                     "telegram": {"channel": "@SeniorTechGuide", "token": os.getenv('TELEGRAM_SENIOR_TOKEN')},
                     "kofi": {"profile": "seniortechguide", "api_key": os.getenv('KOFI_SENIOR_API')},
-                    "gumroad": {"product_id": os.getenv('GUMROAD_SENIOR_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
             },
             "general": {
@@ -47,7 +44,6 @@ class MultiPlatformEngine:
                 "platforms": {
                     "telegram": {"channel": "@AIEducationHub_bot", "token": os.getenv('TELEGRAM_GENERAL_TOKEN')},
                     "kofi": {"profile": "aieducationhub", "api_key": os.getenv('KOFI_GENERAL_API')},
-                    "gumroad": {"product_id": os.getenv('GUMROAD_GENERAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
             }
         }
@@ -64,8 +60,8 @@ class MultiPlatformEngine:
         
         print("🚀 Multi-Platform AI Education Engine initialized")
         print(f"📊 Industries: {len(self.industries)}")
-        print(f"🔧 Platforms per industry: 3")
-        print(f"📡 Total channels: {len(self.industries) * 3}")
+        print(f"🔧 Platforms per industry: 2")
+        print(f"📡 Total channels: {len(self.industries) * 2}  # Telegram + Ko-fi")
 
     def classify_content_industry(self, content):
         """
@@ -275,7 +271,8 @@ class MultiPlatformEngine:
             return False
 
 
-    def publish_to_gumroad(self, industry, content):
+    # DISABLED: Gumroad API doesn't support product updates
+    # def publish_to_gumroad(self, industry, content):
         """Update industry-specific Gumroad product with new content"""
         print(f"🚀 GUMROAD FUNCTION CALLED for industry: {industry}")
         try:
@@ -401,16 +398,13 @@ class MultiPlatformEngine:
         
         # Publish to all platforms for the primary industry
         results = {}
-        for platform in ["telegram", "kofi", "gumroad"]:
+        for platform in ["telegram", "kofi"]:
             adapted_content = self.adapt_content_for_industry(base_content, primary_industry, platform)
             
             if platform == "telegram":
                 success = self.publish_to_telegram(primary_industry, adapted_content)
             elif platform == "kofi":
                 success = self.publish_to_kofi(primary_industry, adapted_content)
-            elif platform == "gumroad":
-                print(f"🔍 About to call Gumroad for industry: {primary_industry}")
-                success = self.publish_to_gumroad(primary_industry, adapted_content)
             
             results[f"{primary_industry}_{platform}"] = success
             
