@@ -303,6 +303,7 @@ class MultiPlatformEngine:
 💡 Perfect for {industry} professionals looking to leverage AI effectively.
             """.strip()
             
+            # Use form-data with access_token (Gumroad API v2 standard)
             payload = {
                 "access_token": api_key,
                 "description": formatted_description[:1000],  # Gumroad description limit
@@ -310,11 +311,16 @@ class MultiPlatformEngine:
             }
             
             headers = {
-                "Content-Type": "application/x-www-form-urlencoded",
                 "User-Agent": "MultiPlatform-AI-Education/1.0"
             }
             
+            # Try PUT first, then POST if 404/405
             response = requests.put(update_url, data=payload, headers=headers, timeout=30)
+            
+            # If PUT fails with method not allowed, try POST
+            if response.status_code in [404, 405]:
+                print(f"🔄 PUT failed for {industry}, trying POST...")
+                response = requests.post(update_url, data=payload, headers=headers, timeout=30)
             
             if response.status_code in [200, 201]:
                 product_data = response.json()
