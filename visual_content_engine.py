@@ -433,75 +433,60 @@ ENGAGEMENT: Use visual storytelling, progressive disclosure, and emotional journ
             }
         }
         
-        # Generate images with proper error handling
-        image_attempts = []
+        # Generate SINGLE whiteboard-style image that represents everything
+        whiteboard_image_prompt = f"""
+Create a single comprehensive whiteboard-style educational diagram about {tool_data['name']} for {industry} professionals.
+
+WHITEBOARD STYLE:
+- Clean white background like a real whiteboard
+- Hand-drawn black sketches and diagrams
+- Simple stick figures and basic shapes
+- Handwritten-style text labels
+- Connecting arrows drawn by hand
+- Mathematical equations and formulas if relevant
+- Informal, sketch-like appearance
+
+CONTENT TO INCLUDE IN ONE IMAGE:
+1. PROBLEM SECTION (top-left): Stick figure looking frustrated at desk with papers scattered
+2. SOLUTION SECTION (center): {tool_data['name']} drawn as simple interface box with arrows
+3. WORKFLOW SECTION (middle): Step-by-step process: Input → {tool_data['name']} → Output → Results
+4. BENEFITS SECTION (right): Hand-drawn charts showing:
+   - Time saved: Clock with arrow
+   - Money saved: Dollar signs
+   - Efficiency: Upward trending graph
+5. STATISTICS (bottom): Simple bar chart showing "{tool_data.get('income_potential', '$2,500/month')}" ROI
+6. CALL-TO-ACTION (bottom-right): "Join {industry} professionals using this!" in handwritten style
+
+VISUAL ELEMENTS:
+- Hand-drawn arrows connecting all sections
+- Simple icons (lightbulb for ideas, gear for process, etc.)
+- Sketch-style borders around sections
+- Handwritten labels and titles
+- Mathematical formulas or process equations where relevant
+- Simple flowchart elements
+
+INDUSTRY CONTEXT: Adapt terminology and icons specifically for {industry} sector
+TONE: Educational, approachable, like a teacher explaining on a real whiteboard
+SIZE: Comprehensive enough to be the ONLY visual needed - contains all information
+"""
         
-        # Generate thumbnail
-        thumbnail_prompt = f"""
-YouTube thumbnail for '{tool_data['name']} Tutorial for {industry} Professionals'
-Show: Tool interface, successful professional, dramatic before/after results
-Text overlay: '{tool_data['name']} REVEALED', 'GAME CHANGER', '${tool_data.get('income_potential', '2500')}/month'
-Style: High contrast, bold colors, attention-grabbing
-"""
-        thumbnail_path = self.generate_educational_image(thumbnail_prompt, "thumbnail")
-        if thumbnail_path:
-            visual_package["images"]["thumbnail"] = thumbnail_path
-            image_attempts.append("thumbnail")
-
-        # Generate workflow diagram
-        workflow_prompt = f"""
-Step-by-step workflow diagram showing how {tool_data['name']} automates {industry} processes
-Show: Input data → {tool_data['name']} processing → Automated output → Results
-Include: Icons, arrows, clear labels, professional design
-Style: Modern infographic, easy to follow, educational
-"""
-        workflow_path = self.generate_educational_image(workflow_prompt, "workflow_visualizations")
-        if workflow_path:
-            visual_package["images"]["workflow"] = workflow_path
-            image_attempts.append("workflow")
-
-        # Generate feature breakdown
-        features_prompt = f"""
-Feature breakdown infographic for {tool_data['name']}
-Show: Key features, benefits, pricing, comparison with alternatives
-Layout: Grid format, icons for each feature, clear hierarchy
-Text: Feature names, brief descriptions, value propositions
-Style: Clean, professional, educational design
-"""
-        features_path = self.generate_educational_image(features_prompt, "educational_diagrams")
-        if features_path:
-            visual_package["images"]["features"] = features_path
-            image_attempts.append("features")
-
-        # Generate success metrics
-        metrics_prompt = f"""
-Success metrics and ROI visualization for {tool_data['name']} in {industry}
-Show: Time saved, revenue increase, efficiency gains, user satisfaction
-Charts: Bar graphs, pie charts, trend lines showing improvement
-Data: {tool_data.get('income_potential', '$2,500/month')}, 70% time savings, 95% user satisfaction
-Style: Professional dashboard, clear data visualization
-"""
-        metrics_path = self.generate_educational_image(metrics_prompt, "educational_diagrams")
-        if metrics_path:
-            visual_package["images"]["metrics"] = metrics_path
-            image_attempts.append("metrics")
+        whiteboard_path = self.generate_educational_image(whiteboard_image_prompt, "educational_diagrams")
+        if whiteboard_path:
+            visual_package["images"]["whiteboard_complete"] = whiteboard_path
+            print("✅ Single comprehensive whiteboard image generated!")
         
-        # Generate whiteboard explainer video with Veo 3 (50% chance - higher for whiteboard)
-        if random.random() < 0.5:  # 50% chance for whiteboard video
-            whiteboard_video_path = self.generate_whiteboard_explainer_video(tool_data, industry, script)
-            if whiteboard_video_path:
-                visual_package["whiteboard_video"] = whiteboard_video_path
-                print("🎨 Whiteboard explainer video successful!")
+        # NO VIDEO GENERATION - Only single whiteboard image
+        print("🚫 Video generation disabled - Focus on single comprehensive whiteboard image")
         
         # Log generation results
         total_images = len(visual_package["images"])
-        has_whiteboard_video = "whiteboard_video" in visual_package
-        print(f"🎨 Visual package complete: {total_images}/4 images + {'🎨✅' if has_whiteboard_video else '❌'} whiteboard explainer")
+        has_whiteboard_image = "whiteboard_complete" in visual_package["images"]
+        print(f"🎨 Visual package complete: {total_images} images - {'✅ Comprehensive whiteboard' if has_whiteboard_image else '❌ No whiteboard'}")
         
-        if total_images == 0 and not has_whiteboard_video:
+        if total_images == 0:
             print("📝 Content will proceed as text-only due to generation issues")
-        elif total_images < 4:
-            print(f"⚠️ Partial generation: {image_attempts} + {'whiteboard explainer' if has_whiteboard_video else 'no video'}")
+        elif has_whiteboard_image:
+            print("✅ Perfect! Single comprehensive whiteboard image contains all information")
 
         return visual_package
 

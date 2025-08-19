@@ -232,40 +232,21 @@ class MultiPlatformEngine:
                 
                 print(f"📊 Images sent: {image_success}/{len(images)}")
             
-            # Send whiteboard explainer video if available  
-            if visual_package and 'whiteboard_video' in visual_package:
-                video_path = visual_package['whiteboard_video']
-                if video_path and os.path.exists(video_path):
-                    try:
-                        print(f"🎨 Sending whiteboard explainer video to {channel}")
-                        video_url = f"https://api.telegram.org/bot{token}/sendVideo"
-                        
-                        with open(video_path, 'rb') as video_file:
-                            files = {'video': video_file}
-                            video_data = {
-                                'chat_id': channel,
-                                'caption': f"🎨 Whiteboard Explainer: {industry} AI automation with psychological persuasion techniques",
-                                'supports_streaming': True
-                            }
-                            
-                            video_response = requests.post(video_url, data=video_data, files=files, timeout=90)
-                            if video_response.status_code == 200:
-                                print(f"✅ Whiteboard explainer sent successfully!")
-                            else:
-                                print(f"⚠️ Whiteboard video upload failed: {video_response.status_code}")
-                    except Exception as video_error:
-                        print(f"⚠️ Error sending whiteboard video: {video_error}")
-                else:
-                    # Send text description if video file doesn't exist yet
+            # Send additional whiteboard explanation if comprehensive whiteboard image exists
+            if images and 'whiteboard_complete' in images:
+                try:
                     text_url = f"https://api.telegram.org/bot{token}/sendMessage"
-                    description = f"🎨 **Whiteboard Explainer Video Generated!**\n\n📖 Content: Professional whiteboard animation for {industry} AI automation\n🎯 Features: Psychological persuasion + Visual storytelling\n⏱️ Duration: 60-90 seconds\n💡 Style: Hand-drawn animations with step-by-step process\n\n*Video processing via Veo 3 - Google's most advanced video AI*"
+                    whiteboard_explanation = f"🎨 **Comprehensive Whiteboard Explanation**\n\n📚 This single image contains:\n• Problem identification\n• Step-by-step solution workflow\n• Benefits and ROI visualization\n• Industry-specific implementation\n• Success metrics and statistics\n\n💡 Everything you need to understand {industry} AI automation in one visual!"
                     
-                    desc_payload = {
+                    explanation_payload = {
                         "chat_id": channel,
-                        "text": description,
+                        "text": whiteboard_explanation,
                         "parse_mode": "Markdown"
                     }
-                    requests.post(text_url, json=desc_payload)
+                    requests.post(text_url, json=explanation_payload)
+                    print("✅ Whiteboard explanation sent")
+                except Exception as explanation_error:
+                    print(f"⚠️ Error sending whiteboard explanation: {explanation_error}")
             
             print(f"✅ Published {industry} content to main channel: {channel}")
             return True
