@@ -232,11 +232,50 @@ class MultiPlatformEngine:
                 
                 print(f"📊 Images sent: {image_success}/{len(images)}")
             
+            # Send whiteboard explainer video if available  
+            if visual_package and 'whiteboard_video' in visual_package:
+                video_path = visual_package['whiteboard_video']
+                if video_path and os.path.exists(video_path):
+                    try:
+                        print(f"🎬 Sending whiteboard explainer video to {channel}")
+                        video_url = f"https://api.telegram.org/bot{token}/sendVideo"
+                        
+                        with open(video_path, 'rb') as video_file:
+                            files = {'video': video_file}
+                            video_data = {
+                                'chat_id': channel,
+                                'caption': f"🎨 Whiteboard Explainer Video: {industry} AI automation with psychological persuasion",
+                                'supports_streaming': True
+                            }
+                            
+                            video_response = requests.post(video_url, data=video_data, files=files, timeout=90)
+                            if video_response.status_code == 200:
+                                print(f"✅ Whiteboard explainer video sent successfully!")
+                            else:
+                                print(f"⚠️ Whiteboard video upload failed: {video_response.status_code}")
+                    except Exception as video_error:
+                        print(f"⚠️ Error sending whiteboard video: {video_error}")
+                else:
+                    # Send preview message if video was generated but file not ready
+                    try:
+                        text_url = f"https://api.telegram.org/bot{token}/sendMessage"
+                        video_preview = f"🎥 **Whiteboard Explainer Video Generated!**\n\n🎨 Content: Hand-drawn whiteboard animation for {industry} professionals\n📖 Features: Psychological persuasion + Visual storytelling\n⏱️ Duration: 60-90 seconds\n💡 Style: Real whiteboard drawing with step-by-step explanation\n\n*Powered by Google Veo 3 - Most advanced video AI*"
+                        
+                        preview_payload = {
+                            "chat_id": channel,
+                            "text": video_preview,
+                            "parse_mode": "Markdown"
+                        }
+                        requests.post(text_url, json=preview_payload)
+                        print("✅ Video preview message sent")
+                    except Exception as preview_error:
+                        print(f"⚠️ Error sending video preview: {preview_error}")
+            
             # Send additional whiteboard explanation if comprehensive whiteboard image exists
             if images and 'whiteboard_complete' in images:
                 try:
                     text_url = f"https://api.telegram.org/bot{token}/sendMessage"
-                    whiteboard_explanation = f"🎨 **Comprehensive Whiteboard Explanation**\n\n📚 This single image contains:\n• Problem identification\n• Step-by-step solution workflow\n• Benefits and ROI visualization\n• Industry-specific implementation\n• Success metrics and statistics\n\n💡 Everything you need to understand {industry} AI automation in one visual!"
+                    whiteboard_explanation = f"🎨 **Comprehensive Whiteboard Image**\n\n📚 This visual contains everything:\n• Problem identification & frustration\n• Step-by-step solution workflow  \n• Benefits visualization & ROI charts\n• Industry-specific implementation\n• Success metrics & statistics\n\n💡 Hand-drawn style makes complex AI concepts simple to understand!"
                     
                     explanation_payload = {
                         "chat_id": channel,

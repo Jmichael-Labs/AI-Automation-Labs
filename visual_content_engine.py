@@ -475,18 +475,34 @@ SIZE: Comprehensive enough to be the ONLY visual needed - contains all informati
             visual_package["images"]["whiteboard_complete"] = whiteboard_path
             print("✅ Single comprehensive whiteboard image generated!")
         
-        # NO VIDEO GENERATION - Only single whiteboard image
-        print("🚫 Video generation disabled - Focus on single comprehensive whiteboard image")
+        # RESTORE VIDEO GENERATION - Both whiteboard image AND video
+        # Generate whiteboard explainer video with Veo 3 (25% chance to avoid quota issues)
+        if random.random() < 0.25:  # Reduced to 25% to manage quota
+            print("🎬 Generating whiteboard explainer video...")
+            whiteboard_video_path = self.generate_whiteboard_explainer_video(tool_data, industry, script)
+            if whiteboard_video_path:
+                visual_package["whiteboard_video"] = whiteboard_video_path
+                print("🎥 Whiteboard explainer video successful!")
+            else:
+                print("⚠️ Video generation failed - quota or API issue")
+        else:
+            print("🎲 Video generation skipped this time (quota management)")
         
-        # Log generation results
+        # Log generation results  
         total_images = len(visual_package["images"])
         has_whiteboard_image = "whiteboard_complete" in visual_package["images"]
-        print(f"🎨 Visual package complete: {total_images} images - {'✅ Comprehensive whiteboard' if has_whiteboard_image else '❌ No whiteboard'}")
+        has_whiteboard_video = "whiteboard_video" in visual_package
         
-        if total_images == 0:
+        print(f"🎨 Visual package complete: {total_images} images + {'🎥✅' if has_whiteboard_video else '❌'} whiteboard video")
+        
+        if total_images == 0 and not has_whiteboard_video:
             print("📝 Content will proceed as text-only due to generation issues")
+        elif has_whiteboard_image and has_whiteboard_video:
+            print("🎉 PERFECT! Both whiteboard image AND video generated!")
         elif has_whiteboard_image:
-            print("✅ Perfect! Single comprehensive whiteboard image contains all information")
+            print("✅ Whiteboard image ready - video will try next time")
+        elif has_whiteboard_video:
+            print("🎥 Whiteboard video ready - image generation had issues")
 
         return visual_package
 
