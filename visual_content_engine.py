@@ -726,12 +726,13 @@ SIZE: Comprehensive enough to be the ONLY visual needed - contains all informati
                 income=tool_data.get('income_potential', '$2,500')
             )
         
-        # Complete package
+        # Complete package - INCLUDE VIDEO!
         complete_package = {
             "title": title,
             "theme": theme_type,
             "script": script,
             "visuals": visual_package["images"],
+            "whiteboard_video": visual_package.get("whiteboard_video"),  # ← ADD VIDEO HERE!
             "metadata": visual_package["metadata"],
             "publishing_ready": True,
             "estimated_duration": "6-8 minutes",
@@ -739,6 +740,9 @@ SIZE: Comprehensive enough to be the ONLY visual needed - contains all informati
         }
         
         print(f"✅ Complete educational package created: {title}")
+        print(f"🔍 DEBUG: Package includes video: {'whiteboard_video' in complete_package and complete_package['whiteboard_video'] is not None}")
+        if complete_package.get('whiteboard_video'):
+            print(f"🔍 DEBUG: Video path in package: {complete_package['whiteboard_video']}")
         return complete_package
 
 # Test function
