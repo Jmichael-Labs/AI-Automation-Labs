@@ -71,6 +71,7 @@ jobs:
         # === GOOGLE CLOUD ===
         GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp-key.json
         GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         
         # === CONTACT ===
         EMAIL_CONTACT: ${{ secrets.EMAIL_CONTACT }}

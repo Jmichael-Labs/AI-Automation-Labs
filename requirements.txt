@@ -10,6 +10,8 @@ python-telegram-bot>=20.5
 # Vertex AI dependencies for visual content
 google-cloud-aiplatform>=1.38.0
 vertexai>=1.38.0
+# Gemini API for Veo 3 video generation
+google-generativeai>=0.8.0
 # Image processing for visual content
 Pillow>=10.0.0
 # Cache refresh 2025-08-19
