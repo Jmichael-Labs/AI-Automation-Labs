@@ -1,0 +1,81 @@
+name: AI Education V2 - Fresh Workflow
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # 9 AM EST
+    - cron: '0 20 * * *'  # 3 PM EST  
+    - cron: '0 1 * * *'   # 8 PM EST
+  workflow_dispatch:
+
+jobs:
+  fresh-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    steps:
+    - name: Fresh checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies (no cache)
+      run: |
+        python -m pip install --upgrade pip
+        pip install --no-cache-dir -r requirements.txt
+        
+    - name: Configure Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+      run: |
+        echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/gcp-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json
+        echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json" >> $GITHUB_ENV
+        
+    - name: AI Education System V2
+      env:
+        # === TELEGRAM TOKENS ===
+        TELEGRAM_LEGAL_TOKEN: ${{ secrets.TELEGRAM_LEGAL_TOKEN }}
+        TELEGRAM_MEDICAL_TOKEN: ${{ secrets.TELEGRAM_MEDICAL_TOKEN }}
+        TELEGRAM_SENIOR_TOKEN: ${{ secrets.TELEGRAM_SENIOR_TOKEN }}
+        TELEGRAM_GENERAL_TOKEN: ${{ secrets.TELEGRAM_GENERAL_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        
+        # === GUMROAD ===
+        GUMROAD_API_KEY: ${{ secrets.GUMROAD_API_KEY }}
+        GUMROAD_LEGAL_ID: ${{ secrets.GUMROAD_LEGAL_ID }}
+        GUMROAD_MEDICAL_ID: ${{ secrets.GUMROAD_MEDICAL_ID }}
+        GUMROAD_SENIOR_ID: ${{ secrets.GUMROAD_SENIOR_ID }}
+        GUMROAD_GENERAL_ID: ${{ secrets.GUMROAD_GENERAL_ID }}
+        
+        # === KO-FI ===
+        KOFI_LEGAL_API: ${{ secrets.KOFI_LEGAL_API }}
+        KOFI_MEDICAL_API: ${{ secrets.KOFI_MEDICAL_API }}
+        KOFI_SENIOR_API: ${{ secrets.KOFI_SENIOR_API }}
+        KOFI_GENERAL_API: ${{ secrets.KOFI_GENERAL_API }}
+        
+        # === GOOGLE CLOUD ===
+        GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp-key.json
+        GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+        
+        # === CONTACT ===
+        EMAIL_CONTACT: ${{ secrets.EMAIL_CONTACT }}
+        INSTAGRAM_CONSULTING: ${{ secrets.INSTAGRAM_CONSULTING }}
+        
+      run: |
+        echo "🚀 AI Education V2 - Fresh Start"
+        echo "📅 Time: $(date)"
+        echo "📊 Current commit: $(git rev-parse HEAD)"
+        
+        # Force fresh execution
+        python multi_platform_engine.py
+        
+    - name: Cleanup
+      if: always()
+      run: |
+        rm -f /tmp/gcp-key.json
+        echo "🧹 V2 cleanup done"
