@@ -521,13 +521,13 @@ DRAWING SEQUENCE:
                 print(f"⏱️ Waiting for video generation... ({waited_time}s/{max_wait_time}s)")
                 time.sleep(poll_interval)
                 waited_time += poll_interval
-                operation = self.veo3_client.operations.get(operation.name)
+                operation = self.veo3_client.operations.get(operation)
             
-            if operation.done and hasattr(operation, 'response'):
+            if operation.done and hasattr(operation, 'result'):
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 
                 # Get the generated video
-                generated_video = operation.response.generated_videos[0]
+                generated_video = operation.result.generated_videos[0]
                 
                 # Download and save the REAL video file
                 video_filename = f"/tmp/whiteboard_segment_1_{industry}_{timestamp}.mp4"
