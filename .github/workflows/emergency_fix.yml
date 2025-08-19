@@ -35,26 +35,52 @@ jobs:
       with:
         python-version: '3.11'
         
-    - name: 📦 Install Dependencies (Fast)
+    - name: 🎬 Install Video Processing Tools
       run: |
-        echo "📦 Fast install with minimal dependencies..."
+        echo "🎬 Installing ffmpeg for video concatenation..."
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+        ffmpeg -version
+        echo "✅ ffmpeg installed successfully"
+        
+    - name: 📦 Install Dependencies (Complete)
+      run: |
+        echo "📦 Installing complete dependencies for Vertex AI + Video..."
         python -m pip install --upgrade pip
-        # Core dependencies only
+        
+        # Core dependencies
         pip install Flask==3.0.0 requests==2.32.4 python-telegram-bot==22.3
         pip install praw==7.8.1 beautifulsoup4==4.12.2
-        # Google AI for video generation
+        
+        # Google AI for video generation (COMPLETE VERTEX AI SUITE)
         pip install google-genai==1.29.0 google-generativeai==0.8.5
+        pip install google-cloud-aiplatform google-cloud-storage
+        pip install vertexai
+        
         # Image processing
         pip install Pillow==11.3.0
-        echo "✅ Fast install complete (essential packages only)"
+        
+        echo "✅ Complete install with Vertex AI support"
         
     - name: ☁️ Configure Google Cloud
       env:
         GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
       run: |
+        echo "🔧 Setting up Google Cloud credentials for youtube-pro-469213..."
         echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/gcp-key.json
         export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json
         echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json" >> $GITHUB_ENV
+        
+        # Install gcloud CLI for authentication
+        echo "📦 Installing gcloud CLI..."
+        curl https://sdk.cloud.google.com | bash
+        source ~/google-cloud-sdk/path.bash.inc
+        
+        # Authenticate using service account
+        gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
+        gcloud config set project youtube-pro-469213
+        
+        echo "✅ Google Cloud configured for project: youtube-pro-469213"
         
     - name: 🎯 EMERGENCY AI EDUCATION SYSTEM
       env:
@@ -76,7 +102,7 @@ jobs:
         
         # === GOOGLE CLOUD ===
         GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp-key.json
-        GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+        GOOGLE_PROJECT_ID: youtube-pro-469213
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         
         # === CONTACT ===
