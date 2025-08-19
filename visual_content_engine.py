@@ -333,6 +333,10 @@ Text: Clear, readable fonts with proper hierarchy
 Purpose: Educational content for AI tool tutorials
 """
 
+        # TEMPORARILY DISABLED - Image generation causing issues
+        print(f"🚫 Image generation disabled - focusing on video only")
+        return None
+        
         try:
             print(f"🎨 Attempting Imagen 3.0 generation for {visual_type}: {prompt[:50]}...")
             
@@ -603,8 +607,8 @@ End with smooth transition setup for next segment.
             try:
                 print(f"🎬 Using Veo 3 API for REAL newsroom video generation...")
                 
-                # Import clean Veo 3 generator
-                from veo3_generator_clean import generate_single_video_segment
+                # Import clean Veo 3 generator with retry logic
+                from veo3_generator_clean_v2 import generate_single_video_segment
                 
                 # Generate video using clean function
                 result = generate_single_video_segment(segment_prompt, i, industry)
@@ -757,7 +761,7 @@ End with smooth transition setup for next segment.
                     print(f"⚠️ Concatenation failed, returning first segment")
                     return generated_segments[0]['file_path']
             else:
-                print(f"⚠️ Only {len(generated_segments)} segment available, expected 12")
+                print(f"⚠️ Only {len(generated_segments)} segment available, expected 3")
                 print(f"📹 Returning single segment: {generated_segments[0]['file_path']}")
                 return generated_segments[0]['file_path']
         else:
@@ -765,16 +769,28 @@ End with smooth transition setup for next segment.
             return None
     
     def concatenate_video_segments(self, segments, tool_data, industry):
-        """Concatenate 12 video segments into one complete 96-second newsroom video"""
+        """Concatenate video segments into one complete newsroom video"""
         
         print(f"🎬 CONCATENATING {len(segments)} segments into complete newsroom video...")
         
         # Sort segments by number to ensure correct order
         sorted_segments = sorted(segments, key=lambda x: x['segment_number'])
         
-        # Create ffmpeg input list
-        segment_files = [seg['file_path'] for seg in sorted_segments]
-        
+        # Verify all segment files exist before concatenation
+        segment_files = []
+        for seg in sorted_segments:
+            file_path = seg['file_path']
+            if os.path.exists(file_path):
+                file_size = os.path.getsize(file_path)
+                print(f"✅ Segment {seg['segment_number']}: {file_path} ({file_size} bytes)")
+                segment_files.append(file_path)
+            else:
+                print(f"❌ Missing segment {seg['segment_number']}: {file_path}")
+                
+        if len(segment_files) == 0:
+            print("❌ No valid segment files found for concatenation")
+            return None
+            
         # Generate output filename
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_filename = f"/tmp/complete_newsroom_{tool_data['name'].replace(' ', '_')}_{industry}_{timestamp}.mp4"
@@ -786,6 +802,8 @@ End with smooth transition setup for next segment.
                 for segment_file in segment_files:
                     f.write(f"file '{segment_file}'\n")
                 concat_list = f.name
+            
+            print(f"🔧 Concatenating {len(segment_files)} verified segments...")
             
             # Use ffmpeg to concatenate videos
             import subprocess
