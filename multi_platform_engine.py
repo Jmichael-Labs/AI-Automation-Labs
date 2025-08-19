@@ -371,9 +371,12 @@ class MultiPlatformEngine:
         
         print(f"🎯 Selected tool for visual content: {tool_data['name']}")
         
-        # Generate visual content for each industry
+        # Generate visual content for one random industry to avoid quota issues
         results = {}
-        for industry in self.industries.keys():
+        selected_industry = random.choice(list(self.industries.keys()))
+        print(f"🎯 Generating visual content for selected industry: {selected_industry}")
+        
+        for industry in [selected_industry]:  # Only process one industry
             try:
                 print(f"\n🎨 Generating visual content for {industry} industry...")
                 
@@ -383,8 +386,17 @@ class MultiPlatformEngine:
                 )
                 
                 if visual_package:
-                    # Adapt for Telegram with visual elements
-                    telegram_content = self.create_telegram_visual_post(visual_package, industry)
+                    # Adapt for Telegram with visual elements  
+                    try:
+                        telegram_content = self.create_telegram_visual_post(visual_package, industry)
+                    except Exception as e:
+                        print(f"⚠️ Visual post creation error: {e}")
+                        # Use basic adaptation as fallback
+                        telegram_content = self.adapt_content_for_industry(
+                            f"Visual content: {visual_package.get('title', 'AI Education Content')}", 
+                            industry, 
+                            "telegram"
+                        )
                     
                     # Publish to main demo channel
                     success = self.publish_to_main_channel(industry, telegram_content)
@@ -435,8 +447,17 @@ Platform: Single Telegram Channel + Vertex AI Visual Engine"""
     def create_telegram_visual_post(self, visual_package, industry):
         """Create Telegram post with visual content references"""
         
-        adaptation = self.industries[industry]
-        telegram_config = adaptation["telegram"]
+        # Get industry info and create telegram config
+        industry_info = self.industries[industry]
+        
+        # Create telegram config from adaptation function
+        adapted_content = self.adapt_content_for_industry("", industry, "telegram")
+        
+        # Extract telegram config from industry adaptations
+        telegram_config = {
+            "prefix": industry_info["label"],
+            "cta": f"Join our {industry_info['description']} community for visual tutorials and case studies"
+        }
         
         # Create visual-enhanced content
         content = f"""{telegram_config['prefix']}
@@ -503,8 +524,8 @@ Platform: Single Telegram Channel + Vertex AI Visual Engine"""
         """
         print(f"\n🌅 Starting advanced publishing cycle: {datetime.now()}")
         
-        # 70% chance for visual content, 30% for text content
-        use_visual = random.random() < 0.7
+        # Force visual content for better engagement (90% visual, 10% text)
+        use_visual = random.random() < 0.9
         
         if use_visual:
             print("🎨 Running visual content generation...")
