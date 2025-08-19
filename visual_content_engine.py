@@ -12,7 +12,7 @@ from datetime import datetime
 from google.cloud import aiplatform
 from google.cloud.aiplatform.gapic.schema import predict
 import vertexai
-from vertexai.preview.vision_models import ImageGenerationModel
+from vertexai.preview.vision_models import ImageGenerationModel, VideoGenerationModel
 from vertexai.preview.generative_models import GenerativeModel
 import random
 
@@ -44,6 +44,13 @@ class VisualContentEngine:
                 self.image_model = ImageGenerationModel.from_pretrained("imagegeneration@006")
             except:
                 self.image_model = None
+            
+            try:
+                self.video_model = VideoGenerationModel.from_pretrained("videoGeneration@001")
+                print("✅ Video generation model loaded")
+            except Exception as video_error:
+                print(f"⚠️ Video model not available: {video_error}")
+                self.video_model = None
             self.vertex_ai_available = True
             print("✅ Vertex AI models initialized successfully")
             
@@ -294,6 +301,71 @@ Purpose: Educational content for AI tool tutorials
                 print("🔍 Imagen 3.0 model not accessible - check project permissions")
             return None
 
+    def generate_educational_video(self, prompt, tool_data, industry):
+        """Generate educational videos using Vertex AI Video Generation"""
+        
+        if not self.vertex_ai_available or not self.video_model:
+            print(f"🔄 Skipping video generation (Video model not available)")
+            return None
+        
+        # Enhanced video prompt
+        video_prompt = f"""
+Create a professional educational video about {tool_data['name']} for {industry} professionals.
+
+Content: {prompt}
+
+Visual Style:
+- Professional, educational presentation style
+- Clean, modern interface demonstrations
+- Step-by-step workflow animations
+- Business/professional environment
+- Clear, readable text overlays
+- Smooth transitions and movements
+
+Duration: 30-60 seconds
+Quality: High-definition, professional
+Tone: Educational, engaging, business-focused
+Purpose: AI tool demonstration for {industry} sector
+
+Key elements to show:
+- {tool_data['name']} interface in action
+- Workflow automation process
+- Results and benefits visualization
+- Professional user interactions
+"""
+
+        try:
+            print(f"🎬 Attempting video generation for {tool_data['name']} in {industry}...")
+            
+            # Generate video
+            video_response = self.video_model.generate_video(
+                prompt=video_prompt,
+                duration_seconds=30,
+                aspect_ratio="16:9"
+            )
+            
+            if video_response:
+                # Save video locally
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"/tmp/ai_education_video_{timestamp}.mp4"
+                
+                with open(filename, 'wb') as video_file:
+                    video_file.write(video_response.video_bytes)
+                
+                print(f"✅ Video saved: {filename}")
+                return filename
+            else:
+                print("⚠️ No video generated")
+                return None
+                
+        except Exception as e:
+            print(f"⚠️ Video generation error: {e}")
+            if "quota" in str(e).lower() or "429" in str(e):
+                print("📊 Video generation quota exceeded")
+            elif "404" in str(e):
+                print("🔍 Video model not accessible")
+            return None
+
     def create_visual_content_package(self, script, tool_data, industry):
         """Create complete visual package for educational content"""
         
@@ -363,13 +435,26 @@ Style: Professional dashboard, clear data visualization
             visual_package["images"]["metrics"] = metrics_path
             image_attempts.append("metrics")
         
-        # Log image generation results
+        # Generate educational video (30% chance to avoid quota issues)
+        if random.random() < 0.3:  # 30% chance for video generation
+            video_prompt = f"""
+Professional educational video showing {tool_data['name']} automation workflow for {industry} professionals.
+Show step-by-step process, interface demonstrations, and results visualization.
+"""
+            video_path = self.generate_educational_video(video_prompt, tool_data, industry)
+            if video_path:
+                visual_package["video"] = video_path
+                print("🎥 Video generation successful!")
+        
+        # Log generation results
         total_images = len(visual_package["images"])
-        print(f"🎨 Visual package complete: {total_images}/4 images generated successfully")
-        if total_images == 0:
-            print("📝 Content will proceed as text-only due to image generation issues")
+        has_video = "video" in visual_package
+        print(f"🎨 Visual package complete: {total_images}/4 images + {'✅' if has_video else '❌'} video")
+        
+        if total_images == 0 and not has_video:
+            print("📝 Content will proceed as text-only due to generation issues")
         elif total_images < 4:
-            print(f"⚠️ Partial image generation: {image_attempts}")
+            print(f"⚠️ Partial generation: {image_attempts} + {'video' if has_video else 'no video'}")
 
         return visual_package
 

@@ -171,8 +171,8 @@ class MultiPlatformEngine:
         
         return adapted_content.strip()
 
-    def publish_to_main_channel(self, industry, content, images=None):
-        """Publish content to main demo channel with industry labeling and images"""
+    def publish_to_main_channel(self, industry, content, images=None, visual_package=None):
+        """Publish content to main demo channel with industry labeling, images, and video"""
         try:
             token = self.main_channel["token"]
             channel = self.main_channel["channel"]
@@ -231,6 +231,30 @@ class MultiPlatformEngine:
                         print(f"⚠️ Image not found: {image_path}")
                 
                 print(f"📊 Images sent: {image_success}/{len(images)}")
+            
+            # Send video if available
+            if visual_package and 'video' in visual_package:
+                video_path = visual_package['video']
+                if video_path and os.path.exists(video_path):
+                    try:
+                        print(f"🎥 Sending video to {channel}")
+                        video_url = f"https://api.telegram.org/bot{token}/sendVideo"
+                        
+                        with open(video_path, 'rb') as video_file:
+                            files = {'video': video_file}
+                            video_data = {
+                                'chat_id': channel,
+                                'caption': f"🎬 Educational Video: {industry} AI automation demonstration",
+                                'supports_streaming': True
+                            }
+                            
+                            video_response = requests.post(video_url, data=video_data, files=files, timeout=60)
+                            if video_response.status_code == 200:
+                                print(f"✅ Video sent successfully!")
+                            else:
+                                print(f"⚠️ Video upload failed: {video_response.status_code}")
+                    except Exception as video_error:
+                        print(f"⚠️ Error sending video: {video_error}")
             
             print(f"✅ Published {industry} content to main channel: {channel}")
             return True
@@ -372,7 +396,7 @@ class MultiPlatformEngine:
         adapted_content = self.adapt_content_for_industry(base_content, primary_industry, "telegram")
         
         # Publish to main channel with industry labeling (text only)
-        success = self.publish_to_main_channel(primary_industry, adapted_content, None)
+        success = self.publish_to_main_channel(primary_industry, adapted_content, None, None)
         results = {f"{primary_industry}_main_channel": success}
         
         print(f"📡 Published {primary_industry} content to main demo channel")
@@ -432,8 +456,8 @@ class MultiPlatformEngine:
                             "telegram"
                         )
                     
-                    # Publish to main demo channel with images
-                    success = self.publish_to_main_channel(industry, telegram_content, visual_package.get('visuals'))
+                    # Publish to main demo channel with images and video
+                    success = self.publish_to_main_channel(industry, telegram_content, visual_package.get('visuals'), visual_package)
                     results[f"{industry}_visual"] = success
                     
                     if success:
