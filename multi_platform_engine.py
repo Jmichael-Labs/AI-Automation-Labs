@@ -266,6 +266,8 @@ class MultiPlatformEngine:
             # Send whiteboard explainer video if available  
             if visual_package and 'whiteboard_video' in visual_package:
                 video_path = visual_package['whiteboard_video']
+                print(f"🔍 DEBUG: Video path found: {video_path}")
+                print(f"🔍 DEBUG: File exists check: {os.path.exists(video_path) if video_path else 'No path'}")
                 if video_path and os.path.exists(video_path):
                     try:
                         print(f"🎬 Sending whiteboard explainer video to {channel}")
@@ -284,9 +286,11 @@ class MultiPlatformEngine:
                                 print(f"✅ Whiteboard explainer video sent successfully!")
                             else:
                                 print(f"⚠️ Whiteboard video upload failed: {video_response.status_code}")
+                                print(f"🔍 DEBUG: Response text: {video_response.text[:200]}")
                     except Exception as video_error:
                         print(f"⚠️ Error sending whiteboard video: {video_error}")
                 else:
+                    print(f"❌ DEBUG: Video file not found or path empty")
                     # Send preview message if video was generated but file not ready
                     try:
                         text_url = f"https://api.telegram.org/bot{token}/sendMessage"

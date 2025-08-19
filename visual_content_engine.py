@@ -573,13 +573,21 @@ DRAWING SEQUENCE:
                 with open(video_filename, 'wb') as video_file:
                     video_file.write(video_data)
                 
-                print(f"🎥 REAL VIDEO successfully generated and saved!")
-                print(f"📁 File: {video_filename}")
-                print(f"⏱️ Duration: 8 seconds (Veo 3)")
-                print(f"📺 Resolution: 720p, 16:9 aspect ratio")
-                print(f"🔊 Audio: Natively generated")
-                print(f"📊 Total segments for 2-minute video: {len(video_segments)} x 8s = {len(video_segments) * 8}s")
-                print(f"⏰ Current: Segment 1/15 complete - REAL VIDEO!")
+                # Verify file was saved correctly
+                if os.path.exists(video_filename):
+                    file_size = os.path.getsize(video_filename)
+                    print(f"🎥 REAL VIDEO successfully generated and saved!")
+                    print(f"📁 File: {video_filename}")
+                    print(f"📊 File size: {file_size} bytes")
+                    print(f"⏱️ Duration: 8 seconds (Veo 3)")
+                    print(f"📺 Resolution: 720p, 16:9 aspect ratio")
+                    print(f"🔊 Audio: Natively generated")
+                    print(f"📊 Total segments for 2-minute video: {len(video_segments)} x 8s = {len(video_segments) * 8}s")
+                    print(f"⏰ Current: Segment 1/15 complete - REAL VIDEO!")
+                    print(f"✅ File verification: EXISTS and has {file_size} bytes")
+                else:
+                    print(f"❌ ERROR: Video file was not saved to {video_filename}")
+                    return None
                 
                 return video_filename
             elif waited_time >= max_wait_time:
