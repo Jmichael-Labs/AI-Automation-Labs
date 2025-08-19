@@ -21,7 +21,7 @@ class MultiPlatformEngine:
             "legal": {
                 "keywords": ["law", "legal", "attorney", "lawyer", "court", "litigation", "contract", "compliance"],
                 "platforms": {
-                    "telegram": {"channel": "@AILegalAcademyBot", "token": os.getenv('TELEGRAM_LEGAL_TOKEN')},
+                    "telegram": {"channel": "@LegalAIAcademy", "token": os.getenv('TELEGRAM_LEGAL_TOKEN')},
                     "kofi": {"profile": "legalaiacademy", "api_key": os.getenv('KOFI_LEGAL_API')},
                     "gumroad": {"product_id": os.getenv('GUMROAD_LEGAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
@@ -29,7 +29,7 @@ class MultiPlatformEngine:
             "medical": {
                 "keywords": ["medical", "healthcare", "doctor", "physician", "patient", "diagnosis", "treatment", "clinical"],
                 "platforms": {
-                    "telegram": {"channel": "@HealthAIInsights_Bot", "token": os.getenv('TELEGRAM_MEDICAL_TOKEN')},
+                    "telegram": {"channel": "@HealthAIInsights", "token": os.getenv('TELEGRAM_MEDICAL_TOKEN')},
                     "kofi": {"profile": "healthaiinsights", "api_key": os.getenv('KOFI_MEDICAL_API')},
                     "gumroad": {"product_id": os.getenv('GUMROAD_MEDICAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
@@ -37,7 +37,7 @@ class MultiPlatformEngine:
             "senior": {
                 "keywords": ["senior", "elderly", "aging", "caregiver", "retirement", "accessibility", "simple", "easy"],
                 "platforms": {
-                    "telegram": {"channel": "@SeniorTechGuideBot", "token": os.getenv('TELEGRAM_SENIOR_TOKEN')},
+                    "telegram": {"channel": "@SeniorTechGuide", "token": os.getenv('TELEGRAM_SENIOR_TOKEN')},
                     "kofi": {"profile": "seniortechguide", "api_key": os.getenv('KOFI_SENIOR_API')},
                     "gumroad": {"product_id": os.getenv('GUMROAD_SENIOR_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
@@ -45,7 +45,7 @@ class MultiPlatformEngine:
             "general": {
                 "keywords": ["ai", "artificial intelligence", "automation", "technology", "innovation", "business"],
                 "platforms": {
-                    "telegram": {"channel": "@AIEducationHubBot", "token": os.getenv('TELEGRAM_GENERAL_TOKEN')},
+                    "telegram": {"channel": "@AIEducationHub", "token": os.getenv('TELEGRAM_GENERAL_TOKEN')},
                     "kofi": {"profile": "aieducationhub", "api_key": os.getenv('KOFI_GENERAL_API')},
                     "gumroad": {"product_id": os.getenv('GUMROAD_GENERAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
