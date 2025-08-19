@@ -277,6 +277,7 @@ class MultiPlatformEngine:
 
     def publish_to_gumroad(self, industry, content):
         """Update industry-specific Gumroad product with new content"""
+        print(f"🚀 GUMROAD FUNCTION CALLED for industry: {industry}")
         try:
             api_key = self.industries[industry]["platforms"]["gumroad"]["api_key"]
             product_id = self.industries[industry]["platforms"]["gumroad"]["product_id"]
@@ -285,7 +286,8 @@ class MultiPlatformEngine:
                 print(f"⚠️ Gumroad credentials missing for {industry}")
                 return False
             
-            # Gumroad API v2 - Update product
+            # Gumroad API v2 - Try different endpoints for update
+            # Method 1: Direct product update (most common)
             update_url = f"https://api.gumroad.com/v2/products/{product_id}"
             print(f"🔍 DEBUG Gumroad: URL={update_url}, ProductID={product_id}, APIKey={api_key[:8]}...")
             
@@ -387,6 +389,7 @@ class MultiPlatformEngine:
             elif platform == "kofi":
                 success = self.publish_to_kofi(primary_industry, adapted_content)
             elif platform == "gumroad":
+                print(f"🔍 About to call Gumroad for industry: {primary_industry}")
                 success = self.publish_to_gumroad(primary_industry, adapted_content)
             
             results[f"{primary_industry}_{platform}"] = success
