@@ -332,13 +332,23 @@ class MultiPlatformEngine:
                 "User-Agent": "MultiPlatform-AI-Education/1.0"
             }
             
-            # Try PUT first, then POST if 404/405
+            # Gumroad API: Try PUT with form data (most common for updates)
+            print(f"🔄 Trying PUT with form data...")
             response = requests.put(update_url, data=payload, headers=headers, timeout=30)
+            print(f"🔍 PUT response: {response.status_code} - {response.text[:100]}")
             
-            # If PUT fails with method not allowed, try POST
+            # If PUT fails, try POST with form data
             if response.status_code in [404, 405]:
-                print(f"🔄 PUT failed for {industry}, trying POST...")
+                print(f"🔄 PUT failed, trying POST with form data...")
                 response = requests.post(update_url, data=payload, headers=headers, timeout=30)
+                print(f"🔍 POST response: {response.status_code} - {response.text[:100]}")
+                
+            # If both fail, try without User-Agent header (some APIs are picky)
+            if response.status_code in [404, 405]:
+                print(f"🔄 Trying PUT without User-Agent header...")
+                simple_headers = {}
+                response = requests.put(update_url, data=payload, headers=simple_headers, timeout=30)
+                print(f"🔍 Simple PUT response: {response.status_code} - {response.text[:100]}")
             
             if response.status_code in [200, 201]:
                 product_data = response.json()
