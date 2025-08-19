@@ -14,19 +14,15 @@ jobs:
     - name: 🚨 Emergency Fresh Checkout
       uses: actions/checkout@v4
       with:
-        ref: 465b6af  # SPECIFIC COMMIT WITH FIX
         fetch-depth: 0
         clean: true
         
-    - name: ✅ Verify Correct Commit
+    - name: ✅ Verify Latest Commit
       run: |
-        echo "🎯 Expected: 465b6af"
-        echo "📊 Actual: $(git rev-parse --short HEAD)"
-        if [ "$(git rev-parse --short HEAD)" != "465b6af" ]; then
-          echo "❌ ERROR: Wrong commit!"
-          exit 1
-        fi
-        echo "✅ CORRECT COMMIT VERIFIED!"
+        echo "📊 Current commit: $(git rev-parse --short HEAD)"
+        echo "📊 Latest commits:"
+        git log --oneline -3
+        echo "✅ Using latest code from main branch"
         
     - name: 🧨 Nuclear Cache Clear
       run: |
