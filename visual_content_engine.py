@@ -615,7 +615,7 @@ End with smooth transition setup for next segment.
                 
                 # USER'S PROJECT CONFIGURATION - Direct Vertex AI (NO GEMINI)
                 # Use Vertex AI VideoGenerationModel directly
-                from vertexai.preview.vision_models import VideoGenerationModel
+                from vertexai.preview.generative_models import VideoGenerationModel
                 
                 # Initialize video model using user's project credentials  
                 video_model = VideoGenerationModel.from_pretrained("veo-3.0-fast-generate-001")
