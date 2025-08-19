@@ -29,11 +29,19 @@ def generate_single_video_segment(segment_prompt, segment_number, industry):
             )
         )
         
-        # Poll the operation status until the video is ready
+        # Poll the operation status until the video is ready (optimized timing)
         print(f"⏳ Waiting for Veo 3 video generation to complete...")
-        while not operation.done:
+        poll_count = 0
+        max_polls = 30  # 5 minute maximum (30 * 10s = 300s)
+        
+        while not operation.done and poll_count < max_polls:
+            poll_count += 1
+            print(f"   Polling {poll_count}/{max_polls} (estimated: {poll_count * 10}s elapsed)")
             time.sleep(10)
             operation = client.operations.get(operation)
+        
+        if poll_count >= max_polls:
+            raise Exception(f"Video generation timeout after {max_polls * 10} seconds")
         
         # Process completed operation
         if operation.response and operation.response.generated_videos:

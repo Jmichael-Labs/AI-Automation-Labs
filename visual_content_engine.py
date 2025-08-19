@@ -534,16 +534,16 @@ Purpose: Educational content for AI tool tutorials
         if has_paid_credits:
             # VERTEX AI DIRECT: Much higher limits than Gemini API
             daily_quota_limit = 1000  # Vertex AI enterprise limits
-            segments_to_generate = quota_strategies["weekly_series"]  # Generate all 12!
+            segments_to_generate = quota_strategies["triple_hook"]  # Generate 3 segments for speed!
             print("💰 VERTEX AI DIRECT ENDPOINT DETECTED!")
             print("🚀 Project: youtube-pro-469213 with Veo 3 Fast")
-            print(f"🎯 Generating complete 12-segment newsroom video")
+            print(f"🎯 Generating 3-segment newsroom video (optimized for speed)")
             print(f"💳 Budget: $300 credits with Vertex AI pricing")
-            print(f"🎬 No daily limits - generate as needed!")
+            print(f"🎬 Fast generation - 3 powerful segments!")
             print(f"⚡ 1 video per request (sampleCount: 1) - controlled generation")
             print(f"🔊 Audio included + 720p resolution")
             print(f"💡 Model: veo-3.0-fast-generate-001 (cost optimized)")
-            selected_segments = video_segments  # All 12 segments!
+            selected_segments = video_segments[:segments_to_generate]  # Use quota strategy
         else:
             daily_quota_limit = 10  # Free tier limit
             segments_to_generate = quota_strategies["single_highlight"]  # Conservative: 1 video
