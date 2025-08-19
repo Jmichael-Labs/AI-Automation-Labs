@@ -57,7 +57,7 @@ class MultiPlatformEngine:
         
         # Initialize notification system
         self.notification_chat_id = os.getenv('TELEGRAM_CHAT_ID')
-        self.notification_token = self.main_channel["token"]
+        self.notification_token = os.getenv('TELEGRAM_GENERAL_TOKEN')  # Use dedicated token
         
         print("🚀 AI Education Demo Channel Engine initialized")
         print(f"📊 Content types: {len(self.industries)} industry categories")
@@ -395,8 +395,16 @@ class MultiPlatformEngine:
                 return False
             
             url = f"https://api.telegram.org/bot{self.notification_token}/sendMessage"
+            
+            # Ensure chat_id is integer if it's a number
+            chat_id = self.notification_chat_id
+            try:
+                chat_id = int(chat_id) if chat_id.isdigit() or (chat_id.startswith('-') and chat_id[1:].isdigit()) else chat_id
+            except (AttributeError, ValueError):
+                pass
+                
             payload = {
-                "chat_id": self.notification_chat_id,
+                "chat_id": chat_id,
                 "text": f"🤖 Multi-Platform System\n\n{message}",
                 "parse_mode": "Markdown"
             }
