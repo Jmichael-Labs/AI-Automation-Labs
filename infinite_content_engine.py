@@ -8,6 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import random
+import os
 import time
 from datetime import datetime, timedelta
 import hashlib
@@ -449,8 +450,8 @@ class InfiniteContentEngine:
         content += f"\n\n**🔥 Current Opportunity:**\n{self.generate_current_opportunity(tool)}"
         content += f"\n\n---\n\n**Ready to implement {tool.name}?**"
         content += f"\nI can walk you through the exact setup process."
-        content += f"\n\n📧 Email: your.email@example.com"
-        content += f"\n📱 Instagram: https://instagram.com/youraccount"
+        content += f"\n\n📧 Email: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
+        content += f"\n📱 Instagram: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
         content += f"\n\n*Building automated income streams, one tool at a time* 🤖"
         
         # Verify uniqueness
@@ -505,8 +506,8 @@ class InfiniteContentEngine:
         content += f"\n\n**🎯 Implementation Timeline:**\n{self.generate_timeline(tool1, tool2)}"
         content += f"\n\n---\n\n**Need help setting up this combo?**"
         content += f"\nI've implemented {tool1.name} + {tool2.name} systems before."
-        content += f"\n\n📧 Email: your.email@example.com"
-        content += f"\n📱 Instagram: https://instagram.com/youraccount"
+        content += f"\n\n📧 Email: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
+        content += f"\n📱 Instagram: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
         content += f"\n\n*Two tools, infinite possibilities* 🚀"
         
         if self.is_content_unique(content):
@@ -556,8 +557,8 @@ class InfiniteContentEngine:
         content += f"\n\n**📊 Market Data:**\n{self.generate_market_data(tool)}"
         content += f"\n\n---\n\n**Want to capitalize on this opportunity?**"
         content += f"\nI can show you the exact implementation strategy."
-        content += f"\n\n📧 Email: your.email@example.com"
-        content += f"\n📱 Instagram: https://instagram.com/youraccount"
+        content += f"\n\n📧 Email: {os.getenv('EMAIL_CONTACT', 'jmichaeloficial@gmail.com')}"
+        content += f"\n📱 Instagram: {os.getenv('INSTAGRAM_CONSULTING', 'https://instagram.com/jmichaeloficial')}"
         content += f"\n\n*Spotting opportunities before they become obvious* 👁️"
         
         if self.is_content_unique(content):
