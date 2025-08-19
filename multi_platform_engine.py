@@ -171,8 +171,8 @@ class MultiPlatformEngine:
         
         return adapted_content.strip()
 
-    def publish_to_main_channel(self, industry, content):
-        """Publish content to main demo channel with industry labeling"""
+    def publish_to_main_channel(self, industry, content, images=None):
+        """Publish content to main demo channel with industry labeling and images"""
         try:
             token = self.main_channel["token"]
             channel = self.main_channel["channel"]
@@ -185,21 +185,55 @@ class MultiPlatformEngine:
                 print(f"⚠️ No Telegram token for main channel")
                 return False
             
-            url = f"https://api.telegram.org/bot{token}/sendMessage"
-            payload = {
+            # Send text first
+            text_url = f"https://api.telegram.org/bot{token}/sendMessage"
+            text_payload = {
                 "chat_id": channel,
                 "text": labeled_content,
                 "parse_mode": "Markdown"
             }
             
-            print(f"🔍 DEBUG: Sending {industry} content to main channel {channel}")
-            response = requests.post(url, json=payload)
-            if response.status_code == 200:
-                print(f"✅ Published {industry} content to main channel: {channel}")
-                return True
-            else:
-                print(f"❌ Main channel {industry} failed: {response.status_code} - {response.text[:100]}")
+            print(f"🔍 DEBUG: Sending {industry} text content to main channel {channel}")
+            text_response = requests.post(text_url, json=text_payload)
+            
+            if text_response.status_code != 200:
+                print(f"❌ Text message failed: {text_response.status_code} - {text_response.text[:100]}")
                 return False
+            
+            # Send images if available
+            if images and isinstance(images, dict):
+                print(f"📸 Sending {len(images)} images to {channel}")
+                image_success = 0
+                
+                for image_type, image_path in images.items():
+                    if image_path and os.path.exists(image_path):
+                        try:
+                            # Send photo
+                            photo_url = f"https://api.telegram.org/bot{token}/sendPhoto"
+                            
+                            with open(image_path, 'rb') as photo_file:
+                                files = {'photo': photo_file}
+                                photo_data = {
+                                    'chat_id': channel,
+                                    'caption': f"🎨 {image_type.title().replace('_', ' ')}: Visual content for {industry} industry"
+                                }
+                                
+                                photo_response = requests.post(photo_url, data=photo_data, files=files)
+                                if photo_response.status_code == 200:
+                                    print(f"✅ Sent {image_type} image successfully")
+                                    image_success += 1
+                                else:
+                                    print(f"⚠️ Failed to send {image_type}: {photo_response.status_code}")
+                                    
+                        except Exception as img_error:
+                            print(f"⚠️ Error sending {image_type}: {img_error}")
+                    else:
+                        print(f"⚠️ Image not found: {image_path}")
+                
+                print(f"📊 Images sent: {image_success}/{len(images)}")
+            
+            print(f"✅ Published {industry} content to main channel: {channel}")
+            return True
                 
         except Exception as e:
             print(f"❌ Main channel {industry} error: {e}")
@@ -337,8 +371,8 @@ class MultiPlatformEngine:
         # Adapt content for the classified industry
         adapted_content = self.adapt_content_for_industry(base_content, primary_industry, "telegram")
         
-        # Publish to main channel with industry labeling
-        success = self.publish_to_main_channel(primary_industry, adapted_content)
+        # Publish to main channel with industry labeling (text only)
+        success = self.publish_to_main_channel(primary_industry, adapted_content, None)
         results = {f"{primary_industry}_main_channel": success}
         
         print(f"📡 Published {primary_industry} content to main demo channel")
@@ -398,8 +432,8 @@ class MultiPlatformEngine:
                             "telegram"
                         )
                     
-                    # Publish to main demo channel
-                    success = self.publish_to_main_channel(industry, telegram_content)
+                    # Publish to main demo channel with images
+                    success = self.publish_to_main_channel(industry, telegram_content, visual_package.get('visuals'))
                     results[f"{industry}_visual"] = success
                     
                     if success:
