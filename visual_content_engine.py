@@ -27,6 +27,9 @@ class VisualContentEngine:
         self.vertex_ai_available = False
         self.text_model = None
         self.image_model = None
+        self.veo3_client = None
+        self.gemini_client = None
+        self.video_model = None
         
         try:
             # Initialize Vertex AI
@@ -78,6 +81,7 @@ class VisualContentEngine:
             except Exception as video_error:
                 print(f"⚠️ Gemini API configuration error: {video_error}")
                 self.gemini_client = None 
+                self.veo3_client = None
                 self.video_model = None
             self.vertex_ai_available = True
             print("✅ Vertex AI models initialized successfully")
