@@ -613,38 +613,47 @@ End with smooth transition setup for next segment.
                 # Generate actual video using Vertex AI direct endpoint
                 # Using user's youtube-pro-469213 project with higher limits
                 
-                # USER'S PROJECT CONFIGURATION - Direct Vertex AI (NO GEMINI)
-                # Use Vertex AI VideoGenerationModel directly
-                from vertexai.preview.generative_models import VideoGenerationModel
+                # USER'S PROJECT CONFIGURATION - Veo 3 with correct GenAI Client
+                # Use GenAI Client for Veo 3 (correct 2025 approach)
+                import time
+                from google import genai
+                from google.genai import types
                 
-                # Initialize video model using user's project credentials  
-                video_model = VideoGenerationModel.from_pretrained("veo-3.0-fast-generate-001")
+                # Initialize GenAI client for Veo 3
+                client = genai.Client()
                 
                 # Generate video directly with Vertex AI
                 print(f"🚀 GENERATING with Vertex AI - Project: youtube-pro-469213")
                 print(f"💳 Using your $300 credits directly (no Gemini limits)")
                 
                 try:
-                    response = video_model.generate_video(
+                    # Generate video with Veo 3 using correct GenAI Client
+                    operation = client.models.generate_videos(
+                        model="veo-3.0-generate-preview",
                         prompt=segment_prompt,
-                        aspect_ratio="16:9",
-                        duration_seconds=8,
-                        resolution="720p",
-                        sample_count=1
+                        config=types.GenerateVideosConfig(
+                            aspect_ratio="16:9",
+                            duration_seconds=8,
+                            response_count=1
+                        )
                     )
                     
-                    # Process Vertex AI response
-                    if response.generated_videos:
+                    # Poll the operation status until the video is ready
+                    print(f"⏳ Waiting for Veo 3 video generation to complete...")
+                    while not operation.done:
+                        time.sleep(10)
+                        operation = client.operations.get(operation)
+                    
+                    # Process completed operation
+                    if operation.response.generated_videos:
                         # Save the video file
                         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                         video_filename = f"/tmp/newsroom_segment_{i}_{industry}_{timestamp}.mp4"
                         
-                        # Get video data
-                        video_data = response.generated_videos[0]._file_data
-                        
-                        # Save video file
-                        with open(video_filename, 'wb') as video_file:
-                            video_file.write(video_data)
+                        # Get video data and download
+                        generated_video = operation.response.generated_videos[0]
+                        client.files.download(file=generated_video.video)
+                        generated_video.video.save(video_filename)
                         
                         # Verify file was saved
                         if os.path.exists(video_filename):
