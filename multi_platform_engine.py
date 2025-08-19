@@ -223,12 +223,13 @@ class MultiPlatformEngine:
                 "parse_mode": "Markdown"
             }
             
+            print(f"🔍 DEBUG: Sending to {channel} with token ending in {token[-8:] if token else 'MISSING'}")
             response = requests.post(url, json=payload)
             if response.status_code == 200:
                 print(f"✅ Published to Telegram {industry}: {channel}")
                 return True
             else:
-                print(f"❌ Telegram {industry} failed: {response.status_code}")
+                print(f"❌ Telegram {industry} failed: {response.status_code} - {response.text[:100]}")
                 return False
                 
         except Exception as e:
