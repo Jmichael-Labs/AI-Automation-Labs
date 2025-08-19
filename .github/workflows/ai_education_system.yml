@@ -1,4 +1,4 @@
-name: Multi-Platform AI Education Publishing System (12 Channels)
+name: AI Education System - 12 Channel Automation
 
 on:
   schedule:
@@ -54,14 +54,14 @@ jobs:
         TELEGRAM_SENIOR_TOKEN: ${{ secrets.TELEGRAM_SENIOR_TOKEN }}
         TELEGRAM_GENERAL_TOKEN: ${{ secrets.TELEGRAM_GENERAL_TOKEN }}
         
+        # === TELEGRAM CHAT ID FOR NOTIFICATIONS ===
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        
         # === KO-FI API KEYS (4 industries) ===
         KOFI_LEGAL_API: ${{ secrets.KOFI_LEGAL_API }}
         KOFI_MEDICAL_API: ${{ secrets.KOFI_MEDICAL_API }}
         KOFI_SENIOR_API: ${{ secrets.KOFI_SENIOR_API }}
         KOFI_GENERAL_API: ${{ secrets.KOFI_GENERAL_API }}
-        
-        # === TELEGRAM CHAT ID FOR NOTIFICATIONS ===
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         
         # === GUMROAD API CONFIGURATION ===
         GUMROAD_API_KEY: ${{ secrets.GUMROAD_API_KEY }}
@@ -79,7 +79,7 @@ jobs:
         INSTAGRAM_CONSULTING: ${{ secrets.INSTAGRAM_CONSULTING }}
         
       run: |
-        echo "🚀 Starting Multi-Platform AI Education Publishing System"
+        echo "🚀 Starting AI Education System - 12 Channel Automation"
         echo "📅 Execution time: $(date)"
         echo "🕐 Schedule context: $(date +%H) hours UTC"
         
@@ -92,7 +92,7 @@ jobs:
         echo "- Gumroad API: $([ -n "$GUMROAD_API_KEY" ] && echo "✅ Ready" || echo "❌ Missing")"
         echo "- Google Cloud: $([ -f "$GOOGLE_APPLICATION_CREDENTIALS" ] && echo "✅ Ready" || echo "❌ Missing")"
         
-        echo "🔄 Executing Multi-Platform Content Distribution..."
+        echo "🔄 Executing 12-Channel Content Distribution..."
         
         # Run the multi-platform publishing engine
         python multi_platform_engine.py 2>&1 | tee /tmp/publishing_log.txt || { 
@@ -118,7 +118,7 @@ jobs:
       if: always()
       run: |
         echo "📊 Workflow Performance Metrics:"
-        echo "- Execution time: ${{ job.start-time }} to $(date)"
+        echo "- Execution time: $(date)"
         echo "- Runner OS: ${{ runner.os }}"
         echo "- Python version: $(python --version)"
         echo "- Memory usage: $(free -h | grep Mem | awk '{print $3 "/" $2}')"
@@ -130,11 +130,3 @@ jobs:
         rm -f /tmp/gcp-key.json
         rm -f /tmp/publishing_log.txt
         echo "🧹 Cleanup completed"
-        
-    - name: Upload logs (on failure)
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: publishing-logs-${{ github.run_id }}
-        path: /tmp/publishing_log.txt
-        retention-days: 7
