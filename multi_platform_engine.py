@@ -287,6 +287,12 @@ class MultiPlatformEngine:
             
             # Gumroad API v2 - Update product
             update_url = f"https://api.gumroad.com/v2/products/{product_id}"
+            print(f"🔍 DEBUG Gumroad: URL={update_url}, ProductID={product_id}, APIKey={api_key[:8]}...")
+            
+            # First test API key with user endpoint
+            user_test_url = "https://api.gumroad.com/v2/user"
+            user_response = requests.get(user_test_url, params={"access_token": api_key}, timeout=10)
+            print(f"🔍 User API test: {user_response.status_code} - {user_response.text[:100]}")
             
             # Format content for product description update
             formatted_description = f"""
