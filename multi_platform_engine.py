@@ -45,7 +45,7 @@ class MultiPlatformEngine:
             "general": {
                 "keywords": ["ai", "artificial intelligence", "automation", "technology", "innovation", "business"],
                 "platforms": {
-                    "telegram": {"channel": "@AIEducationHub", "token": os.getenv('TELEGRAM_GENERAL_TOKEN')},
+                    "telegram": {"channel": "@AIEducationHub_bot", "token": os.getenv('TELEGRAM_GENERAL_TOKEN')},
                     "kofi": {"profile": "aieducationhub", "api_key": os.getenv('KOFI_GENERAL_API')},
                     "gumroad": {"product_id": os.getenv('GUMROAD_GENERAL_ID'), "api_key": os.getenv('GUMROAD_API_KEY')}
                 }
