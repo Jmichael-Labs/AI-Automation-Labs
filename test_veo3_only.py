@@ -31,7 +31,7 @@ def test_veo3_video_generation():
         
         # Try to generate a video segment
         try:
-            video_path = engine.generate_whiteboard_video_segments(test_tool, "general", "test script")
+            video_path = engine.generate_futuristic_newsroom_segments(test_tool, "general", "test script")
             if video_path:
                 print(f"🎥 SUCCESS! Video generated: {video_path}")
                 

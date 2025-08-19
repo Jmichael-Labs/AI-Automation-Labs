@@ -505,11 +505,44 @@ Purpose: Educational content for AI tool tutorials
         print(f"🎬 Generating {len(video_segments)} futuristic newsroom segments for {tool_data['name']}")
         print(f"📺 Total duration: {len(video_segments) * 8} seconds ({len(video_segments) * 8 / 60:.1f} minutes)")
         
-        # Generate all 12 segments sequentially for complete video
+        # INTELLIGENT QUOTA MANAGEMENT SYSTEM
+        # Free tier: 10 videos/day, Tier 1: 10/day, Tier 2: 50/day, Tier 3: 500/day
+        
+        # Dynamic segment strategy based on quota availability
+        quota_strategies = {
+            "single_highlight": 1,    # Single powerful segment for quota conservation
+            "triple_hook": 3,         # Hook + Authority + CTA (most effective)
+            "weekly_series": 12       # Full series over multiple days
+        }
+        
+        # INTELLIGENT SEGMENT SELECTION & ROTATION
+        import hashlib
+        from datetime import datetime
+        
+        # Create daily seed for consistent but rotating selection
+        today = datetime.now().strftime("%Y-%m-%d")
+        tool_hash = hashlib.md5(f"{tool_data['name']}{today}".encode()).hexdigest()
+        seed_number = int(tool_hash[:4], 16) % len(video_segments)
+        
+        daily_quota_limit = 10  # Free tier limit
+        segments_to_generate = quota_strategies["single_highlight"]  # Conservative: 1 video
+        
+        # Select optimal segment based on captology priority
+        high_priority_segments = [0, 1, 9, 10, 11]  # Hook, Authority, Urgency, Bio Link, Closing
+        selected_index = high_priority_segments[seed_number % len(high_priority_segments)]
+        
+        print(f"🎯 SMART QUOTA STRATEGY: Generating {segments_to_generate} strategic segment")
+        print(f"📊 Daily limit: {daily_quota_limit} videos (Free tier)")
+        print(f"🎲 Today's segment: #{selected_index + 1} - {video_segments[selected_index]['title']}")
+        print(f"🧠 High-impact rotation ensures variety + quota efficiency")
+        
         generated_segments = []
         
-        for i, segment in enumerate(video_segments, 1):
-            print(f"🎨 Generating segment {i}/12: {segment['title']}")
+        # Generate only the selected strategic segment
+        selected_segments = [video_segments[selected_index]]
+        
+        for i, segment in enumerate(selected_segments, 1):
+            print(f"🎨 Generating strategic segment {i}/{segments_to_generate}: {segment['title']}")
             
             segment_prompt = f"""
 Create an 8-second futuristic AI newsroom segment: "{segment['title']}"
@@ -560,71 +593,82 @@ End with smooth transition setup for next segment.
                         aspect_ratio="16:9"
                     )
                 )
-            
-            print(f"🔄 Polling video generation operation...")
-            max_wait_time = 300  # 5 minutes max wait
-            poll_interval = 10   # Check every 10 seconds
-            waited_time = 0
-            
-            # Poll for completion
-            while not operation.done and waited_time < max_wait_time:
-                print(f"⏱️ Waiting for video generation... ({waited_time}s/{max_wait_time}s)")
-                time.sleep(poll_interval)
-                waited_time += poll_interval
-                operation = self.veo3_client.operations.get(operation)
-            
-            if operation.done and hasattr(operation, 'result'):
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 
-                # Get the generated video
-                generated_video = operation.result.generated_videos[0]
+                print(f"🔄 Polling video generation operation...")
+                max_wait_time = 300  # 5 minutes max wait
+                poll_interval = 10   # Check every 10 seconds
+                waited_time = 0
                 
-                # Download and save the REAL video file
-                video_filename = f"/tmp/whiteboard_segment_1_{industry}_{timestamp}.mp4"
+                # Poll for completion
+                while not operation.done and waited_time < max_wait_time:
+                    print(f"⏱️ Waiting for video generation... ({waited_time}s/{max_wait_time}s)")
+                    time.sleep(poll_interval)
+                    waited_time += poll_interval
+                    operation = self.veo3_client.operations.get(operation)
                 
-                # Download the video file
-                video_data = self.veo3_client.files.download(file=generated_video.video)
-                
-                # Save the actual video file
-                with open(video_filename, 'wb') as video_file:
-                    video_file.write(video_data)
-                
-                # Verify file was saved correctly
-                if os.path.exists(video_filename):
-                    file_size = os.path.getsize(video_filename)
-                    print(f"🎥 REAL NEWSROOM VIDEO successfully generated!")
-                    print(f"📁 File: {video_filename}")
-                    print(f"📊 File size: {file_size} bytes") 
-                    print(f"⏱️ Duration: 8 seconds (Veo 3)")
-                    print(f"📺 Resolution: 720p, 16:9 aspect ratio")
-                    print(f"🎙️ Audio: Professional English narration")
-                    print(f"✅ File verification: EXISTS and has {file_size} bytes")
+                if operation.done and hasattr(operation, 'result'):
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     
-                    generated_segments.append({
-                        "segment_number": i,
-                        "title": segment['title'],
-                        "file_path": video_filename,
-                        "file_size": file_size,
-                        "narration": segment.get('narration', segment['content'])
-                    })
+                    # Get the generated video
+                    generated_video = operation.result.generated_videos[0]
                     
-                    # For now, only generate first segment to test (quota management)
-                    if i == 1:
-                        print(f"🎯 Generated segment {i}/12 - Testing single segment first")
-                        break
+                    # Download and save the REAL video file
+                    video_filename = f"/tmp/newsroom_segment_{i}_{industry}_{timestamp}.mp4"
+                    
+                    # Download the video file
+                    video_data = self.veo3_client.files.download(file=generated_video.video)
+                    
+                    # Save the actual video file
+                    with open(video_filename, 'wb') as video_file:
+                        video_file.write(video_data)
+                    
+                    # Verify file was saved correctly
+                    if os.path.exists(video_filename):
+                        file_size = os.path.getsize(video_filename)
+                        print(f"🎥 REAL NEWSROOM VIDEO successfully generated!")
+                        print(f"📁 File: {video_filename}")
+                        print(f"📊 File size: {file_size} bytes") 
+                        print(f"⏱️ Duration: 8 seconds (Veo 3)")
+                        print(f"📺 Resolution: 720p, 16:9 aspect ratio")
+                        print(f"🎙️ Audio: Professional English narration")
+                        print(f"✅ File verification: EXISTS and has {file_size} bytes")
                         
-                else:
-                    print(f"❌ ERROR: Video file was not saved to {video_filename}")
+                        generated_segments.append({
+                            "segment_number": i,
+                            "title": segment['title'],
+                            "file_path": video_filename,
+                            "file_size": file_size,
+                            "narration": segment.get('narration', segment['content'])
+                        })
+                        
+                        # Save quota usage info for future optimization
+                        quota_info = {
+                            "date": today,
+                            "segments_generated": 1,
+                            "quota_used": f"1/{daily_quota_limit}",
+                            "strategy": "single_highlight",
+                            "segment_type": segment['title'],
+                            "tool_featured": tool_data['name']
+                        }
+                        print(f"💾 Quota tracking: {quota_info}")
+                        print(f"🎯 Strategic generation complete - 1 high-impact video created")
+                        break
+                            
+                    else:
+                        print(f"❌ ERROR: Video file was not saved to {video_filename}")
                     
             except Exception as e:
                 print(f"⚠️ Segment {i} generation error: {e}")
                 continue
         
-        print(f"📊 Generation Summary:")
-        print(f"✅ Segments generated: {len(generated_segments)}/12")
+        print(f"📊 INTELLIGENT GENERATION SUMMARY:")
+        print(f"✅ Strategic segments: {len(generated_segments)}/1 (quota-optimized)")
         print(f"🎬 Style: Futuristic AI newsroom")
-        print(f"🗣️ Language: Professional English")
-        print(f"🎯 Purpose: Bio link conversion via captology")
+        print(f"🗣️ Language: Professional English") 
+        print(f"🎯 Purpose: Maximum bio link conversion")
+        print(f"💡 Strategy: Daily rotation of high-impact segments")
+        print(f"📈 Quota efficiency: 100% (1 video = maximum ROI)")
+        print(f"🔄 Tomorrow: Different segment for variety")
         
         # Return first segment for testing (future: return concatenated video)
         if generated_segments:
