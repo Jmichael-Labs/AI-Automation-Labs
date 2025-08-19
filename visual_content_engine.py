@@ -15,6 +15,9 @@ import vertexai
 from vertexai.preview.vision_models import ImageGenerationModel
 from vertexai.preview.generative_models import GenerativeModel
 import google.generativeai as genai
+from google import genai as google_genai
+from google.genai import types
+import time
 import random
 
 class VisualContentEngine:
@@ -53,13 +56,24 @@ class VisualContentEngine:
                 # Configure Gemini API for Veo 3 video generation  
                 gemini_api_key = os.getenv('GEMINI_API_KEY')
                 if gemini_api_key:
+                    # Configure both APIs for different purposes
                     genai.configure(api_key=gemini_api_key)
                     self.gemini_client = genai
-                    self.video_model = "gemini-2.0-flash-exp"  # Latest available model for video descriptions
-                    print("✅ Gemini API configured for video content generation")
+                    
+                    # Initialize Veo 3 client for actual video generation
+                    try:
+                        self.veo3_client = google_genai.Client(api_key=gemini_api_key)
+                        self.video_model = "veo-3.0-generate-preview"
+                        print("✅ Veo 3 API configured for REAL video generation")
+                    except Exception as veo_error:
+                        print(f"⚠️ Veo 3 client error: {veo_error}")
+                        self.veo3_client = None
+                        self.video_model = "gemini-2.0-flash-exp"  # Fallback for descriptions
+                        print("✅ Gemini API configured for video descriptions (Veo 3 fallback)")
                 else:
                     print("⚠️ GEMINI_API_KEY not found in environment")
                     self.gemini_client = None
+                    self.veo3_client = None
                     self.video_model = None
             except Exception as video_error:
                 print(f"⚠️ Gemini API configuration error: {video_error}")
@@ -318,8 +332,8 @@ Purpose: Educational content for AI tool tutorials
     def generate_whiteboard_video_segments(self, tool_data, industry, script_highlights):
         """Generate multiple 8-second video segments for complete whiteboard explainer"""
         
-        if not self.gemini_client or not self.video_model:
-            print(f"🔄 Skipping whiteboard video generation (Gemini API not available)")
+        if not self.veo3_client or not self.video_model:
+            print(f"🔄 Skipping whiteboard video generation (Veo 3 API not available)")
             return None
         
         # Industry-specific psychological triggers
@@ -477,49 +491,69 @@ DRAWING SEQUENCE:
         try:
             print(f"🎨 Generating REAL video segment 1/15: {segment['title']}")
             
-            # Generate ACTUAL VIDEO with Veo 3 using Gemini API
-            if not self.gemini_client:
-                raise Exception("Gemini client not available")
-                
-            # Use Gemini API for video generation
-            model = self.gemini_client.GenerativeModel(model_name=self.video_model)
+            # Generate ACTUAL VIDEO with Veo 3 API
+            if not self.veo3_client:
+                raise Exception("Veo 3 client not available")
             
-            # For now, Veo 3 video generation through Gemini API is still in preview
-            # This is a placeholder for actual video generation when the API becomes available
-            print("⚠️ Note: Veo 3 video generation API is still in preview")
-            print("🔄 Generating video description instead of actual video")
+            print("🎬 Using Veo 3 API for REAL video generation...")
             
-            # Generate video description/script using Gemini
-            video_response = model.generate_content(
-                contents=[f"Create a detailed video description for: {segment_prompt}"],
-                generation_config={
-                    "temperature": 0.7,
-                    "top_p": 0.8,
-                    "max_output_tokens": 1024
-                }
+            # Generate actual video using Veo 3
+            operation = self.veo3_client.models.generate_videos(
+                model=self.video_model,
+                prompt=segment_prompt,
+                config=types.GenerateVideosConfig(
+                    negative_prompt="cartoon, drawing, low quality, blurry, text overlay",
+                    aspect_ratio="16:9"
+                )
             )
             
-            if video_response and video_response.text:
+            print(f"🔄 Polling video generation operation...")
+            max_wait_time = 300  # 5 minutes max wait
+            poll_interval = 10   # Check every 10 seconds
+            waited_time = 0
+            
+            # Poll for completion
+            while not operation.done and waited_time < max_wait_time:
+                print(f"⏱️ Waiting for video generation... ({waited_time}s/{max_wait_time}s)")
+                time.sleep(poll_interval)
+                waited_time += poll_interval
+                operation = self.veo3_client.operations.get(operation.name)
+            
+            if operation.done and hasattr(operation, 'response'):
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 
-                # Save video description file (placeholder for actual video)
-                video_filename = f"/tmp/whiteboard_segment_1_{industry}_{timestamp}.txt"
-                with open(video_filename, 'w', encoding='utf-8') as video_file:
-                    video_file.write(f"Video Description for {segment['title']}:\n\n")
-                    video_file.write(video_response.text)
+                # Get the generated video
+                generated_video = operation.response.generated_videos[0]
                 
-                print(f"✅ Video description generated: {segment['title']}")
-                print(f"📝 Description saved: {video_filename}")
+                # Download and save the REAL video file
+                video_filename = f"/tmp/whiteboard_segment_1_{industry}_{timestamp}.mp4"
+                
+                # Download the video file
+                video_data = self.veo3_client.files.download(file=generated_video.video)
+                
+                # Save the actual video file
+                with open(video_filename, 'wb') as video_file:
+                    video_file.write(video_data)
+                
+                print(f"🎥 REAL VIDEO successfully generated and saved!")
+                print(f"📁 File: {video_filename}")
+                print(f"⏱️ Duration: 8 seconds (Veo 3)")
+                print(f"📺 Resolution: 720p, 16:9 aspect ratio")
+                print(f"🔊 Audio: Natively generated")
                 print(f"📊 Total segments for 2-minute video: {len(video_segments)} x 8s = {len(video_segments) * 8}s")
-                print(f"⏰ Current: Segment 1/15 complete (description)")
+                print(f"⏰ Current: Segment 1/15 complete - REAL VIDEO!")
                 
                 return video_filename
+            elif waited_time >= max_wait_time:
+                print(f"⏰ Video generation timeout after {max_wait_time}s")
+                print("🔄 Operation may still be processing in background")
+                return None
             else:
-                print("⚠️ No text content received from Gemini")
+                print("⚠️ Video generation failed - no response received")
                 return None
                 
         except Exception as e:
-            print(f"⚠️ Gemini video description generation error: {e}")
+            print(f"⚠️ Veo 3 video generation error: {e}")
             return None
 
     # Keep old function for backwards compatibility
@@ -586,8 +620,8 @@ SIZE: Comprehensive enough to be the ONLY visual needed - contains all informati
             print("✅ Single comprehensive whiteboard image generated!")
         
         # RESTORE VIDEO GENERATION - Both whiteboard image AND video
-        # Generate whiteboard explainer video with Veo 3 (75% chance for testing)
-        if random.random() < 0.75:  # Increased to 75% to test video generation
+        # Generate whiteboard explainer video with Veo 3 (100% chance for testing REAL videos)
+        if random.random() < 1.0:  # 100% probability to test Veo 3 real video generation
             print("🎬 Generating whiteboard explainer video...")
             whiteboard_video_path = self.generate_whiteboard_explainer_video(tool_data, industry, script)
             if whiteboard_video_path:
