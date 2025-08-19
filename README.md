@@ -4,20 +4,20 @@
 ![JMichael Labs](logo.png)
 
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/Jmichael-Labs)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-4%20Channels-blue.svg)](https://github.com/features/actions)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Single%20Channel-blue.svg)](https://github.com/features/actions)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Visual AI](https://img.shields.io/badge/Vertex%20AI-Visual%20Content-green.svg)](https://cloud.google.com/vertex-ai)
 
 ## 🎯 **PROPÓSITO PRINCIPAL**
 
-**Sistema completamente autónomo** que genera contenido educativo **narrativo visual** de calidad profesional, similar a los mejores canales de YouTube educativos (Veritasium, Johnny Harris), distribuyendo automáticamente a 4 canales Telegram especializados.
+**Sistema completamente autónomo** que genera contenido educativo **narrativo visual** de calidad profesional, similar a los mejores canales de YouTube educativos (Veritasium, Johnny Harris), distribuyendo automáticamente a un canal principal de demostración.
 
 ### ✨ **DIFERENCIADORES ÚNICOS**
 
 - **🎬 Contenido Narrativo Estilo YouTube**: Scripts de 6-8 minutos con storytelling profesional
 - **🎨 Generación Visual Automática**: Imágenes educativas con Google Vertex AI (Imagen 3.0)
 - **🧠 Scripts Inteligentes**: Gemini 1.5 Pro para narrativas educativas avanzadas
-- **📱 4 Comunidades Especializadas**: Legal, Medical, Senior, General AI
+- **📱 Canal Único de Demostración**: Contenido clasificado por industria en un solo lugar
 - **🔄 70% Visual + 30% Texto**: Mix inteligente de contenido
 - **⚡ Nunca Se Repite**: Sistema de hash + 44+ herramientas AI únicas
 
@@ -28,11 +28,13 @@
 ### 📊 **DISTRIBUCIÓN ACTUAL**
 ```
 Sistema Visual AI Education Engine
-├── 4 Canales Telegram Especializados
-│   ├── @LegalAIAcademy - Legal AI Visual Learning
-│   ├── @HealthAIInsights - Medical AI Visual Education  
-│   ├── @SeniorTechGuide - Senior-Friendly AI Visual Guide
-│   └── @AIEducationHub_bot - AI Education Visual Hub
+├── Canal Principal de Demostración
+│   └── @AIEducationHub_bot - Todo el contenido clasificado por industria
+├── Clasificación Automática por Industria
+│   ├── 🏛️ Legal AI - Sector legal y compliance
+│   ├── 🏥 Medical AI - Healthcare e innovación médica
+│   ├── 👴 Senior Tech - Tecnología senior-friendly
+│   └── 🧠 General AI - Educación IA general
 ├── Google Vertex AI Integration
 │   ├── Gemini 1.5 Pro - Narrative Script Generation
 │   ├── Imagen 3.0 - Educational Image Creation
@@ -149,12 +151,9 @@ Join our Legal AI community for visual tutorials and case studies
 
 ## 🚀 **CONFIGURACIÓN DE PRODUCCIÓN**
 
-### 🔑 **Environment Variables Requeridas (9 Variables):**
+### 🔑 **Environment Variables Requeridas (5 Variables):**
 ```bash
-# Telegram Bot Tokens (4 channels)
-TELEGRAM_LEGAL_TOKEN=7xxxxxxx:AAGxxxxxxxxx
-TELEGRAM_MEDICAL_TOKEN=7xxxxxxx:AAGxxxxxxxxx  
-TELEGRAM_SENIOR_TOKEN=7xxxxxxx:AAGxxxxxxxxx
+# Telegram Bot Token (single main channel)
 TELEGRAM_GENERAL_TOKEN=7xxxxxxx:AAGxxxxxxxxx
 TELEGRAM_CHAT_ID=xxxxxxxxx
 
@@ -184,11 +183,11 @@ python-telegram-bot>=20.5
 
 ### 🎯 **Archivos Principales:**
 ```
-reddit_ai_bot_production/
+AI-Automation-Labs/
 ├── 🎬 visual_content_engine.py         # Vertex AI visual generation
-├── 🚀 multi_platform_engine.py         # Main 4-channel publishing engine
+├── 🚀 multi_platform_engine.py         # Main single-channel publishing engine
 ├── 🎭 infinite_content_engine.py       # Dynamic content generation
-├── ⚙️ .github/workflows/emergency_fix.yml # 4-channel automation
+├── ⚙️ .github/workflows/emergency_fix.yml # Single-channel automation
 └── 📋 requirements.txt                  # Dependencies with Vertex AI
 ```
 
@@ -247,21 +246,20 @@ reddit_ai_bot_production/
 
 ### 🖥️ **Local Testing:**
 ```bash
-cd /path/to/reddit_ai_bot_production
+cd /path/to/AI-Automation-Labs
 python3 multi_platform_engine.py
 ```
 
 ### ⚙️ **GitHub Actions (Producción):**
 ```bash
 # Automático 3x diario o manual dispatch
-GitHub → Actions → "AI Education System - 4 Telegram Channel Automation"
+GitHub → Actions → "AI Education System - Single Channel Automation"
 ```
 
 ### 📱 **Verificar Resultados:**
-- **Legal**: https://t.me/LegalAIAcademy
-- **Medical**: https://t.me/HealthAIInsights  
-- **Senior**: https://t.me/SeniorTechGuide
-- **General**: https://t.me/AIEducationHub_bot
+- **Canal Principal**: https://t.me/AIEducationHub_bot
+  - Todo el contenido clasificado por industria
+  - 🏛️ Legal AI | 🏥 Medical AI | 👴 Senior Tech | 🧠 General AI
 
 ### 🎨 **Verificar Imágenes Generadas:**
 Las imágenes se generan automáticamente y se guardan temporalmente en `/tmp/` durante la ejecución. En producción, podrían integrarse con cloud storage para persistencia.
@@ -270,7 +268,7 @@ Las imágenes se generan automáticamente y se guardan temporalmente en `/tmp/` 
 
 ## 📞 **SUPPORT & CONTACT**
 
-- **Issues**: [GitHub Issues](https://github.com/Jmichael-Labs/reddit-ai-problem-solver/issues)
+- **Issues**: [GitHub Issues](https://github.com/Jmichael-Labs/AI-Automation-Labs/issues)
 - **Email**: jmichaeloficial@gmail.com
 - **Instagram**: [@jmichaeloficial](https://instagram.com/jmichaeloficial)
 - **System Status**: Monitor via Telegram notifications
@@ -291,4 +289,4 @@ This project is proprietary to JMichael Labs. All rights reserved.
 
 *Transforming AI education through intelligent visual automation*
 
-**System Status**: ✅ Production Ready | **Channels**: 4 Active | **Visual Engine**: Vertex AI | **Cost**: ~$30/month
+**System Status**: ✅ Production Ready | **Channel**: @AIEducationHub_bot | **Visual Engine**: Vertex AI | **Cost**: ~$30/month
