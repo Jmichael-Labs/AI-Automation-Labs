@@ -603,171 +603,27 @@ End with smooth transition setup for next segment.
             try:
                 print(f"🎬 Using Veo 3 API for REAL newsroom video generation...")
                 
-                # Generate ACTUAL VIDEO with Vertex AI (bypass Gemini API)
-                print("🔧 BYPASSING GEMINI API - Using Vertex AI direct credentials")
+                # Import clean Veo 3 generator
+                from veo3_generator_clean import generate_single_video_segment
                 
-                # Use Vertex AI directly instead of Gemini API (user has GitHub credentials)
-                if not VERTEX_AI_AVAILABLE:
-                    raise Exception("Vertex AI not available - need project credentials")
+                # Generate video using clean function
+                result = generate_single_video_segment(segment_prompt, i, industry)
                 
-                # Generate actual video using Vertex AI direct endpoint
-                # Using user's youtube-pro-469213 project with higher limits
-                
-                # USER'S PROJECT CONFIGURATION - Veo 3 with correct GenAI Client
-                # Use GenAI Client for Veo 3 (correct 2025 approach)
-                import time
-                from google import genai
-                from google.genai import types
-                
-                # Initialize GenAI client for Veo 3
-                client = genai.Client()
-                
-                # Generate video directly with Vertex AI
-                print(f"🚀 GENERATING with Vertex AI - Project: youtube-pro-469213")
-                print(f"💳 Using your $300 credits directly (no Gemini limits)")
-                
-                try:
-                    # Generate video with Veo 3 using correct GenAI Client
-                    operation = client.models.generate_videos(
-                        model="veo-3.0-generate-preview",
-                        prompt=segment_prompt,
-                        config=types.GenerateVideosConfig(
-                            aspect_ratio="16:9",
-                            duration_seconds=8,
-                            response_count=1
-                        )
-                    )
+                if result:
+                    generated_segments.append({
+                        "segment_number": i,
+                        "title": segment['title'],
+                        "file_path": result['file_path'],
+                        "file_size": result['file_size'],
+                        "narration": segment.get('narration', segment['content']),
+                        "source": "veo3_real"
+                    })
                     
-                    # Poll the operation status until the video is ready
-                    print(f"⏳ Waiting for Veo 3 video generation to complete...")
-                    while not operation.done:
-                        time.sleep(10)
-                        operation = client.operations.get(operation)
-                    
-                    # Process completed operation
-                    if operation.response.generated_videos:
-                        # Save the video file
-                        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                        video_filename = f"/tmp/newsroom_segment_{i}_{industry}_{timestamp}.mp4"
-                        
-                        # Get video data and download
-                        generated_video = operation.response.generated_videos[0]
-                        client.files.download(file=generated_video.video)
-                        generated_video.video.save(video_filename)
-                        
-                        # Verify file was saved
-                        if os.path.exists(video_filename):
-                            file_size = os.path.getsize(video_filename)
-                            print(f"🎥 VERTEX AI VIDEO successfully generated!")
-                            print(f"📁 File: {video_filename}")
-                            print(f"📊 File size: {file_size} bytes") 
-                            print(f"⏱️ Duration: 8 seconds (Veo 3 Fast)")
-                            print(f"📺 Resolution: 720p, 16:9 aspect ratio")
-                            print(f"🎙️ Audio: Professional English narration")
-                            print(f"✅ Using Vertex AI credits (no Gemini quota)")
-                            
-                            generated_segments.append({
-                                "segment_number": i,
-                                "title": segment['title'],
-                                "file_path": video_filename,
-                                "file_size": file_size,
-                                "narration": segment.get('narration', segment['content']),
-                                "source": "vertex_ai_direct"
-                            })
-                            
-                            print(f"🎯 Segment {i}/{len(selected_segments)} completed successfully!")
-                            continue
-                        else:
-                            print(f"❌ ERROR: Video file was not saved to {video_filename}")
-                            raise Exception("Video file not saved")
-                    else:
-                        raise Exception("No video generated by Vertex AI")
-                        
-                except Exception as vertex_error:
-                    print(f"⚠️ Vertex AI generation failed: {vertex_error}")
-                    print("🔄 Falling back to Gemini API...")
+                    print(f"🎯 Segment {i}/{len(selected_segments)} completed successfully!")
+                    continue
+                else:
+                    raise Exception("Veo 3 generation failed")
                 
-                print("🚀 Using Vertex AI direct endpoint (youtube-pro-469213)")
-                print("💰 Higher limits than Gemini API - generating 12 segments!")
-                
-                # Use direct API call instead of SDK (following user's example)
-                import subprocess
-                import json
-                import tempfile
-                
-                # Create request file
-                with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
-                    json.dump(vertex_request, f)
-                    request_file = f.name
-                
-                # Make API call using gcloud auth - USER'S EXACT CONFIGURATION
-                api_endpoint = "us-central1-aiplatform.googleapis.com"
-                project_id = "youtube-pro-469213"
-                location_id = "us-central1"
-                model_id = "veo-3.0-fast-generate-001"  # User specified: Fast model
-                
-                curl_cmd = [
-                    "curl", "-X", "POST",
-                    "-H", "Content-Type: application/json",
-                    "-H", f"Authorization: Bearer $(gcloud auth print-access-token)",
-                    f"https://{api_endpoint}/v1/projects/{project_id}/locations/{location_id}/publishers/google/models/{model_id}:predictLongRunning",
-                    "-d", f"@{request_file}"
-                ]
-                
-                try:
-                    result = subprocess.run(curl_cmd, capture_output=True, text=True, shell=True)
-                    operation_response = json.loads(result.stdout)
-                    operation_name = operation_response.get('name', '')
-                    print(f"✅ Vertex AI operation started: {operation_name[:50]}...")
-                    
-                    # Extract operation ID for fetch (following user's pattern)
-                    operation_id = operation_name.strip('"')
-                    
-                    # Create fetch request file
-                    fetch_request = {
-                        "operationName": operation_id
-                    }
-                    
-                    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
-                        json.dump(fetch_request, f)
-                        fetch_file = f.name
-                    
-                    # Create mock operation object for compatibility with polling
-                    class MockOperation:
-                        def __init__(self, name, fetch_file, api_endpoint, project_id, location_id, model_id):
-                            self.name = name
-                            self.done = False
-                            self.fetch_file = fetch_file
-                            self.api_endpoint = api_endpoint
-                            self.project_id = project_id
-                            self.location_id = location_id
-                            self.model_id = model_id
-                    
-                    operation = MockOperation(operation_id, fetch_file, api_endpoint, project_id, location_id, model_id)
-                    
-                except Exception as api_error:
-                    print(f"⚠️ Vertex AI direct call failed: {api_error}")
-                    # Fallback to SDK method
-                    operation = self.veo3_client.models.generate_videos(
-                        model=self.video_model,
-                        prompt=segment_prompt,
-                        config=types.GenerateVideosConfig(
-                            negative_prompt="cartoon, amateur, low quality, blurry, unprofessional, hand-drawn",
-                            aspect_ratio="16:9"
-                        )
-                    )
-                
-                print(f"🔄 Polling video generation operation...")
-                max_wait_time = 300  # 5 minutes max wait
-                poll_interval = 10   # Check every 10 seconds
-                waited_time = 0
-                
-                # Poll for completion
-                while not operation.done and waited_time < max_wait_time:
-                    print(f"⏱️ Waiting for video generation... ({waited_time}s/{max_wait_time}s)")
-                    time.sleep(poll_interval)
-                    waited_time += poll_interval
-                    operation = self.veo3_client.operations.get(operation)
                 
                 if operation.done and hasattr(operation, 'result'):
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
