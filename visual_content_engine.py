@@ -9,11 +9,17 @@ import json
 import time
 import requests
 from datetime import datetime
-from google.cloud import aiplatform
-from google.cloud.aiplatform.gapic.schema import predict
-import vertexai
-from vertexai.preview.vision_models import ImageGenerationModel
-from vertexai.preview.generative_models import GenerativeModel
+# Optional Vertex AI imports - graceful fallback if not available
+try:
+    from google.cloud import aiplatform
+    from google.cloud.aiplatform.gapic.schema import predict
+    import vertexai
+    from vertexai.preview.vision_models import ImageGenerationModel
+    from vertexai.preview.generative_models import GenerativeModel
+    VERTEX_AI_AVAILABLE = True
+except ImportError:
+    print("⚠️ Vertex AI dependencies not available - using Veo 3 only mode")
+    VERTEX_AI_AVAILABLE = False
 import google.generativeai as genai
 from google import genai as google_genai
 from google.genai import types
@@ -31,65 +37,93 @@ class VisualContentEngine:
         self.gemini_client = None
         self.video_model = None
         
-        try:
-            # Initialize Vertex AI
-            project_id = os.getenv('GOOGLE_PROJECT_ID', 'ai-education-hub-428332946540')
-            location = "us-central1"
-            
-            vertexai.init(project=project_id, location=location)
-            
-            # Initialize models with correct 2025 versions
+        if VERTEX_AI_AVAILABLE:
             try:
-                self.text_model = GenerativeModel("gemini-2.5-pro")  # Latest advanced reasoning
-            except:
+                # Initialize Vertex AI
+                project_id = os.getenv('GOOGLE_PROJECT_ID', 'ai-education-hub-428332946540')
+                location = "us-central1"
+                
+                vertexai.init(project=project_id, location=location)
+                
+                # Initialize models with correct 2025 versions
                 try:
-                    self.text_model = GenerativeModel("gemini-2.5-flash")  # Best price-performance
+                    self.text_model = GenerativeModel("gemini-2.5-pro")  # Latest advanced reasoning
                 except:
                     try:
-                        self.text_model = GenerativeModel("gemini-2.0-flash")  # Next-gen features
+                        self.text_model = GenerativeModel("gemini-2.5-flash")  # Best price-performance
                     except:
-                        self.text_model = None
+                        try:
+                            self.text_model = GenerativeModel("gemini-2.0-flash")  # Next-gen features
+                        except:
+                            self.text_model = None
+                
+                try:
+                    self.image_model = ImageGenerationModel.from_pretrained("imagegeneration@006")
+                except:
+                    self.image_model = None
             
-            try:
-                self.image_model = ImageGenerationModel.from_pretrained("imagegeneration@006")
-            except:
-                self.image_model = None
+                try:
+                    # Configure Gemini API for Veo 3 video generation  
+                    gemini_api_key = os.getenv('GEMINI_API_KEY')
+                    if gemini_api_key:
+                        # Configure both APIs for different purposes
+                        genai.configure(api_key=gemini_api_key)
+                        self.gemini_client = genai
+                        
+                        # Initialize Veo 3 client for actual video generation
+                        try:
+                            self.veo3_client = google_genai.Client(api_key=gemini_api_key)
+                            self.video_model = "veo-3.0-generate-preview"
+                            print("✅ Veo 3 API configured for REAL video generation")
+                        except Exception as veo_error:
+                            print(f"⚠️ Veo 3 client error: {veo_error}")
+                            self.veo3_client = None
+                            self.video_model = "gemini-2.0-flash-exp"  # Fallback for descriptions
+                            print("✅ Gemini API configured for video descriptions (Veo 3 fallback)")
+                    else:
+                        print("⚠️ GEMINI_API_KEY not found in environment")
+                        self.gemini_client = None
+                        self.veo3_client = None
+                        self.video_model = None
+                except Exception as video_error:
+                    print(f"⚠️ Gemini API configuration error: {video_error}")
+                    self.gemini_client = None 
+                    self.veo3_client = None
+                    self.video_model = None
+                self.vertex_ai_available = True
+                print("✅ Vertex AI models initialized successfully")
+                
+            except Exception as e:
+                print(f"⚠️ Vertex AI not available: {e}")
+                print("🔄 Using fallback content generation mode")
+                self.vertex_ai_available = False
+        else:
+            print("🔄 Vertex AI dependencies not installed - Veo 3 only mode")
+            self.vertex_ai_available = False
             
+            # Still try to initialize Gemini API for Veo 3 even without Vertex AI
             try:
-                # Configure Gemini API for Veo 3 video generation  
                 gemini_api_key = os.getenv('GEMINI_API_KEY')
                 if gemini_api_key:
-                    # Configure both APIs for different purposes
                     genai.configure(api_key=gemini_api_key)
                     self.gemini_client = genai
                     
-                    # Initialize Veo 3 client for actual video generation
                     try:
                         self.veo3_client = google_genai.Client(api_key=gemini_api_key)
                         self.video_model = "veo-3.0-generate-preview"
-                        print("✅ Veo 3 API configured for REAL video generation")
+                        print("✅ Veo 3 API configured for REAL video generation (no Vertex AI)")
                     except Exception as veo_error:
                         print(f"⚠️ Veo 3 client error: {veo_error}")
                         self.veo3_client = None
-                        self.video_model = "gemini-2.0-flash-exp"  # Fallback for descriptions
+                        self.video_model = "gemini-2.0-flash-exp"
                         print("✅ Gemini API configured for video descriptions (Veo 3 fallback)")
                 else:
                     print("⚠️ GEMINI_API_KEY not found in environment")
-                    self.gemini_client = None
-                    self.veo3_client = None
-                    self.video_model = None
-            except Exception as video_error:
-                print(f"⚠️ Gemini API configuration error: {video_error}")
+            except Exception as e:
+                print(f"⚠️ Gemini API configuration error: {e}")
                 self.gemini_client = None 
                 self.veo3_client = None
                 self.video_model = None
-            self.vertex_ai_available = True
-            print("✅ Vertex AI models initialized successfully")
-            
-        except Exception as e:
-            print(f"⚠️ Vertex AI not available: {e}")
-            print("🔄 Using fallback content generation mode")
-            self.vertex_ai_available = False
         
         # Content themes for journalistic/news style content
         self.narrative_themes = {
