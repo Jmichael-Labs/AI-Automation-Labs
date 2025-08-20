@@ -1,10 +1,9 @@
 name: Deploy with Vertex AI Authentication
 
 on:
-  push:
-    branches: [ main ]
-  schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:  # Manual execution only
+  # schedule:
+  #   - cron: '*/30 * * * *'  # DISABLED - was sending videos every 30 minutes
 
 jobs:
   deploy:
@@ -12,8 +11,9 @@ jobs:
     timeout-minutes: 30  # Increased for video generation
     
     env:
-      # Gemini API Key for Veo 3 (NOT Vertex AI)
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # Vertex AI credentials (original approach)
+      GOOGLE_CLOUD_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       
     steps:
     - uses: actions/checkout@v4
@@ -32,10 +32,11 @@ jobs:
       run: |
         pip install -r requirements.txt
         
-    - name: Verify Gemini API configuration
+    - name: Verify Vertex AI configuration
       run: |
-        echo "🔑 Gemini API Key configured for Veo 3"
-        echo "API Key: ${GEMINI_API_KEY:0:10}...${GEMINI_API_KEY: -4}"
+        echo "🔑 Vertex AI credentials configured for Veo 3"
+        echo "Project: ${GOOGLE_CLOUD_PROJECT}"
+        echo "Creds: ${GOOGLE_APPLICATION_CREDENTIALS:0:20}..."
         
     - name: Test Vertex AI authentication
       run: |
