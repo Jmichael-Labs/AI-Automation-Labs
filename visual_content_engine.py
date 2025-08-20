@@ -606,11 +606,12 @@ End with smooth transition setup for next segment.
             try:
                 print(f"🎬 Using Veo 3 API for REAL newsroom video generation...")
                 
-                # Import hybrid video generator (guaranteed to work)
-                from hybrid_video_generator import generate_guaranteed_video_segment
+                # Import smart video generator (detects available models)
+                from smart_video_generator import generate_smart_video_segment
                 
-                # Generate video using hybrid function (Veo 3 + Mock fallback)
-                result = generate_guaranteed_video_segment(segment_prompt, i, industry)
+                # Generate video using smart function (detects Veo availability)
+                tool_name = tool_data.get('name', 'AI Tool')
+                result = generate_smart_video_segment(segment_prompt, i, industry, tool_name)
                 
                 if result:
                     generated_segments.append({
