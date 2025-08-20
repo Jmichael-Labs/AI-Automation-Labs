@@ -1,15 +1,15 @@
 # 🔐 GITHUB SECRETS REQUERIDOS PARA VEO 3
 
-## ⚠️ CONFIGURACIÓN CRÍTICA NECESARIA
+## ⚠️ CONFIGURACIÓN CRÍTICA CORREGIDA
 
-Para que Veo 3 funcione en GitHub Actions, debes configurar estos secrets:
+**DESCUBRIMIENTO:** Veo 3 requiere **Gemini Developer API**, NO Vertex AI
 
 ### 📋 SECRETS REQUERIDOS:
 
-1. **GOOGLE_APPLICATION_CREDENTIALS**
-   - Contenido del archivo JSON de service account
-   - Proyecto: youtube-pro-469213
-   - Debe tener permisos para Vertex AI
+1. **GEMINI_API_KEY** ⚡ CRÍTICO ⚡
+   - API Key de Gemini Developer (no Vertex AI)
+   - Obtener en: https://aistudio.google.com/app/apikey
+   - Veo 3 solo funciona con Gemini Developer API
 
 2. **TELEGRAM_GENERAL_TOKEN** (ya configurado)
    - Token del bot de Telegram
@@ -20,17 +20,23 @@ Para que Veo 3 funcione en GitHub Actions, debes configurar estos secrets:
 6. **REDDIT_PASSWORD** (ya configurado)
 7. **EMAIL_CONTACT** (ya configurado)
 
-## 🚨 PROBLEMA ACTUAL:
+## 🚨 PROBLEMA IDENTIFICADO:
 
-**Veo 3 falla porque GitHub Actions no tiene acceso al service account JSON.**
+**Error:** `This method is only supported in the Gemini Developer client.`
 
-Sin `GOOGLE_APPLICATION_CREDENTIALS`, el GenAI Client no puede autenticarse con Vertex AI.
+**Causa:** Configuramos Vertex AI, pero Veo 3 requiere Gemini Developer API.
 
-## ✅ SOLUCIÓN:
+## ✅ SOLUCIÓN CORRECTA:
 
-1. Ve a: GitHub Repository → Settings → Secrets and variables → Actions
-2. Agrega: `GOOGLE_APPLICATION_CREDENTIALS` 
-3. Valor: Todo el contenido del archivo JSON de service account
+### 🔑 OBTENER GEMINI API KEY:
+1. Ve a: https://aistudio.google.com/app/apikey
+2. Crea un nuevo API Key
+3. Copia la key completa
+
+### 📝 CONFIGURAR EN GITHUB:
+1. Ve a: GitHub Repository → Settings → Secrets and variables → Actions  
+2. Agrega: `GEMINI_API_KEY`
+3. Valor: La API key completa de Gemini
 
 ## 🧪 VERIFICACIÓN:
 

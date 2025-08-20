@@ -21,17 +21,18 @@ def test_veo3_basic():
         print(f"❌ Import failed: {e}")
         return False
     
-    # Test 2: Configure Vertex AI and initialize client
+    # Test 2: Configure Gemini API and initialize client  
     try:
-        # Configure for Vertex AI (same as production)
-        os.environ['GOOGLE_GENAI_USE_VERTEXAI'] = 'true'
-        os.environ['GOOGLE_CLOUD_PROJECT'] = 'youtube-pro-469213'
-        os.environ['GOOGLE_CLOUD_LOCATION'] = 'us-central1'
+        # Check for Gemini API key (required for Veo 3)
+        gemini_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
+        if not gemini_key:
+            raise Exception("GEMINI_API_KEY required for Veo 3")
         
-        print("🔧 Configured Vertex AI environment variables")
+        print("🔧 Found Gemini API Key for Veo 3")
+        print(f"🔑 Key: {'*' * 10}...{gemini_key[-4:]}")
         
         client = genai.Client()
-        print("✅ GenAI Client initialized with Vertex AI")
+        print("✅ GenAI Client initialized with Gemini API")
     except Exception as e:
         print(f"❌ Client initialization failed: {e}")
         print("💡 Possible issues:")

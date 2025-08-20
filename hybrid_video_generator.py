@@ -74,13 +74,16 @@ def generate_guaranteed_video_segment(segment_prompt, segment_number, industry):
         
         print(f"🚀 Attempting Veo 3 generation...")
         
-        # Configure environment for Vertex AI
+        # Configure environment for Gemini Developer API (Veo 3 requirement)
         import os
-        os.environ['GOOGLE_GENAI_USE_VERTEXAI'] = 'true'
-        os.environ['GOOGLE_CLOUD_PROJECT'] = 'youtube-pro-469213'
-        os.environ['GOOGLE_CLOUD_LOCATION'] = 'us-central1'
         
-        print(f"🔧 Configured Vertex AI: project=youtube-pro-469213, location=us-central1")
+        # Check if we have GEMINI_API_KEY (required for Veo 3)
+        gemini_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
+        if not gemini_key:
+            raise Exception("GEMINI_API_KEY required for Veo 3 - not Vertex AI credentials")
+        
+        print(f"🔧 Configured Gemini Developer API for Veo 3")
+        print(f"🔑 API Key: {'*' * 10}...{gemini_key[-4:]}")
         
         # Initialize GenAI client with Vertex AI configuration
         client = genai.Client()

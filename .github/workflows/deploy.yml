@@ -12,10 +12,8 @@ jobs:
     timeout-minutes: 30  # Increased for video generation
     
     env:
-      # Vertex AI Authentication Variables (from GitHub Secrets)
-      GOOGLE_GENAI_USE_VERTEXAI: 'true'
-      GOOGLE_CLOUD_PROJECT: 'youtube-pro-469213'
-      GOOGLE_CLOUD_LOCATION: 'us-central1'
+      # Gemini API Key for Veo 3 (NOT Vertex AI)
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       
     steps:
     - uses: actions/checkout@v4
@@ -34,13 +32,10 @@ jobs:
       run: |
         pip install -r requirements.txt
         
-    - name: Set up Google Cloud authentication
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+    - name: Verify Gemini API configuration
       run: |
-        echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/gcp-key.json
-        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json
-        echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json" >> $GITHUB_ENV
+        echo "🔑 Gemini API Key configured for Veo 3"
+        echo "API Key: ${GEMINI_API_KEY:0:10}...${GEMINI_API_KEY: -4}"
         
     - name: Test Vertex AI authentication
       run: |
