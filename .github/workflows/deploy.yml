@@ -1,0 +1,58 @@
+name: Deploy with Vertex AI Authentication
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # Increased for video generation
+    
+    env:
+      # Vertex AI Authentication Variables (from GitHub Secrets)
+      GOOGLE_GENAI_USE_VERTEXAI: 'true'
+      GOOGLE_CLOUD_PROJECT: 'youtube-pro-469213'
+      GOOGLE_CLOUD_LOCATION: 'us-central1'
+      
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+        
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Set up Google Cloud authentication
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      run: |
+        echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/gcp-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json
+        echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json" >> $GITHUB_ENV
+        
+    - name: Test Vertex AI authentication
+      run: |
+        python test_veo3_simple.py
+        
+    - name: Run main application
+      env:
+        TELEGRAM_GENERAL_TOKEN: ${{ secrets.TELEGRAM_GENERAL_TOKEN }}
+        REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+        REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+        REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+        EMAIL_CONTACT: ${{ secrets.EMAIL_CONTACT }}
+      run: |
+        python multi_platform_engine.py
