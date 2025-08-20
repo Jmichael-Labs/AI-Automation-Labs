@@ -10,20 +10,30 @@ import subprocess
 from datetime import datetime
 
 def create_mock_video(segment_prompt, segment_number, industry):
-    """Create a mock video as fallback - GUARANTEED to work"""
+    """Create an informative mock video as fallback - GUARANTEED to work"""
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     mock_filename = f"/tmp/mock_newsroom_segment_{segment_number}_{industry}_{timestamp}.mp4"
     
-    # Create a simple mock video (black screen with text)
+    # Create a more informative mock video
     try:
-        # Extract key info from prompt for overlay text
-        segment_title = f"Segment {segment_number}: AI News Update"
+        # Extract meaningful info from prompt
+        segment_titles = {
+            1: "🚀 AI News Opening",
+            2: "🔍 Tech Analysis", 
+            3: "💡 Innovation Update"
+        }
         
+        title = segment_titles.get(segment_number, f"AI Update {segment_number}")
+        subtitle = f"Veo 3 Unavailable - Mock Content"
+        
+        # Create a more professional looking mock with gradient background
         mock_cmd = [
             "ffmpeg", "-f", "lavfi",
-            "-i", f"color=c=black:s=1280x720:d=8:r=30",
-            "-vf", f"drawtext=text='{segment_title}':fontcolor=white:fontsize=48:x=(w-text_w)/2:y=(h-text_h)/2",
+            "-i", f"color=c=0x1a1a2e:s=1280x720:d=8:r=30",
+            "-vf", (f"drawtext=text='{title}':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=(h-text_h)/2-50,"
+                   f"drawtext=text='{subtitle}':fontcolor=0x888888:fontsize=32:x=(w-text_w)/2:y=(h-text_h)/2+30,"
+                   f"drawtext=text='Segment {segment_number}/3':fontcolor=0x666666:fontsize=24:x=50:y=50"),
             "-c:v", "libx264", "-t", "8", "-pix_fmt", "yuv420p", "-y",
             mock_filename
         ]
@@ -64,7 +74,15 @@ def generate_guaranteed_video_segment(segment_prompt, segment_number, industry):
         
         print(f"🚀 Attempting Veo 3 generation...")
         
-        # Initialize GenAI client
+        # Configure environment for Vertex AI
+        import os
+        os.environ['GOOGLE_GENAI_USE_VERTEXAI'] = 'true'
+        os.environ['GOOGLE_CLOUD_PROJECT'] = 'youtube-pro-469213'
+        os.environ['GOOGLE_CLOUD_LOCATION'] = 'us-central1'
+        
+        print(f"🔧 Configured Vertex AI: project=youtube-pro-469213, location=us-central1")
+        
+        # Initialize GenAI client with Vertex AI configuration
         client = genai.Client()
         
         # Generate video with Veo 3
