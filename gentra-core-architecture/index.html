@@ -1,7 +1,3 @@
-Exit code: 0
-Wall time: 4.3 seconds
-Total output lines: 2014
-Output:
 <!doctype html>
 <html lang="es">
 <head>
@@ -734,7 +730,1146 @@ Output:
     display: block;
     margin-top: .25rem;
     color: #668994;
-    font: …38361 tokens truncated…trong><p>No BUY durante bearish DOWN. No SELL durante bullish UP.</p></div></div>`;
+    font: .68rem/1.4 "Cascadia Code", Consolas, monospace;
+    letter-spacing: .08em;
+  }
+
+  #gentra-visual-manual .gm-mini-core {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 7.2rem;
+    height: 7.2rem;
+    margin: .25rem auto;
+    border: 1px solid rgba(99,245,255,.22);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,245,255,.18), rgba(33,141,255,.04) 42%, transparent 64%);
+    box-shadow: inset 0 0 24px rgba(99,245,255,.07), 0 0 28px rgba(99,245,255,.08);
+  }
+
+  #gentra-visual-manual .gm-mini-core::before,
+  #gentra-visual-manual .gm-mini-core::after {
+    content: "";
+    position: absolute;
+    inset: .62rem;
+    border: 1px dashed rgba(99,245,255,.42);
+    border-radius: 50%;
+    animation: gm-spin 14s linear infinite;
+  }
+
+  #gentra-visual-manual .gm-mini-core::after {
+    inset: 1.4rem;
+    border-color: rgba(143,115,255,.55);
+    animation-duration: 20s;
+    animation-direction: reverse;
+  }
+
+  #gentra-visual-manual .gm-mini-core span {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff, #63f5ff 32%, #087b9d 72%);
+    box-shadow: 0 0 1.25rem rgba(99,245,255,.66);
+  }
+
+  #gentra-visual-manual .gm-mini-core strong {
+    position: absolute;
+    bottom: .62rem;
+    color: var(--gm-cyan);
+    font: .58rem/1 "Cascadia Code", Consolas, monospace;
+    letter-spacing: .16em;
+  }
+
+  #gentra-visual-manual .gm-side-status {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .45rem;
+  }
+
+  #gentra-visual-manual .gm-side-stat {
+    padding: .58rem;
+    border: 1px solid rgba(99,245,255,.12);
+    border-radius: .55rem;
+    background: rgba(99,245,255,.035);
+  }
+
+  #gentra-visual-manual .gm-side-stat span { display: block; color: #638691; font: .62rem/1.3 "Cascadia Code", monospace; letter-spacing: .08em; }
+  #gentra-visual-manual .gm-side-stat strong { display: block; margin-top: .2rem; color: var(--gm-cyan); font-size: .83rem; }
+
+  #gentra-visual-manual .gm-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .35rem;
+  }
+
+  #gentra-visual-manual .gm-nav .btn {
+    display: grid;
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+    align-items: center;
+    min-height: 0;
+    padding: .52rem .62rem;
+    text-align: left;
+  }
+
+  #gentra-visual-manual .gm-nav-index {
+    color: #527480;
+    font: .66rem/1 "Cascadia Code", Consolas, monospace;
+  }
+
+  #gentra-visual-manual .gm-stage {
+    position: relative;
+    min-height: 30rem;
+    padding: 1rem;
+    border: 1px solid rgba(99,245,255,.1);
+    border-radius: 1rem;
+    background:
+      linear-gradient(rgba(99,245,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,245,255,.025) 1px, transparent 1px),
+      rgba(2, 10, 17, .46);
+    background-size: 28px 28px;
+    box-shadow: inset 0 0 80px rgba(0,0,0,.34), 0 18px 55px rgba(0,0,0,.2);
+    overflow: hidden;
+  }
+
+  #gentra-visual-manual .gm-stage::before,
+  #gentra-visual-manual .gm-stage::after {
+    content: "";
+    position: absolute;
+    width: 3.4rem;
+    height: 3.4rem;
+    pointer-events: none;
+  }
+
+  #gentra-visual-manual .gm-stage::before { top: .55rem; left: .55rem; border-top: 1px solid var(--gm-cyan); border-left: 1px solid var(--gm-cyan); }
+  #gentra-visual-manual .gm-stage::after { right: .55rem; bottom: .55rem; border-right: 1px solid var(--gm-cyan); border-bottom: 1px solid var(--gm-cyan); }
+  #gentra-visual-manual .gm-stage > * { position: relative; z-index: 1; }
+
+  #gentra-visual-manual .gm-progress {
+    position: relative;
+    height: 2px;
+    background: rgba(99,245,255,.09);
+    overflow: visible;
+  }
+
+  #gentra-visual-manual .gm-progress > span {
+    box-shadow: 0 0 12px var(--gm-cyan);
+  }
+
+  #gentra-visual-manual .gm-progress > span::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: .45rem;
+    height: .45rem;
+    border-radius: 50%;
+    background: var(--gm-cyan);
+    box-shadow: 0 0 1rem var(--gm-cyan);
+    transform: translate(50%, -50%);
+  }
+
+  #gentra-visual-manual .gm-chapter-head {
+    align-items: flex-end;
+    padding: .25rem .2rem 0;
+  }
+
+  #gentra-visual-manual .gm-chapter-kicker {
+    color: var(--gm-cyan);
+    font: .66rem/1.4 "Cascadia Code", Consolas, monospace;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  #gentra-visual-manual .gm-chapter-head h1 {
+    margin: .18rem 0 .2rem;
+    font-size: clamp(1.45rem, 2.5vw, 2.45rem);
+    line-height: 1.1;
+    letter-spacing: -.035em;
+  }
+
+  #gentra-visual-manual .gm-chapter-head p { max-width: 72ch; margin: 0; }
+
+  #gentra-visual-manual .gm-svg-stage {
+    position: relative;
+    min-height: 20rem;
+    padding: .5rem;
+    border: 1px solid rgba(99,245,255,.11);
+    border-radius: .85rem;
+    background: radial-gradient(circle at 50% 48%, rgba(99,245,255,.09), transparent 42%), rgba(1, 8, 14, .48);
+    perspective: 1000px;
+    overflow: hidden;
+  }
+
+  #gentra-visual-manual .gm-svg-stage::after {
+    content: "";
+    position: absolute;
+    inset: 12% 8%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(99,245,255,.05), transparent 62%);
+    filter: blur(18px);
+    pointer-events: none;
+  }
+
+  #gentra-visual-manual .gm-svg { position: relative; z-index: 1; filter: drop-shadow(0 0 9px rgba(99,245,255,.09)); }
+  #gentra-visual-manual .gm-svg-energy { animation: gm-energy-flow 7s linear infinite; }
+  #gentra-visual-manual .gm-svg-halo { animation: gm-halo-pulse 3.4s ease-in-out infinite; transform-origin: center; }
+
+  #gentra-visual-manual .gm-reactor-scene {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 34rem;
+    perspective: 1200px;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  #gentra-visual-manual .gm-reactor-scene.is-compact { min-height: 20rem; }
+  #gentra-visual-manual .gm-reactor-scene.is-compact .gm-reactor-deck { width: min(100%, 31rem); }
+  #gentra-visual-manual .gm-reactor-scene.is-compact .gm-reactor-readout { display: none; }
+
+  #gentra-visual-manual .gm-reactor-scene::before {
+    content: "";
+    position: absolute;
+    width: min(76vw, 46rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,245,255,.18), rgba(33,141,255,.08) 24%, transparent 66%);
+    filter: blur(20px);
+  }
+
+  #gentra-visual-manual .gm-reactor-deck {
+    position: relative;
+    width: min(100%, 44rem);
+    transform-style: preserve-3d;
+    transform: rotateX(var(--gm-rx, 0deg)) rotateY(var(--gm-ry, 0deg));
+    transition: transform .18s ease-out;
+  }
+
+  #gentra-visual-manual .gm-reactor-svg { display: block; width: 100%; overflow: visible; filter: drop-shadow(0 0 24px rgba(99,245,255,.16)); }
+  #gentra-visual-manual .gm-reactor-ring { fill: none; stroke: rgba(99,245,255,.48); stroke-width: 1.6; stroke-dasharray: 8 14; transform-origin: 400px 400px; animation: gm-spin 18s linear infinite; }
+  #gentra-visual-manual .gm-reactor-ring.r2 { stroke: rgba(143,115,255,.46); stroke-dasharray: 3 12; animation-duration: 26s; animation-direction: reverse; }
+  #gentra-visual-manual .gm-reactor-ring.r3 { stroke: rgba(80,255,189,.34); stroke-dasharray: 22 12; animation-duration: 34s; }
+  #gentra-visual-manual .gm-reactor-sweep { transform-origin: 400px 400px; animation: gm-spin 8s linear infinite; }
+  #gentra-visual-manual .gm-reactor-core-pulse { transform-origin: 400px 400px; animation: gm-core-breathe 2.8s ease-in-out infinite; }
+  #gentra-visual-manual .gm-reactor-orbit-node { transition: filter .2s ease; }
+  #gentra-visual-manual .gm-reactor-orbit-node:hover { filter: drop-shadow(0 0 12px var(--gm-cyan)); }
+  #gentra-visual-manual .gm-reactor-label { fill: #c8faff; font: 600 13px "Cascadia Code", Consolas, monospace; text-anchor: middle; letter-spacing: .08em; }
+  #gentra-visual-manual .gm-reactor-micro { fill: #688f9a; font: 11px "Cascadia Code", Consolas, monospace; text-anchor: middle; }
+
+  #gentra-visual-manual .gm-reactor-readout {
+    position: absolute;
+    right: 2%;
+    bottom: 4%;
+    display: grid;
+    gap: .32rem;
+    min-width: 10rem;
+    padding: .7rem;
+    border-left: 1px solid var(--gm-cyan);
+    background: linear-gradient(90deg, rgba(99,245,255,.07), transparent);
+    color: #7ea5af;
+    font: .65rem/1.45 "Cascadia Code", Consolas, monospace;
+    transform: translateZ(70px);
+  }
+
+  #gentra-visual-manual .gm-reactor-readout strong { color: var(--gm-cyan); }
+
+  #gentra-visual-manual .gm-atlas {
+    display: grid;
+    grid-template-columns: minmax(10rem, .28fr) minmax(0, .72fr);
+    gap: .8rem;
+  }
+
+  #gentra-visual-manual .gm-atlas-nav { display: grid; align-content: start; gap: .4rem; }
+  #gentra-visual-manual .gm-atlas-view { position: relative; min-height: 28rem; padding: .45rem; border: 1px solid rgba(99,245,255,.14); border-radius: .9rem; background: #020a10; overflow: hidden; }
+  #gentra-visual-manual .gm-atlas-view img { display: block; width: 100%; height: 100%; min-height: 27rem; object-fit: contain; filter: drop-shadow(0 0 20px rgba(99,245,255,.12)); }
+  #gentra-visual-manual .gm-atlas-caption { position: absolute; left: 1rem; right: 1rem; bottom: 1rem; display: flex; justify-content: space-between; gap: .7rem; padding: .6rem .72rem; border: 1px solid rgba(99,245,255,.17); border-radius: .55rem; background: rgba(2,10,16,.8); backdrop-filter: blur(12px); }
+
+  #gentra-visual-manual .gm-launch {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background:
+      radial-gradient(circle at center, rgba(18, 98, 127, .2), transparent 35%),
+      linear-gradient(135deg, #010509, #03121d 55%, #010509);
+    overflow: auto;
+  }
+
+  #gentra-visual-manual .gm-launch::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .22;
+    background-image: linear-gradient(rgba(99,245,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(99,245,255,.08) 1px, transparent 1px);
+    background-size: 52px 52px;
+    transform: perspective(600px) rotateX(62deg) scale(1.45) translateY(26%);
+    transform-origin: center bottom;
+  }
+
+  #gentra-visual-manual .gm-launch-panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr);
+    align-items: center;
+    width: min(96vw, 1260px);
+    border: 1px solid rgba(99,245,255,.2);
+    border-radius: 1.2rem;
+    background: rgba(2, 11, 18, .68);
+    box-shadow: 0 0 80px rgba(33,141,255,.12), inset 0 1px rgba(255,255,255,.04);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+  }
+
+  #gentra-visual-manual .gm-launch-copy { display: grid; align-content: center; gap: 1rem; padding: clamp(1.5rem, 4vw, 4rem); }
+  #gentra-visual-manual .gm-launch-copy h1 { margin: 0; color: #fff; font-size: clamp(2.3rem, 5.6vw, 5.8rem); line-height: .92; letter-spacing: -.07em; }
+  #gentra-visual-manual .gm-launch-copy h1 span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(99,245,255,.74); text-shadow: 0 0 30px rgba(99,245,255,.16); }
+  #gentra-visual-manual .gm-launch-copy p { max-width: 52ch; color: #8fb2bc; }
+  #gentra-visual-manual .gm-launch-tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+  #gentra-visual-manual .gm-enter { justify-self: start; padding: .9rem 1.2rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+
+  #gentra-visual-manual .gm-print {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+  }
+
+  @keyframes gm-spin { to { transform: rotate(360deg); } }
+  @keyframes gm-energy-flow { to { stroke-dashoffset: -260; } }
+  @keyframes gm-halo-pulse { 50% { opacity: .65; transform: scale(1.08); } }
+  @keyframes gm-core-breathe { 50% { transform: scale(1.055); filter: drop-shadow(0 0 24px rgba(99,245,255,.55)); } }
+
+  @media (max-width: 1040px) {
+    #gentra-visual-manual .gm-shell { grid-template-columns: 13rem minmax(0, 1fr); }
+    #gentra-visual-manual .gm-two { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-launch-panel { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-launch-panel .gm-reactor-scene { order: -1; min-height: 22rem; }
+  }
+
+  @media (max-width: 760px) {
+    #gentra-visual-manual .gm-shell { display: block; }
+    #gentra-visual-manual .gm-sidebar { position: relative; height: auto; border-right: 0; border-bottom: 1px solid rgba(99,245,255,.14); }
+    #gentra-visual-manual .gm-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #gentra-visual-manual .gm-command { padding: .8rem; }
+    #gentra-visual-manual .gm-command-bar { position: relative; }
+    #gentra-visual-manual .gm-atlas { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-atlas-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #gentra-visual-manual .gm-atlas-view,
+    #gentra-visual-manual .gm-atlas-view img { min-height: 18rem; }
+    #gentra-visual-manual .gm-launch-copy { padding: 1.3rem; }
+  }
+
+  @media print {
+    #gentra-visual-manual { background: #fff; color: #111; }
+    #gentra-visual-manual .gm-sidebar,
+    #gentra-visual-manual .gm-command-bar,
+    #gentra-visual-manual .gm-launch,
+    #gentra-visual-manual footer { display: none !important; }
+    #gentra-visual-manual .gm-shell { display: block; width: 100%; }
+    #gentra-visual-manual .gm-command { padding: 0; }
+    #gentra-visual-manual .gm-stage { border: 0; box-shadow: none; background: #fff; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #gentra-visual-manual .gm-reactor-ring,
+    #gentra-visual-manual .gm-reactor-sweep,
+    #gentra-visual-manual .gm-reactor-core-pulse,
+    #gentra-visual-manual .gm-svg-energy,
+    #gentra-visual-manual .gm-svg-halo { animation: none !important; }
+  }
+</style>
+
+<script src="vendor/react-compatible-offline.js"></script>
+<script>
+(() => {
+  const { useEffect, useMemo, useState } = React;
+  const html = htm.bind(React.createElement);
+
+  const chapters = [
+    { id: "map", label: "Mapa", title: "Mapa completo del sistema", summary: "La arquitectura entera reunida en una sola superficie educativa." },
+    { id: "macro", label: "Macro", title: "Universo macro y regímenes", summary: "Cómo las series externas se convierten en RISK_ON, RISK_OFF o protección." },
+    { id: "asia", label: "Asia", title: "Router nocturno de Asia", summary: "Cinco votos para evitar que Nasdaq quede ciego durante la noche." },
+    { id: "trend", label: "TQI", title: "Calidad y dirección de tendencia", summary: "Eficiencia, volatilidad, estructura y persistencia reunidas en una medida." },
+    { id: "session", label: "Sesión", title: "Subasta y geometría de sesión", summary: "Premium, discount, VWAP, opening range, buffers y handoff." },
+    { id: "structure", label: "Estructura", title: "Zonas institucionales", summary: "OB, breakers, límites, FVG, defensa e invalidación." },
+    { id: "memory", label: "Memoria", title: "Carry, Omni y continuidad", summary: "Qué conocimiento sobrevive al cambio de Asia, London y New York." },
+    { id: "entry", label: "Entrada", title: "Autorización de entradas", summary: "El candidato debe atravesar todas las compuertas obligatorias." },
+    { id: "risk", label: "Riesgo", title: "Riesgo y ciclo de vida", summary: "Stop, objetivos, emergency reversal, timeout y cierre de mercado." },
+    { id: "operations", label: "TradingView", title: "Operación segura en TradingView", summary: "Código, perfil, alerta cloud y webhook deben compartir identidad." },
+    { id: "mathematics", label: "Matemática", title: "Núcleo matemático trazable", summary: "Cada ecuación se conecta con su significado y líneas de fuente." },
+    { id: "science", label: "Ciencia", title: "Clasificación científica", summary: "Analogías rigurosas, límites honestos y lenguaje defendible." },
+    { id: "evidence", label: "Invención", title: "Evidencia y divulgación privada", summary: "Qué conservar para auditoría, propiedad intelectual y reproducibilidad." },
+    { id: "parameters", label: "216 ajustes", title: "Registro completo de parámetros", summary: "Todos los controles, defaults, valores calibrados y usos." }
+  ];
+
+  const modules = [
+    { id: "macro", label: "Macro", input: "VIX/VXN, DXY, SOX, DJT, NQ, tasas, commodities, DSI", output: "Régimen y lado permitido", equation: "z_t = H(x_t, z_(t-1), m_(t-1), session_t)", simple: "Lee el clima económico antes de escoger dirección.", developer: "Clasifica evidencia cruzada en estados persistentes y aplica la autoridad macro soberana.", quant: "Transforma un vector continuo x_t en un estado discreto z_t con dependencia de memoria y sesión." },
+    { id: "trend", label: "TQI", input: "Eficiencia, volatilidad, estructura, momentum", output: "Calidad y dirección local", equation: "TQI = 0.35E + 0.20V + 0.25S + 0.20M", simple: "Comprueba si el precio avanza limpio o desordenado.", developer: "Fusiona cuatro componentes y adapta la geometría de las bandas.", quant: "Construye una combinación convexa de señales normalizadas y una transformación no lineal de ancho." },
+    { id: "session", label: "Sesión", input: "High, low, VWAP, OR y reloj", output: "Ubicación y permiso temporal", equation: "EQ=(H+L)/2; P=EQ+b(H-EQ); D=EQ-b(EQ-L)", simple: "Comprueba dónde está el precio dentro del día.", developer: "Construye valor, premium, discount, opening range, buffers y handoff.", quant: "Define coordenadas de subasta y ventanas discretas de admisibilidad temporal." },
+    { id: "structure", label: "Estructura", input: "Pivots, volumen, FVG, OB y límites", output: "Zona válida o invalidada", equation: "Z_t in {valid, tested, defended, rejected, perforated, invalid}", simple: "Recuerda los lugares donde compradores y vendedores lucharon.", developer: "Mantiene estados de OB, breaker, limit observer, defensa y peligro opuesto.", quant: "Representa cada zona como una máquina de estados finita con transiciones por precio y cierre." },
+    { id: "memory", label: "Memoria", input: "Carry, Omni, breakers e handoff", output: "Contexto heredado", equation: "m_t = U(m_(t-1), z_t, structure_t, invalidation_t)", simple: "Conserva la lección útil de la sesión anterior.", developer: "Hereda régimen y anclas no invalidadas sin superar una espera soberana.", quant: "Actualiza un estado latente determinista condicionado por régimen, estructura e invalidación." },
+    { id: "flow", label: "Flujo", input: "Volumen, rechazo y contexto inferior", output: "Confirmación direccional", equation: "F_t = directional confirmation in [0,1]", simple: "Pregunta quién está ganando en la vela actual.", developer: "Confirma al candidato mediante rechazo, volumen y límites de temporalidad inferior.", quant: "Aporta una evidencia normalizada; no crea por sí sola autoridad macro." },
+    { id: "safety", label: "Seguridad", input: "WAIT, tendencia, buffers, peligro y extensión", output: "Autorizar o bloquear", equation: "G_t = product(g_i); any g_i=0 => WAIT", simple: "Cierra todas las puertas cuando existe peligro.", developer: "Aplica veto por hard wait, contradicción, sesión, entrada tardía y zona opuesta.", quant: "Implementa una conjunción booleana donde cualquier barrera obligatoria anula la acción." },
+    { id: "risk", label: "Riesgo", input: "Entry, ATR, zona, sweep y R", output: "SL, TP y salida", equation: "SL=Entry-d*ATR; TP_k=Entry+side*Risk*R_k", simple: "Decide dónde la idea deja de ser correcta.", developer: "Construye stop manual o estructural y objetivos R separados de la inferencia.", quant: "Mapea la autorización a una geometría de pérdida acotada y recompensas discretas." }
+  ];
+
+  const architecture = [
+    { label: "Observar", source: "Datos", simple: "Reunir las pistas.", developer: "Leer precio, ATR, mercados externos, volumen y reloj.", quant: "x_t in R^n" },
+    { label: "Clasificar", source: "Macro", simple: "Nombrar el clima.", developer: "Resolver la evidencia como régimen operativo.", quant: "z_t=H(x_t,z_(t-1),m_(t-1))" },
+    { label: "Recordar", source: "Carry/Omni", simple: "Guardar la pista útil.", developer: "Conservar régimen y anclas aún válidas.", quant: "m_t=U(m_(t-1),z_t,Z_t)" },
+    { label: "Ubicar", source: "Sesión", simple: "Saber dónde está el precio.", developer: "Calcular valor, VWAP, OR, premium y discount.", quant: "A_t={EQ,VWAP,OR,P,D}" },
+    { label: "Estructurar", source: "Zonas", simple: "Encontrar las paredes.", developer: "Calificar breakers, OB, FVG, límites y defensa.", quant: "Z_t in finite states" },
+    { label: "Confirmar", source: "Trigger", simple: "Ver quién gana ahora.", developer: "Exigir tendencia, flujo y reacción compatibles.", quant: "u_t=P(x_t,z_t,q_t,m_t,A_t,Z_t)" },
+    { label: "Autorizar", source: "Gates", simple: "Abrir todas las cerraduras.", developer: "Aplicar esperas soberanas y vetos obligatorios.", quant: "a_t=u_t*product(g_i)" },
+    { label: "Acotar", source: "Riesgo", simple: "Definir error y recompensa.", developer: "Construir SL, TP, timeout y emergency lifecycle.", quant: "Risk=|Entry-SL|" }
+  ];
+
+  const macroSources = [
+    { label: "VIX / VXN", ticker: "CBOE:VIX · CBOE:VXN", domain: "Volatilidad", meaning: "Estrés general y tecnológico; shock o calma." },
+    { label: "DXY", ticker: "TVC:DXY", domain: "Dólar", meaning: "Presión monetaria y liquidez global." },
+    { label: "SOX", ticker: "NASDAQ:SOX", domain: "Tecnología", meaning: "Pulso del complejo de semiconductores." },
+    { label: "DJT", ticker: "DJ:DJT", domain: "Economía física", meaning: "Confirmación de transporte y actividad real." },
+    { label: "NQ", ticker: "CME_MINI_DL:NQ1!", domain: "Activo rector", meaning: "Confirmación directa del Nasdaq." },
+    { label: "US10Y / US02Y", ticker: "TVC:US10Y · TVC:US02Y", domain: "Tasas", meaning: "Costo de capital y tensión de duración." },
+    { label: "Oil", ticker: "BITUNIX:CLUSDT.P", domain: "Energía", meaning: "Inflación, geopolítica y presión sectorial." },
+    { label: "Gold", ticker: "BITUNIX:XAUUSDT.P", domain: "Refugio", meaning: "Demanda defensiva y choque conjunto." },
+    { label: "BTC", ticker: "BINANCE:BTCUSDT", domain: "Cripto líder", meaning: "Proxy de estrés y desacople cripto." },
+    { label: "USDT.D", ticker: "CRYPTOCAP:USDT.D", domain: "Liquidez cripto", meaning: "Salida o entrada de apetito por riesgo." }
+  ];
+
+  const regimes = [
+    { label: "PANIC", permission: "ABORT", rank: 1, meaning: "Choque múltiple; la ejecución normal queda anulada." },
+    { label: "WAIT_MODE", permission: "NO TRADE", rank: 2, meaning: "Conflicto, overheat, datos incompletos o transición." },
+    { label: "RISK_OFF", permission: "SELL ONLY", rank: 3, meaning: "Presión bajista macro confirmada." },
+    { label: "RISK_ON", permission: "BUY ONLY", rank: 4, meaning: "Riesgo favorable con estructura compatible." },
+    { label: "TRANSITION", permission: "NO TRADE", rank: 5, meaning: "Aún no existe consenso suficiente." },
+    { label: "DATA_WAIT", permission: "NO TRADE", rank: 6, meaning: "Faltan series necesarias para decidir." },
+    { label: "FILTER OFF", permission: "BOTH", rank: 7, meaning: "Filtro macro desactivado explícitamente." }
+  ];
+
+  const asiaVotes = [
+    { label: "USDJPY", off: "<= -f", on: ">= +f", meaning: "Caída favorece carry-off; subida favorece carry-on." },
+    { label: "AUDJPY", off: "<= -f", on: ">= +f", meaning: "Par sensible al apetito global por riesgo." },
+    { label: "USDCNH", off: ">= +f", on: "<= -f", meaning: "Fortaleza del dólar contra CNH aporta estrés; su caída aporta alivio." },
+    { label: "NIKKEI", off: "<= -n", on: ">= +n", meaning: "Riesgo japonés y tono regional de Asia." },
+    { label: "NQ", off: "<= -q", on: ">= +q", meaning: "Confirmación directa del futuro rector." }
+  ];
+
+  const asiaRouterStages = [
+    { label: "ANCLAR", sub: "Asia open", meaning: "Captura la apertura nocturna de cada fuente antes de comparar movimientos." },
+    { label: "NORMALIZAR", sub: "Delta %", meaning: "Convierte cada cambio a porcentaje para que FX, Nikkei y NQ sean comparables." },
+    { label: "VALIDAR", sub: "5 feeds", meaning: "Comprueba disponibilidad y frescura. Una fuente ausente activa DATA_WAIT." },
+    { label: "VOTAR", sub: "ON / OFF", meaning: "Clasifica cada fuente como carry-on, carry-off o neutral segun su umbral." },
+    { label: "AUTORIDAD", sub: "WAIT guard", meaning: "Aplica consenso, estres y veto soberano antes de autorizar direccion." },
+    { label: "HEREDAR", sub: "London -> NY", meaning: "Entrega solamente contexto valido; una sesion nueva no inventa direccion." }
+  ];
+
+  const asiaRouterOutcomes = [
+    { label: "CARRY OFF", sub: "SELL context", code: "ASIA_CARRY_OFF_SELL", meaning: "Consenso nocturno bajista suficiente: habilita contexto de venta, sujeto a las demas compuertas." },
+    { label: "CARRY ON", sub: "BUY context", code: "ASIA_CARRY_ON_LONG", meaning: "Consenso nocturno alcista y sin estres duro: habilita contexto de compra." },
+    { label: "CARRY WAIT", sub: "NO TRADE", code: "ASIA_CARRY_WAIT", meaning: "Votos mixtos o consenso insuficiente: conserva seguridad y no fuerza operacion." },
+    { label: "DATA WAIT", sub: "NO TRADE", code: "DATA_WAIT", meaning: "Datos incompletos o invalidos: bloquea ejecucion hasta recuperar evidencia." }
+  ];
+
+  const asiaHandoffStages = [
+    { label: "ASIA", sub: "ancla", meaning: "Construye el mapa nocturno y fija el regimen candidato con sus anclas." },
+    { label: "LONDON", sub: "confirma", meaning: "Confirma continuidad o invalida el contexto mediante estructura y aceptacion." },
+    { label: "NEW YORK", sub: "hereda", meaning: "Recibe solo una memoria todavia valida; macro soberana y hard WAIT conservan autoridad." }
+  ];
+
+  const trendParts = [
+    { label: "Eficiencia", weight: .35, symbol: "E", meaning: "Progreso neto dividido por el camino total recorrido." },
+    { label: "Volatilidad", weight: .20, symbol: "V", meaning: "Calidad del régimen de ATR o volumen frente a su base." },
+    { label: "Estructura", weight: .25, symbol: "S", meaning: "Desplazamiento del precio dentro de su rango estructural." },
+    { label: "Persistencia", weight: .20, symbol: "M", meaning: "Consistencia direccional dentro de la ventana de momentum." }
+  ];
+
+  const sessionObjects = [
+    { label: "Premium", code: "EQ+b(H-EQ)", meaning: "Mitad superior de valor; una venta necesita aceptación compatible." },
+    { label: "VWAP", code: "sum(PV)/sum(V)", meaning: "Precio medio ponderado por volumen de la sesión." },
+    { label: "Equilibrium", code: "(H+L)/2", meaning: "Centro matemático del rango operativo." },
+    { label: "Opening Range", code: "OR High / OR Low", meaning: "Rango inicial cuya pérdida y retest condicionan entradas." },
+    { label: "Discount", code: "EQ-b(EQ-L)", meaning: "Mitad inferior de valor; una compra necesita aceptación compatible." }
+  ];
+
+  const structureObjects = [
+    { label: "Supply / Demand", depth: 1, state: "Contexto", meaning: "Área amplia de oferta o demanda donde puede existir reacción." },
+    { label: "Order Block", depth: 2, state: "Origen", meaning: "Vela origen asociada con desplazamiento y estructura." },
+    { label: "Breaker", depth: 3, state: "Negociación", meaning: "Zona estructural perforada o defendida que conserva memoria." },
+    { label: "Limit Observer", depth: 4, state: "Reacción", meaning: "Zona STRONG/ULTRA de alta reacción; no crea una entrada aislada." },
+    { label: "FVG / CISD / SMT", depth: 5, state: "Confluencia", meaning: "Desequilibrio, cambio de entrega y divergencia correlacionada." },
+    { label: "Defense", depth: 6, state: "Aceptación", meaning: "Tiempo y salida confirmada desde un breaker negociado." },
+    { label: "Opposing Danger", depth: 7, state: "Veto", meaning: "Zona contraria cercana que puede bloquear una entrada prematura." }
+  ];
+
+  const memoryObjects = [
+    { label: "Carry", scope: "Régimen", equation: "c_t=carry(z_previous, anchor)", meaning: "Hereda una dirección macro válida y su ancla hasta invalidación." },
+    { label: "Omni", scope: "Tres sesiones", equation: "o_t=consensus(Asia, London, NY)", meaning: "Resume continuidad estructural entre varias sesiones." },
+    { label: "Breaker memory", scope: "Zona", equation: "b_t=last valid structural zone", meaning: "Conserva zonas relevantes para un retest posterior." },
+    { label: "Handoff", scope: "Transición", equation: "h_t=session close context", meaning: "Entrega rango, valor y contexto al siguiente bloque operativo." }
+  ];
+
+  const entryGates = [
+    { label: "Autoridad macro", law: "RISK_ON=>BUY; RISK_OFF=>SELL", meaning: "La dirección candidata debe coincidir con el régimen soberano." },
+    { label: "Hard WAIT", law: "WAIT=>BUY=0 and SELL=0", meaning: "Carry, Omni o confluencia no pueden atravesar una espera dura." },
+    { label: "Dirección de trend", law: "No BUY bearish; no SELL bullish", meaning: "Evita ejecutar contra la dirección local confirmada." },
+    { label: "Sesión y buffers", law: "inside operational window", meaning: "Respeta estabilización, cierre y buffer de cash open." },
+    { label: "Aceptación de valor", law: "BUY above support; SELL below resistance", meaning: "Exige aceptación respecto a VWAP, bandas y opening range." },
+    { label: "Zona estructural", law: "valid zone and valid stop", meaning: "La reacción debe pertenecer a una estructura aún utilizable." },
+    { label: "Peligro opuesto", law: "distance > dangerATR", meaning: "Bloquea entrada si una zona contraria fuerte está demasiado cerca." },
+    { label: "Freshness", law: "not late and macro fresh", meaning: "Evita perseguir una señal extendida o un contexto macro viejo." },
+    { label: "Flow", law: "directional confirmation", meaning: "Order flow y rechazo confirman el lado buscado; no lo inventan." },
+    { label: "Stop válido", law: "risk > minimum and finite", meaning: "No existe entrada sin una invalidación razonable y cuantificable." }
+  ];
+
+  const riskObjects = [
+    { label: "SL", value: "2.65 ATR", meaning: "Distancia manual confirmada del perfil operativo actual.", equation: "SL_buy=Entry-2.65*ATR; SL_sell=Entry+2.65*ATR" },
+    { label: "Entry", value: "Trigger", meaning: "Precio de autorización después de todas las compuertas.", equation: "Risk=|Entry-SL|" },
+    { label: "TP1", value: "1R", meaning: "Primer objetivo y referencia de riesgo inicial.", equation: "TP1=Entry+side*Risk" },
+    { label: "TP2", value: "2R", meaning: "Segundo objetivo y target del emergency reversal.", equation: "TP2=Entry+side*2*Risk" },
+    { label: "TP3", value: "3R", meaning: "Tercer objetivo del runner.", equation: "TP3=Entry+side*3*Risk" }
+  ];
+
+  const lifecycle = [
+    { label: "Candidate", meaning: "Existe intención, pero aún no hay autorización." },
+    { label: "Active", meaning: "Entrada confirmada con SL y objetivos congelados." },
+    { label: "Partial", meaning: "TP parcial realizado; el riesgo restante se recalcula." },
+    { label: "Emergency", meaning: "Flip por deterioro, macro opuesto y fallo estructural confirmado." },
+    { label: "Settled", meaning: "TP, SL, timeout, cierre de mercado o salida realizada." }
+  ];
+
+  const operationSteps = [
+    { label: "Congelar fuente", check: "Version + SHA", detail: "Registrar versión embebida y hash antes de crear alertas." },
+    { label: "Congelar perfil", check: "216 values", detail: "Aplicar el snapshot completo; no probar perillas en producción." },
+    { label: "Verificar chart", check: "Identity", detail: "Cuenta, feed, símbolo, timeframe, velas estándar, timezone y una instancia." },
+    { label: "Compilar", check: "Healthy", detail: "Sin error de compilación, runtime ni fuentes macro inválidas." },
+    { label: "Crear alerta", check: "New snapshot", detail: "La alerta cloud congela script, símbolo, timeframe e inputs actuales." },
+    { label: "Auditar manager", check: "Exactly one", detail: "Alert Manager es la autoridad; confirmar una sola alerta productiva." },
+    { label: "Verificar webhook", check: "Dry run", detail: "Normalización, freshness, idempotencia y logs de aceptación o rechazo." },
+    { label: "Operar", check: "Preserve identity", detail: "Ante cualquier cambio de identidad, eliminar y recrear la alerta." }
+  ];
+
+  const incidents = [
+    { symptom: "Señal en gráfico, sin notificación", action: "Revisar Alert Manager, snapshot y canales habilitados." },
+    { symptom: "Móvil y escritorio no coinciden", action: "Comparar layout, feed, símbolo, timeframe, versión e inputs." },
+    { symptom: "Cambio después de reload", action: "Distinguir recálculo histórico de la alerta cloud ya congelada." },
+    { symptom: "Webhook duplicado", action: "Desactivar alertas duplicadas y revisar idempotencia del receptor." },
+    { symptom: "Alerta detenida", action: "Revisar runtime, expiración, plan y protección por frecuencia." },
+    { symptom: "Comportamiento remoto viejo", action: "Eliminar snapshot anterior y crear una alerta completamente nueva." }
+  ];
+
+  const equations = [
+    { id: "change", label: "Cambio macro", formula: "Delta X_t(%) = 100 * (X_t-X_open) / X_open", meaning: "Normaliza cada mercado respecto a su apertura relevante.", lines: "Macro router" },
+    { id: "er", label: "Efficiency Ratio", formula: "ER_t = |C_t-C_(t-n)| / sum(i=1..n, |C_i-C_(i-1)|)", meaning: "Progreso recto dividido por toda la distancia recorrida.", lines: "1902-1905" },
+    { id: "effatr", label: "ATR eficiente", formula: "effATR_t = ATR_t * (0.5 + 0.5*ER_t)", meaning: "Ajusta la geometría al grado de eficiencia direccional.", lines: "1958-1959" },
+    { id: "tqi", label: "Trend Quality", formula: "TQI_t = 0.35E_t + 0.20V_t + 0.25S_t + 0.20M_t", meaning: "Fusión ponderada de cuatro dimensiones normalizadas.", lines: "1963-1982" },
+    { id: "adaptive", label: "Ancho adaptativo", formula: "K_t = smooth((1+a(0.5-ER_t))*(1-q+q(0.6+0.8(1-TQI_t)^p)))", meaning: "Convierte eficiencia y calidad en distancia de bandas.", lines: "1984-2010" },
+    { id: "auction", label: "Subasta", formula: "EQ=(H+L)/2; P=EQ+b(H-EQ); D=EQ-b(EQ-L)", meaning: "Ubica al precio dentro del valor de la sesión.", lines: "2184-2192" },
+    { id: "asia", label: "Votos Asia", formula: "Voff=sum(I_riskoff); Von=sum(I_riskon); stable threshold=4/5", meaning: "Exige cuatro mercados alineados para el perfil estable actual.", lines: "1429-1430" },
+    { id: "gate", label: "Gate soberano", formula: "a_t = s_t * product(i=1..k, g_i(t)), s_t in {-1,0,+1}", meaning: "Un solo cero obligatorio convierte la decisión en WAIT.", lines: "2592, 2830-2831" },
+    { id: "risk", label: "Riesgo", formula: "SL_buy=Entry-ATR*d; TP_k=Entry+side*|Entry-SL|*R_k", meaning: "Separa la inferencia direccional de la pérdida acotada.", lines: "3064-3112" },
+    { id: "expectancy", label: "Expectativa", formula: "E[R]=P(W)E[R|W]-P(L)E[|R||L]", meaning: "La sostenibilidad depende del R realizado, no solo del win rate.", lines: "3433-3457" }
+  ];
+
+  const scientificLenses = [
+    { label: "Sistema híbrido", status: "Coincidencia más cercana", equation: "x_t in R^n; z_t in finite states", mapping: "Mediciones continuas alimentan una máquina de estados discreta.", caveat: "Es software de decisión, no una planta física diferencial." },
+    { label: "Regime switching", status: "Analogía fuerte", equation: "z_t=H(x_t,z_(t-1),m_(t-1))", mapping: "Los regímenes persisten y cambian la legalidad de cada acción.", caveat: "No es una cadena de Markov estimada estadísticamente." },
+    { label: "Mixture of experts", status: "Analogía formal", equation: "a_t=policy(x_t)*product(g_i)", mapping: "Macro, TQI, sesión, estructura y flujo actúan como especialistas.", caveat: "Los pesos fueron diseñados; no entrenados mediante EM." },
+    { label: "Safety barrier", status: "Analogía formal", equation: "safe(a_t)=1 iff product(g_i)=1", mapping: "WAIT define una región que ninguna convicción puede atravesar.", caveat: "No se reclama una prueba formal de conjunto invariante." },
+    { label: "Adaptive markets", status: "Alineación conceptual", equation: "policy_t=policy(environment_t,memory_t)", mapping: "La geometría y permisos se adaptan al entorno actual.", caveat: "La alineación conceptual no constituye prueba académica." },
+    { label: "Polaridad algebraica", status: "Vista matemática", equation: "a_t in {-1,0,+1}", mapping: "SELL, WAIT y BUY forman un estado firmado y simétrico.", caveat: "No es una polaridad física ni mística." },
+    { label: "Cuántico", status: "Solo metáfora", equation: "No amplitudes, Hilbert space or Born rule", mapping: "Varias narrativas pueden quedar abiertas antes del cierre de gates.", caveat: "La implementación es clásica y determinista; llamarla cuántica sería incorrecto." }
+  ];
+
+  const evidenceItems = [
+    { label: "Identidad canónica", value: "v2.4.67 TEST", detail: "3,819 líneas Pine v6, 216 inputs y SHA-256 107A64296F2C045D2AD26CC2B56601CFADEE217780D633938DAF8A035A83190C." },
+    { label: "Combinación inventiva", value: "Macro + estructura + memoria + seguridad", detail: "La posible novedad reside en la combinación y jerarquía, no en afirmar que cada componente aislado sea nuevo." },
+    { label: "Perfil reproducible", value: "2026-07-18-r2", detail: "El snapshot calibrado, su hash, la versión y el entorno quedan trazados en el registro técnico de parámetros." },
+    { label: "Evidencia a conservar", value: "Fuente, hashes, alertas y logs", detail: "Guardar versiones, snapshots, capturas, changelog, resultados forward y condiciones operativas." },
+    { label: "Disciplina de claims", value: "Sin promesa de certeza", detail: "El sistema clasifica y autoriza bajo reglas; no demuestra predicción infalible ni garantiza rentabilidad." },
+    { label: "Confidencialidad", value: "Privado", detail: "Compartir únicamente con personas autorizadas y conservar trazabilidad de cada copia." }
+  ];
+
+  const sourceCoverage = [
+    { file: "Manual técnico", destination: "Mapa, Macro, Asia, TQI, Sesión, Estructura, Memoria, Entrada y Riesgo" },
+    { file: "Explained for Everyone", destination: "Selector global Básico / Técnico / Quant" },
+    { file: "Formula Traceability", destination: "Capítulo Matemática con líneas de fuente" },
+    { file: "Operations Runbook", destination: "Capítulo TradingView e incidentes" },
+    { file: "Scientific Analogies", destination: "Capítulo Ciencia y límites" },
+    { file: "Invention Disclosure", destination: "Capítulo Invención y evidencia" },
+    { file: "Parameter Dictionary", destination: "Explorador de 216 ajustes" }
+  ];
+
+  const parameterRegistry = [
+/*__GENTRA_PARAMETERS_START__*/
+  {"order":1,"variable":"presetInput","title":"Preset","type":"string","sourceDefault":"Auto","calibratedValue":"Custom","calibrationStatus":"confirmed","group":"Main","line":40,"usageCount":2,"description":"Selects the effective ATR, band width, ER and RSI families. Custom exposes the calibrated values directly."},
+  {"order":2,"variable":"atrLenInput","title":"ATR Length","type":"int","sourceDefault":13,"calibratedValue":14,"calibrationStatus":"confirmed","group":"Main","line":41,"usageCount":2,"description":"Lookback used by ATR when the resolved preset is Custom."},
+  {"order":3,"variable":"baseMultInput","title":"Base Band Width (xATR)","type":"float","sourceDefault":2,"calibratedValue":2,"calibrationStatus":"source-default","group":"Main","line":42,"usageCount":2,"description":"Base distance of the adaptive trend bands, expressed in ATR units."},
+  {"order":4,"variable":"sourceInput","title":"Source","type":"source","sourceDefault":"close","calibratedValue":"close","calibrationStatus":"confirmed","group":"Main","line":43,"usageCount":4,"description":"Price series used as the geometric center of the adaptive bands."},
+  {"order":5,"variable":"useAdaptiveInput","title":"Vol-Adaptive Bands","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Adapt","line":44,"usageCount":1,"description":"Enables or disables the Vol-Adaptive Bands module or gate."},
+  {"order":6,"variable":"erLengthInput","title":"ER Window","type":"int","sourceDefault":20,"calibratedValue":20,"calibrationStatus":"source-default","group":"Adapt","line":45,"usageCount":2,"description":"Window of Kaufman-style efficiency ratio: net displacement divided by cumulative path."},
+  {"order":7,"variable":"adaptStrengthInput","title":"Adapt Strength","type":"float","sourceDefault":0.5,"calibratedValue":0.5,"calibrationStatus":"source-default","group":"Adapt","line":46,"usageCount":1,"description":"Controls how strongly efficiency expands or contracts the legacy band multiplier."},
+  {"order":8,"variable":"atrBaselineLenInput","title":"ATR Base Len","type":"int","sourceDefault":100,"calibratedValue":100,"calibrationStatus":"source-default","group":"Adapt","line":47,"usageCount":1,"description":"Long baseline used to compare current ATR with its normal volatility regime."},
+  {"order":9,"variable":"useTqiInput","title":"Enable TQI","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"TQI","line":48,"usageCount":6,"description":"Enables or disables the Enable TQI module or gate."},
+  {"order":10,"variable":"qualityStrengthInput","title":"TQI Influence","type":"float","sourceDefault":0.4,"calibratedValue":0.4,"calibrationStatus":"source-default","group":"TQI","line":49,"usageCount":3,"description":"Blends TQI into the final band multiplier."},
+  {"order":11,"variable":"qualityCurveInput","title":"TQI Curve","type":"float","sourceDefault":1.5,"calibratedValue":1.5,"calibrationStatus":"source-default","group":"TQI","line":50,"usageCount":1,"description":"Nonlinear power applied to low-quality conditions before adapting band width."},
+  {"order":12,"variable":"multSmoothInput","title":"Smooth Mult","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"TQI","line":51,"usageCount":2,"description":"Configures Smooth Mult in the TQI module."},
+  {"order":13,"variable":"useAsymBandsInput","title":"Asym Bands","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"TQI","line":52,"usageCount":1,"description":"Enables or disables the Asym Bands module or gate."},
+  {"order":14,"variable":"asymStrengthInput","title":"Asym Strength","type":"float","sourceDefault":0.5,"calibratedValue":0.5,"calibrationStatus":"source-default","group":"TQI","line":53,"usageCount":2,"description":"Sets the numerical threshold for Asym Strength; increasing it generally demands a larger move or wider tolerance."},
+  {"order":15,"variable":"useEffAtrInput","title":"ER ATR","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"TQI","line":54,"usageCount":1,"description":"Enables or disables the ER ATR module or gate."},
+  {"order":16,"variable":"useCharFlipInput","title":"Char Flip","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"TQI","line":55,"usageCount":1,"description":"Enables or disables the Char Flip module or gate."},
+  {"order":17,"variable":"charFlipMinAgeInput","title":"CF Min Age","type":"int","sourceDefault":5,"calibratedValue":5,"calibrationStatus":"source-default","group":"TQI","line":56,"usageCount":1,"description":"Sets the numerical threshold for CF Min Age; increasing it generally demands a larger move or wider tolerance."},
+  {"order":18,"variable":"charFlipHighInput","title":"CF High TQI","type":"float","sourceDefault":0.55,"calibratedValue":0.55,"calibrationStatus":"source-default","group":"TQI","line":57,"usageCount":1,"description":"Configures CF High TQI in the TQI module."},
+  {"order":19,"variable":"charFlipLowInput","title":"CF Low TQI","type":"float","sourceDefault":0.25,"calibratedValue":0.25,"calibrationStatus":"source-default","group":"TQI","line":58,"usageCount":1,"description":"Configures CF Low TQI in the TQI module."},
+  {"order":20,"variable":"tqiWeightErInput","title":"W Efficiency","type":"float","sourceDefault":0.35,"calibratedValue":0.35,"calibrationStatus":"source-default","group":"TQI","line":59,"usageCount":2,"description":"Weight of directional efficiency inside TQI."},
+  {"order":21,"variable":"tqiWeightVolInput","title":"W Volatility","type":"float","sourceDefault":0.2,"calibratedValue":0.2,"calibrationStatus":"source-default","group":"TQI","line":60,"usageCount":2,"description":"Weight of standardized volume or ATR regime inside TQI."},
+  {"order":22,"variable":"tqiWeightStructInput","title":"W Structure","type":"float","sourceDefault":0.25,"calibratedValue":0.25,"calibrationStatus":"source-default","group":"TQI","line":61,"usageCount":2,"description":"Weight of price displacement from the center of its structural range."},
+  {"order":23,"variable":"tqiWeightMomInput","title":"W Momentum","type":"float","sourceDefault":0.2,"calibratedValue":0.2,"calibrationStatus":"source-default","group":"TQI","line":62,"usageCount":2,"description":"Weight of directional persistence across the momentum window."},
+  {"order":24,"variable":"tqiStructLenInput","title":"Structure Window","type":"int","sourceDefault":20,"calibratedValue":20,"calibrationStatus":"source-default","group":"TQI","line":63,"usageCount":3,"description":"Sets the observation depth for Structure Window; larger values use more history and normally react more slowly."},
+  {"order":25,"variable":"tqiMomLenInput","title":"Momentum Window","type":"int","sourceDefault":10,"calibratedValue":10,"calibrationStatus":"source-default","group":"TQI","line":64,"usageCount":4,"description":"Sets the observation depth for Momentum Window; larger values use more history and normally react more slowly."},
+  {"order":26,"variable":"respectTrendDirectionInput","title":"Require Local Trend Direction","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"TQI","line":65,"usageCount":2,"description":"Hard directional gate: no BUY during bearish local trend and no SELL during bullish local trend."},
+  {"order":27,"variable":"useMatrixZoneInput","title":"Use OB/Breaker","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":76,"usageCount":28,"description":"Enables or disables the Use OB/Breaker module or gate."},
+  {"order":28,"variable":"matrixPivotLenInput","title":"Pivot Strength","type":"int","sourceDefault":10,"calibratedValue":10,"calibrationStatus":"source-default","group":"Entry","line":77,"usageCount":2,"description":"Pivot sensitivity used to discover candidate structural zones."},
+  {"order":29,"variable":"matrixObScanBarsInput","title":"OB Scan Bars","type":"int","sourceDefault":13,"calibratedValue":13,"calibrationStatus":"source-default","group":"Entry","line":78,"usageCount":2,"description":"Backward search depth for the origin candle of an OB/breaker."},
+  {"order":30,"variable":"matrixObModeInput","title":"OB Method","type":"string","sourceDefault":"Full","calibratedValue":"Full","calibrationStatus":"source-default","group":"Entry","line":79,"usageCount":2,"description":"Configures OB Method in the Entry module."},
+  {"order":31,"variable":"matrixRiskMethodInput","title":"Risk Method","type":"string","sourceDefault":"Close","calibratedValue":"Close","calibrationStatus":"source-default","group":"Entry","line":80,"usageCount":6,"description":"Controls risk geometry for Risk Method."},
+  {"order":32,"variable":"matrixMinStrengthInput","title":"Min OB Vol","type":"float","sourceDefault":1,"calibratedValue":0.5,"calibrationStatus":"confirmed","group":"Entry","line":81,"usageCount":2,"description":"Minimum volume-strength ratio required for a zone to participate."},
+  {"order":33,"variable":"matrixBreakerBufferInput","title":"Breaker Buffer (xATR)","type":"float","sourceDefault":0.22,"calibratedValue":0.22,"calibrationStatus":"source-default","group":"Entry","line":82,"usageCount":3,"description":"ATR tolerance around breaker levels for touch, acceptance and Carry invalidation."},
+  {"order":34,"variable":"matrixRejectBodyInput","title":"Reject Body","type":"float","sourceDefault":0.5,"calibratedValue":0.5,"calibrationStatus":"source-default","group":"Entry","line":83,"usageCount":2,"description":"Minimum candle-body rejection ratio required to validate structural reaction."},
+  {"order":35,"variable":"useHcMemoryInput","title":"Use HC Memory","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":84,"usageCount":6,"description":"Enables or disables the Use HC Memory module or gate."},
+  {"order":36,"variable":"hcMemoryBarsInput","title":"HC Memory Bars","type":"int","sourceDefault":2,"calibratedValue":2,"calibrationStatus":"source-default","group":"Entry","line":85,"usageCount":2,"description":"Sets the observation depth for HC Memory Bars; larger values use more history and normally react more slowly."},
+  {"order":37,"variable":"hcMemoryMaxDistAtrInput","title":"HC Max Dist","type":"float","sourceDefault":0.4,"calibratedValue":0.4,"calibrationStatus":"source-default","group":"Entry","line":86,"usageCount":2,"description":"Configures HC Max Dist in the Entry module."},
+  {"order":38,"variable":"useSessionBreakerMemoryInput","title":"Fut Preserve Breakers","type":"bool","sourceDefault":true,"calibratedValue":false,"calibrationStatus":"confirmed","group":"Entry","line":87,"usageCount":1,"description":"Enables or disables the Fut Preserve Breakers module or gate."},
+  {"order":39,"variable":"useSessionBreakerMemoryCryptoInput","title":"Crypto Preserve Breakers","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"confirmed","group":"Entry","line":88,"usageCount":1,"description":"Enables or disables the Crypto Preserve Breakers module or gate."},
+  {"order":40,"variable":"showZonePrepInput","title":"Show Prep Marks","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":89,"usageCount":6,"description":"Controls the visual display of Show Prep Marks; intended primarily for chart presentation."},
+  {"order":41,"variable":"matrixSessionFilterInput","title":"Require Prem/Disc","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":90,"usageCount":2,"description":"Configures Require Prem/Disc in the Entry module."},
+  {"order":42,"variable":"sessionZoneBandInput","title":"Prem/Disc Band","type":"float","sourceDefault":0.15,"calibratedValue":0.15,"calibrationStatus":"source-default","group":"Entry","line":91,"usageCount":2,"description":"Fraction of each half-session range used to build premium and discount bands."},
+  {"order":43,"variable":"sessionZoneMinBarsInput","title":"Min Session Bars","type":"int","sourceDefault":3,"calibratedValue":3,"calibrationStatus":"source-default","group":"Entry","line":92,"usageCount":0,"description":"Sets the observation depth for Min Session Bars; larger values use more history and normally react more slowly."},
+  {"order":44,"variable":"showMatrixZonesInput","title":"Show OB/Breaker","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":93,"usageCount":4,"description":"Controls the visual display of Show OB/Breaker; intended primarily for chart presentation."},
+  {"order":45,"variable":"showZoneBoxesInput","title":"Show GENTRA Boxes","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":94,"usageCount":2,"description":"Controls the visual display of Show GENTRA Boxes; intended primarily for chart presentation."},
+  {"order":46,"variable":"showZoneBadgesInput","title":"Show Zone Badges","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":95,"usageCount":2,"description":"Controls the visual display of Show Zone Badges; intended primarily for chart presentation."},
+  {"order":47,"variable":"zoneBoxExtendBarsInput","title":"Box Projection","type":"int","sourceDefault":80,"calibratedValue":80,"calibrationStatus":"source-default","group":"Entry","line":96,"usageCount":9,"description":"Sets the observation depth for Box Projection; larger values use more history and normally react more slowly."},
+  {"order":48,"variable":"showSessionValueInput","title":"Show Value Bands","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":97,"usageCount":3,"description":"Controls the visual display of Show Value Bands; intended primarily for chart presentation."},
+  {"order":49,"variable":"useZoneDefenseInput","title":"Breaker Defense","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":98,"usageCount":8,"description":"Enables or disables the Breaker Defense module or gate."},
+  {"order":50,"variable":"zoneDefenseMinBarsInput","title":"Min Defense Bars","type":"int","sourceDefault":5,"calibratedValue":5,"calibrationStatus":"source-default","group":"Entry","line":99,"usageCount":1,"description":"Minimum time price must negotiate inside a breaker before defense is recognized."},
+  {"order":51,"variable":"zoneDefenseExitAtrInput","title":"Defense Exit (xATR)","type":"float","sourceDefault":0.1,"calibratedValue":0.1,"calibrationStatus":"source-default","group":"Entry","line":100,"usageCount":2,"description":"ATR displacement required to confirm exit from defended structure."},
+  {"order":52,"variable":"zoneDefenseLnyBoostInput","title":"Boost LDN->NY","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":101,"usageCount":1,"description":"Configures Boost LDN->NY in the Entry module."},
+  {"order":53,"variable":"showRiskInput","title":"Show TP/SL Levels","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":102,"usageCount":4,"description":"Controls the visual display of Show TP/SL Levels; intended primarily for chart presentation."},
+  {"order":54,"variable":"zoneSlBufferInput","title":"SL Outside Zone (xZone)","type":"float","sourceDefault":0.25,"calibratedValue":0.35,"calibrationStatus":"confirmed","group":"Risk","line":103,"usageCount":2,"description":"Extra stop distance outside the selected zone, as a fraction of zone height."},
+  {"order":55,"variable":"zoneMinRiskAtrInput","title":"Min Zone Risk Floor (xATR)","type":"float","sourceDefault":0.25,"calibratedValue":0.35,"calibrationStatus":"confirmed","group":"Risk","line":104,"usageCount":2,"description":"Minimum structural risk distance, preventing unrealistically tiny stops."},
+  {"order":56,"variable":"useSmartSlInput","title":"Smart SL: Zone + Sweep","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":105,"usageCount":3,"description":"Enables or disables the Smart SL: Zone + Sweep module or gate."},
+  {"order":57,"variable":"smartSlLookbackInput","title":"Smart SL Sweep Lookback","type":"int","sourceDefault":8,"calibratedValue":8,"calibrationStatus":"source-default","group":"Risk","line":106,"usageCount":4,"description":"Sweep lookback used by Smart SL to include recent liquidity extremes."},
+  {"order":58,"variable":"smartSlAtrBufferInput","title":"Smart SL Sweep Buffer (xATR)","type":"float","sourceDefault":0.35,"calibratedValue":0.35,"calibrationStatus":"source-default","group":"Risk","line":107,"usageCount":6,"description":"ATR clearance placed beyond the detected sweep."},
+  {"order":59,"variable":"smartSlMinRiskAtrInput","title":"Smart SL Min Risk (xATR)","type":"float","sourceDefault":0.75,"calibratedValue":0.75,"calibrationStatus":"source-default","group":"Risk","line":108,"usageCount":4,"description":"Absolute minimum Smart SL risk expressed in ATR units."},
+  {"order":60,"variable":"slControlModeInput","title":"SL Control Mode","type":"string","sourceDefault":"Auto","calibratedValue":"Manual ATR","calibrationStatus":"confirmed","group":"Risk","line":109,"usageCount":5,"description":"Configures SL Control Mode in the Risk module."},
+  {"order":61,"variable":"manualSlAtrInput","title":"Manual SL Distance (xATR)","type":"float","sourceDefault":0.75,"calibratedValue":2.65,"calibrationStatus":"confirmed","group":"Risk","line":110,"usageCount":5,"description":"Manual stop distance from entry in ATR units."},
+  {"order":62,"variable":"useEmergencyReversalInput","title":"Enable Emergency Macro Reversal","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Emergency","line":111,"usageCount":6,"description":"Enables or disables the Enable Emergency Macro Reversal module or gate."},
+  {"order":63,"variable":"emergencyRequireZoneFailureInput","title":"Require Zone Failure / Perforation","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Emergency","line":112,"usageCount":4,"description":"Sets the numerical threshold for Require Zone Failure / Perforation; increasing it generally demands a larger move or wider tolerance."},
+  {"order":64,"variable":"emergencyMinAdverseAtrInput","title":"Min Adverse Move Before Flip (xATR)","type":"float","sourceDefault":0.25,"calibratedValue":0.25,"calibrationStatus":"source-default","group":"Emergency","line":113,"usageCount":4,"description":"Minimum adverse displacement before an emergency reversal can be considered."},
+  {"order":65,"variable":"emergencyTpRInput","title":"Emergency Target TP2 (R)","type":"float","sourceDefault":2,"calibratedValue":2,"calibrationStatus":"source-default","group":"Emergency","line":114,"usageCount":6,"description":"R target assigned to an emergency reversal."},
+  {"order":66,"variable":"showEmergencyReversalInput","title":"Show Emergency Reversal Marks","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Emergency","line":115,"usageCount":2,"description":"Controls the visual display of Show Emergency Reversal Marks; intended primarily for chart presentation."},
+  {"order":67,"variable":"tp1RInput","title":"TP1 (R-multiple)","type":"float","sourceDefault":1,"calibratedValue":1,"calibrationStatus":"source-default","group":"Risk","line":117,"usageCount":3,"description":"First profit target in multiples of initial risk."},
+  {"order":68,"variable":"tp2RInput","title":"TP2 (R-multiple)","type":"float","sourceDefault":2,"calibratedValue":2,"calibrationStatus":"source-default","group":"Risk","line":118,"usageCount":3,"description":"Second profit target in multiples of initial risk."},
+  {"order":69,"variable":"tp3RInput","title":"TP3 (R-multiple)","type":"float","sourceDefault":3,"calibratedValue":3,"calibrationStatus":"source-default","group":"Risk","line":119,"usageCount":3,"description":"Third profit target in multiples of initial risk."},
+  {"order":70,"variable":"labelOffsetInput","title":"Label Offset (bars)","type":"int","sourceDefault":10,"calibratedValue":10,"calibrationStatus":"source-default","group":"Risk","line":120,"usageCount":4,"description":"Sets the observation depth for Label Offset (bars); larger values use more history and normally react more slowly."},
+  {"order":71,"variable":"showHitsInput","title":"Mark TP Hits (visual)","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":121,"usageCount":3,"description":"Controls the visual display of Mark TP Hits (visual); intended primarily for chart presentation."},
+  {"order":72,"variable":"tradeMaxAgeInput","title":"Trade Timeout (bars)","type":"int","sourceDefault":100,"calibratedValue":100,"calibrationStatus":"source-default","group":"Risk","line":122,"usageCount":2,"description":"Maximum number of chart bars an unresolved trade can remain open."},
+  {"order":73,"variable":"settleOpenTradeAtMarketCloseInput","title":"Settle Open Trade At Market Close","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":123,"usageCount":1,"description":"Configures Settle Open Trade At Market Close in the Risk module."},
+  {"order":74,"variable":"marketCloseSettleHourInput","title":"Market Close Settle Hour NY","type":"int","sourceDefault":16,"calibratedValue":16,"calibrationStatus":"source-default","group":"Risk","line":124,"usageCount":1,"description":"New York hour used to settle unresolved futures trades at market close."},
+  {"order":75,"variable":"marketCloseSettleMinuteInput","title":"Market Close Settle Minute NY","type":"int","sourceDefault":30,"calibratedValue":30,"calibrationStatus":"source-default","group":"Risk","line":125,"usageCount":1,"description":"New York minute used to settle unresolved futures trades at market close."},
+  {"order":76,"variable":"weeklyActiveTradeFailsafeInput","title":"Weekly Reset Clears Active Trade Failsafe","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":126,"usageCount":1,"description":"Configures Weekly Reset Clears Active Trade Failsafe in the Risk module."},
+  {"order":77,"variable":"keepClosedLevelsInput","title":"Keep Closed Trade Levels","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Risk","line":127,"usageCount":1,"description":"Configures Keep Closed Trade Levels in the Risk module."},
+  {"order":78,"variable":"scalpCloseTp1Input","title":"Scalp: Close Trade On TP1","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":128,"usageCount":1,"description":"Configures Scalp: Close Trade On TP1 in the Risk module."},
+  {"order":79,"variable":"useTpRunnerObserverInput","title":"TP Runner Observer (Stats Only)","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Risk","line":129,"usageCount":3,"description":"Enables or disables the TP Runner Observer (Stats Only) module or gate."},
+  {"order":80,"variable":"themeInput","title":"Theme","type":"string","sourceDefault":"Auto","calibratedValue":"Auto","calibrationStatus":"source-default","group":"Visual","line":139,"usageCount":1,"description":"Selects the presentation mode for Theme."},
+  {"order":81,"variable":"showBandsInput","title":"Show SuperTrend Bands","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Visual","line":140,"usageCount":1,"description":"Controls the visual display of Show SuperTrend Bands; intended primarily for chart presentation."},
+  {"order":82,"variable":"showTqiColorInput","title":"Color Line by TQI","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Visual","line":141,"usageCount":1,"description":"Controls the visual display of Color Line by TQI; intended primarily for chart presentation."},
+  {"order":83,"variable":"showSignalsInput","title":"Show Signal Labels","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Visual","line":142,"usageCount":6,"description":"Controls the visual display of Show Signal Labels; intended primarily for chart presentation."},
+  {"order":84,"variable":"keepLast10SignalLabelsInput","title":"Keep Last 10 Entry Labels (Debug)","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Visual","line":143,"usageCount":9,"description":"Configures Keep Last 10 Entry Labels (Debug) in the Visual module."},
+  {"order":85,"variable":"keepLastSignalInput","title":"Keep Last Signal Until Replaced","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Visual","line":144,"usageCount":4,"description":"Configures Keep Last Signal Until Replaced in the Visual module."},
+  {"order":86,"variable":"clearSessionSignalsInput","title":"Clear Signals On Session Change","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Visual","line":145,"usageCount":1,"description":"Configures Clear Signals On Session Change in the Visual module."},
+  {"order":87,"variable":"signalMemoryBarsInput","title":"Signal Memory Bars","type":"int","sourceDefault":0,"calibratedValue":0,"calibrationStatus":"source-default","group":"Visual","line":146,"usageCount":1,"description":"Sets the observation depth for Signal Memory Bars; larger values use more history and normally react more slowly."},
+  {"order":88,"variable":"cleanVisualFromLondonInput","title":"Clean Visual Memory From Last Asia","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Visual","line":147,"usageCount":3,"description":"Configures Clean Visual Memory From Last Asia in the Visual module."},
+  {"order":89,"variable":"showBgInput","title":"Show Trend Background","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Visual","line":148,"usageCount":1,"description":"Controls the visual display of Show Trend Background; intended primarily for chart presentation."},
+  {"order":90,"variable":"showDashInput","title":"Show Dashboard","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Dashboard","line":149,"usageCount":1,"description":"Controls the visual display of Show Dashboard; intended primarily for chart presentation."},
+  {"order":91,"variable":"showBreakdownInput","title":"Show Score Breakdown (legacy)","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Dashboard","line":150,"usageCount":2,"description":"Controls the visual display of Show Score Breakdown (legacy); intended primarily for chart presentation."},
+  {"order":92,"variable":"showPerfInput","title":"Show Performance Stats","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Dashboard","line":151,"usageCount":4,"description":"Controls the visual display of Show Performance Stats; intended primarily for chart presentation."},
+  {"order":93,"variable":"perfScopeInput","title":"Performance Scope","type":"string","sourceDefault":"Current Week","calibratedValue":"Current Week","calibrationStatus":"source-default","group":"Dashboard","line":152,"usageCount":2,"description":"Configures Performance Scope in the Dashboard module."},
+  {"order":94,"variable":"guardHistoricalSlStatsInput","title":"Guard Historical SL Stats Replay","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Dashboard","line":153,"usageCount":2,"description":"Configures Guard Historical SL Stats Replay in the Dashboard module."},
+  {"order":95,"variable":"dashPosStr","title":"Dashboard Position","type":"string","sourceDefault":"Top Right","calibratedValue":"Top Right","calibrationStatus":"source-default","group":"Dashboard","line":154,"usageCount":1,"description":"Selects the presentation mode for Dashboard Position."},
+  {"order":96,"variable":"bullColorInput","title":"Bull","type":"color","sourceDefault":"#00E676","calibratedValue":"#00E676","calibrationStatus":"source-default","group":"Colors","line":155,"usageCount":49,"description":"Defines the chart color used for Bull."},
+  {"order":97,"variable":"bearColorInput","title":"Bear","type":"color","sourceDefault":"#FF5252","calibratedValue":"#FF5252","calibrationStatus":"source-default","group":"Colors","line":156,"usageCount":47,"description":"Defines the chart color used for Bear."},
+  {"order":98,"variable":"slColorInput","title":"SL","type":"color","sourceDefault":"#FF1744","calibratedValue":"#FF1744","calibrationStatus":"source-default","group":"Colors","line":157,"usageCount":3,"description":"Defines the chart color used for SL."},
+  {"order":99,"variable":"tpColorInput","title":"TP","type":"color","sourceDefault":"#00E676","calibratedValue":"#00E676","calibrationStatus":"source-default","group":"Colors","line":158,"usageCount":6,"description":"Defines the chart color used for TP."},
+  {"order":100,"variable":"enableAlertsInput","title":"Enable Alert Signals","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Alerts","line":159,"usageCount":3,"description":"Enables or disables the Enable Alert Signals module or gate."},
+  {"order":101,"variable":"enableTradeAlertsInput","title":"Trade Entry Alerts","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Alerts","line":160,"usageCount":2,"description":"Enables or disables the Trade Entry Alerts module or gate."},
+  {"order":102,"variable":"enableEmergencyAlertsInput","title":"Emergency Reversal Alerts","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Alerts","line":161,"usageCount":1,"description":"Enables or disables the Emergency Reversal Alerts module or gate."},
+  {"order":103,"variable":"enableSafetyAlertsInput","title":"Context Alerts (removed)","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Alerts","line":162,"usageCount":0,"description":"Enables or disables the Context Alerts (removed) module or gate."},
+  {"order":104,"variable":"webhookInput","title":"Webhook JSON Format","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Alerts","line":163,"usageCount":3,"description":"Configures Webhook JSON Format in the Alerts module."},
+  {"order":105,"variable":"useSessionOracleInput","title":"Enable Session Oracle","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":164,"usageCount":11,"description":"Enables or disables the Enable Session Oracle module or gate."},
+  {"order":106,"variable":"sessionTzInput","title":"Session Timezone","type":"string","sourceDefault":"America/New_York","calibratedValue":"America/New_York","calibrationStatus":"source-default","group":"Session","line":165,"usageCount":12,"description":"Configures Session Timezone in the Session module."},
+  {"order":107,"variable":"blockSessionsInput","title":"Block Buffers / Dead Zones","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":166,"usageCount":5,"description":"Enables the protective block associated with Block Buffers / Dead Zones."},
+  {"order":108,"variable":"sessionBufferInput","title":"Session Stabilization Minutes","type":"int","sourceDefault":15,"calibratedValue":15,"calibrationStatus":"source-default","group":"Session","line":167,"usageCount":2,"description":"Mandatory stabilization time after an operational session begins."},
+  {"order":109,"variable":"sessionCloseBufferInput","title":"Session Close Buffer Minutes","type":"int","sourceDefault":15,"calibratedValue":15,"calibrationStatus":"source-default","group":"Session","line":168,"usageCount":1,"description":"No-entry window before an operational session closes."},
+  {"order":110,"variable":"nyCashBufferInput","title":"NY Cash Open Buffer Minutes","type":"int","sourceDefault":10,"calibratedValue":10,"calibrationStatus":"source-default","group":"Session","line":169,"usageCount":1,"description":"No-entry buffer around the 09:30 New York cash open."},
+  {"order":111,"variable":"oneTradePerSessionInput","title":"One Trade Per Session","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":170,"usageCount":3,"description":"Configures One Trade Per Session in the Session module."},
+  {"order":112,"variable":"showSessionVisualMapInput","title":"Show Session Visual Map","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":171,"usageCount":3,"description":"Controls the visual display of Show Session Visual Map; intended primarily for chart presentation."},
+  {"order":113,"variable":"showSessionVisualBoxInput","title":"Show Session Range Box","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":172,"usageCount":1,"description":"Controls the visual display of Show Session Range Box; intended primarily for chart presentation."},
+  {"order":114,"variable":"showSessionOpenRangeInput","title":"Show Opening Range","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":173,"usageCount":1,"description":"Controls the visual display of Show Opening Range; intended primarily for chart presentation."},
+  {"order":115,"variable":"sessionOpenRangeMinutesInput","title":"Opening Range Minutes","type":"int","sourceDefault":15,"calibratedValue":15,"calibrationStatus":"source-default","group":"Session","line":174,"usageCount":1,"description":"Defines the operational clock value for Opening Range Minutes."},
+  {"order":116,"variable":"showSessionHandoffInput","title":"Show Previous Session Handoff","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":175,"usageCount":5,"description":"Controls the visual display of Show Previous Session Handoff; intended primarily for chart presentation."},
+  {"order":117,"variable":"showSessionVisualTableInput","title":"Show Compact Session Table","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":176,"usageCount":1,"description":"Controls the visual display of Show Compact Session Table; intended primarily for chart presentation."},
+  {"order":118,"variable":"showTradeConfidenceInput","title":"Show Session Trade Safety","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Session","line":177,"usageCount":7,"description":"Controls the visual display of Show Session Trade Safety; intended primarily for chart presentation."},
+  {"order":119,"variable":"sessionRangeLookbackInput","title":"Session Range Avg Lookback","type":"int","sourceDefault":20,"calibratedValue":20,"calibrationStatus":"source-default","group":"Session","line":178,"usageCount":1,"description":"Sets the observation depth for Session Range Avg Lookback; larger values use more history and normally react more slowly."},
+  {"order":120,"variable":"sessionCompressionRatioInput","title":"Compressed Session Ratio","type":"float","sourceDefault":0.75,"calibratedValue":0.75,"calibrationStatus":"source-default","group":"Session","line":179,"usageCount":2,"description":"Marks a session compressed when current range / average range is at or below this value."},
+  {"order":121,"variable":"sessionExhaustionRatioInput","title":"Exhausted Session Ratio","type":"float","sourceDefault":1.25,"calibratedValue":1.25,"calibrationStatus":"source-default","group":"Session","line":180,"usageCount":2,"description":"Marks a session exhausted when current range / average range reaches this value."},
+  {"order":122,"variable":"showSmcObserverInput","title":"Enable Observer Only","type":"bool","sourceDefault":true,"calibratedValue":false,"calibrationStatus":"confirmed","group":"SMC","line":181,"usageCount":1,"description":"Controls the visual display of Enable Observer Only; intended primarily for chart presentation."},
+  {"order":123,"variable":"showOneMinuteProjectionInput","title":"1M Limits HTF","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":182,"usageCount":1,"description":"Controls the visual display of 1M Limits HTF; intended primarily for chart presentation."},
+  {"order":124,"variable":"useOneMinuteLimitTriggerInput","title":"1M Limit Trigger","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":183,"usageCount":2,"description":"Enables or disables the 1M Limit Trigger module or gate."},
+  {"order":125,"variable":"showMsnrInput","title":"Show 15M MSNR Bias","type":"bool","sourceDefault":true,"calibratedValue":false,"calibrationStatus":"confirmed","group":"SMC","line":184,"usageCount":4,"description":"Controls the visual display of Show 15M MSNR Bias; intended primarily for chart presentation."},
+  {"order":126,"variable":"msnrTfInput","title":"MSNR Higher Timeframe","type":"timeframe","sourceDefault":"15","calibratedValue":"15","calibrationStatus":"source-default","group":"SMC","line":185,"usageCount":3,"description":"Configures MSNR Higher Timeframe in the SMC module."},
+  {"order":127,"variable":"msnrLenInput","title":"MSNR Structure Length","type":"int","sourceDefault":20,"calibratedValue":20,"calibrationStatus":"source-default","group":"SMC","line":186,"usageCount":2,"description":"Sets the observation depth for MSNR Structure Length; larger values use more history and normally react more slowly."},
+  {"order":128,"variable":"showFvgInput","title":"Show Latest FVG","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":187,"usageCount":2,"description":"Controls the visual display of Show Latest FVG; intended primarily for chart presentation."},
+  {"order":129,"variable":"fvgMinAtrInput","title":"Minimum FVG Size (xATR)","type":"float","sourceDefault":0.1,"calibratedValue":0.1,"calibrationStatus":"source-default","group":"SMC","line":188,"usageCount":2,"description":"Sets the numerical threshold for Minimum FVG Size (xATR); increasing it generally demands a larger move or wider tolerance."},
+  {"order":130,"variable":"showCisdInput","title":"Show CISD Levels","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":189,"usageCount":4,"description":"Controls the visual display of Show CISD Levels; intended primarily for chart presentation."},
+  {"order":131,"variable":"showSmtInput","title":"Show SMT Divergence","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":190,"usageCount":2,"description":"Controls the visual display of Show SMT Divergence; intended primarily for chart presentation."},
+  {"order":132,"variable":"smtPeerInput","title":"SMT Correlated Asset","type":"symbol","sourceDefault":"CME_MINI:ES1!","calibratedValue":"CME_MINI:ES1!","calibrationStatus":"source-default","group":"SMC","line":191,"usageCount":2,"description":"Selects the external market series used by SMT Correlated Asset."},
+  {"order":133,"variable":"smtLenInput","title":"SMT Swing Comparison Length","type":"int","sourceDefault":12,"calibratedValue":12,"calibrationStatus":"source-default","group":"SMC","line":192,"usageCount":4,"description":"Sets the observation depth for SMT Swing Comparison Length; larger values use more history and normally react more slowly."},
+  {"order":134,"variable":"showLiquidityLevelsInput","title":"PDH/PDL/11O","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":193,"usageCount":3,"description":"Controls the visual display of PDH/PDL/11O; intended primarily for chart presentation."},
+  {"order":135,"variable":"useSmcTriggerPowerInput","title":"Use Confluence Trigger Power","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"SMC","line":194,"usageCount":2,"description":"Enables or disables the Use Confluence Trigger Power module or gate."},
+  {"order":136,"variable":"smcTriggerMemoryInput","title":"Confluence Memory Bars","type":"int","sourceDefault":3,"calibratedValue":3,"calibrationStatus":"source-default","group":"SMC","line":195,"usageCount":2,"description":"Number of bars for which confirmed SMC confluence remains usable."},
+  {"order":137,"variable":"useDsiInput","title":"Enable DSI USDT.D Protection","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"DSI","line":1090,"usageCount":1,"description":"Enables or disables the Enable DSI USDT.D Protection module or gate."},
+  {"order":138,"variable":"dsiApplyInput","title":"Apply DSI To","type":"string","sourceDefault":"Crypto All","calibratedValue":"Crypto All","calibrationStatus":"source-default","group":"DSI","line":1091,"usageCount":1,"description":"Configures Apply DSI To in the DSI module."},
+  {"order":139,"variable":"usdtDomSym","title":"USDT Dominance Symbol","type":"symbol","sourceDefault":"CRYPTOCAP:USDT.D","calibratedValue":"CRYPTOCAP:USDT.D","calibrationStatus":"source-default","group":"DSI","line":1092,"usageCount":2,"description":"Selects the external market series used by USDT Dominance Symbol."},
+  {"order":140,"variable":"dsiWaitPctInput","title":"DSI Wait Threshold %","type":"float","sourceDefault":0.6,"calibratedValue":0.6,"calibrationStatus":"source-default","group":"DSI","line":1093,"usageCount":1,"description":"USDT dominance change that forces caution in crypto."},
+  {"order":141,"variable":"dsiSellPctInput","title":"DSI Sell Mandate %","type":"float","sourceDefault":0.8,"calibratedValue":0.8,"calibrationStatus":"source-default","group":"DSI","line":1094,"usageCount":1,"description":"USDT dominance rise required for a crypto sell mandate."},
+  {"order":142,"variable":"dsiSystemicInput","title":"DSI Systemic Panic %","type":"float","sourceDefault":1.5,"calibratedValue":1.5,"calibrationStatus":"source-default","group":"DSI","line":1095,"usageCount":1,"description":"USDT dominance rise interpreted as systemic crypto stress."},
+  {"order":143,"variable":"dsiBuyPctInput","title":"DSI Buy Relief %","type":"float","sourceDefault":-0.6,"calibratedValue":-0.6,"calibrationStatus":"source-default","group":"DSI","line":1096,"usageCount":1,"description":"USDT dominance decline interpreted as crypto liquidity relief."},
+  {"order":144,"variable":"useCryptoWeekendInput","title":"BTC Weekend","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"DSI","line":1097,"usageCount":1,"description":"Enables or disables the BTC Weekend module or gate."},
+  {"order":145,"variable":"dsiWeekendWaitPctInput","title":"Wknd DSI Wait %","type":"float","sourceDefault":0.3,"calibratedValue":0.3,"calibrationStatus":"source-default","group":"DSI","line":1098,"usageCount":1,"description":"Sets the numerical threshold for Wknd DSI Wait %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":146,"variable":"dsiWeekendSellPctInput","title":"Wknd DSI Sell %","type":"float","sourceDefault":0.5,"calibratedValue":0.5,"calibrationStatus":"source-default","group":"DSI","line":1099,"usageCount":1,"description":"Sets the numerical threshold for Wknd DSI Sell %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":147,"variable":"dsiWeekendSystemicPctInput","title":"Wknd DSI Panic %","type":"float","sourceDefault":0.9,"calibratedValue":0.9,"calibrationStatus":"source-default","group":"DSI","line":1100,"usageCount":1,"description":"Sets the numerical threshold for Wknd DSI Panic %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":148,"variable":"dsiWeekendBuyPctInput","title":"Wknd DSI Buy %","type":"float","sourceDefault":-0.3,"calibratedValue":-0.3,"calibrationStatus":"source-default","group":"DSI","line":1101,"usageCount":1,"description":"Sets the numerical threshold for Wknd DSI Buy %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":149,"variable":"weekendOilVelRiskPctInput","title":"Wknd Oil 4H %","type":"float","sourceDefault":1.2,"calibratedValue":1.2,"calibrationStatus":"source-default","group":"DSI","line":1102,"usageCount":1,"description":"Sets the numerical threshold for Wknd Oil 4H %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":150,"variable":"weekendGoldRefugePctInput","title":"Wknd Gold 4H %","type":"float","sourceDefault":0.8,"calibratedValue":0.8,"calibrationStatus":"source-default","group":"DSI","line":1103,"usageCount":1,"description":"Sets the numerical threshold for Wknd Gold 4H %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":151,"variable":"weekendBtcDecouplePctInput","title":"Wknd BTC>Gold %","type":"float","sourceDefault":0.4,"calibratedValue":0.4,"calibrationStatus":"source-default","group":"DSI","line":1104,"usageCount":2,"description":"Sets the numerical threshold for Wknd BTC>Gold %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":152,"variable":"useMacroFilter","title":"Enable Macro Filter (Geopolitical)","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1105,"usageCount":8,"description":"Enables or disables the Enable Macro Filter (Geopolitical) module or gate."},
+  {"order":153,"variable":"testCarryoverActive","title":"Simulate Carryover (Manual Test)","type":"bool","sourceDefault":false,"calibratedValue":false,"calibrationStatus":"source-default","group":"Macro","line":1106,"usageCount":1,"description":"Configures Simulate Carryover (Manual Test) in the Macro module."},
+  {"order":154,"variable":"testCarryoverRegime","title":"Simulated Carryover Regime","type":"string","sourceDefault":"RISK_OFF","calibratedValue":"RISK_OFF","calibrationStatus":"source-default","group":"Macro","line":1107,"usageCount":7,"description":"Configures Simulated Carryover Regime in the Macro module."},
+  {"order":155,"variable":"testCarryoverNq","title":"Simulated Carryover NQ Level","type":"float","sourceDefault":30600,"calibratedValue":30600,"calibrationStatus":"source-default","group":"Macro","line":1108,"usageCount":1,"description":"Configures Simulated Carryover NQ Level in the Macro module."},
+  {"order":156,"variable":"vixSym","title":"VIX Symbol","type":"symbol","sourceDefault":"CBOE:VIX","calibratedValue":"CBOE:VIX","calibrationStatus":"source-default","group":"Macro","line":1109,"usageCount":3,"description":"Selects the external market series used by VIX Symbol."},
+  {"order":157,"variable":"vxnSym","title":"VXN Symbol","type":"symbol","sourceDefault":"CBOE:VXN","calibratedValue":"CBOE:VXN","calibrationStatus":"source-default","group":"Macro","line":1110,"usageCount":3,"description":"Selects the external market series used by VXN Symbol."},
+  {"order":158,"variable":"dxySym","title":"DXY Symbol","type":"symbol","sourceDefault":"TVC:DXY","calibratedValue":"TVC:DXY","calibrationStatus":"source-default","group":"Macro","line":1111,"usageCount":2,"description":"Selects the external market series used by DXY Symbol."},
+  {"order":159,"variable":"goldSym","title":"Gold 24/7 Symbol (XAUUSDT.P)","type":"symbol","sourceDefault":"BITUNIX:XAUUSDT.P","calibratedValue":"BITUNIX:XAUUSDT.P","calibrationStatus":"source-default","group":"Macro","line":1112,"usageCount":2,"description":"Selects the external market series used by Gold 24/7 Symbol (XAUUSDT.P)."},
+  {"order":160,"variable":"oilSym","title":"Oil 24/7 Symbol (CLUSDT.P)","type":"symbol","sourceDefault":"BITUNIX:CLUSDT.P","calibratedValue":"BITUNIX:CLUSDT.P","calibrationStatus":"source-default","group":"Macro","line":1113,"usageCount":2,"description":"Selects the external market series used by Oil 24/7 Symbol (CLUSDT.P)."},
+  {"order":161,"variable":"tnxSym","title":"10Y Yield Symbol","type":"symbol","sourceDefault":"TVC:US10Y","calibratedValue":"TVC:US10Y","calibrationStatus":"source-default","group":"Macro","line":1114,"usageCount":2,"description":"Selects the external market series used by 10Y Yield Symbol."},
+  {"order":162,"variable":"us02ySym","title":"US02Y Symbol","type":"symbol","sourceDefault":"TVC:US02Y","calibratedValue":"TVC:US02Y","calibrationStatus":"source-default","group":"Macro","line":1115,"usageCount":2,"description":"Selects the external market series used by US02Y Symbol."},
+  {"order":163,"variable":"soxSym","title":"SOX Symbol","type":"symbol","sourceDefault":"NASDAQ:SOX","calibratedValue":"NASDAQ:SOX","calibrationStatus":"source-default","group":"Macro","line":1116,"usageCount":3,"description":"Selects the external market series used by SOX Symbol."},
+  {"order":164,"variable":"djtSym","title":"DJT Symbol","type":"symbol","sourceDefault":"DJ:DJT","calibratedValue":"DJ:DJT","calibrationStatus":"source-default","group":"Macro","line":1117,"usageCount":3,"description":"Selects the external market series used by DJT Symbol."},
+  {"order":165,"variable":"nqSym","title":"NQ Futures Symbol","type":"symbol","sourceDefault":"CME_MINI_DL:NQ1!","calibratedValue":"CME_MINI_DL:NQ1!","calibrationStatus":"source-default","group":"Macro","line":1118,"usageCount":1,"description":"Selects the external market series used by NQ Futures Symbol."},
+  {"order":166,"variable":"useBtcProxy","title":"Use BTC as Crisis Proxy","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1119,"usageCount":1,"description":"Enables or disables the Use BTC as Crisis Proxy module or gate."},
+  {"order":167,"variable":"btcSym","title":"Crypto BTC Leader Symbol","type":"symbol","sourceDefault":"BINANCE:BTCUSDT","calibratedValue":"BINANCE:BTCUSDT","calibrationStatus":"source-default","group":"Macro","line":1120,"usageCount":1,"description":"Selects the external market series used by Crypto BTC Leader Symbol."},
+  {"order":168,"variable":"macroDecisionPct","title":"Macro %","type":"float","sourceDefault":0.15,"calibratedValue":0.15,"calibrationStatus":"source-default","group":"Macro","line":1148,"usageCount":1,"description":"Base percentage tolerance used in macro consensus tests."},
+  {"order":169,"variable":"dxyDecisionPct","title":"DXY Decision % vs Open","type":"float","sourceDefault":0.4,"calibratedValue":0.4,"calibrationStatus":"source-default","group":"Macro","line":1149,"usageCount":3,"description":"DXY change from its session open required for directional pressure."},
+  {"order":170,"variable":"dxyAlarmPct","title":"DXY Alarm % vs Open","type":"float","sourceDefault":0.6,"calibratedValue":0.6,"calibrationStatus":"source-default","group":"Macro","line":1150,"usageCount":2,"description":"DXY change treated as an extreme macro alarm."},
+  {"order":171,"variable":"anchorDecisionPct","title":"Commodity %","type":"float","sourceDefault":0.15,"calibratedValue":0.15,"calibrationStatus":"source-default","group":"Macro","line":1151,"usageCount":3,"description":"Sets the numerical threshold for Commodity %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":172,"variable":"vixStressPct","title":"VIX/VXN Stress % vs Open","type":"float","sourceDefault":5,"calibratedValue":5,"calibrationStatus":"source-default","group":"Macro","line":1152,"usageCount":1,"description":"VIX/VXN change treated as volatility stress."},
+  {"order":173,"variable":"vixBombPct","title":"VIX/VXN Bomb % vs Open","type":"float","sourceDefault":15,"calibratedValue":15,"calibrationStatus":"source-default","group":"Macro","line":1153,"usageCount":1,"description":"VIX/VXN change treated as a volatility shock."},
+  {"order":174,"variable":"oilPressurePct","title":"Oil Sector Pressure % vs Open","type":"float","sourceDefault":1.2,"calibratedValue":1.2,"calibrationStatus":"source-default","group":"Macro","line":1154,"usageCount":5,"description":"Oil change interpreted as sector or inflation pressure."},
+  {"order":175,"variable":"oilShockPct","title":"Oil Shock % vs Open","type":"float","sourceDefault":1.5,"calibratedValue":1.5,"calibrationStatus":"source-default","group":"Macro","line":1155,"usageCount":2,"description":"Oil change interpreted as a geopolitical shock."},
+  {"order":176,"variable":"oilParabolicPct","title":"Oil Parabolic % vs Open","type":"float","sourceDefault":2.8,"calibratedValue":2.8,"calibrationStatus":"source-default","group":"Macro","line":1156,"usageCount":1,"description":"Oil change interpreted as a parabolic macro event."},
+  {"order":177,"variable":"goldShockPct","title":"Gold Shock % vs Open","type":"float","sourceDefault":1.5,"calibratedValue":1.5,"calibrationStatus":"source-default","group":"Macro","line":1157,"usageCount":2,"description":"Gold change used to identify refuge or joint commodity shock."},
+  {"order":178,"variable":"btcStressPct","title":"BTC Stress % vs Open","type":"float","sourceDefault":-3,"calibratedValue":-3,"calibrationStatus":"source-default","group":"Macro","line":1158,"usageCount":2,"description":"Sets the numerical threshold for BTC Stress % vs Open; increasing it generally demands a larger move or wider tolerance."},
+  {"order":179,"variable":"yieldStressPct","title":"Yield Stress % vs Open","type":"float","sourceDefault":1.5,"calibratedValue":1.5,"calibrationStatus":"source-default","group":"Macro","line":1159,"usageCount":1,"description":"Treasury-yield change interpreted as financing pressure."},
+  {"order":180,"variable":"techMovePct","title":"SOX/DJT %","type":"float","sourceDefault":0.4,"calibratedValue":0.3,"calibrationStatus":"confirmed","group":"Macro","line":1160,"usageCount":4,"description":"SOX/DJT movement threshold used by Tech Shield, Overheat and Capitulation logic."},
+  {"order":181,"variable":"soxBreakoutPct","title":"SOX Breakout % vs Open","type":"float","sourceDefault":1.2,"calibratedValue":1.2,"calibrationStatus":"source-default","group":"Macro","line":1161,"usageCount":1,"description":"Sets the numerical threshold for SOX Breakout % vs Open; increasing it generally demands a larger move or wider tolerance."},
+  {"order":182,"variable":"nqAbovePct","title":"NQ Above Open %","type":"float","sourceDefault":0.2,"calibratedValue":0.2,"calibrationStatus":"source-default","group":"Macro","line":1162,"usageCount":3,"description":"NQ change from open required for directional confirmation."},
+  {"order":183,"variable":"nqBreakoutPct","title":"NQ Breakout % vs Open","type":"float","sourceDefault":0.8,"calibratedValue":0.8,"calibrationStatus":"source-default","group":"Macro","line":1163,"usageCount":1,"description":"Sets the numerical threshold for NQ Breakout % vs Open; increasing it generally demands a larger move or wider tolerance."},
+  {"order":184,"variable":"futuresMomentumPct","title":"Futures 1-2H Momentum %","type":"float","sourceDefault":0.2,"calibratedValue":0.2,"calibrationStatus":"source-default","group":"Macro","line":1164,"usageCount":7,"description":"One-to-two-hour chart displacement required for the futures momentum shield."},
+  {"order":185,"variable":"futuresDiscountPct","title":"Fut Discount %","type":"float","sourceDefault":0.15,"calibratedValue":0.15,"calibrationStatus":"source-default","group":"Macro","line":1165,"usageCount":1,"description":"Sets the numerical threshold for Fut Discount %; increasing it generally demands a larger move or wider tolerance."},
+  {"order":186,"variable":"useMacroGpsInput","title":"Enable Macro GPS No-Chase","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1166,"usageCount":4,"description":"Enables or disables the Enable Macro GPS No-Chase module or gate."},
+  {"order":187,"variable":"macroGpsFreshMinutesInput","title":"Macro Fresh Window Minutes","type":"int","sourceDefault":120,"calibratedValue":120,"calibrationStatus":"source-default","group":"Macro","line":1167,"usageCount":1,"description":"Sets the observation depth for Macro Fresh Window Minutes; larger values use more history and normally react more slowly."},
+  {"order":188,"variable":"macroGpsMaxExtensionAtrInput","title":"Max Discount Already Moved (xATR)","type":"float","sourceDefault":1.6,"calibratedValue":1.6,"calibrationStatus":"source-default","group":"Macro","line":1168,"usageCount":5,"description":"Maximum ATR extension allowed before Macro GPS classifies an entry as late."},
+  {"order":189,"variable":"macroGpsBlockTrendFlipInput","title":"Block Late Entry If Micro Trend Reversed","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1169,"usageCount":2,"description":"Configures Block Late Entry If Micro Trend Reversed in the Macro module."},
+  {"order":190,"variable":"useSessionHandoffGuardInput","title":"3m Guard: Block Discounted Session Handoff","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1170,"usageCount":4,"description":"Enables or disables the 3m Guard: Block Discounted Session Handoff module or gate."},
+  {"order":191,"variable":"handoffGuardMinutesInput","title":"Handoff Guard Minutes","type":"int","sourceDefault":90,"calibratedValue":90,"calibrationStatus":"source-default","group":"Macro","line":1171,"usageCount":1,"description":"Defines the operational clock value for Handoff Guard Minutes."},
+  {"order":192,"variable":"handoffDiscountAtrInput","title":"Prev Session Discounted Move (xATR)","type":"float","sourceDefault":1,"calibratedValue":1,"calibrationStatus":"source-default","group":"Macro","line":1172,"usageCount":5,"description":"Sets the numerical threshold for Prev Session Discounted Move (xATR); increasing it generally demands a larger move or wider tolerance."},
+  {"order":193,"variable":"handoffRecoveryAtrInput","title":"Recovery From Session Low (xATR)","type":"float","sourceDefault":0.35,"calibratedValue":0.35,"calibrationStatus":"source-default","group":"Macro","line":1173,"usageCount":1,"description":"Sets the numerical threshold for Recovery From Session Low (xATR); increasing it generally demands a larger move or wider tolerance."},
+  {"order":194,"variable":"useAuctionSettlementInput","title":"Auction Settlement: Sellers/Buyers Paid","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1174,"usageCount":3,"description":"Enables or disables the Auction Settlement: Sellers/Buyers Paid module or gate."},
+  {"order":195,"variable":"settlementLookbackInput","title":"Settlement Consolidation Bars","type":"int","sourceDefault":20,"calibratedValue":20,"calibrationStatus":"source-default","group":"Macro","line":1175,"usageCount":2,"description":"Sets the observation depth for Settlement Consolidation Bars; larger values use more history and normally react more slowly."},
+  {"order":196,"variable":"settlementRangeAtrInput","title":"Max Settlement Range (xATR)","type":"float","sourceDefault":1.6,"calibratedValue":1.6,"calibrationStatus":"source-default","group":"Macro","line":1176,"usageCount":1,"description":"Maximum consolidation range accepted by the auction-settlement detector."},
+  {"order":197,"variable":"settlementReclaimAtrInput","title":"Reclaim From Extreme (xATR)","type":"float","sourceDefault":0.35,"calibratedValue":0.35,"calibrationStatus":"source-default","group":"Macro","line":1177,"usageCount":2,"description":"ATR reclaim from an extreme required to declare one side paid."},
+  {"order":198,"variable":"settlementAcceptBarsInput","title":"Acceptance Bars After Value Reclaim","type":"int","sourceDefault":3,"calibratedValue":3,"calibrationStatus":"source-default","group":"Macro","line":1178,"usageCount":2,"description":"Sets the observation depth for Acceptance Bars After Value Reclaim; larger values use more history and normally react more slowly."},
+  {"order":199,"variable":"useCryptoPaidLiquidityGuardInput","title":"Crypto Guard: Block Paid Liquidity Re-entry","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1179,"usageCount":5,"description":"Enables or disables the Crypto Guard: Block Paid Liquidity Re-entry module or gate."},
+  {"order":200,"variable":"cryptoPaidExpansionAtrInput","title":"Crypto Paid Extreme Expansion (xATR)","type":"float","sourceDefault":2,"calibratedValue":2,"calibrationStatus":"source-default","group":"Macro","line":1180,"usageCount":2,"description":"Sets the numerical threshold for Crypto Paid Extreme Expansion (xATR); increasing it generally demands a larger move or wider tolerance."},
+  {"order":201,"variable":"cryptoPaidRejectAtrInput","title":"Crypto Paid Extreme Rejection (xATR)","type":"float","sourceDefault":1.5,"calibratedValue":1.5,"calibrationStatus":"source-default","group":"Macro","line":1181,"usageCount":2,"description":"Sets the numerical threshold for Crypto Paid Extreme Rejection (xATR); increasing it generally demands a larger move or wider tolerance."},
+  {"order":202,"variable":"cryptoPaidAcceptBarsInput","title":"Crypto Paid Release Acceptance Bars","type":"int","sourceDefault":2,"calibratedValue":2,"calibrationStatus":"source-default","group":"Macro","line":1182,"usageCount":2,"description":"Sets the observation depth for Crypto Paid Release Acceptance Bars; larger values use more history and normally react more slowly."},
+  {"order":203,"variable":"showHighReactionObserverInput","title":"Show Limit Observer","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":1183,"usageCount":1,"description":"Controls the visual display of Show Limit Observer; intended primarily for chart presentation."},
+  {"order":204,"variable":"highReactionEmaFilterInput","title":"Limit EMA200","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":1184,"usageCount":2,"description":"Configures Limit EMA200 in the Entry module."},
+  {"order":205,"variable":"useLimitRejectionPressureInput","title":"Omni Limit Guard","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":1185,"usageCount":4,"description":"Enables or disables the Omni Limit Guard module or gate."},
+  {"order":206,"variable":"useObserverRejectionTriggerInput","title":"Observer Privilege","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":1186,"usageCount":1,"description":"Enables or disables the Observer Privilege module or gate."},
+  {"order":207,"variable":"useOpposingObserverDangerInput","title":"Block Opp Observer","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Entry","line":1187,"usageCount":2,"description":"Enables or disables the Block Opp Observer module or gate."},
+  {"order":208,"variable":"opposingObserverDangerAtrInput","title":"Opp Obs Dist xATR","type":"float","sourceDefault":0.5,"calibratedValue":0.5,"calibrationStatus":"source-default","group":"Entry","line":1188,"usageCount":2,"description":"Proximity at which an opposing observer zone blocks a premature entry."},
+  {"order":209,"variable":"useAsiaRiskRouterInput","title":"Asia Risk Router","type":"bool","sourceDefault":true,"calibratedValue":true,"calibrationStatus":"source-default","group":"Macro","line":1189,"usageCount":3,"description":"Enables or disables the Asia Risk Router module or gate."},
+  {"order":210,"variable":"asiaFxDecisionPctInput","title":"Asia FX %","type":"float","sourceDefault":0.12,"calibratedValue":0.12,"calibrationStatus":"source-default","group":"Macro","line":1190,"usageCount":1,"description":"FX percentage threshold used by USDJPY, AUDJPY and USDCNH Asia votes."},
+  {"order":211,"variable":"asiaNikkeiDecisionPctInput","title":"Asia Nikkei %","type":"float","sourceDefault":0.2,"calibratedValue":0.2,"calibrationStatus":"source-default","group":"Macro","line":1191,"usageCount":1,"description":"Nikkei percentage threshold used by the overnight risk vote."},
+  {"order":212,"variable":"asiaRiskVotesInput","title":"Asia Votes","type":"int","sourceDefault":3,"calibratedValue":4,"calibrationStatus":"confirmed","group":"Macro","line":1192,"usageCount":1,"description":"Number of aligned Asia votes required to authorize Carry-on or Carry-off."},
+  {"order":213,"variable":"usdjpySym","title":"USDJPY","type":"symbol","sourceDefault":"FX_IDC:USDJPY","calibratedValue":"FX_IDC:USDJPY","calibrationStatus":"source-default","group":"Macro","line":1193,"usageCount":1,"description":"Selects the external market series used by USDJPY."},
+  {"order":214,"variable":"audjpySym","title":"AUDJPY","type":"symbol","sourceDefault":"FX_IDC:AUDJPY","calibratedValue":"FX_IDC:AUDJPY","calibrationStatus":"source-default","group":"Macro","line":1194,"usageCount":1,"description":"Selects the external market series used by AUDJPY."},
+  {"order":215,"variable":"usdcnhSym","title":"USDCNH","type":"symbol","sourceDefault":"FX_IDC:USDCNH","calibratedValue":"FX_IDC:USDCNH","calibrationStatus":"source-default","group":"Macro","line":1195,"usageCount":1,"description":"Selects the external market series used by USDCNH."},
+  {"order":216,"variable":"nikkeiSym","title":"NIKKEI","type":"symbol","sourceDefault":"NIKKEI","calibratedValue":"NIKKEI","calibrationStatus":"source-default","group":"Macro","line":1196,"usageCount":1,"description":"Selects the external market series used by NIKKEI."}
+/*__GENTRA_PARAMETERS_END__*/
+  ];
+
+  const modeLabels = { simple: "Básico", developer: "Técnico", quant: "Quant" };
+
+  const visualAssets = [
+    { file: "architecture-reactor.svg", label: "Reactor de arquitectura", detail: "Ocho módulos alrededor del núcleo de decisión." },
+    { file: "decision-pipeline.svg", label: "Pipeline de autorización", detail: "De datos y régimen hasta ejecución y riesgo." },
+    { file: "equation-core.svg", label: "Núcleo matemático", detail: "La ecuación unificada y sus transformaciones." },
+    { file: "memory-lattice.svg", label: "Malla de memoria", detail: "Carry, Omni, breakers y continuidad entre sesiones." },
+    { file: "regime-state-machine.svg", label: "Máquina de regímenes", detail: "Jerarquía de RISK_ON, RISK_OFF y esperas soberanas." }
+  ];
+
+  function splitSvgLabel(value) {
+    const text = String(value || "");
+    if (text.length <= 14 || !text.includes(" ")) return [text];
+    const words = text.split(/\s+/);
+    let first = "";
+    let second = "";
+    for (const word of words) {
+      if ((first + " " + word).trim().length <= Math.ceil(text.length / 2) + 2 && !second) first = (first + " " + word).trim();
+      else second = (second + " " + word).trim();
+    }
+    return second ? [first, second] : [first];
+  }
+
+  function SvgNetwork({ items, selectedKey, onSelect, centerLabel, centerSub, ariaLabel }) {
+    const requestedKey = String(selectedKey ?? items[0]?.id ?? 0);
+    const [activeKey, setActiveKey] = useState(requestedKey);
+    useEffect(() => setActiveKey(requestedKey), [requestedKey]);
+    const center = { x: 450, y: 260 };
+    const count = Math.max(1, items.length);
+    const radius = count > 10 ? 34 : count > 7 ? 39 : 44;
+    const rx = count > 11 ? 350 : 330;
+    const ry = count > 11 ? 205 : 190;
+    const nodes = items.map((item, index) => {
+      const angle = -Math.PI / 2 + index * (Math.PI * 2 / count);
+      return {
+        item,
+        index,
+        key: String(item.id ?? index),
+        x: center.x + Math.cos(angle) * rx,
+        y: center.y + Math.sin(angle) * ry
+      };
+    });
+    const activeIndex = Math.max(0, nodes.findIndex(node => node.key === activeKey));
+    const centerLines = splitSvgLabel(centerLabel);
+    const verticalGrid = [100,200,300,400,500,600,700,800].map(x => html`<line key=${"gx" + x} className="gm-svg-grid" x1=${x} y1="35" x2=${x} y2="485"/>`);
+    const horizontalGrid = [80,170,260,350,440].map(y => html`<line key=${"gy" + y} className="gm-svg-grid" x1="45" y1=${y} x2="855" y2=${y}/>`);
+    const links = nodes.map(node => html`<line key=${"line-" + node.key} className=${"gm-svg-link " + (activeKey === node.key ? "is-selected" : "")} x1=${node.x} y1=${node.y} x2=${center.x} y2=${center.y}/>`);
+    const coreText = centerLines.map((line, index) => html`<text key=${"core-" + index} className="gm-svg-core-label" x=${center.x} y=${center.y + (index - (centerLines.length - 1) / 2) * 17}>${line}</text>`);
+    const nodeMarks = nodes.map(node => {
+      const lines = splitSvgLabel(node.item.short || node.item.label);
+      const label = "Abrir " + node.item.label;
+      const className = "gm-svg-node " + (activeKey === node.key ? "is-selected" : "");
+      const textMarks = lines.map((line, index) => html`<text key=${node.key + "-" + index} className="gm-svg-label" x=${node.x} y=${node.y - 7 + (index - (lines.length - 1) / 2) * 15}>${line}</text>`);
+      const selectNode = () => {
+        setActiveKey(node.key);
+        if (typeof onSelect === "function") onSelect(node.key, node.index);
+      };
+      return html`<g key=${node.key} className=${className} role="button" aria-pressed=${activeKey === node.key} aria-label=${label} onClick=${selectNode}><circle cx=${node.x} cy=${node.y} r=${radius}/>${textMarks}${node.item.sub ? html`<text className="gm-svg-sub" x=${node.x} y=${node.y + 24}>${node.item.sub}</text>` : null}</g>`;
+    });
+    const energyStyle = { "--gm-energy-offset": String(activeIndex * -34) + "px" };
+    return html`<div className="gm-svg-stage"><svg className="gm-svg" viewBox="0 0 900 520" role="img" aria-label=${ariaLabel}><title>${ariaLabel}</title><desc>Seleccione un nodo para abrir su explicación técnica.</desc>${verticalGrid}${horizontalGrid}<ellipse className="gm-svg-orbit" cx=${center.x} cy=${center.y} rx=${rx} ry=${ry}/><ellipse className="gm-svg-energy" style=${energyStyle} cx=${center.x} cy=${center.y} rx=${rx - 18} ry=${ry - 18}/>${links}<circle className="gm-svg-halo" cx=${center.x} cy=${center.y} r="82"/><circle className="gm-svg-core" cx=${center.x} cy=${center.y} r="66"/>${coreText}${centerSub ? html`<text className="gm-svg-sub" x=${center.x} y=${center.y + 45}>${centerSub}</text>` : null}${nodeMarks}</svg></div>`;
+  }
+
+  function SvgParameterProfile({ item }) {
+    if (!item) return null;
+    const calibrated = String(item.calibratedValue ?? item.sourceDefault);
+    const source = String(item.sourceDefault);
+    return html`<div className="gm-svg-stage"><svg className="gm-svg" viewBox="0 0 900 360" role="img" aria-label=${`Perfil del parámetro ${item.title}`}><title>Perfil de ${item.title}</title><desc>Conecta el valor por defecto, el valor calibrado y sus usos dentro del código.</desc><line className="gm-svg-profile-line" x1="180" y1="180" x2="720" y2="180"/><circle className="gm-svg-profile-node" cx="180" cy="180" r="58"/><circle className="gm-svg-core" cx="450" cy="180" r="72"/><circle className="gm-svg-profile-node" cx="720" cy="180" r="58"/><text className="gm-svg-label" x="180" y="166">DEFAULT</text><text className="gm-svg-sub" x="180" y="190">${source}</text><text className="gm-svg-label" x="450" y="160">${item.title}</text><text className="gm-svg-sub" x="450" y="184">${calibrated}</text><text className="gm-svg-sub" x="450" y="208">${item.calibrationStatus}</text><text className="gm-svg-label" x="720" y="166">USOS</text><text className="gm-svg-sub" x="720" y="190">${item.usageCount}</text><text className="gm-svg-sub" x="450" y="300">${item.variable} · source line ${item.line}</text></svg></div>`;
+  }
+
+  function Detail({ item, level, badge }) {
+    return html`<div className="card gm-detail-stack"><div className="gm-card-head"><strong>${item.label}</strong>${badge ? html`<span className="viz-badge">${badge}</span>` : null}</div><p>${item[level] || item.meaning || item.detail}</p>${item.input ? html`<div className="gm-reference"><strong>Entrada</strong><p>${item.input}</p></div>` : null}${item.output ? html`<div className="gm-reference"><strong>Salida</strong><p>${item.output}</p></div>` : null}${item.equation ? html`<pre className="gm-formula"><code>${item.equation}</code></pre>` : null}</div>`;
+  }
+
+  function ReactorCore({ compact = false }) {
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+    const nodes = modules.map((item, index) => {
+      const angle = -Math.PI / 2 + index * Math.PI * 2 / modules.length;
+      return {
+        ...item,
+        x: 400 + Math.cos(angle) * 286,
+        y: 400 + Math.sin(angle) * 286
+      };
+    });
+    const onMove = event => {
+      const box = event.currentTarget.getBoundingClientRect();
+      const px = (event.clientX - box.left) / Math.max(1, box.width) - .5;
+      const py = (event.clientY - box.top) / Math.max(1, box.height) - .5;
+      setTilt({ x: py * -7, y: px * 9 });
+    };
+    const deckStyle = { "--gm-rx": `${tilt.x}deg`, "--gm-ry": `${tilt.y}deg` };
+    return html`<div className=${`gm-reactor-scene ${compact ? "is-compact" : ""}`} onPointerMove=${onMove} onPointerLeave=${() => setTilt({ x: 0, y: 0 })}>
+      <div className="gm-reactor-deck" style=${deckStyle}>
+        <svg className="gm-reactor-svg" viewBox="0 0 800 800" role="img" aria-label="Reactor tridimensional de la arquitectura GENTRA CORE">
+          <title>Reactor de arquitectura GENTRA CORE</title>
+          <desc>Ocho módulos orbitan un núcleo central que solo autoriza una decisión cuando régimen, memoria, ubicación, estructura, flujo, seguridad y riesgo son compatibles.</desc>
+          <defs>
+            <radialGradient id="gm-core-gradient" cx="50%" cy="44%">
+              <stop offset="0" stopColor="#ffffff"/>
+              <stop offset=".16" stopColor="#a7fbff"/>
+              <stop offset=".5" stopColor="#2bd5eb"/>
+              <stop offset="1" stopColor="#073c59"/>
+            </radialGradient>
+            <linearGradient id="gm-ring-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#63f5ff"/>
+              <stop offset=".52" stopColor="#218dff"/>
+              <stop offset="1" stopColor="#8f73ff"/>
+            </linearGradient>
+            <filter id="gm-core-glow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="16" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g opacity=".28">
+            ${[120,190,260,330].map(radius => html`<circle key=${radius} cx="400" cy="400" r=${radius} fill="none" stroke="#63f5ff" strokeWidth="1"/>`)}
+            ${[0,45,90,135].map(angle => html`<line key=${angle} x1="80" y1="400" x2="720" y2="400" stroke="#63f5ff" strokeWidth="1" transform=${`rotate(${angle} 400 400)`}/>`)}
+          </g>
+          <circle className="gm-reactor-ring r3" cx="400" cy="400" r="326"/>
+          <circle className="gm-reactor-ring r2" cx="400" cy="400" r="250"/>
+          <circle className="gm-reactor-ring" cx="400" cy="400" r="178"/>
+          <g className="gm-reactor-sweep" opacity=".7">
+            <path d="M400 66 A334 334 0 0 1 692 238" fill="none" stroke="url(#gm-ring-gradient)" strokeWidth="7" strokeLinecap="round"/>
+            <circle cx="692" cy="238" r="6" fill="#63f5ff" filter="url(#gm-core-glow)"/>
+          </g>
+          ${nodes.map((node, index) => html`<g key=${node.id} className="gm-reactor-orbit-node" transform=${`translate(${node.x} ${node.y})`}>
+            <circle r="34" fill="rgba(3,18,28,.96)" stroke=${index % 2 ? "#218dff" : "#63f5ff"} strokeWidth="2"/>
+            <circle r="26" fill="none" stroke="rgba(99,245,255,.18)" strokeWidth="1"/>
+            <circle r="4" fill="#63f5ff"/>
+            <text className="gm-reactor-label" y="50">${node.label.toUpperCase()}</text>
+          </g>`)}
+          <g className="gm-reactor-core-pulse" filter="url(#gm-core-glow)">
+            <circle cx="400" cy="400" r="112" fill="rgba(3,19,30,.93)" stroke="url(#gm-ring-gradient)" strokeWidth="3"/>
+            <circle cx="400" cy="400" r="84" fill="none" stroke="rgba(99,245,255,.55)" strokeWidth="2" strokeDasharray="5 10"/>
+            <circle cx="400" cy="400" r="59" fill="url(#gm-core-gradient)"/>
+            <circle cx="400" cy="400" r="39" fill="#03121d" stroke="#d9feff" strokeWidth="2"/>
+            <text className="gm-reactor-label" x="400" y="394">GENTRA</text>
+            <text className="gm-reactor-micro" x="400" y="416">DECISION CORE</text>
+          </g>
+        </svg>
+        <div className="gm-reactor-readout"><strong>CORE ONLINE</strong><span>PROFILE · r2</span><span>MODULE NETWORK · 8</span><span>VISUAL ATLAS · 5</span><span>INPUT REGISTRY · 216</span></div>
+      </div>
+    </div>`;
+  }
+
+  function VisualAtlas({ index, onSelect }) {
+    const selected = visualAssets[index] || visualAssets[0];
+    return html`<div className="gm-atlas">
+      <div className="gm-atlas-nav" role="list" aria-label="Láminas visuales del dossier">
+        ${visualAssets.map((item, itemIndex) => html`<button key=${item.file} type="button" className=${`btn ${index === itemIndex ? "btn-primary" : ""}`} onClick=${() => onSelect(itemIndex)}>${String(itemIndex + 1).padStart(2, "0")} · ${item.label}</button>`)}
+      </div>
+      <figure className="gm-atlas-view">
+        <img src=${`../assets/${selected.file}`} alt=${selected.detail}/>
+        <figcaption className="gm-atlas-caption"><strong>${selected.label}</strong><span className="text-small text-muted">${selected.detail}</span></figcaption>
+      </figure>
+    </div>`;
+  }
+
+  function App() {
+    const [introOpen, setIntroOpen] = useState(true);
+    const [chapter, setChapter] = useState("map");
+    const [level, setLevel] = useState("simple");
+    const [atlasIndex, setAtlasIndex] = useState(0);
+    const [moduleId, setModuleId] = useState("macro");
+    const [architectureStep, setArchitectureStep] = useState(0);
+    const [macroSource, setMacroSource] = useState(0);
+    const [regimeIndex, setRegimeIndex] = useState(0);
+    const [asiaVote, setAsiaVote] = useState(0);
+    const [asiaStage, setAsiaStage] = useState(0);
+    const [asiaOutcome, setAsiaOutcome] = useState(0);
+    const [asiaHandoff, setAsiaHandoff] = useState(0);
+    const [trendPart, setTrendPart] = useState(0);
+    const [sessionObject, setSessionObject] = useState(0);
+    const [structureObject, setStructureObject] = useState(0);
+    const [memoryObject, setMemoryObject] = useState(0);
+    const [entryGate, setEntryGate] = useState(0);
+    const [riskObject, setRiskObject] = useState(1);
+    const [lifeIndex, setLifeIndex] = useState(0);
+    const [operationStep, setOperationStep] = useState(0);
+    const [incidentIndex, setIncidentIndex] = useState(0);
+    const [equationId, setEquationId] = useState("tqi");
+    const [scienceIndex, setScienceIndex] = useState(0);
+    const [evidenceIndex, setEvidenceIndex] = useState(0);
+    const [parameterSearch, setParameterSearch] = useState("");
+    const [parameterGroup, setParameterGroup] = useState("All");
+    const [parameterPage, setParameterPage] = useState(0);
+    const [selectedParameter, setSelectedParameter] = useState(null);
+
+    const chapterIndex = chapters.findIndex(item => item.id === chapter);
+    const chapterInfo = chapters[chapterIndex];
+    const activeModule = modules.find(item => item.id === moduleId) || modules[0];
+    const activeEquation = equations.find(item => item.id === equationId) || equations[0];
+    const groups = useMemo(() => ["All", ...new Set(parameterRegistry.map(item => item.group))], []);
+    const filteredParameters = useMemo(() => {
+      const query = parameterSearch.trim().toLowerCase();
+      return parameterRegistry.filter(item => (parameterGroup === "All" || item.group === parameterGroup) && (!query || `${item.variable} ${item.title} ${item.description}`.toLowerCase().includes(query)));
+    }, [parameterGroup, parameterSearch]);
+    const pageSize = 8;
+    const pageCount = Math.max(1, Math.ceil(filteredParameters.length / pageSize));
+    const safePage = Math.min(parameterPage, pageCount - 1);
+    const visibleParameters = filteredParameters.slice(safePage * pageSize, safePage * pageSize + pageSize);
+    const activeParameter = selectedParameter && filteredParameters.some(item => item.variable === selectedParameter.variable) ? selectedParameter : visibleParameters[0];
+
+    function chooseChapter(index) {
+      const safe = Math.max(0, Math.min(chapters.length - 1, index));
+      setChapter(chapters[safe].id);
+    }
+
+    function chooseGroup(group) {
+      setParameterGroup(group);
+      setParameterPage(0);
+      setSelectedParameter(null);
+    }
+
+    function renderMap() {
+      const positions = [modules[0], modules[1], modules[2], modules[3], null, modules[4], modules[5], modules[6], modules[7]];
+      const activeStage = architecture[architectureStep];
+      return html`<div className="gm-stack"><div className="gm-two"><div className="gm-orbit-map" role="group" aria-label="Módulos principales de GENTRA">${positions.map((item,index) => item ? html`<button key=${item.id} type="button" className=${`btn gm-orbit-node ${moduleId===item.id ? "btn-primary" : ""}`} onClick=${()=>setModuleId(item.id)}>${item.label}</button>` : html`<div key=${`core-${index}`} className="gm-orbit-core"><strong>DECISION<br/>CORE</strong></div>`)}</div><${Detail} item=${activeModule} level=${level} badge="MÓDULO" /></div><div className="gm-stack"><div className="gm-flow">${architecture.map((item,index)=>html`<button key=${item.label} type="button" className=${`btn ${architectureStep===index ? "btn-primary is-selected" : ""}`} onClick=${()=>setArchitectureStep(index)}>${index+1}. ${item.label}</button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${activeStage.label}</strong><span className="viz-badge">${activeStage.source}</span></div><p>${activeStage[level]}</p></div><div className="card"><strong>Transformación</strong><pre className="gm-formula"><code>${activeStage.quant}</code></pre></div></div></div><div className="gm-reference"><strong>Manual unificado</strong><p>Los siete documentos de arquitectura, operación, matemática, ciencia, invención, explicación y parámetros están representados dentro de estos capítulos. No existe simulación de trades ni historial ficticio.</p></div></div>`;
+    }
+
+    function renderMacro() {
+      const source = macroSources[macroSource];
+      const regime = regimes[regimeIndex];
+      return html`<div className="gm-stack"><div className="gm-source-grid">${macroSources.map((item,index)=>html`<button key=${item.label} type="button" className=${`btn gm-source-button ${macroSource===index ? "btn-primary" : ""}`} onClick=${()=>setMacroSource(index)}><strong>${item.label}</strong><span className="text-small">${item.domain}</span></button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${source.label}</strong><span className="viz-badge">${source.domain}</span></div><p>${source.meaning}</p><pre className="gm-formula"><code>${source.ticker}</code></pre></div><div className="card"><strong>Normalización común</strong><pre className="gm-formula"><code>Delta X_t(%) = 100 * (X_t-X_open) / X_open</code></pre><p>Los umbrales no son idénticos: cada dominio usa decisión, estrés, alarma, shock o breakout según su función.</p></div></div><div className="gm-regime-grid">${regimes.map((item,index)=>html`<button key=${item.label} type="button" className=${`btn ${regimeIndex===index ? "btn-primary" : ""}`} onClick=${()=>setRegimeIndex(index)}><strong>${item.label}</strong><span className="text-small">${item.permission}</span></button>`)}</div><div className="card"><div className="gm-card-head"><strong>${regime.label}</strong><span className="viz-badge">PRIORIDAD ${regime.rank}</span></div><p>${regime.meaning}</p></div><div className="gm-warning"><strong>Ley soberana</strong><p>Un estado PANIC, WAIT_MODE, TRANSITION o DATA_WAIT no es una invitación a adivinar. Su salida operativa es no ejecutar hasta que las condiciones permitan una dirección.</p></div></div>`;
+    }
+
+    function renderAsia() {
+      const vote = asiaVotes[asiaVote];
+      return html`<div className="gm-stack"><div className="gm-vote-map">${asiaVotes.map((item,index)=>html`<button key=${item.label} type="button" className=${`btn ${asiaVote===index ? "btn-primary" : ""}`} onClick=${()=>setAsiaVote(index)}><strong>${item.label}</strong><span className="text-small">OFF ${item.off}</span><span className="text-small">ON ${item.on}</span></button>`)}<div className="gm-vote-core"><strong>PERFIL ESTABLE: 4 DE 5 VOTOS</strong><span className="text-small">default de fuente: 3</span></div></div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${vote.label}</strong><span className="viz-badge">VOTO ASIA</span></div><p>${vote.meaning}</p><pre className="gm-formula"><code>Risk-off: ${vote.off}\nRisk-on: ${vote.on}</code></pre></div><div className="card"><strong>Ecuaciones del router</strong><pre className="gm-formula"><code>Voff=I(USDJPY<=-f)+I(AUDJPY<=-f)+I(USDCNH>=f)+I(NIKKEI<=-n)+I(NQ<=-q)\n\nVon=I(USDJPY>=f)+I(AUDJPY>=f)+I(USDCNH<=-f)+I(NIKKEI>=n)+I(NQ>=q)</code></pre></div></div><div className="gm-memory-ribbon"><button type="button" className="btn">ASIA<br/><span className="text-small">clasifica y ancla</span></button><button type="button" className="btn">LONDON<br/><span className="text-small">confirma o invalida</span></button><button type="button" className="btn">NEW YORK<br/><span className="text-small">hereda el contexto válido</span></button></div><div className="gm-reference"><strong>Resultado</strong><p>Cuatro votos risk-off autorizan ASIA_CARRY_OFF_SELL. Cuatro votos risk-on, sin estrés duro, autorizan ASIA_CARRY_ON_LONG. Evidencia insuficiente conserva WAIT.</p></div></div>`;
+    }
+
+    function renderTrend() {
+      const part = trendParts[trendPart];
+      return html`<div className="gm-stack"><div className="gm-two"><div className="gm-stack">${trendParts.map((item,index)=>html`<button key=${item.label} type="button" className=${`btn ${trendPart===index ? "btn-primary" : ""}`} onClick=${()=>setTrendPart(index)}><span className="gm-weight-row"><strong>${item.label}</strong><span className="gm-weight-track"><span className="gm-weight-fill" style=${{"--gm-weight":`${item.weight*100}%`}}></span></span><span>${Math.round(item.weight*100)}%</span></span></button>`)}</div><div className="card"><div className="gm-card-head"><strong>${part.label}</strong><span className="viz-badge">${part.symbol}</span></div><p>${part.meaning}</p><pre className="gm-formula"><code>TQI = 0.35E + 0.20V + 0.25S + 0.20M</code></pre></div></div><div className="gm-three"><div className="card"><strong>Efficiency Ratio</strong><pre className="gm-formula"><code>ER=net displacement / total path</code></pre><p>Cerca de 1 significa recorrido directo; cerca de 0 significa ruido.</p></div><div className="card"><strong>ATR eficiente</strong><pre className="gm-formula"><code>effATR=ATR*(0.5+0.5ER)</code></pre><p>Adapta la escala al carácter del movimiento.</p></div><div className="card"><strong>Character Flip</strong><pre className="gm-formula"><code>High TQI=0.55\nLow TQI=0.25\nMin age=5</code></pre><p>Detecta cambio de carácter sin confundir cada vela con un nuevo régimen.</p></div></div><div className="gm-warning"><strong>Regla direccional crítica</strong><p>No BUY mientras el trend confirmado sea bearish DOWN. No SELL mientras sea bullish UP.</p></div></div>`;
+    }
+
+    function renderSession() {
+      const item = sessionObjects[sessionObject];
+      return html`<div className="gm-stack"><div className="gm-two"><div className="gm-auction">${sessionObjects.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${sessionObject===index ? "btn-primary" : ""}`} onClick=${()=>setSessionObject(index)}><strong>${entry.label}</strong><code>${entry.code}</code></button>`)}</div><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">SESSION VALUE</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.code}</code></pre></div></div><div className="gm-timeline"><div className="gm-session-block"><strong>ASIA</strong><p>Descubre el tono nocturno y crea el primer rango.</p></div><div className="gm-session-block"><strong>LONDON</strong><p>Expande, confirma o invalida el handoff.</p></div><div className="gm-session-block"><strong>NEW YORK</strong><p>Integra cash open, noticias y mayor liquidez.</p></div></div><div className="gm-four"><div className="card"><strong>Stabilization</strong><p>15 minutos</p></div><div className="card"><strong>Close buffer</strong><p>15 minutos</p></div><div className="card"><strong>NY cash buffer</strong><p>10 minutos</p></div><div className="card"><strong>Opening range</strong><p>15 minutos</p></div></div><div className="gm-reference"><strong>Aceptación, no dibujo</strong><p>Las bandas representan coordenadas operativas. BUY necesita recuperar y aceptar soporte de valor; SELL necesita perder y aceptar resistencia de valor. Un retest fallido puede mantener la entrada en espera.</p></div></div>`;
+    }
+
+    function renderStructure() {
+      const item = structureObjects[structureObject];
+      return html`<div className="gm-stack"><div className="gm-two"><div className="gm-layer-stack">${structureObjects.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn gm-layer-button ${structureObject===index ? "btn-primary" : ""}`} style=${{"--gm-depth":entry.depth}} onClick=${()=>setStructureObject(index)}><strong>${entry.label}</strong><span className="text-small">${entry.state}</span></button>`)}</div><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.state}</span></div><p>${item.meaning}</p></div></div><div className="gm-flow">${["Candidate","Valid","Tested","Defended","Rejected","Perforated","Invalid","Archived"].map((state,index)=>html`<button key=${state} type="button" className="btn"><strong>${index+1}</strong><span className="text-small">${state}</span></button>`)}</div><div className="gm-three"><div className="card"><strong>Detección</strong><p>Pivot, origen, fuerza de volumen y desplazamiento.</p></div><div className="card"><strong>Negociación</strong><p>Toque, cierre, tiempo dentro, rechazo y salida.</p></div><div className="card"><strong>Invalidación</strong><p>Cierre confirmado más allá del límite correspondiente.</p></div></div><div className="gm-warning"><strong>Principio</strong><p>Una zona no genera una entrada automática. Actúa como contexto, confirmación, protección o invalidación dentro del ecosistema.</p></div></div>`;
+    }
+
+    function renderMemory() {
+      const item = memoryObjects[memoryObject];
+      return html`<div className="gm-stack"><div className="gm-memory-ribbon"><button type="button" className="btn">ASIA</button><button type="button" className="btn">LONDON</button><button type="button" className="btn">NEW YORK</button></div><div className="gm-choice-grid">${memoryObjects.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${memoryObject===index ? "btn-primary" : ""}`} onClick=${()=>setMemoryObject(index)}><strong>${entry.label}</strong><span className="text-small">${entry.scope}</span></button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.scope}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div><div className="card"><strong>Cuándo termina</strong><p>La memoria deja de mandar cuando su ancla es invalidada, la estructura opuesta queda confirmada o una autoridad macro superior cambia el estado. El cambio de sesión por sí solo no debería borrar una evidencia todavía válida.</p></div></div><div className="gm-authority"><div><strong>1. PANIC / HARD WAIT</strong><p>Veto absoluto</p></div><div><strong>2. MACRO / CARRY</strong><p>Dirección soberana</p></div><div><strong>3. OMNI / STRUCTURE</strong><p>Continuidad</p></div><div><strong>4. LOCAL TRIGGER</strong><p>Momento de entrada</p></div></div><div className="gm-warning"><strong>Límite de autoridad</strong><p>Carry y Omni aportan memoria, pero nunca tienen permiso para operar contra un hard WAIT activo.</p></div></div>`;
+    }
+
+    function renderEntry() {
+      const gate = entryGates[entryGate];
+      return html`<div className="gm-stack"><div className="gm-two"><div className="gm-gate-stack">${entryGates.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn gm-gate-button ${entryGate===index ? "btn-primary" : ""}`} onClick=${()=>setEntryGate(index)}><span className="gm-gate-number">${index+1}</span><span><strong>${entry.label}</strong><br/><span className="text-small">obligatorio</span></span></button>`)}</div><div className="card"><div className="gm-card-head"><strong>${gate.label}</strong><span className="viz-badge">GATE ${entryGate+1}</span></div><p>${gate.meaning}</p><pre className="gm-formula"><code>${gate.law}</code></pre></div></div><div className="gm-two"><div className="card"><strong>BUY confirmado</strong><pre className="gm-formula"><code>BUY = macroBuy AND trendUp AND sessionAccepted\n      AND validBullStructure AND flowBuy\n      AND noOpposingDanger AND validStop\n      AND NOT hardWait</code></pre></div><div className="card"><strong>SELL confirmado</strong><pre className="gm-formula"><code>SELL = macroSell AND trendDown AND sessionAccepted\n       AND validBearStructure AND flowSell\n       AND noOpposingDanger AND validStop\n       AND NOT hardWait</code></pre></div></div><div className="gm-warning"><strong>Álgebra de seguridad</strong><p>La arquitectura es multiplicativa: una compuerta obligatoria en cero anula el candidato completo. Las confluencias suman evidencia, pero no pueden compensar un veto soberano.</p></div></div>`;
+    }
+
+    function renderRisk() {
+      const item = riskObjects[riskObject];
+      const life = lifecycle[lifeIndex];
+      return html`<div className="gm-stack"><div className="gm-risk-axis">${riskObjects.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${riskObject===index ? "btn-primary" : ""}`} onClick=${()=>setRiskObject(index)}><strong>${entry.label}</strong><span className="text-small">${entry.value}</span></button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div><div className="card"><strong>Geometría estable</strong><pre className="gm-formula"><code>Manual ATR = 2.65\nRisk = |Entry-SL|\nTP1=1R · TP2=2R · TP3=3R</code></pre><p>El default 0.75 permanece solamente como trazabilidad de la fuente.</p></div></div><div className="gm-flow">${lifecycle.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${lifeIndex===index ? "btn-primary is-selected" : ""}`} onClick=${()=>setLifeIndex(index)}>${entry.label}</button>`)}</div><div className="card"><div className="gm-card-head"><strong>${life.label}</strong><span className="viz-badge">LIFECYCLE</span></div><p>${life.meaning}</p></div><div className="gm-three"><div className="card"><strong>Smart SL</strong><p>Integra zona, sweep, buffer ATR y piso mínimo.</p></div><div className="card"><strong>Emergency</strong><p>Exige macro opuesto, movimiento adverso y fallo estructural confirmado.</p></div><div className="card"><strong>Settlement</strong><p>Cierra memoria activa por TP, SL, timeout, market close o reset semanal válido.</p></div></div></div>`;
+    }
+
+    function renderOperations() {
+      const step = operationSteps[operationStep];
+      const incident = incidents[incidentIndex];
+      return html`<div className="gm-stack"><div className="gm-flow">${operationSteps.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${operationStep===index ? "btn-primary is-selected" : ""}`} onClick=${()=>setOperationStep(index)}>${index+1}. ${entry.label}</button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${step.label}</strong><span className="viz-badge">${step.check}</span></div><p>${step.detail}</p></div><div className="card"><strong>Identidad canónica</strong><pre className="gm-formula"><code>Indicator: GENTRA CORE\nVersion: v2.4.67 TEST\nProfile: 2026-07-18-r2\nSource hash: 107A6429...A83190C</code></pre></div></div><div className="gm-three"><div className="card"><strong>Chart actual</strong><p>Estado visual recalculado con la configuración local.</p></div><div className="card"><strong>Alerta cloud</strong><p>Snapshot independiente congelado al crearla.</p></div><div className="card"><strong>Webhook</strong><p>Ruta externa que necesita logs e idempotencia.</p></div></div><div className="gm-choice-grid">${incidents.map((entry,index)=>html`<button key=${entry.symptom} type="button" className=${`btn ${incidentIndex===index ? "btn-primary" : ""}`} onClick=${()=>setIncidentIndex(index)}>${entry.symptom}</button>`)}</div><div className="card"><div className="gm-card-head"><strong>${incident.symptom}</strong><span className="viz-badge">PRIMERA ACCIÓN</span></div><p>${incident.action}</p></div><div className="gm-warning"><strong>Ley operativa</strong><p>Congelar código, congelar perfil, crear la alerta desde ese chart exacto y recrearla cuando cambie cualquier componente de identidad.</p></div></div>`;
+    }
+
+    function renderMathematics() {
+      return html`<div className="gm-stack"><div className="gm-choice-grid">${equations.map(item=>html`<button key=${item.id} type="button" className=${`btn ${equationId===item.id ? "btn-primary" : ""}`} onClick=${()=>setEquationId(item.id)}>${item.label}</button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${activeEquation.label}</strong><span className="viz-badge">LINES ${activeEquation.lines}</span></div><pre className="gm-formula"><code>${activeEquation.formula}</code></pre><p>${activeEquation.meaning}</p></div><div className="card"><strong>Ecuación unificada</strong><pre className="gm-formula"><code>z_t = H(x_t,z_(t-1),m_(t-1),session_t)\nq_t = Q(x_t)\nm_t = U(m_(t-1),z_t,Z_t,invalidation_t)\nu_t = P(x_t,z_t,q_t,m_t,A_t,Z_t)\na_t = u_t * product(g_i)</code></pre></div></div><div className="gm-three"><div className="card"><strong>Continuo</strong><p>Precio, ATR, cambios porcentuales y calidad.</p></div><div className="card"><strong>Discreto</strong><p>Régimen, estado de zona, memoria y permiso.</p></div><div className="card"><strong>Evento</strong><p>Sesión, cierre de vela, invalidación, alerta y salida.</p></div></div><div className="gm-reference"><strong>Interpretación profesional</strong><p>GENTRA es un sistema híbrido determinista: estima estado, conserva memoria y autoriza acciones acotadas bajo barreras de seguridad.</p></div></div>`;
+    }
+
+    function renderScience() {
+      const lens = scientificLenses[scienceIndex];
+      return html`<div className="gm-stack"><div className="gm-choice-grid">${scientificLenses.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${scienceIndex===index ? "btn-primary" : ""}`} onClick=${()=>setScienceIndex(index)}>${entry.label}</button>`)}</div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${lens.label}</strong><span className="viz-badge">${lens.status}</span></div><p>${lens.mapping}</p><div className="gm-warning"><p>${lens.caveat}</p></div></div><div className="card"><strong>Correspondencia matemática</strong><pre className="gm-formula"><code>${lens.equation}</code></pre></div></div><div className="gm-reference"><strong>Descripción defendible</strong><p>Motor adaptativo de regímenes con estados híbridos, memoria dirigida por eventos, especialistas deterministas y autorización protegida por barreras lógicas.</p></div></div>`;
+    }
+
+    function renderEvidence() {
+      const item = evidenceItems[evidenceIndex];
+      return html`<div className="gm-stack"><div className="gm-choice-grid">${evidenceItems.map((entry,index)=>html`<button key=${entry.label} type="button" className=${`btn ${evidenceIndex===index ? "btn-primary" : ""}`} onClick=${()=>setEvidenceIndex(index)}>${entry.label}</button>`)}</div><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.detail}</p></div><div><div className="gm-card-head"><strong>Cobertura del manual unificado</strong><span className="text-small text-muted">todos los archivos reunidos</span></div>${sourceCoverage.map(entry=>html`<div key=${entry.file} className="gm-coverage-line"><strong>${entry.file}</strong><span>${entry.destination}</span></div>`)}</div><div className="gm-three"><div className="card"><strong>Reproducibilidad</strong><p>Fuente + hash + perfil + entorno + alerta.</p></div><div className="card"><strong>Auditoría</strong><p>Fórmulas + líneas + parámetros + changelog.</p></div><div className="card"><strong>Protección</strong><p>Privacidad + acceso controlado + copias identificadas.</p></div></div></div>`;
+    }
+
+    function renderParameters() {
+      return html`<div className="gm-stack"><div className="gm-four"><div className="card"><strong>Preset</strong><p>Custom</p></div><div className="card"><strong>ATR Length</strong><p>14</p></div><div className="card"><strong>Manual SL</strong><p>2.65 ATR</p></div><div className="card"><strong>Asia Votes</strong><p>4 de 5</p></div></div><div className="gm-two"><label className="form-label">Buscar en 216 ajustes<input className="form-control" type="search" value=${parameterSearch} onChange=${event=>{setParameterSearch(event.target.value);setParameterPage(0);setSelectedParameter(null);}} placeholder="Variable, título o función" /></label><label className="form-label">Grupo<select className="form-select" value=${parameterGroup} onChange=${event=>chooseGroup(event.target.value)}>${groups.map(group=>html`<option key=${group} value=${group}>${group}</option>`)}</select></label></div><div className="gm-group-grid">${groups.map(group=>html`<button key=${group} type="button" className=${`btn ${parameterGroup===group ? "btn-primary" : ""}`} onClick=${()=>chooseGroup(group)}>${group}</button>`)}</div><div className="gm-two"><div className="gm-parameter-list">${visibleParameters.map(entry=>html`<button key=${entry.variable} type="button" className=${`btn ${activeParameter?.variable===entry.variable ? "btn-primary" : ""}`} onClick=${()=>setSelectedParameter(entry)}><span className="gm-parameter-line"><strong>${entry.title}</strong><code>${entry.variable}</code><span>${String(entry.calibratedValue ?? entry.sourceDefault)}</span></span></button>`)}</div>${activeParameter ? html`<div className="card"><div className="gm-card-head"><strong>${activeParameter.title}</strong><span className="viz-badge">${activeParameter.calibrationStatus}</span></div><p><code>${activeParameter.variable}</code> · ${activeParameter.group} · línea ${activeParameter.line}</p><p>${activeParameter.description}</p><pre className="gm-formula"><code>Default fuente: ${String(activeParameter.sourceDefault)}\nPerfil calibrado: ${String(activeParameter.calibratedValue)}\nTipo: ${activeParameter.type}\nUsos en código: ${activeParameter.usageCount}</code></pre></div>` : html`<div className="card"><p>No hay resultados para este filtro.</p></div>`}</div><div className="gm-between"><span className="text-muted">${filteredParameters.length} resultados · página ${safePage+1}/${pageCount}</span><div className="gm-inline"><button className="btn" type="button" disabled=${safePage===0} onClick=${()=>setParameterPage(Math.max(0,safePage-1))}>Anterior</button><button className="btn" type="button" disabled=${safePage>=pageCount-1} onClick=${()=>setParameterPage(Math.min(pageCount-1,safePage+1))}>Siguiente</button></div></div></div>`;
+    }
+
+    function renderMapSvg() {
+      const stage = architecture[architectureStep];
+      const stageNodes = architecture.map((item,index)=>({ ...item, id:String(index), sub:item.source }));
+      return html`<div className="gm-stack">
+        <div className="gm-two">
+          <${ReactorCore} compact=${true}/>
+          <div className="gm-stack">
+            <div className="card"><div className="gm-card-head"><strong>Arquitectura viva</strong><span className="viz-badge">8 MÓDULOS</span></div><p>El reactor no representa una señal aislada. Representa la coordinación entre macro, tendencia, sesión, estructura, memoria, flujo, seguridad y riesgo antes de autorizar una acción.</p></div>
+            <div className="gm-four"><div className="card"><strong>216</strong><p>controles trazados</p></div><div className="card"><strong>8</strong><p>módulos coordinados</p></div><div className="card"><strong>5</strong><p>láminas SVG</p></div><div className="card"><strong>14</strong><p>capítulos</p></div></div>
+            <div className="gm-reference"><strong>Lectura del reactor</strong><p>Toque cualquier núcleo o lámina. La interfaz abre la explicación correspondiente sin inventar una simulación de mercado.</p></div>
+          </div>
+        </div>
+        <${VisualAtlas} index=${atlasIndex} onSelect=${setAtlasIndex}/>
+        <div className="gm-two"><${SvgNetwork} items=${modules} selectedKey=${moduleId} onSelect=${key=>setModuleId(key)} centerLabel="DECISION CORE" centerSub="8 modules" ariaLabel="Mapa interactivo de módulos GENTRA"/><${Detail} item=${activeModule} level=${level} badge="MÓDULO"/></div>
+        <div className="gm-two"><${SvgNetwork} items=${stageNodes} selectedKey=${String(architectureStep)} onSelect=${(key,index)=>setArchitectureStep(index)} centerLabel="PIPELINE" centerSub="8 transformations" ariaLabel="Pipeline interactivo de arquitectura"/><div className="card"><div className="gm-card-head"><strong>${stage.label}</strong><span className="viz-badge">${stage.source}</span></div><p>${stage[level]}</p><pre className="gm-formula"><code>${stage.quant}</code></pre></div></div>
+        <div className="gm-reference"><strong>Manual unificado</strong><p>Los documentos técnico, educativo, matemático, operativo, científico, inventivo y paramétrico están reunidos dentro de este HTML. No contiene simulación de trades ni historial ficticio.</p></div>
+      </div>`;
+    }
+
+    function renderMacroSvg() {
+      const source = macroSources[macroSource];
+      const regime = regimes[regimeIndex];
+      const sourceNodes = macroSources.map((item,index)=>({ ...item, id:String(index), sub:item.domain }));
+      const regimeNodes = regimes.map((item,index)=>({ ...item, id:String(index), sub:item.permission }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${sourceNodes} selectedKey=${String(macroSource)} onSelect=${(key,index)=>setMacroSource(index)} centerLabel="MACRO INPUTS" centerSub="cross-market" ariaLabel="Universo macro interactivo"/><${SvgNetwork} items=${regimeNodes} selectedKey=${String(regimeIndex)} onSelect=${(key,index)=>setRegimeIndex(index)} centerLabel="REGIME" centerSub="authority" ariaLabel="Máquina interactiva de regímenes"/></div><div className="gm-two"><div className="card"><div className="gm-card-head"><strong>${source.label}</strong><span className="viz-badge">${source.domain}</span></div><p>${source.meaning}</p><pre className="gm-formula"><code>${source.ticker}\nDelta X_t(%)=100*(X_t-X_open)/X_open</code></pre></div><div className="card"><div className="gm-card-head"><strong>${regime.label}</strong><span className="viz-badge">${regime.permission}</span></div><p>${regime.meaning}</p></div></div><div className="gm-warning"><strong>Ley soberana</strong><p>PANIC, WAIT_MODE, TRANSITION y DATA_WAIT terminan en no ejecución. Confluencia, Carry u Omni no pueden convertir una espera dura en entrada.</p></div></div>`;
+    }
+
+    function renderAsiaSvg() {
+      const vote = asiaVotes[asiaVote];
+      const stage = asiaRouterStages[asiaStage];
+      const outcome = asiaRouterOutcomes[asiaOutcome];
+      const handoff = asiaHandoffStages[asiaHandoff];
+      const voteNodes = asiaVotes.map((item,index)=>({ ...item, id:String(index), sub:`OFF ${item.off}` }));
+      const stageNodes = asiaRouterStages.map((item,index)=>({ ...item, id:String(index) }));
+      const outcomeNodes = asiaRouterOutcomes.map((item,index)=>({ ...item, id:String(index) }));
+      const handoffNodes = asiaHandoffStages.map((item,index)=>({ ...item, id:String(index) }));
+      return html`<div className="gm-stack">
+        <div className="gm-two">
+          <${SvgNetwork} items=${voteNodes} selectedKey=${String(asiaVote)} onSelect=${(key,index)=>setAsiaVote(index)} centerLabel="ASIA VOTES" centerSub="5 cross-market feeds" ariaLabel="Router interactivo de cinco votos de Asia"/>
+          <div className="card"><div className="gm-card-head"><strong>${vote.label}</strong><span className="viz-badge">VOTO ASIA</span></div><p>${vote.meaning}</p><pre className="gm-formula"><code>Risk-off: ${vote.off}\nRisk-on: ${vote.on}\nDelta X_t(%)=100*(X_t-X_asiaOpen)/X_asiaOpen</code></pre><p>Cada fuente aporta un voto direccional o permanece neutral; ninguna serie aislada gobierna el router.</p></div>
+        </div>
+        <div className="gm-two">
+          <${SvgNetwork} items=${stageNodes} selectedKey=${String(asiaStage)} onSelect=${(key,index)=>setAsiaStage(index)} centerLabel="ROUTER" centerSub="decision pipeline" ariaLabel="Etapas interactivas del router nocturno"/>
+          <div className="card"><div className="gm-card-head"><strong>${stage.label}</strong><span className="viz-badge">${stage.sub}</span></div><p>${stage.meaning}</p><pre className="gm-formula"><code>capture -> normalize -> validate -> vote -> authority -> inherit</code></pre></div>
+        </div>
+        <div className="gm-two">
+          <${SvgNetwork} items=${outcomeNodes} selectedKey=${String(asiaOutcome)} onSelect=${(key,index)=>setAsiaOutcome(index)} centerLabel="OUTCOME" centerSub="direction or wait" ariaLabel="Resultados interactivos del router de Asia"/>
+          <div className="card"><div className="gm-card-head"><strong>${outcome.label}</strong><span className="viz-badge">${outcome.sub}</span></div><p>${outcome.meaning}</p><pre className="gm-formula"><code>${outcome.code}\n\nVoff=I(USDJPY<=-f)+I(AUDJPY<=-f)+I(USDCNH>=f)+I(NIKKEI<=-n)+I(NQ<=-q)\nVon =I(USDJPY>= f)+I(AUDJPY>= f)+I(USDCNH<=-f)+I(NIKKEI>= n)+I(NQ>= q)</code></pre></div>
+        </div>
+        <div className="gm-two">
+          <${SvgNetwork} items=${handoffNodes} selectedKey=${String(asiaHandoff)} onSelect=${(key,index)=>setAsiaHandoff(index)} centerLabel="HANDOFF" centerSub="Asia -> London -> NY" ariaLabel="Continuidad interactiva de Asia a New York"/>
+          <div className="card"><div className="gm-card-head"><strong>${handoff.label}</strong><span className="viz-badge">${handoff.sub}</span></div><p>${handoff.meaning}</p><pre className="gm-formula"><code>validCarry_t = previousCarry AND anchorValid AND NOT hardWait\nmissingFeed => DATA_WAIT\nmixedVotes  => ASIA_CARRY_WAIT</code></pre></div>
+        </div>
+        <div className="gm-warning"><strong>Autoridad nocturna completa</strong><p>El router aporta conciencia de Asia y continuidad hacia London/New York, pero no atraviesa PANIC, WAIT_MODE, TRANSITION ni DATA_WAIT. Carry y Omni reciben contexto; no pueden fabricar permiso contra una espera dura.</p></div>
+      </div>`;
+    }
+
+    function renderTrendSvg() {
+      const part = trendParts[trendPart];
+      const nodes = trendParts.map((item,index)=>({ ...item, id:String(index), sub:`${Math.round(item.weight*100)}%` }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(trendPart)} onSelect=${(key,index)=>setTrendPart(index)} centerLabel="TQI" centerSub="weighted quality" ariaLabel="Composición interactiva del Trend Quality Index"/><div className="card"><div className="gm-card-head"><strong>${part.label}</strong><span className="viz-badge">PESO ${Math.round(part.weight*100)}%</span></div><p>${part.meaning}</p><pre className="gm-formula"><code>TQI=0.35E+0.20V+0.25S+0.20M</code></pre></div></div><div className="gm-three"><div className="card"><strong>Efficiency Ratio</strong><pre className="gm-formula"><code>ER=net displacement / total path</code></pre></div><div className="card"><strong>ATR eficiente</strong><pre className="gm-formula"><code>effATR=ATR*(0.5+0.5ER)</code></pre></div><div className="card"><strong>Character Flip</strong><pre className="gm-formula"><code>High=0.55 · Low=0.25 · Age=5</code></pre></div></div><div className="gm-warning"><strong>Dirección obligatoria</strong><p>No BUY durante bearish DOWN. No SELL durante bullish UP.</p></div></div>`;
     }
 
     function renderSessionSvg() {
@@ -745,14 +1880,14 @@ Output:
         { id:"1", label:"LONDON", sub:"expansion" },
         { id:"2", label:"NEW YORK", sub:"cash + futures" }
       ];
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(sessionObject)} onSelect=${(key,index)=>setSessionObject(index)} centerLabel="SESSION VALUE" centerSub="auction map" ariaLabel="GeometrÃ­a interactiva de sesiÃ³n"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">SESSION VALUE</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.code}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${sessions} selectedKey="1" onSelect=${()=>{}} centerLabel="SESSION CLOCK" centerSub="handoff" ariaLabel="Mapa interactivo de sesiones operativas"/><div className="card"><strong>Buffers confirmados</strong><pre className="gm-formula"><code>Stabilization=15 min\nClose buffer=15 min\nNY cash buffer=10 min\nOpening range=15 min</code></pre><p>Las coordenadas de valor deben ser aceptadas, no solamente tocadas.</p></div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(sessionObject)} onSelect=${(key,index)=>setSessionObject(index)} centerLabel="SESSION VALUE" centerSub="auction map" ariaLabel="Geometría interactiva de sesión"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">SESSION VALUE</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.code}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${sessions} selectedKey="1" onSelect=${()=>{}} centerLabel="SESSION CLOCK" centerSub="handoff" ariaLabel="Mapa interactivo de sesiones operativas"/><div className="card"><strong>Buffers confirmados</strong><pre className="gm-formula"><code>Stabilization=15 min\nClose buffer=15 min\nNY cash buffer=10 min\nOpening range=15 min</code></pre><p>Las coordenadas de valor deben ser aceptadas, no solamente tocadas.</p></div></div></div>`;
     }
 
     function renderStructureSvg() {
       const item = structureObjects[structureObject];
       const nodes = structureObjects.map((entry,index)=>({ ...entry, id:String(index), sub:entry.state }));
       const states = ["Candidate","Valid","Tested","Defended","Rejected","Perforated","Invalid","Archived"].map((label,index)=>({id:String(index),label,sub:String(index+1)}));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(structureObject)} onSelect=${(key,index)=>setStructureObject(index)} centerLabel="ZONE MATRIX" centerSub="institutional context" ariaLabel="Capas estructurales interactivas"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.state}</span></div><p>${item.meaning}</p></div></div><div className="gm-two"><${SvgNetwork} items=${states} selectedKey="1" onSelect=${()=>{}} centerLabel="ZONE STATE" centerSub="finite machine" ariaLabel="Estados visuales de una zona"/><div className="card"><strong>Regla de utilizaciÃ³n</strong><p>Una zona aporta contexto, confirmaciÃ³n, protecciÃ³n o invalidaciÃ³n. No crea por sÃ­ sola una seÃ±al automÃ¡tica.</p><pre className="gm-formula"><code>Z_t in {valid,tested,defended,rejected,perforated,invalid}</code></pre></div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(structureObject)} onSelect=${(key,index)=>setStructureObject(index)} centerLabel="ZONE MATRIX" centerSub="institutional context" ariaLabel="Capas estructurales interactivas"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.state}</span></div><p>${item.meaning}</p></div></div><div className="gm-two"><${SvgNetwork} items=${states} selectedKey="1" onSelect=${()=>{}} centerLabel="ZONE STATE" centerSub="finite machine" ariaLabel="Estados visuales de una zona"/><div className="card"><strong>Regla de utilización</strong><p>Una zona aporta contexto, confirmación, protección o invalidación. No crea por sí sola una señal automática.</p><pre className="gm-formula"><code>Z_t in {valid,tested,defended,rejected,perforated,invalid}</code></pre></div></div></div>`;
     }
 
     function renderMemorySvg() {
@@ -764,13 +1899,13 @@ Output:
         {id:"2",label:"OMNI/STRUCTURE",sub:"continuity"},
         {id:"3",label:"LOCAL TRIGGER",sub:"timing"}
       ];
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(memoryObject)} onSelect=${(key,index)=>setMemoryObject(index)} centerLabel="MEMORY" centerSub="cross-session" ariaLabel="Memorias interactivas de GENTRA"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.scope}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${authority} selectedKey="0" onSelect=${()=>{}} centerLabel="AUTHORITY" centerSub="priority" ariaLabel="JerarquÃ­a visual de autoridad"/><div className="card"><strong>InvalidaciÃ³n</strong><p>La memoria termina cuando su ancla falla, la estructura contraria queda confirmada o una autoridad superior cambia el rÃ©gimen. El cambio de sesiÃ³n por sÃ­ solo no debe borrar evidencia aÃºn vÃ¡lida.</p><div className="gm-warning"><p>Carry y Omni nunca atraviesan hard WAIT.</p></div></div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(memoryObject)} onSelect=${(key,index)=>setMemoryObject(index)} centerLabel="MEMORY" centerSub="cross-session" ariaLabel="Memorias interactivas de GENTRA"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.scope}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${authority} selectedKey="0" onSelect=${()=>{}} centerLabel="AUTHORITY" centerSub="priority" ariaLabel="Jerarquía visual de autoridad"/><div className="card"><strong>Invalidación</strong><p>La memoria termina cuando su ancla falla, la estructura contraria queda confirmada o una autoridad superior cambia el régimen. El cambio de sesión por sí solo no debe borrar evidencia aún válida.</p><div className="gm-warning"><p>Carry y Omni nunca atraviesan hard WAIT.</p></div></div></div></div>`;
     }
 
     function renderEntrySvg() {
       const gate = entryGates[entryGate];
       const nodes = entryGates.map((entry,index)=>({ ...entry, id:String(index), sub:`gate ${index+1}` }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(entryGate)} onSelect=${(key,index)=>setEntryGate(index)} centerLabel="AUTHORIZE" centerSub="all gates required" ariaLabel="Comportamiento interactivo de autorizaciÃ³n"/><div className="card"><div className="gm-card-head"><strong>${gate.label}</strong><span className="viz-badge">GATE ${entryGate+1}</span></div><p>${gate.meaning}</p><pre className="gm-formula"><code>${gate.law}</code></pre></div></div><div className="gm-two"><div className="card"><strong>BUY confirmado</strong><pre className="gm-formula"><code>macroBuy AND trendUp AND sessionAccepted\nAND validBullStructure AND flowBuy\nAND noOpposingDanger AND validStop\nAND NOT hardWait</code></pre></div><div className="card"><strong>SELL confirmado</strong><pre className="gm-formula"><code>macroSell AND trendDown AND sessionAccepted\nAND validBearStructure AND flowSell\nAND noOpposingDanger AND validStop\nAND NOT hardWait</code></pre></div></div><div className="gm-warning"><strong>Ãlgebra multiplicativa</strong><p>Una compuerta obligatoria en cero anula al candidato completo. Confluencias adicionales no compensan un veto.</p></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(entryGate)} onSelect=${(key,index)=>setEntryGate(index)} centerLabel="AUTHORIZE" centerSub="all gates required" ariaLabel="Comportamiento interactivo de autorización"/><div className="card"><div className="gm-card-head"><strong>${gate.label}</strong><span className="viz-badge">GATE ${entryGate+1}</span></div><p>${gate.meaning}</p><pre className="gm-formula"><code>${gate.law}</code></pre></div></div><div className="gm-two"><div className="card"><strong>BUY confirmado</strong><pre className="gm-formula"><code>macroBuy AND trendUp AND sessionAccepted\nAND validBullStructure AND flowBuy\nAND noOpposingDanger AND validStop\nAND NOT hardWait</code></pre></div><div className="card"><strong>SELL confirmado</strong><pre className="gm-formula"><code>macroSell AND trendDown AND sessionAccepted\nAND validBearStructure AND flowSell\nAND noOpposingDanger AND validStop\nAND NOT hardWait</code></pre></div></div><div className="gm-warning"><strong>Álgebra multiplicativa</strong><p>Una compuerta obligatoria en cero anula al candidato completo. Confluencias adicionales no compensan un veto.</p></div></div>`;
     }
 
     function renderRiskSvg() {
@@ -778,7 +1913,7 @@ Output:
       const life = lifecycle[lifeIndex];
       const riskNodes = riskObjects.map((entry,index)=>({ ...entry, id:String(index), sub:entry.value }));
       const lifeNodes = lifecycle.map((entry,index)=>({ ...entry, id:String(index), sub:String(index+1) }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${riskNodes} selectedKey=${String(riskObject)} onSelect=${(key,index)=>setRiskObject(index)} centerLabel="RISK" centerSub="bounded geometry" ariaLabel="GeometrÃ­a interactiva de riesgo"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${lifeNodes} selectedKey=${String(lifeIndex)} onSelect=${(key,index)=>setLifeIndex(index)} centerLabel="LIFECYCLE" centerSub="trade state" ariaLabel="Ciclo de vida interactivo del trade"/><div className="card"><div className="gm-card-head"><strong>${life.label}</strong><span className="viz-badge">STATE</span></div><p>${life.meaning}</p><pre className="gm-formula"><code>Manual ATR=2.65\nTP1=1R Â· TP2=2R Â· TP3=3R</code></pre></div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${riskNodes} selectedKey=${String(riskObject)} onSelect=${(key,index)=>setRiskObject(index)} centerLabel="RISK" centerSub="bounded geometry" ariaLabel="Geometría interactiva de riesgo"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${lifeNodes} selectedKey=${String(lifeIndex)} onSelect=${(key,index)=>setLifeIndex(index)} centerLabel="LIFECYCLE" centerSub="trade state" ariaLabel="Ciclo de vida interactivo del trade"/><div className="card"><div className="gm-card-head"><strong>${life.label}</strong><span className="viz-badge">STATE</span></div><p>${life.meaning}</p><pre className="gm-formula"><code>Manual ATR=2.65\nTP1=1R · TP2=2R · TP3=3R</code></pre></div></div></div>`;
     }
 
     function renderOperationsSvg() {
@@ -786,30 +1921,30 @@ Output:
       const incident = incidents[incidentIndex];
       const stepNodes = operationSteps.map((entry,index)=>({ ...entry, id:String(index), sub:entry.check }));
       const incidentNodes = incidents.map((entry,index)=>({ id:String(index), label:entry.symptom, short:`Incident ${index+1}`, sub:"diagnose" }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${stepNodes} selectedKey=${String(operationStep)} onSelect=${(key,index)=>setOperationStep(index)} centerLabel="ALERT IDENTITY" centerSub="cloud snapshot" ariaLabel="Protocolo interactivo de TradingView"/><div className="card"><div className="gm-card-head"><strong>${step.label}</strong><span className="viz-badge">${step.check}</span></div><p>${step.detail}</p><pre className="gm-formula"><code>Version v2.4.67 TEST\nProfile 2026-07-18-r2\nSource identity verified</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${incidentNodes} selectedKey=${String(incidentIndex)} onSelect=${(key,index)=>setIncidentIndex(index)} centerLabel="INCIDENT" centerSub="first action" ariaLabel="DiagnÃ³stico interactivo de incidentes"/><div className="card"><div className="gm-card-head"><strong>${incident.symptom}</strong><span className="viz-badge">PRIMERA ACCIÃ“N</span></div><p>${incident.action}</p><div className="gm-warning"><p>Alert Manager es la autoridad sobre la existencia de la alerta cloud.</p></div></div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${stepNodes} selectedKey=${String(operationStep)} onSelect=${(key,index)=>setOperationStep(index)} centerLabel="ALERT IDENTITY" centerSub="cloud snapshot" ariaLabel="Protocolo interactivo de TradingView"/><div className="card"><div className="gm-card-head"><strong>${step.label}</strong><span className="viz-badge">${step.check}</span></div><p>${step.detail}</p><pre className="gm-formula"><code>Version v2.4.67 TEST\nProfile 2026-07-18-r2\nSource identity verified</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${incidentNodes} selectedKey=${String(incidentIndex)} onSelect=${(key,index)=>setIncidentIndex(index)} centerLabel="INCIDENT" centerSub="first action" ariaLabel="Diagnóstico interactivo de incidentes"/><div className="card"><div className="gm-card-head"><strong>${incident.symptom}</strong><span className="viz-badge">PRIMERA ACCIÓN</span></div><p>${incident.action}</p><div className="gm-warning"><p>Alert Manager es la autoridad sobre la existencia de la alerta cloud.</p></div></div></div></div>`;
     }
 
     function renderMathematicsSvg() {
       const nodes = equations.map(item=>({ ...item, sub:item.lines }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${equationId} onSelect=${key=>setEquationId(key)} centerLabel="MATH CORE" centerSub="traceable equations" ariaLabel="Ecuaciones interactivas de GENTRA"/><div className="card"><div className="gm-card-head"><strong>${activeEquation.label}</strong><span className="viz-badge">LINES ${activeEquation.lines}</span></div><pre className="gm-formula"><code>${activeEquation.formula}</code></pre><p>${activeEquation.meaning}</p></div></div><div className="card"><strong>EcuaciÃ³n unificada</strong><pre className="gm-formula"><code>z_t=H(x_t,z_(t-1),m_(t-1),session_t)\nq_t=Q(x_t)\nm_t=U(m_(t-1),z_t,Z_t,invalidation_t)\nu_t=P(x_t,z_t,q_t,m_t,A_t,Z_t)\na_t=u_t*product(g_i)</code></pre></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${equationId} onSelect=${key=>setEquationId(key)} centerLabel="MATH CORE" centerSub="traceable equations" ariaLabel="Ecuaciones interactivas de GENTRA"/><div className="card"><div className="gm-card-head"><strong>${activeEquation.label}</strong><span className="viz-badge">LINES ${activeEquation.lines}</span></div><pre className="gm-formula"><code>${activeEquation.formula}</code></pre><p>${activeEquation.meaning}</p></div></div><div className="card"><strong>Ecuación unificada</strong><pre className="gm-formula"><code>z_t=H(x_t,z_(t-1),m_(t-1),session_t)\nq_t=Q(x_t)\nm_t=U(m_(t-1),z_t,Z_t,invalidation_t)\nu_t=P(x_t,z_t,q_t,m_t,A_t,Z_t)\na_t=u_t*product(g_i)</code></pre></div></div>`;
     }
 
     function renderScienceSvg() {
       const lens = scientificLenses[scienceIndex];
       const nodes = scientificLenses.map((entry,index)=>({ ...entry, id:String(index), sub:entry.status }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(scienceIndex)} onSelect=${(key,index)=>setScienceIndex(index)} centerLabel="SCIENTIFIC FRAME" centerSub="defensible language" ariaLabel="AnalogÃ­as cientÃ­ficas interactivas"/><div className="card"><div className="gm-card-head"><strong>${lens.label}</strong><span className="viz-badge">${lens.status}</span></div><p>${lens.mapping}</p><pre className="gm-formula"><code>${lens.equation}</code></pre><div className="gm-warning"><p>${lens.caveat}</p></div></div></div><div className="gm-reference"><strong>ClasificaciÃ³n defendible</strong><p>Motor adaptativo de regÃ­menes con estados hÃ­bridos, memoria dirigida por eventos, especialistas deterministas y autorizaciÃ³n protegida por barreras lÃ³gicas.</p></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(scienceIndex)} onSelect=${(key,index)=>setScienceIndex(index)} centerLabel="SCIENTIFIC FRAME" centerSub="defensible language" ariaLabel="Analogías científicas interactivas"/><div className="card"><div className="gm-card-head"><strong>${lens.label}</strong><span className="viz-badge">${lens.status}</span></div><p>${lens.mapping}</p><pre className="gm-formula"><code>${lens.equation}</code></pre><div className="gm-warning"><p>${lens.caveat}</p></div></div></div><div className="gm-reference"><strong>Clasificación defendible</strong><p>Motor adaptativo de regímenes con estados híbridos, memoria dirigida por eventos, especialistas deterministas y autorización protegida por barreras lógicas.</p></div></div>`;
     }
 
     function renderEvidenceSvg() {
       const item = evidenceItems[evidenceIndex];
       const evidenceNodes = evidenceItems.map((entry,index)=>({ ...entry, id:String(index), sub:entry.value }));
       const coverageNodes = sourceCoverage.map((entry,index)=>({ id:String(index), label:entry.file, sub:"integrated" }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${evidenceNodes} selectedKey=${String(evidenceIndex)} onSelect=${(key,index)=>setEvidenceIndex(index)} centerLabel="AUDIT CORE" centerSub="private evidence" ariaLabel="Evidencia interactiva de la invenciÃ³n"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.detail}</p></div></div><div className="gm-two"><${SvgNetwork} items=${coverageNodes} selectedKey="0" onSelect=${()=>{}} centerLabel="ONE HTML" centerSub="7 documents" ariaLabel="Cobertura visual del manual unificado"/><div>${sourceCoverage.map(entry=>html`<div key=${entry.file} className="gm-coverage-line"><strong>${entry.file}</strong><span>${entry.destination}</span></div>`)}</div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${evidenceNodes} selectedKey=${String(evidenceIndex)} onSelect=${(key,index)=>setEvidenceIndex(index)} centerLabel="AUDIT CORE" centerSub="private evidence" ariaLabel="Evidencia interactiva de la invención"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.detail}</p></div></div><div className="gm-two"><${SvgNetwork} items=${coverageNodes} selectedKey="0" onSelect=${()=>{}} centerLabel="ONE HTML" centerSub="7 documents" ariaLabel="Cobertura visual del manual unificado"/><div>${sourceCoverage.map(entry=>html`<div key=${entry.file} className="gm-coverage-line"><strong>${entry.file}</strong><span>${entry.destination}</span></div>`)}</div></div></div>`;
     }
 
     function renderParametersSvg() {
       const groupNodes = groups.filter(group=>group!=="All").map((group,index)=>({ id:group, label:group, sub:`${parameterRegistry.filter(item=>item.group===group).length}` }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${groupNodes} selectedKey=${parameterGroup==="All" ? "Main" : parameterGroup} onSelect=${key=>chooseGroup(key)} centerLabel="216 INPUTS" centerSub="14 groups" ariaLabel="Grupos interactivos de parÃ¡metros"/><${SvgParameterProfile} item=${activeParameter}/></div><div className="gm-four"><div className="card"><strong>Preset</strong><p>Custom</p></div><div className="card"><strong>ATR Length</strong><p>14</p></div><div className="card"><strong>Manual SL</strong><p>2.65 ATR</p></div><div className="card"><strong>Asia Votes</strong><p>4 de 5</p></div></div><div className="gm-two"><label className="form-label">Buscar en 216 ajustes<input className="form-control" type="search" value=${parameterSearch} onChange=${event=>{setParameterSearch(event.target.value);setParameterPage(0);setSelectedParameter(null);}} placeholder="Variable, tÃ­tulo o funciÃ³n"/></label><label className="form-label">Grupo<select className="form-select" value=${parameterGroup} onChange=${event=>chooseGroup(event.target.value)}>${groups.map(group=>html`<option key=${group} value=${group}>${group}</option>`)}</select></label></div><div className="gm-two"><div className="gm-parameter-list">${visibleParameters.map(entry=>html`<button key=${entry.variable} type="button" className=${`btn ${activeParameter?.variable===entry.variable ? "btn-primary" : ""}`} onClick=${()=>setSelectedParameter(entry)}><span className="gm-parameter-line"><strong>${entry.title}</strong><code>${entry.variable}</code><span>${String(entry.calibratedValue ?? entry.sourceDefault)}</span></span></button>`)}</div>${activeParameter ? html`<div className="card"><div className="gm-card-head"><strong>${activeParameter.title}</strong><span className="viz-badge">${activeParameter.calibrationStatus}</span></div><p><code>${activeParameter.variable}</code> Â· ${activeParameter.group} Â· lÃ­nea ${activeParameter.line}</p><p>${activeParameter.description}</p><pre className="gm-formula"><code>Default: ${String(activeParameter.sourceDefault)}\nCalibrado: ${String(activeParameter.calibratedValue)}\nTipo: ${activeParameter.type}\nUsos: ${activeParameter.usageCount}</code></pre></div>` : html`<div className="card"><p>No hay resultados.</p></div>`}</div><div className="gm-between"><span className="text-muted">${filteredParameters.length} resultados Â· pÃ¡gina ${safePage+1}/${pageCount}</span><div className="gm-inline"><button className="btn" type="button" disabled=${safePage===0} onClick=${()=>setParameterPage(Math.max(0,safePage-1))}>Anterior</button><button className="btn" type="button" disabled=${safePage>=pageCount-1} onClick=${()=>setParameterPage(Math.min(pageCount-1,safePage+1))}>Siguiente</button></div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${groupNodes} selectedKey=${parameterGroup==="All" ? "Main" : parameterGroup} onSelect=${key=>chooseGroup(key)} centerLabel="216 INPUTS" centerSub="14 groups" ariaLabel="Grupos interactivos de parámetros"/><${SvgParameterProfile} item=${activeParameter}/></div><div className="gm-four"><div className="card"><strong>Preset</strong><p>Custom</p></div><div className="card"><strong>ATR Length</strong><p>14</p></div><div className="card"><strong>Manual SL</strong><p>2.65 ATR</p></div><div className="card"><strong>Asia Votes</strong><p>4 de 5</p></div></div><div className="gm-two"><label className="form-label">Buscar en 216 ajustes<input className="form-control" type="search" value=${parameterSearch} onChange=${event=>{setParameterSearch(event.target.value);setParameterPage(0);setSelectedParameter(null);}} placeholder="Variable, título o función"/></label><label className="form-label">Grupo<select className="form-select" value=${parameterGroup} onChange=${event=>chooseGroup(event.target.value)}>${groups.map(group=>html`<option key=${group} value=${group}>${group}</option>`)}</select></label></div><div className="gm-two"><div className="gm-parameter-list">${visibleParameters.map(entry=>html`<button key=${entry.variable} type="button" className=${`btn ${activeParameter?.variable===entry.variable ? "btn-primary" : ""}`} onClick=${()=>setSelectedParameter(entry)}><span className="gm-parameter-line"><strong>${entry.title}</strong><code>${entry.variable}</code><span>${String(entry.calibratedValue ?? entry.sourceDefault)}</span></span></button>`)}</div>${activeParameter ? html`<div className="card"><div className="gm-card-head"><strong>${activeParameter.title}</strong><span className="viz-badge">${activeParameter.calibrationStatus}</span></div><p><code>${activeParameter.variable}</code> · ${activeParameter.group} · línea ${activeParameter.line}</p><p>${activeParameter.description}</p><pre className="gm-formula"><code>Default: ${String(activeParameter.sourceDefault)}\nCalibrado: ${String(activeParameter.calibratedValue)}\nTipo: ${activeParameter.type}\nUsos: ${activeParameter.usageCount}</code></pre></div>` : html`<div className="card"><p>No hay resultados.</p></div>`}</div><div className="gm-between"><span className="text-muted">${filteredParameters.length} resultados · página ${safePage+1}/${pageCount}</span><div className="gm-inline"><button className="btn" type="button" disabled=${safePage===0} onClick=${()=>setParameterPage(Math.max(0,safePage-1))}>Anterior</button><button className="btn" type="button" disabled=${safePage>=pageCount-1} onClick=${()=>setParameterPage(Math.min(pageCount-1,safePage+1))}>Siguiente</button></div></div></div>`;
     }
 
     const renderers = {
@@ -829,7 +1964,7 @@ Output:
       parameters: renderParametersSvg
     };
 
-    const progressLabel = "CapÃ­tulo " + (chapterIndex + 1) + " de " + chapters.length;
+    const progressLabel = "Capítulo " + (chapterIndex + 1) + " de " + chapters.length;
     const progressStyle = { "--gm-progress": String(((chapterIndex + 1) / chapters.length) * 100) + "%" };
     const chapterButtons = chapters.map((item, index) => {
       const buttonClass = "btn " + (chapter === item.id ? "btn-primary" : "");
@@ -840,11 +1975,11 @@ Output:
         <div className="gm-launch-panel">
           <${ReactorCore} compact=${true}/>
           <div className="gm-launch-copy">
-            <span className="gm-chapter-kicker">PRIVATE ARCHITECTURE DOSSIER Â· v2.4.67</span>
+            <span className="gm-chapter-kicker">PRIVATE ARCHITECTURE DOSSIER · v2.4.67</span>
             <h1>GENTRA <span>CORE</span></h1>
-            <p>Entre al cuartel visual del motor macroestructural: rÃ©gimen, memoria, sesiÃ³n, estructura, flujo, seguridad y riesgo conectados como una sola arquitectura.</p>
+            <p>Entre al cuartel visual del motor macroestructural: régimen, memoria, sesión, estructura, flujo, seguridad y riesgo conectados como una sola arquitectura.</p>
             <div className="gm-launch-tags"><span className="viz-badge">216 INPUTS</span><span className="viz-badge">8 MODULES</span><span className="viz-badge">5 SVG PLATES</span><span className="viz-badge">14 CHAPTERS</span></div>
-            <button type="button" className="btn btn-primary gm-enter" onClick=${() => setIntroOpen(false)}>Entrar al nÃºcleo</button>
+            <button type="button" className="btn btn-primary gm-enter" onClick=${() => setIntroOpen(false)}>Entrar al núcleo</button>
           </div>
         </div>
       </section>` : null}
@@ -853,18 +1988,18 @@ Output:
           <div className="gm-identity"><span className="gm-core-mark" aria-hidden="true"></span><div className="gm-identity-copy"><strong>GENTRA CORE</strong><span>PRIVATE SYSTEM DOSSIER</span></div></div>
           <div className="gm-mini-core" aria-hidden="true"><span></span><strong>ONLINE</strong></div>
           <div className="gm-side-status"><div className="gm-side-stat"><span>VERSION</span><strong>2.4.67</strong></div><div className="gm-side-stat"><span>PROFILE</span><strong>r2</strong></div><div className="gm-side-stat"><span>MODULES</span><strong>8</strong></div><div className="gm-side-stat"><span>INPUTS</span><strong>216</strong></div></div>
-          <nav className="gm-nav" aria-label="CapÃ­tulos del manual">${chapterButtons}</nav>
+          <nav className="gm-nav" aria-label="Capítulos del manual">${chapterButtons}</nav>
           <div className="gm-reference"><strong>Documento privado</strong><p className="text-small">Arquitectura educativa y auditable. No ejecuta operaciones.</p></div>
         </aside>
         <section className="gm-command">
           <header className="gm-command-bar gm-between">
-            <div className="gm-identity"><span className="gm-core-mark" aria-hidden="true"></span><div className="gm-identity-copy"><strong>VISUAL COMMAND CENTER</strong><span>CORE ONLINE Â· OFFLINE PACKAGE READY</span></div></div>
-            <div className="gm-inline"><label className="form-label">Nivel<select className="form-select" value=${level} onChange=${event => setLevel(event.target.value)}><option value="simple">BÃ¡sico</option><option value="developer">TÃ©cnico</option><option value="quant">Quant</option></select></label><button className="btn gm-print" type="button" onClick=${() => window.print()}>Imprimir / PDF</button></div>
+            <div className="gm-identity"><span className="gm-core-mark" aria-hidden="true"></span><div className="gm-identity-copy"><strong>VISUAL COMMAND CENTER</strong><span>CORE ONLINE · OFFLINE PACKAGE READY</span></div></div>
+            <div className="gm-inline"><label className="form-label">Nivel<select className="form-select" value=${level} onChange=${event => setLevel(event.target.value)}><option value="simple">Básico</option><option value="developer">Técnico</option><option value="quant">Quant</option></select></label><button className="btn gm-print" type="button" onClick=${() => window.print()}>Imprimir / PDF</button></div>
           </header>
           <div className="gm-progress" aria-label=${progressLabel}><span style=${progressStyle}></span></div>
-          <div className="gm-chapter-head"><div className="gm-sr-summary"><span className="gm-chapter-kicker">SYSTEM CHAPTER ${String(chapterIndex + 1).padStart(2, "0")}</span><h1>${chapterInfo.title}</h1><p className="text-muted">${chapterInfo.summary}</p></div><span className="viz-badge">${modeLabels[level]} Â· ${chapterIndex + 1}/${chapters.length}</span></div>
+          <div className="gm-chapter-head"><div className="gm-sr-summary"><span className="gm-chapter-kicker">SYSTEM CHAPTER ${String(chapterIndex + 1).padStart(2, "0")}</span><h1>${chapterInfo.title}</h1><p className="text-muted">${chapterInfo.summary}</p></div><span className="viz-badge">${modeLabels[level]} · ${chapterIndex + 1}/${chapters.length}</span></div>
           <main className="gm-stage">${renderers[chapter]()}</main>
-          <footer className="gm-between"><button className="btn" type="button" disabled=${chapterIndex === 0} onClick=${() => chooseChapter(chapterIndex - 1)}>CapÃ­tulo anterior</button><span className="text-small text-muted">Referencia tÃ©cnica interactiva Â· sin historial ficticio</span><button className="btn btn-primary" type="button" disabled=${chapterIndex === chapters.length - 1} onClick=${() => chooseChapter(chapterIndex + 1)}>Siguiente capÃ­tulo</button></footer>
+          <footer className="gm-between"><button className="btn" type="button" disabled=${chapterIndex === 0} onClick=${() => chooseChapter(chapterIndex - 1)}>Capítulo anterior</button><span className="text-small text-muted">Referencia técnica interactiva · sin historial ficticio</span><button className="btn btn-primary" type="button" disabled=${chapterIndex === chapters.length - 1} onClick=${() => chooseChapter(chapterIndex + 1)}>Siguiente capítulo</button></footer>
         </section>
       </div>
     </div>`;
@@ -876,4 +2011,3 @@ Output:
 <noscript>Este dossier requiere JavaScript local para activar sus diagramas interactivos.</noscript>
 </body>
 </html>
-
