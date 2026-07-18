@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 2.9 seconds
-Output:
 // Embed the contents of preact, preact-hooks, and htm.
 // preact 10.26.5 - MIT License: https://github.com/preactjs/preact/blob/main/LICENSE
 // htm 3.1.1 - Apache 2.0 License: https://github.com/developit/htm/blob/master/LICENSE
@@ -25,5 +22,4 @@ Output:
     }
   };
 })();
-
 
