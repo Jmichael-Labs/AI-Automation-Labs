@@ -1,0 +1,879 @@
+Exit code: 0
+Wall time: 4.3 seconds
+Total output lines: 2014
+Output:
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#02070d">
+  <meta name="description" content="GENTRA CORE private interactive architecture dossier">
+  <title>GENTRA CORE | Private 3D Architecture Dossier</title>
+  <style>
+    html, body { margin: 0; min-width: 320px; min-height: 100%; background: #02070d; }
+    body { overflow-x: hidden; }
+    noscript { display: block; padding: 2rem; color: #e9fbff; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+<div id="gentra-visual-manual">
+  <div id="gentra-manual-root"></div>
+</div>
+
+<style>
+  #gentra-visual-manual {
+    --font-size-base: 14px;
+    color: var(--foreground);
+    width: 100%;
+  }
+
+  #gentra-visual-manual .gm-shell,
+  #gentra-visual-manual .gm-stack,
+  #gentra-visual-manual .gm-detail-stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  #gentra-visual-manual .gm-top,
+  #gentra-visual-manual .gm-between,
+  #gentra-visual-manual .gm-inline,
+  #gentra-visual-manual .gm-chapter-head,
+  #gentra-visual-manual .gm-card-head {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    flex-wrap: wrap;
+  }
+
+  #gentra-visual-manual .gm-between,
+  #gentra-visual-manual .gm-chapter-head,
+  #gentra-visual-manual .gm-card-head {
+    justify-content: space-between;
+  }
+
+  #gentra-visual-manual .gm-identity {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+  }
+
+  #gentra-visual-manual .gm-core-mark {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--viz-series-1);
+    box-shadow: 0 0 1rem color-mix(in srgb, var(--viz-series-1) 68%, transparent);
+  }
+
+  #gentra-visual-manual .gm-nav {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: .4rem;
+  }
+
+  #gentra-visual-manual .gm-nav .btn {
+    min-height: 2.8rem;
+  }
+
+  #gentra-visual-manual .gm-progress {
+    height: 3px;
+    background: var(--muted);
+  }
+
+  #gentra-visual-manual .gm-progress > span {
+    display: block;
+    width: var(--gm-progress);
+    height: 100%;
+    background: var(--viz-series-1);
+    transition: width .32s ease;
+  }
+
+  #gentra-visual-manual .gm-two,
+  #gentra-visual-manual .gm-three,
+  #gentra-visual-manual .gm-four {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  #gentra-visual-manual .gm-two {
+    grid-template-columns: minmax(15rem, .78fr) minmax(0, 1.32fr);
+  }
+
+  #gentra-visual-manual .gm-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #gentra-visual-manual .gm-four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #gentra-visual-manual .gm-orbit-map {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(4.4rem, auto));
+    gap: .45rem;
+    align-items: stretch;
+    background:
+      radial-gradient(circle at center, color-mix(in srgb, var(--viz-series-1) 13%, transparent) 0 12%, transparent 13% 29%, color-mix(in srgb, var(--border) 65%, transparent) 30% 30.5%, transparent 31% 47%, color-mix(in srgb, var(--border) 45%, transparent) 48% 48.5%, transparent 49%);
+  }
+
+  #gentra-visual-manual .gm-orbit-node {
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+
+  #gentra-visual-manual .gm-orbit-core {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--foreground);
+  }
+
+  #gentra-visual-manual .gm-orbit-core strong {
+    display: grid;
+    place-items: center;
+    width: 5.2rem;
+    height: 5.2rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--primary) 20%, var(--card));
+    box-shadow: 0 0 1.4rem color-mix(in srgb, var(--viz-series-1) 30%, transparent);
+  }
+
+  #gentra-visual-manual .gm-choice-grid,
+  #gentra-visual-manual .gm-source-grid,
+  #gentra-visual-manual .gm-regime-grid,
+  #gentra-visual-manual .gm-group-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .45rem;
+  }
+
+  #gentra-visual-manual .gm-source-grid,
+  #gentra-visual-manual .gm-group-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  #gentra-visual-manual .gm-flow {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: .35rem;
+  }
+
+  #gentra-visual-manual .gm-flow .btn {
+    min-height: 3.5rem;
+    border-bottom: 3px solid var(--border);
+  }
+
+  #gentra-visual-manual .gm-flow .btn.is-selected {
+    border-color: var(--viz-series-1);
+  }
+
+  #gentra-visual-manual .gm-source-button,
+  #gentra-visual-manual .gm-gate-button,
+  #gentra-visual-manual .gm-layer-button {
+    display: grid;
+    gap: .25rem;
+    text-align: left;
+    justify-items: start;
+  }
+
+  #gentra-visual-manual .gm-vote-map {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .45rem;
+    align-items: stretch;
+  }
+
+  #gentra-visual-manual .gm-vote-core {
+    grid-column: 1 / -1;
+    display: grid;
+    place-items: center;
+    min-height: 4rem;
+    background: color-mix(in srgb, var(--viz-series-1) 10%, transparent);
+    border-bottom: 3px solid var(--viz-series-1);
+    text-align: center;
+  }
+
+  #gentra-visual-manual .gm-weight-row {
+    display: grid;
+    grid-template-columns: minmax(7rem, .62fr) minmax(0, 1.38fr) 3.2rem;
+    gap: .6rem;
+    align-items: center;
+  }
+
+  #gentra-visual-manual .gm-weight-track {
+    height: .62rem;
+    background: var(--muted);
+  }
+
+  #gentra-visual-manual .gm-weight-fill {
+    width: var(--gm-weight);
+    height: 100%;
+    background: var(--viz-series-1);
+    transition: width .28s ease;
+  }
+
+  #gentra-visual-manual .gm-auction {
+    display: grid;
+    grid-template-rows: repeat(5, minmax(3.1rem, auto));
+    gap: .35rem;
+  }
+
+  #gentra-visual-manual .gm-auction .btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #gentra-visual-manual .gm-timeline {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .45rem;
+  }
+
+  #gentra-visual-manual .gm-session-block {
+    padding: .75rem;
+    border-bottom: 3px solid var(--border);
+  }
+
+  #gentra-visual-manual .gm-layer-stack,
+  #gentra-visual-manual .gm-gate-stack,
+  #gentra-visual-manual .gm-parameter-list {
+    display: grid;
+    gap: .4rem;
+  }
+
+  #gentra-visual-manual .gm-layer-button {
+    min-height: 3.2rem;
+    border-left: calc(var(--gm-depth) * 2px + 2px) solid var(--border);
+  }
+
+  #gentra-visual-manual .gm-memory-ribbon {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .5rem;
+    position: relative;
+  }
+
+  #gentra-visual-manual .gm-memory-ribbon::before {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 50%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+
+  #gentra-visual-manual .gm-memory-ribbon .btn {
+    position: relative;
+    z-index: 1;
+    min-height: 4rem;
+  }
+
+  #gentra-visual-manual .gm-authority {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .45rem;
+  }
+
+  #gentra-visual-manual .gm-authority > div {
+    padding: .7rem;
+    border-top: 3px solid var(--border);
+  }
+
+  #gentra-visual-manual .gm-gate-button {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    align-items: center;
+  }
+
+  #gentra-visual-manual .gm-gate-number {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  #gentra-visual-manual .gm-risk-axis {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .35rem;
+    align-items: stretch;
+    position: relative;
+  }
+
+  #gentra-visual-manual .gm-risk-axis::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 50%;
+    height: 2px;
+    background: var(--border);
+  }
+
+  #gentra-visual-manual .gm-risk-axis .btn {
+    position: relative;
+    min-height: 4.1rem;
+  }
+
+  #gentra-visual-manual .gm-formula {
+    margin: .55rem 0 0;
+    padding: .8rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    background: color-mix(in srgb, var(--muted) 58%, transparent);
+    color: var(--foreground);
+  }
+
+  #gentra-visual-manual .gm-operation-line,
+  #gentra-visual-manual .gm-incident-line,
+  #gentra-visual-manual .gm-coverage-line {
+    display: grid;
+    grid-template-columns: minmax(8rem, .7fr) minmax(0, 1.3fr);
+    gap: .7rem;
+    padding: .6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #gentra-visual-manual .gm-parameter-line {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(5rem, .65fr) minmax(4rem, .35fr);
+    gap: .6rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  #gentra-visual-manual .gm-reference {
+    border-left: 3px solid var(--viz-series-1);
+    padding-left: .8rem;
+  }
+
+  #gentra-visual-manual .gm-warning {
+    border-left: 3px solid var(--destructive);
+    padding-left: .8rem;
+  }
+
+  #gentra-visual-manual .gm-sr-summary {
+    max-width: 76ch;
+  }
+
+  #gentra-visual-manual .gm-svg-stage {
+    width: 100%;
+    min-height: 24rem;
+  }
+
+  #gentra-visual-manual .gm-svg {
+    width: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  #gentra-visual-manual .gm-svg-grid,
+  #gentra-visual-manual .gm-svg-orbit,
+  #gentra-visual-manual .gm-svg-link {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  #gentra-visual-manual .gm-svg-grid { opacity: .38; }
+  #gentra-visual-manual .gm-svg-orbit { opacity: .72; }
+  #gentra-visual-manual .gm-svg-link {
+    stroke-width: 2;
+    transition: stroke .28s ease, opacity .28s ease;
+  }
+
+  #gentra-visual-manual .gm-svg-link.is-selected {
+    stroke: var(--viz-series-1);
+  }
+
+  #gentra-visual-manual .gm-svg-energy {
+    fill: none;
+    stroke: var(--viz-series-1);
+    stroke-width: 2;
+    stroke-dasharray: 8 18;
+    stroke-dashoffset: var(--gm-energy-offset, 0);
+    opacity: .62;
+    transition: stroke-dashoffset .48s ease;
+  }
+
+  #gentra-visual-manual .gm-svg-node {
+    cursor: pointer;
+  }
+
+  #gentra-visual-manual .gm-svg-node circle {
+    fill: color-mix(in srgb, var(--card) 90%, transparent);
+    stroke: var(--border);
+    stroke-width: 2;
+    transition: fill .22s ease, stroke .22s ease, filter .22s ease;
+  }
+
+  #gentra-visual-manual .gm-svg-node:hover circle,
+  #gentra-visual-manual .gm-svg-node.is-selected circle {
+    fill: color-mix(in srgb, var(--viz-series-1) 18%, var(--card));
+    stroke: var(--viz-series-1);
+    filter: drop-shadow(0 0 7px rgba(99,245,255,.5));
+  }
+
+  #gentra-visual-manual .gm-svg-core {
+    fill: color-mix(in srgb, var(--primary) 20%, var(--card));
+    stroke: var(--primary);
+    stroke-width: 3;
+  }
+
+  #gentra-visual-manual .gm-svg-halo {
+    fill: none;
+    stroke: var(--viz-series-1);
+    stroke-width: 2;
+    opacity: .28;
+  }
+
+  #gentra-visual-manual .gm-svg-label,
+  #gentra-visual-manual .gm-svg-sub,
+  #gentra-visual-manual .gm-svg-core-label {
+    fill: var(--foreground);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+  }
+
+  #gentra-visual-manual .gm-svg-sub {
+    fill: var(--muted-foreground);
+  }
+
+  #gentra-visual-manual .gm-svg-profile-line {
+    stroke: var(--border);
+    stroke-width: 3;
+  }
+
+  #gentra-visual-manual .gm-svg-profile-node {
+    fill: var(--card);
+    stroke: var(--viz-series-1);
+    stroke-width: 2;
+  }
+
+  @media (max-width: 860px) {
+    #gentra-visual-manual .gm-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    #gentra-visual-manual .gm-source-grid,
+    #gentra-visual-manual .gm-group-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #gentra-visual-manual .gm-flow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 620px) {
+    #gentra-visual-manual .gm-two,
+    #gentra-visual-manual .gm-three,
+    #gentra-visual-manual .gm-four { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-nav,
+    #gentra-visual-manual .gm-choice-grid,
+    #gentra-visual-manual .gm-source-grid,
+    #gentra-visual-manual .gm-regime-grid,
+    #gentra-visual-manual .gm-group-grid,
+    #gentra-visual-manual .gm-vote-map,
+    #gentra-visual-manual .gm-authority { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #gentra-visual-manual .gm-vote-core { grid-column: 1 / -1; }
+    #gentra-visual-manual .gm-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #gentra-visual-manual .gm-risk-axis { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-risk-axis::before { display: none; }
+    #gentra-visual-manual .gm-parameter-line,
+    #gentra-visual-manual .gm-operation-line,
+    #gentra-visual-manual .gm-incident-line,
+    #gentra-visual-manual .gm-coverage-line { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-memory-ribbon { grid-template-columns: 1fr; }
+    #gentra-visual-manual .gm-memory-ribbon::before { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #gentra-visual-manual *,
+    #gentra-visual-manual *::before,
+    #gentra-visual-manual *::after {
+      animation-duration: .01ms !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>
+
+<style>
+  #gentra-visual-manual {
+    --gm-cyan: #63f5ff;
+    --gm-cyan-soft: rgba(99, 245, 255, .18);
+    --gm-blue: #218dff;
+    --gm-violet: #8f73ff;
+    --gm-green: #50ffbd;
+    --gm-amber: #ffcc66;
+    --gm-red: #ff627a;
+    --gm-ink: #02070d;
+    --gm-panel: rgba(5, 18, 29, .76);
+    --gm-line: rgba(99, 245, 255, .19);
+    --background: #02070d;
+    --foreground: #e9fbff;
+    --card: rgba(6, 24, 37, .74);
+    --card-foreground: #e9fbff;
+    --popover: #071725;
+    --popover-foreground: #e9fbff;
+    --primary: #63f5ff;
+    --primary-foreground: #001013;
+    --secondary: rgba(99, 245, 255, .08);
+    --secondary-foreground: #e9fbff;
+    --muted: rgba(99, 245, 255, .08);
+    --muted-foreground: #86a8b4;
+    --accent: rgba(99, 245, 255, .13);
+    --accent-foreground: #9df9ff;
+    --destructive: #ff627a;
+    --border: rgba(99, 245, 255, .18);
+    --input: rgba(1, 9, 15, .8);
+    --ring: #63f5ff;
+    --viz-series-1: #63f5ff;
+    --viz-series-2: #ffcc66;
+    --viz-series-3: #50ffbd;
+    --viz-series-4: #ff7dc8;
+    --viz-series-5: #9b85ff;
+    --viz-series-6: #46c8ff;
+    min-height: 100vh;
+    color: var(--foreground);
+    background:
+      radial-gradient(circle at 78% 10%, rgba(33, 141, 255, .16), transparent 28rem),
+      radial-gradient(circle at 38% 78%, rgba(99, 245, 255, .08), transparent 34rem),
+      linear-gradient(135deg, #02070d 0%, #04111c 48%, #02070d 100%);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+  }
+
+  #gentra-visual-manual,
+  #gentra-visual-manual * { box-sizing: border-box; }
+
+  #gentra-visual-manual::before,
+  #gentra-visual-manual::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  #gentra-visual-manual::before {
+    z-index: 0;
+    opacity: .32;
+    background-image:
+      linear-gradient(rgba(99, 245, 255, .05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 245, 255, .05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: linear-gradient(to bottom, black, transparent 92%);
+  }
+
+  #gentra-visual-manual::after {
+    z-index: 0;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.013) 4px);
+    mix-blend-mode: screen;
+  }
+
+  #gentra-visual-manual button,
+  #gentra-visual-manual input,
+  #gentra-visual-manual select { font: inherit; }
+
+  #gentra-visual-manual p { margin: .45rem 0 0; line-height: 1.62; }
+  #gentra-visual-manual strong { font-weight: 650; }
+  #gentra-visual-manual code { font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace; }
+
+  #gentra-visual-manual .text-small { font-size: .76rem; }
+  #gentra-visual-manual .text-muted { color: var(--muted-foreground); }
+
+  #gentra-visual-manual .btn {
+    appearance: none;
+    min-width: 0;
+    padding: .68rem .78rem;
+    color: #b9d7df;
+    border: 1px solid rgba(99, 245, 255, .14);
+    border-radius: .62rem;
+    background: linear-gradient(145deg, rgba(9, 31, 45, .72), rgba(3, 13, 21, .68));
+    box-shadow: inset 0 1px rgba(255,255,255,.035);
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+
+  #gentra-visual-manual .btn:hover:not(:disabled),
+  #gentra-visual-manual .btn:focus-visible {
+    color: #fff;
+    border-color: rgba(99, 245, 255, .58);
+    background: rgba(15, 52, 68, .82);
+    box-shadow: 0 0 1rem rgba(99, 245, 255, .1), inset 0 1px rgba(255,255,255,.08);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  #gentra-visual-manual .btn:disabled { opacity: .32; cursor: not-allowed; }
+
+  #gentra-visual-manual .btn-primary,
+  #gentra-visual-manual .btn[aria-pressed="true"] {
+    color: #001013;
+    border-color: var(--gm-cyan);
+    background: linear-gradient(135deg, #a3fbff, #50dbe9);
+    box-shadow: 0 0 1.2rem rgba(99, 245, 255, .24);
+  }
+
+  #gentra-visual-manual .card {
+    position: relative;
+    padding: 1rem;
+    color: var(--card-foreground);
+    border: 1px solid rgba(99, 245, 255, .15);
+    border-radius: .85rem;
+    background:
+      linear-gradient(145deg, rgba(10, 35, 50, .72), rgba(3, 13, 21, .82)),
+      var(--card);
+    box-shadow: inset 0 1px rgba(255,255,255,.035), 0 14px 40px rgba(0,0,0,.2);
+    backdrop-filter: blur(16px);
+  }
+
+  #gentra-visual-manual .card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 1rem;
+    width: 3rem;
+    height: 1px;
+    background: var(--gm-cyan);
+    box-shadow: 0 0 .7rem var(--gm-cyan);
+  }
+
+  #gentra-visual-manual .viz-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .28rem .55rem;
+    color: var(--gm-cyan);
+    border: 1px solid rgba(99,245,255,.24);
+    border-radius: 999px;
+    background: rgba(99,245,255,.07);
+    font: 600 .7rem/1 "Cascadia Code", Consolas, monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  #gentra-visual-manual .form-label {
+    display: grid;
+    gap: .35rem;
+    color: #8fb2bc;
+    font-size: .76rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  #gentra-visual-manual .form-control,
+  #gentra-visual-manual .form-select {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: .55rem .7rem;
+    color: var(--foreground);
+    border: 1px solid rgba(99,245,255,.2);
+    border-radius: .52rem;
+    background: rgba(1, 9, 15, .86);
+    outline: none;
+  }
+
+  #gentra-visual-manual .form-control:focus,
+  #gentra-visual-manual .form-select:focus { border-color: var(--gm-cyan); box-shadow: 0 0 0 3px rgba(99,245,255,.08); }
+
+  #gentra-visual-manual .gm-shell {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 16.5rem minmax(0, 1fr);
+    gap: 0;
+    width: min(100%, 1660px);
+    min-height: 100vh;
+    margin: 0 auto;
+  }
+
+  #gentra-visual-manual .gm-sidebar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100vh;
+    padding: 1.15rem;
+    border-right: 1px solid rgba(99,245,255,.14);
+    background: linear-gradient(180deg, rgba(2, 12, 20, .94), rgba(2, 8, 14, .78));
+    backdrop-filter: blur(20px);
+    overflow: auto;
+  }
+
+  #gentra-visual-manual .gm-command {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    min-width: 0;
+    padding: 1.1rem 1.35rem 1.6rem;
+  }
+
+  #gentra-visual-manual .gm-command-bar {
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    padding: .75rem .85rem;
+    border: 1px solid rgba(99,245,255,.13);
+    border-radius: .78rem;
+    background: rgba(3, 14, 23, .82);
+    box-shadow: 0 10px 40px rgba(0,0,0,.25);
+    backdrop-filter: blur(18px);
+  }
+
+  #gentra-visual-manual .gm-identity-copy strong {
+    color: #fff;
+    font-size: .84rem;
+    letter-spacing: .12em;
+  }
+
+  #gentra-visual-manual .gm-identity-copy span {
+    display: block;
+    margin-top: .25rem;
+    color: #668994;
+    font: …38361 tokens truncated…trong><p>No BUY durante bearish DOWN. No SELL durante bullish UP.</p></div></div>`;
+    }
+
+    function renderSessionSvg() {
+      const item = sessionObjects[sessionObject];
+      const nodes = sessionObjects.map((entry,index)=>({ ...entry, id:String(index), sub:entry.code }));
+      const sessions = [
+        { id:"0", label:"ASIA", sub:"overnight" },
+        { id:"1", label:"LONDON", sub:"expansion" },
+        { id:"2", label:"NEW YORK", sub:"cash + futures" }
+      ];
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(sessionObject)} onSelect=${(key,index)=>setSessionObject(index)} centerLabel="SESSION VALUE" centerSub="auction map" ariaLabel="GeometrÃ­a interactiva de sesiÃ³n"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">SESSION VALUE</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.code}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${sessions} selectedKey="1" onSelect=${()=>{}} centerLabel="SESSION CLOCK" centerSub="handoff" ariaLabel="Mapa interactivo de sesiones operativas"/><div className="card"><strong>Buffers confirmados</strong><pre className="gm-formula"><code>Stabilization=15 min\nClose buffer=15 min\nNY cash buffer=10 min\nOpening range=15 min</code></pre><p>Las coordenadas de valor deben ser aceptadas, no solamente tocadas.</p></div></div></div>`;
+    }
+
+    function renderStructureSvg() {
+      const item = structureObjects[structureObject];
+      const nodes = structureObjects.map((entry,index)=>({ ...entry, id:String(index), sub:entry.state }));
+      const states = ["Candidate","Valid","Tested","Defended","Rejected","Perforated","Invalid","Archived"].map((label,index)=>({id:String(index),label,sub:String(index+1)}));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(structureObject)} onSelect=${(key,index)=>setStructureObject(index)} centerLabel="ZONE MATRIX" centerSub="institutional context" ariaLabel="Capas estructurales interactivas"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.state}</span></div><p>${item.meaning}</p></div></div><div className="gm-two"><${SvgNetwork} items=${states} selectedKey="1" onSelect=${()=>{}} centerLabel="ZONE STATE" centerSub="finite machine" ariaLabel="Estados visuales de una zona"/><div className="card"><strong>Regla de utilizaciÃ³n</strong><p>Una zona aporta contexto, confirmaciÃ³n, protecciÃ³n o invalidaciÃ³n. No crea por sÃ­ sola una seÃ±al automÃ¡tica.</p><pre className="gm-formula"><code>Z_t in {valid,tested,defended,rejected,perforated,invalid}</code></pre></div></div></div>`;
+    }
+
+    function renderMemorySvg() {
+      const item = memoryObjects[memoryObject];
+      const nodes = memoryObjects.map((entry,index)=>({ ...entry, id:String(index), sub:entry.scope }));
+      const authority = [
+        {id:"0",label:"HARD WAIT",sub:"veto"},
+        {id:"1",label:"MACRO/CARRY",sub:"direction"},
+        {id:"2",label:"OMNI/STRUCTURE",sub:"continuity"},
+        {id:"3",label:"LOCAL TRIGGER",sub:"timing"}
+      ];
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(memoryObject)} onSelect=${(key,index)=>setMemoryObject(index)} centerLabel="MEMORY" centerSub="cross-session" ariaLabel="Memorias interactivas de GENTRA"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.scope}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${authority} selectedKey="0" onSelect=${()=>{}} centerLabel="AUTHORITY" centerSub="priority" ariaLabel="JerarquÃ­a visual de autoridad"/><div className="card"><strong>InvalidaciÃ³n</strong><p>La memoria termina cuando su ancla falla, la estructura contraria queda confirmada o una autoridad superior cambia el rÃ©gimen. El cambio de sesiÃ³n por sÃ­ solo no debe borrar evidencia aÃºn vÃ¡lida.</p><div className="gm-warning"><p>Carry y Omni nunca atraviesan hard WAIT.</p></div></div></div></div>`;
+    }
+
+    function renderEntrySvg() {
+      const gate = entryGates[entryGate];
+      const nodes = entryGates.map((entry,index)=>({ ...entry, id:String(index), sub:`gate ${index+1}` }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(entryGate)} onSelect=${(key,index)=>setEntryGate(index)} centerLabel="AUTHORIZE" centerSub="all gates required" ariaLabel="Comportamiento interactivo de autorizaciÃ³n"/><div className="card"><div className="gm-card-head"><strong>${gate.label}</strong><span className="viz-badge">GATE ${entryGate+1}</span></div><p>${gate.meaning}</p><pre className="gm-formula"><code>${gate.law}</code></pre></div></div><div className="gm-two"><div className="card"><strong>BUY confirmado</strong><pre className="gm-formula"><code>macroBuy AND trendUp AND sessionAccepted\nAND validBullStructure AND flowBuy\nAND noOpposingDanger AND validStop\nAND NOT hardWait</code></pre></div><div className="card"><strong>SELL confirmado</strong><pre className="gm-formula"><code>macroSell AND trendDown AND sessionAccepted\nAND validBearStructure AND flowSell\nAND noOpposingDanger AND validStop\nAND NOT hardWait</code></pre></div></div><div className="gm-warning"><strong>Ãlgebra multiplicativa</strong><p>Una compuerta obligatoria en cero anula al candidato completo. Confluencias adicionales no compensan un veto.</p></div></div>`;
+    }
+
+    function renderRiskSvg() {
+      const item = riskObjects[riskObject];
+      const life = lifecycle[lifeIndex];
+      const riskNodes = riskObjects.map((entry,index)=>({ ...entry, id:String(index), sub:entry.value }));
+      const lifeNodes = lifecycle.map((entry,index)=>({ ...entry, id:String(index), sub:String(index+1) }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${riskNodes} selectedKey=${String(riskObject)} onSelect=${(key,index)=>setRiskObject(index)} centerLabel="RISK" centerSub="bounded geometry" ariaLabel="GeometrÃ­a interactiva de riesgo"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.meaning}</p><pre className="gm-formula"><code>${item.equation}</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${lifeNodes} selectedKey=${String(lifeIndex)} onSelect=${(key,index)=>setLifeIndex(index)} centerLabel="LIFECYCLE" centerSub="trade state" ariaLabel="Ciclo de vida interactivo del trade"/><div className="card"><div className="gm-card-head"><strong>${life.label}</strong><span className="viz-badge">STATE</span></div><p>${life.meaning}</p><pre className="gm-formula"><code>Manual ATR=2.65\nTP1=1R Â· TP2=2R Â· TP3=3R</code></pre></div></div></div>`;
+    }
+
+    function renderOperationsSvg() {
+      const step = operationSteps[operationStep];
+      const incident = incidents[incidentIndex];
+      const stepNodes = operationSteps.map((entry,index)=>({ ...entry, id:String(index), sub:entry.check }));
+      const incidentNodes = incidents.map((entry,index)=>({ id:String(index), label:entry.symptom, short:`Incident ${index+1}`, sub:"diagnose" }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${stepNodes} selectedKey=${String(operationStep)} onSelect=${(key,index)=>setOperationStep(index)} centerLabel="ALERT IDENTITY" centerSub="cloud snapshot" ariaLabel="Protocolo interactivo de TradingView"/><div className="card"><div className="gm-card-head"><strong>${step.label}</strong><span className="viz-badge">${step.check}</span></div><p>${step.detail}</p><pre className="gm-formula"><code>Version v2.4.67 TEST\nProfile 2026-07-18-r2\nSource identity verified</code></pre></div></div><div className="gm-two"><${SvgNetwork} items=${incidentNodes} selectedKey=${String(incidentIndex)} onSelect=${(key,index)=>setIncidentIndex(index)} centerLabel="INCIDENT" centerSub="first action" ariaLabel="DiagnÃ³stico interactivo de incidentes"/><div className="card"><div className="gm-card-head"><strong>${incident.symptom}</strong><span className="viz-badge">PRIMERA ACCIÃ“N</span></div><p>${incident.action}</p><div className="gm-warning"><p>Alert Manager es la autoridad sobre la existencia de la alerta cloud.</p></div></div></div></div>`;
+    }
+
+    function renderMathematicsSvg() {
+      const nodes = equations.map(item=>({ ...item, sub:item.lines }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${equationId} onSelect=${key=>setEquationId(key)} centerLabel="MATH CORE" centerSub="traceable equations" ariaLabel="Ecuaciones interactivas de GENTRA"/><div className="card"><div className="gm-card-head"><strong>${activeEquation.label}</strong><span className="viz-badge">LINES ${activeEquation.lines}</span></div><pre className="gm-formula"><code>${activeEquation.formula}</code></pre><p>${activeEquation.meaning}</p></div></div><div className="card"><strong>EcuaciÃ³n unificada</strong><pre className="gm-formula"><code>z_t=H(x_t,z_(t-1),m_(t-1),session_t)\nq_t=Q(x_t)\nm_t=U(m_(t-1),z_t,Z_t,invalidation_t)\nu_t=P(x_t,z_t,q_t,m_t,A_t,Z_t)\na_t=u_t*product(g_i)</code></pre></div></div>`;
+    }
+
+    function renderScienceSvg() {
+      const lens = scientificLenses[scienceIndex];
+      const nodes = scientificLenses.map((entry,index)=>({ ...entry, id:String(index), sub:entry.status }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${nodes} selectedKey=${String(scienceIndex)} onSelect=${(key,index)=>setScienceIndex(index)} centerLabel="SCIENTIFIC FRAME" centerSub="defensible language" ariaLabel="AnalogÃ­as cientÃ­ficas interactivas"/><div className="card"><div className="gm-card-head"><strong>${lens.label}</strong><span className="viz-badge">${lens.status}</span></div><p>${lens.mapping}</p><pre className="gm-formula"><code>${lens.equation}</code></pre><div className="gm-warning"><p>${lens.caveat}</p></div></div></div><div className="gm-reference"><strong>ClasificaciÃ³n defendible</strong><p>Motor adaptativo de regÃ­menes con estados hÃ­bridos, memoria dirigida por eventos, especialistas deterministas y autorizaciÃ³n protegida por barreras lÃ³gicas.</p></div></div>`;
+    }
+
+    function renderEvidenceSvg() {
+      const item = evidenceItems[evidenceIndex];
+      const evidenceNodes = evidenceItems.map((entry,index)=>({ ...entry, id:String(index), sub:entry.value }));
+      const coverageNodes = sourceCoverage.map((entry,index)=>({ id:String(index), label:entry.file, sub:"integrated" }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${evidenceNodes} selectedKey=${String(evidenceIndex)} onSelect=${(key,index)=>setEvidenceIndex(index)} centerLabel="AUDIT CORE" centerSub="private evidence" ariaLabel="Evidencia interactiva de la invenciÃ³n"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.detail}</p></div></div><div className="gm-two"><${SvgNetwork} items=${coverageNodes} selectedKey="0" onSelect=${()=>{}} centerLabel="ONE HTML" centerSub="7 documents" ariaLabel="Cobertura visual del manual unificado"/><div>${sourceCoverage.map(entry=>html`<div key=${entry.file} className="gm-coverage-line"><strong>${entry.file}</strong><span>${entry.destination}</span></div>`)}</div></div></div>`;
+    }
+
+    function renderParametersSvg() {
+      const groupNodes = groups.filter(group=>group!=="All").map((group,index)=>({ id:group, label:group, sub:`${parameterRegistry.filter(item=>item.group===group).length}` }));
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${groupNodes} selectedKey=${parameterGroup==="All" ? "Main" : parameterGroup} onSelect=${key=>chooseGroup(key)} centerLabel="216 INPUTS" centerSub="14 groups" ariaLabel="Grupos interactivos de parÃ¡metros"/><${SvgParameterProfile} item=${activeParameter}/></div><div className="gm-four"><div className="card"><strong>Preset</strong><p>Custom</p></div><div className="card"><strong>ATR Length</strong><p>14</p></div><div className="card"><strong>Manual SL</strong><p>2.65 ATR</p></div><div className="card"><strong>Asia Votes</strong><p>4 de 5</p></div></div><div className="gm-two"><label className="form-label">Buscar en 216 ajustes<input className="form-control" type="search" value=${parameterSearch} onChange=${event=>{setParameterSearch(event.target.value);setParameterPage(0);setSelectedParameter(null);}} placeholder="Variable, tÃ­tulo o funciÃ³n"/></label><label className="form-label">Grupo<select className="form-select" value=${parameterGroup} onChange=${event=>chooseGroup(event.target.value)}>${groups.map(group=>html`<option key=${group} value=${group}>${group}</option>`)}</select></label></div><div className="gm-two"><div className="gm-parameter-list">${visibleParameters.map(entry=>html`<button key=${entry.variable} type="button" className=${`btn ${activeParameter?.variable===entry.variable ? "btn-primary" : ""}`} onClick=${()=>setSelectedParameter(entry)}><span className="gm-parameter-line"><strong>${entry.title}</strong><code>${entry.variable}</code><span>${String(entry.calibratedValue ?? entry.sourceDefault)}</span></span></button>`)}</div>${activeParameter ? html`<div className="card"><div className="gm-card-head"><strong>${activeParameter.title}</strong><span className="viz-badge">${activeParameter.calibrationStatus}</span></div><p><code>${activeParameter.variable}</code> Â· ${activeParameter.group} Â· lÃ­nea ${activeParameter.line}</p><p>${activeParameter.description}</p><pre className="gm-formula"><code>Default: ${String(activeParameter.sourceDefault)}\nCalibrado: ${String(activeParameter.calibratedValue)}\nTipo: ${activeParameter.type}\nUsos: ${activeParameter.usageCount}</code></pre></div>` : html`<div className="card"><p>No hay resultados.</p></div>`}</div><div className="gm-between"><span className="text-muted">${filteredParameters.length} resultados Â· pÃ¡gina ${safePage+1}/${pageCount}</span><div className="gm-inline"><button className="btn" type="button" disabled=${safePage===0} onClick=${()=>setParameterPage(Math.max(0,safePage-1))}>Anterior</button><button className="btn" type="button" disabled=${safePage>=pageCount-1} onClick=${()=>setParameterPage(Math.min(pageCount-1,safePage+1))}>Siguiente</button></div></div></div>`;
+    }
+
+    const renderers = {
+      map: renderMapSvg,
+      macro: renderMacroSvg,
+      asia: renderAsiaSvg,
+      trend: renderTrendSvg,
+      session: renderSessionSvg,
+      structure: renderStructureSvg,
+      memory: renderMemorySvg,
+      entry: renderEntrySvg,
+      risk: renderRiskSvg,
+      operations: renderOperationsSvg,
+      mathematics: renderMathematicsSvg,
+      science: renderScienceSvg,
+      evidence: renderEvidenceSvg,
+      parameters: renderParametersSvg
+    };
+
+    const progressLabel = "CapÃ­tulo " + (chapterIndex + 1) + " de " + chapters.length;
+    const progressStyle = { "--gm-progress": String(((chapterIndex + 1) / chapters.length) * 100) + "%" };
+    const chapterButtons = chapters.map((item, index) => {
+      const buttonClass = "btn " + (chapter === item.id ? "btn-primary" : "");
+      return html`<button key=${item.id} type="button" className=${buttonClass} aria-pressed=${chapter === item.id} onClick=${() => setChapter(item.id)}><span className="gm-nav-index">${String(index + 1).padStart(2, "0")}</span><span>${item.label}</span></button>`;
+    });
+    return html`<div className="gm-app">
+      ${introOpen ? html`<section className="gm-launch" aria-label="Inicio del dossier visual">
+        <div className="gm-launch-panel">
+          <${ReactorCore} compact=${true}/>
+          <div className="gm-launch-copy">
+            <span className="gm-chapter-kicker">PRIVATE ARCHITECTURE DOSSIER Â· v2.4.67</span>
+            <h1>GENTRA <span>CORE</span></h1>
+            <p>Entre al cuartel visual del motor macroestructural: rÃ©gimen, memoria, sesiÃ³n, estructura, flujo, seguridad y riesgo conectados como una sola arquitectura.</p>
+            <div className="gm-launch-tags"><span className="viz-badge">216 INPUTS</span><span className="viz-badge">8 MODULES</span><span className="viz-badge">5 SVG PLATES</span><span className="viz-badge">14 CHAPTERS</span></div>
+            <button type="button" className="btn btn-primary gm-enter" onClick=${() => setIntroOpen(false)}>Entrar al nÃºcleo</button>
+          </div>
+        </div>
+      </section>` : null}
+      <div className="gm-shell">
+        <aside className="gm-sidebar">
+          <div className="gm-identity"><span className="gm-core-mark" aria-hidden="true"></span><div className="gm-identity-copy"><strong>GENTRA CORE</strong><span>PRIVATE SYSTEM DOSSIER</span></div></div>
+          <div className="gm-mini-core" aria-hidden="true"><span></span><strong>ONLINE</strong></div>
+          <div className="gm-side-status"><div className="gm-side-stat"><span>VERSION</span><strong>2.4.67</strong></div><div className="gm-side-stat"><span>PROFILE</span><strong>r2</strong></div><div className="gm-side-stat"><span>MODULES</span><strong>8</strong></div><div className="gm-side-stat"><span>INPUTS</span><strong>216</strong></div></div>
+          <nav className="gm-nav" aria-label="CapÃ­tulos del manual">${chapterButtons}</nav>
+          <div className="gm-reference"><strong>Documento privado</strong><p className="text-small">Arquitectura educativa y auditable. No ejecuta operaciones.</p></div>
+        </aside>
+        <section className="gm-command">
+          <header className="gm-command-bar gm-between">
+            <div className="gm-identity"><span className="gm-core-mark" aria-hidden="true"></span><div className="gm-identity-copy"><strong>VISUAL COMMAND CENTER</strong><span>CORE ONLINE Â· OFFLINE PACKAGE READY</span></div></div>
+            <div className="gm-inline"><label className="form-label">Nivel<select className="form-select" value=${level} onChange=${event => setLevel(event.target.value)}><option value="simple">BÃ¡sico</option><option value="developer">TÃ©cnico</option><option value="quant">Quant</option></select></label><button className="btn gm-print" type="button" onClick=${() => window.print()}>Imprimir / PDF</button></div>
+          </header>
+          <div className="gm-progress" aria-label=${progressLabel}><span style=${progressStyle}></span></div>
+          <div className="gm-chapter-head"><div className="gm-sr-summary"><span className="gm-chapter-kicker">SYSTEM CHAPTER ${String(chapterIndex + 1).padStart(2, "0")}</span><h1>${chapterInfo.title}</h1><p className="text-muted">${chapterInfo.summary}</p></div><span className="viz-badge">${modeLabels[level]} Â· ${chapterIndex + 1}/${chapters.length}</span></div>
+          <main className="gm-stage">${renderers[chapter]()}</main>
+          <footer className="gm-between"><button className="btn" type="button" disabled=${chapterIndex === 0} onClick=${() => chooseChapter(chapterIndex - 1)}>CapÃ­tulo anterior</button><span className="text-small text-muted">Referencia tÃ©cnica interactiva Â· sin historial ficticio</span><button className="btn btn-primary" type="button" disabled=${chapterIndex === chapters.length - 1} onClick=${() => chooseChapter(chapterIndex + 1)}>Siguiente capÃ­tulo</button></footer>
+        </section>
+      </div>
+    </div>`;
+  }
+
+  ReactDOM.createRoot(document.getElementById("gentra-manual-root")).render(html`<${App}/>`);
+})();
+</script>
+<noscript>Este dossier requiere JavaScript local para activar sus diagramas interactivos.</noscript>
+</body>
+</html>
+
