@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#0a2942"/><stop offset=".55" stop-color="#041321"/><stop offset="1" stop-color="#02070d"/></radialGradient>
+    <radialGradient id="core"><stop offset="0" stop-color="#fff"/><stop offset=".22" stop-color="#93f8ff"/><stop offset=".55" stop-color="#22cfff"/><stop offset="1" stop-color="#0a4068"/></radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>.t{font-family:Segoe UI,Arial,sans-serif;fill:#dffaff}.s{font-size:24px;letter-spacing:2px}.h{font-size:38px;font-weight:700;letter-spacing:3px}.l{stroke:#36e7ff;stroke-opacity:.45;fill:none}.n{fill:#071927;stroke:#36e7ff;stroke-width:2}.r{fill:none;stroke:#36e7ff;stroke-opacity:.35;stroke-width:2}</style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity=".35"><path d="M0 100H1600M0 200H1600M0 300H1600M0 400H1600M0 500H1600M0 600H1600M0 700H1600M0 800H1600" stroke="#1b6685"/><path d="M100 0V900M300 0V900M500 0V900M700 0V900M900 0V900M1100 0V900M1300 0V900M1500 0V900" stroke="#1b6685"/></g>
+  <g transform="translate(800 450)">
+    <circle r="276" class="r" stroke-dasharray="18 12"/>
+    <circle r="220" class="r" stroke-dasharray="5 15"/>
+    <circle r="160" class="r" stroke-width="8" filter="url(#glow)"/>
+    <circle r="110" fill="url(#core)" filter="url(#glow)"/>
+    <circle r="76" fill="#03111c" stroke="#dfffff" stroke-width="3"/>
+    <text class="t h" text-anchor="middle" y="-4">OMEGA</text>
+    <text class="t s" text-anchor="middle" y="34">GENTRA</text>
+  </g>
+  <g class="t s" text-anchor="middle">
+    <g transform="translate(800 82)"><rect class="n" x="-130" y="-30" width="260" height="60" rx="15"/><text y="9">MACRO REGIME</text></g>
+    <g transform="translate(1265 185)"><rect class="n" x="-120" y="-30" width="240" height="60" rx="15"/><text y="9">CARRY MEMORY</text></g>
+    <g transform="translate(1400 450)"><rect class="n" x="-105" y="-30" width="210" height="60" rx="15"/><text y="9">SESSION</text></g>
+    <g transform="translate(1265 718)"><rect class="n" x="-135" y="-30" width="270" height="60" rx="15"/><text y="9">STRUCTURE / OB</text></g>
+    <g transform="translate(800 818)"><rect class="n" x="-130" y="-30" width="260" height="60" rx="15"/><text y="9">ORDER FLOW</text></g>
+    <g transform="translate(335 718)"><rect class="n" x="-120" y="-30" width="240" height="60" rx="15"/><text y="9">RISK ENGINE</text></g>
+    <g transform="translate(200 450)"><rect class="n" x="-120" y="-30" width="240" height="60" rx="15"/><text y="9">TQI TREND</text></g>
+    <g transform="translate(335 185)"><rect class="n" x="-145" y="-30" width="290" height="60" rx="15"/><text y="9">OMNI 3-SESSION</text></g>
+  </g>
+  <g class="l" stroke-width="3"><path d="M800 112V290"/><path d="M1145 205L990 335"/><path d="M1295 450H1065"/><path d="M1140 698L990 568"/><path d="M800 788V610"/><path d="M455 698L610 568"/><path d="M320 450H535"/><path d="M480 205L610 335"/></g>
+  <text x="70" y="70" class="t h">GENTRA CORE</text><text x="72" y="108" class="t s" fill="#7da7ba">MACRO-STRUCTURAL DECISION REACTOR</text>
+</svg>
+
