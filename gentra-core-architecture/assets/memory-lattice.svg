@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs><linearGradient id="p"><stop stop-color="#0b2c46"/><stop offset="1" stop-color="#06111d"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><style>.t{font-family:Segoe UI,Arial,sans-serif;fill:#e8fbff;text-anchor:middle}.h{font-size:32px;font-weight:700}.s{font-size:21px}.b{fill:url(#p);stroke:#36e7ff;stroke-width:3}.l{stroke:#36e7ff;stroke-width:4;fill:none}.dash{stroke:#ffc857;stroke-width:4;stroke-dasharray:15 10;fill:none}</style></defs>
+  <rect width="1600" height="900" fill="#02070d"/>
+  <text x="800" y="70" class="t h">SESSION MEMORY LATTICE</text>
+  <g transform="translate(120 180)"><rect class="b" width="360" height="300" rx="24"/><text class="t h" x="180" y="58">OLDER SESSION</text><text class="t s" x="180" y="115">Bull pressure: 0/1</text><text class="t s" x="180" y="155">Bear pressure: 0/1</text><text class="t s" x="180" y="205">Invalidation level</text><text class="t s" x="180" y="245">Vote retained</text></g>
+  <g transform="translate(620 180)"><rect class="b" width="360" height="300" rx="24"/><text class="t h" x="180" y="58">PREVIOUS</text><text class="t s" x="180" y="115">Bull pressure: 0/1</text><text class="t s" x="180" y="155">Bear pressure: 0/1</text><text class="t s" x="180" y="205">Invalidation level</text><text class="t s" x="180" y="245">Vote retained</text></g>
+  <g transform="translate(1120 180)"><rect class="b" width="360" height="300" rx="24" filter="url(#g)"/><text class="t h" x="180" y="58">CURRENT</text><text class="t s" x="180" y="115">Live pressure</text><text class="t s" x="180" y="155">Limit rejection</text><text class="t s" x="180" y="205">Authority update</text><text class="t s" x="180" y="245">New vote</text></g>
+  <path class="l" d="M480 330H610"/><path class="l" d="M980 330H1110"/>
+  <g transform="translate(430 610)"><rect class="b" width="740" height="150" rx="28"/><text class="t h" x="370" y="55">OMNI FLOW AUTHORITY</text><text class="t s" x="370" y="102">Bull votes &gt; Bear votes, or Bear votes &gt; Bull votes</text></g>
+  <path class="l" d="M300 480V560H800V600M800 480V600M1300 480V560H800"/>
+  <path class="dash" d="M170 820H1430"/><text x="800" y="855" class="t s" fill="#ffc857">Carry line: valid until two-bar acceptance beyond ATR buffer.</text>
+</svg>
+
