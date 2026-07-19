@@ -1675,7 +1675,7 @@
         ${visualAssets.map((item, itemIndex) => html`<button key=${item.file} type="button" className=${`btn ${index === itemIndex ? "btn-primary" : ""}`} onClick=${() => onSelect(itemIndex)}>${String(itemIndex + 1).padStart(2, "0")} · ${item.label}</button>`)}
       </div>
       <figure className="gm-atlas-view">
-        <img src=${`../assets/${selected.file}`} alt=${selected.detail}/>
+        <img src=${`assets/${selected.file}`} alt=${selected.detail}/>
         <figcaption className="gm-atlas-caption"><strong>${selected.label}</strong><span className="text-small text-muted">${selected.detail}</span></figcaption>
       </figure>
     </div>`;
@@ -1690,6 +1690,7 @@
     const [architectureStep, setArchitectureStep] = useState(0);
     const [macroSource, setMacroSource] = useState(0);
     const [regimeIndex, setRegimeIndex] = useState(0);
+    const [asiaPanel, setAsiaPanel] = useState("votes");
     const [asiaVote, setAsiaVote] = useState(0);
     const [asiaStage, setAsiaStage] = useState(0);
     const [asiaOutcome, setAsiaOutcome] = useState(0);
@@ -1845,23 +1846,28 @@
       const stageNodes = asiaRouterStages.map((item,index)=>({ ...item, id:String(index) }));
       const outcomeNodes = asiaRouterOutcomes.map((item,index)=>({ ...item, id:String(index) }));
       const handoffNodes = asiaHandoffStages.map((item,index)=>({ ...item, id:String(index) }));
-      return html`<div className="gm-stack">
-        <div className="gm-two">
+      const panels = [
+        { id:"votes", label:"Votos" },
+        { id:"router", label:"Router" },
+        { id:"outcome", label:"Resultado" },
+        { id:"handoff", label:"Handoff" }
+      ];
+      const panelContent = asiaPanel === "votes" ? html`<div className="gm-two">
           <${SvgNetwork} items=${voteNodes} selectedKey=${String(asiaVote)} onSelect=${(key,index)=>setAsiaVote(index)} centerLabel="ASIA VOTES" centerSub="5 cross-market feeds" ariaLabel="Router interactivo de cinco votos de Asia"/>
           <div className="card"><div className="gm-card-head"><strong>${vote.label}</strong><span className="viz-badge">VOTO ASIA</span></div><p>${vote.meaning}</p><pre className="gm-formula"><code>Risk-off: ${vote.off}\nRisk-on: ${vote.on}\nDelta X_t(%)=100*(X_t-X_asiaOpen)/X_asiaOpen</code></pre><p>Cada fuente aporta un voto direccional o permanece neutral; ninguna serie aislada gobierna el router.</p></div>
-        </div>
-        <div className="gm-two">
+        </div>` : asiaPanel === "router" ? html`<div className="gm-two">
           <${SvgNetwork} items=${stageNodes} selectedKey=${String(asiaStage)} onSelect=${(key,index)=>setAsiaStage(index)} centerLabel="ROUTER" centerSub="decision pipeline" ariaLabel="Etapas interactivas del router nocturno"/>
           <div className="card"><div className="gm-card-head"><strong>${stage.label}</strong><span className="viz-badge">${stage.sub}</span></div><p>${stage.meaning}</p><pre className="gm-formula"><code>capture -> normalize -> validate -> vote -> authority -> inherit</code></pre></div>
-        </div>
-        <div className="gm-two">
+        </div>` : asiaPanel === "outcome" ? html`<div className="gm-two">
           <${SvgNetwork} items=${outcomeNodes} selectedKey=${String(asiaOutcome)} onSelect=${(key,index)=>setAsiaOutcome(index)} centerLabel="OUTCOME" centerSub="direction or wait" ariaLabel="Resultados interactivos del router de Asia"/>
           <div className="card"><div className="gm-card-head"><strong>${outcome.label}</strong><span className="viz-badge">${outcome.sub}</span></div><p>${outcome.meaning}</p><pre className="gm-formula"><code>${outcome.code}\n\nVoff=I(USDJPY<=-f)+I(AUDJPY<=-f)+I(USDCNH>=f)+I(NIKKEI<=-n)+I(NQ<=-q)\nVon =I(USDJPY>= f)+I(AUDJPY>= f)+I(USDCNH<=-f)+I(NIKKEI>= n)+I(NQ>= q)</code></pre></div>
-        </div>
-        <div className="gm-two">
+        </div>` : html`<div className="gm-two">
           <${SvgNetwork} items=${handoffNodes} selectedKey=${String(asiaHandoff)} onSelect=${(key,index)=>setAsiaHandoff(index)} centerLabel="HANDOFF" centerSub="Asia -> London -> NY" ariaLabel="Continuidad interactiva de Asia a New York"/>
           <div className="card"><div className="gm-card-head"><strong>${handoff.label}</strong><span className="viz-badge">${handoff.sub}</span></div><p>${handoff.meaning}</p><pre className="gm-formula"><code>validCarry_t = previousCarry AND anchorValid AND NOT hardWait\nmissingFeed => DATA_WAIT\nmixedVotes  => ASIA_CARRY_WAIT</code></pre></div>
-        </div>
+        </div>`;
+      return html`<div className="gm-stack">
+        <div className="gm-flow" role="tablist" aria-label="Capas del router nocturno">${panels.map(item=>html`<button key=${item.id} type="button" role="tab" aria-selected=${asiaPanel===item.id} className=${`btn ${asiaPanel===item.id ? "btn-primary is-selected" : ""}`} onClick=${()=>setAsiaPanel(item.id)}>${item.label}</button>`)}</div>
+        ${panelContent}
         <div className="gm-warning"><strong>Autoridad nocturna completa</strong><p>El router aporta conciencia de Asia y continuidad hacia London/New York, pero no atraviesa PANIC, WAIT_MODE, TRANSITION ni DATA_WAIT. Carry y Omni reciben contexto; no pueden fabricar permiso contra una espera dura.</p></div>
       </div>`;
     }
