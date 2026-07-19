@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs><radialGradient id="g"><stop stop-color="#0d4567"/><stop offset=".6" stop-color="#061828"/><stop offset="1" stop-color="#02070d"/></radialGradient><filter id="gl"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><style>.t{font-family:Cambria Math,Georgia,serif;fill:#f3fdff;text-anchor:middle}.h{font-size:44px;font-weight:700}.e{font-size:34px}.s{font-family:Segoe UI,Arial,sans-serif;font-size:22px;fill:#91b6c8;text-anchor:middle}.r{fill:none;stroke:#39e7ff;stroke-width:3}</style></defs>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <circle cx="800" cy="450" r="330" class="r" opacity=".25" stroke-dasharray="8 14"/>
+  <circle cx="800" cy="450" r="260" class="r" opacity=".5"/>
+  <circle cx="800" cy="450" r="180" class="r" filter="url(#gl)"/>
+  <text x="800" y="92" class="t h">GENTRA MATHEMATICAL CORE</text>
+  <text x="800" y="235" class="t e">TQI = (0.35E + 0.20V + 0.25S + 0.20M) / W</text>
+  <text x="800" y="340" class="t e">ATR_eff = ATR x (0.5 + 0.5E)</text>
+  <text x="800" y="455" class="t h" filter="url(#gl)">Omega(t) = M x C x Q x Z x F x G</text>
+  <text x="800" y="565" class="t e">Signal(t) = 1{Omega(t) intersect HardGates(t)}</text>
+  <text x="800" y="675" class="t e">TP_k = Entry +/- k x |Entry - SL|</text>
+  <text x="800" y="770" class="s">M Macro  C Carry  Q Session Quality  Z Structure  F Flow  G Risk Gates</text>
+</svg>
