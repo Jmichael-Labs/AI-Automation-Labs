@@ -361,6 +361,19 @@
     max-width: 76ch;
   }
 
+  #gentra-visual-manual .gm-evidence-detail {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  #gentra-visual-manual .gm-evidence-detail p,
+  #gentra-visual-manual .gm-evidence-detail .viz-badge {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   #gentra-visual-manual .gm-svg-stage {
     width: 100%;
     min-height: 24rem;
@@ -1971,7 +1984,7 @@
       const item = evidenceItems[evidenceIndex];
       const evidenceNodes = evidenceItems.map((entry,index)=>({ ...entry, id:String(index), sub:entry.value }));
       const coverageNodes = sourceCoverage.map((entry,index)=>({ id:String(index), label:entry.file, sub:"integrated" }));
-      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${evidenceNodes} selectedKey=${String(evidenceIndex)} onSelect=${(key,index)=>setEvidenceIndex(index)} centerLabel="AUDIT CORE" centerSub="private evidence" ariaLabel="Evidencia interactiva de la invención"/><div className="card"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.detail}</p></div></div><div className="gm-two"><${SvgNetwork} items=${coverageNodes} selectedKey="0" onSelect=${()=>{}} centerLabel="ONE HTML" centerSub="7 documents" ariaLabel="Cobertura visual del manual unificado"/><div>${sourceCoverage.map(entry=>html`<div key=${entry.file} className="gm-coverage-line"><strong>${entry.file}</strong><span>${entry.destination}</span></div>`)}</div></div></div>`;
+      return html`<div className="gm-stack"><div className="gm-two"><${SvgNetwork} items=${evidenceNodes} selectedKey=${String(evidenceIndex)} onSelect=${(key,index)=>setEvidenceIndex(index)} centerLabel="AUDIT CORE" centerSub="private evidence" ariaLabel="Evidencia interactiva de la invención"/><div className="card gm-evidence-detail"><div className="gm-card-head"><strong>${item.label}</strong><span className="viz-badge">${item.value}</span></div><p>${item.detail}</p></div></div><div className="gm-two"><${SvgNetwork} items=${coverageNodes} selectedKey="0" onSelect=${()=>{}} centerLabel="ONE HTML" centerSub="7 documents" ariaLabel="Cobertura visual del manual unificado"/><div>${sourceCoverage.map(entry=>html`<div key=${entry.file} className="gm-coverage-line"><strong>${entry.file}</strong><span>${entry.destination}</span></div>`)}</div></div></div>`;
     }
 
     function renderParametersSvg() {
