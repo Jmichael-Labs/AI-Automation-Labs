@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#58dfff"/></marker><filter id="g"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><style>.t{font-family:Segoe UI,Arial,sans-serif;fill:#effcff;text-anchor:middle}.h{font-size:34px;font-weight:700}.s{font-size:20px}.n{stroke-width:4}.a{stroke:#58dfff;stroke-opacity:.7;stroke-width:3;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1600" height="900" fill="#020811"/>
+  <text x="800" y="65" class="t h">MACRO REGIME STATE MACHINE</text>
+  <g transform="translate(180 230)"><circle r="115" fill="#073425" stroke="#37f29b" class="n" filter="url(#g)"/><text class="t h" y="-8">RISK_ON</text><text class="t s" y="30">BUY only</text></g>
+  <g transform="translate(1420 230)"><circle r="115" fill="#3b0b16" stroke="#ff4b5c" class="n" filter="url(#g)"/><text class="t h" y="-8">RISK_OFF</text><text class="t s" y="30">SELL only</text></g>
+  <g transform="translate(800 215)"><circle r="120" fill="#332609" stroke="#ffc857" class="n"/><text class="t h" y="-8">WAIT</text><text class="t s" y="30">No trade</text></g>
+  <g transform="translate(800 665)"><circle r="125" fill="#33040c" stroke="#ff1738" class="n" filter="url(#g)"/><text class="t h" y="-8">PANIC</text><text class="t s" y="30">ABORT</text></g>
+  <g transform="translate(385 665)"><circle r="100" fill="#102437" stroke="#6da8c8" class="n"/><text class="t h" y="-8">TRANSITION</text><text class="t s" y="30">No consensus</text></g>
+  <g transform="translate(1215 665)"><circle r="100" fill="#14202d" stroke="#8ca9ba" class="n"/><text class="t h" y="-8">DATA_WAIT</text><text class="t s" y="30">Inputs missing</text></g>
+  <path class="a" d="M300 230H660"/><path class="a" d="M940 230H1300"/><path class="a" d="M690 300L460 585"/><path class="a" d="M910 300L1145 585"/><path class="a" d="M770 335V525"/><path class="a" d="M830 525V345"/>
+  <path class="a" d="M280 300C390 420 520 420 680 300"/><path class="a" d="M1320 300C1210 420 1080 420 920 300"/>
+  <text x="800" y="855" class="t s">Carry preserves the last directional regime until price acceptance invalidates its authority.</text>
+</svg>
+
