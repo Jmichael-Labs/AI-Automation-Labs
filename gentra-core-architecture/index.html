@@ -1872,6 +1872,32 @@
       </div>`;
     }
 
+    function renderAsiaSafe() {
+      return html`<div className="gm-stack">
+        <div className="gm-warning"><strong>Router nocturno en modo estable</strong><p>Estos paneles usan interacción nativa del navegador. No reconstruyen el motor visual al abrirse y mantienen completa la explicación de Asia.</p></div>
+        <details className="card" open>
+          <summary><strong>01 · Votos cross-market</strong></summary>
+          <div className="gm-vote-map">${asiaVotes.map(item=>html`<div key=${item.label} className="card"><strong>${item.label}</strong><span className="text-small">RISK_OFF ${item.off}</span><span className="text-small">RISK_ON ${item.on}</span><p>${item.meaning}</p></div>`)}<div className="gm-vote-core"><strong>ASIA VOTES</strong><span className="text-small">5 fuentes · perfil estable 4/5</span></div></div>
+          <pre className="gm-formula"><code>Voff=I(USDJPY<=-f)+I(AUDJPY<=-f)+I(USDCNH>=f)+I(NIKKEI<=-n)+I(NQ<=-q)\n\nVon=I(USDJPY>=f)+I(AUDJPY>=f)+I(USDCNH<=-f)+I(NIKKEI>=n)+I(NQ>=q)</code></pre>
+        </details>
+        <details className="card">
+          <summary><strong>02 · Pipeline del router</strong></summary>
+          <div className="gm-flow">${asiaRouterStages.map((item,index)=>html`<div key=${item.label} className="card"><span className="viz-badge">${index+1}</span><strong>${item.label}</strong><span className="text-small">${item.sub}</span><p>${item.meaning}</p></div>`)}</div>
+          <pre className="gm-formula"><code>capture -> normalize -> validate -> vote -> authority -> inherit</code></pre>
+        </details>
+        <details className="card">
+          <summary><strong>03 · Resultados y autoridad</strong></summary>
+          <div className="gm-regime-grid">${asiaRouterOutcomes.map(item=>html`<div key=${item.code} className="card"><strong>${item.label}</strong><span className="text-small">${item.sub}</span><p>${item.meaning}</p><code>${item.code}</code></div>`)}</div>
+        </details>
+        <details className="card">
+          <summary><strong>04 · Handoff Asia → London → New York</strong></summary>
+          <div className="gm-memory-ribbon">${asiaHandoffStages.map(item=>html`<div key=${item.label} className="card"><strong>${item.label}</strong><span className="text-small">${item.sub}</span><p>${item.meaning}</p></div>`)}</div>
+          <pre className="gm-formula"><code>validCarry_t = previousCarry AND anchorValid AND NOT hardWait\nmissingFeed => DATA_WAIT\nmixedVotes  => ASIA_CARRY_WAIT</code></pre>
+        </details>
+        <div className="gm-warning"><strong>Autoridad nocturna completa</strong><p>El router aporta conciencia de Asia y continuidad hacia London/New York, pero no atraviesa PANIC, WAIT_MODE, TRANSITION ni DATA_WAIT.</p></div>
+      </div>`;
+    }
+
     function renderTrendSvg() {
       const part = trendParts[trendPart];
       const nodes = trendParts.map((item,index)=>({ ...item, id:String(index), sub:`${Math.round(item.weight*100)}%` }));
@@ -1956,7 +1982,7 @@
     const renderers = {
       map: renderMapSvg,
       macro: renderMacroSvg,
-      asia: renderAsiaSvg,
+      asia: renderAsiaSafe,
       trend: renderTrendSvg,
       session: renderSessionSvg,
       structure: renderStructureSvg,
