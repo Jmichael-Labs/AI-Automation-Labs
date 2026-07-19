@@ -1886,12 +1886,13 @@
     }
 
     function renderAsiaSafe() {
+      const voteFormula = "Voff=I(USDJPY<=-f)+I(AUDJPY<=-f)+I(USDCNH>=f)+I(NIKKEI<=-n)+I(NQ<=-q)\\n\\nVon=I(USDJPY>=f)+I(AUDJPY>=f)+I(USDCNH<=-f)+I(NIKKEI>=n)+I(NQ>=q)";
       return html`<div className="gm-stack">
         <div className="gm-warning"><strong>Router nocturno en modo estable</strong><p>Estos paneles usan interacción nativa del navegador. No reconstruyen el motor visual al abrirse y mantienen completa la explicación de Asia.</p></div>
         <details className="card" open>
           <summary><strong>01 · Votos cross-market</strong></summary>
           <div className="gm-vote-map">${asiaVotes.map(item=>html`<div key=${item.label} className="card"><strong>${item.label}</strong><span className="text-small">RISK_OFF ${item.off}</span><span className="text-small">RISK_ON ${item.on}</span><p>${item.meaning}</p></div>`)}<div className="gm-vote-core"><strong>ASIA VOTES</strong><span className="text-small">5 fuentes · perfil estable 4/5</span></div></div>
-          <pre className="gm-formula"><code>Voff=I(USDJPY<=-f)+I(AUDJPY<=-f)+I(USDCNH>=f)+I(NIKKEI<=-n)+I(NQ<=-q)\n\nVon=I(USDJPY>=f)+I(AUDJPY>=f)+I(USDCNH<=-f)+I(NIKKEI>=n)+I(NQ>=q)</code></pre>
+          <pre className="gm-formula"><code>${voteFormula}</code></pre>
         </details>
         <details className="card">
           <summary><strong>02 · Pipeline del router</strong></summary>
